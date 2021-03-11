@@ -1,0 +1,43 @@
+.btn {
+    @apply font-bold py-2 px-4 rounded;
+}
+
+.btn-cta {
+    @apply font-bold py-4 px-8 rounded text-xl;
+}
+
+.btn-block {
+    @apply block text-center w-full;
+}
+
+.btn-primary {
+    @apply bg-blue-600 text-white;
+}
+
+.btn-primary:hover {
+    @apply bg-blue-800;
+}
+
+.btn-secondary {
+    @apply bg-gray-500 text-white;
+}
+
+.btn-secondary:hover {
+    @apply bg-gray-700;
+}
+
+.btn-accent {
+    @apply bg-red-600 text-white;
+}
+
+.btn-accent:hover {
+    @apply bg-red-700;
+}
+
+.btn-success {
+    @apply bg-green-400 text-white;
+}
+
+.btn-success:hover {
+    @apply bg-green-600 text-white;
+}
