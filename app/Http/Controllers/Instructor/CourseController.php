@@ -156,4 +156,16 @@ class CourseController extends Controller
     {
         //
     }
+
+    /**
+     * Show the form for editing the specified instructor goals
+     *
+     * @param       App\Models\Course   $course
+     * @return      view
+     */
+    public function goals( Course $course ){
+
+        return view('instructor.courses.goals', compact('course'));
+
+    }
 }

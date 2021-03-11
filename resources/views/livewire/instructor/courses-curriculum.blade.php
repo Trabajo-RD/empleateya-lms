@@ -26,8 +26,8 @@
                     <header class="flex justify-between items-center">
                         <h2 x-on:click="open = !open" class="cursor-pointer text-xl"><i class="fas fa-chalkboard-teacher mr-4"></i><strong>Sección: </strong>{{ $item->name }}</h2>
                         <div>
-                            <i class="fas fa-edit text-gray-500 cursor-pointer mr-4" wire:click="edit({{$item}})"></i>
-                            <i class="far fa-trash-alt text-red-500 cursor-pointer" wire:click="destroy({{$item}})"></i>
+                            <i class="fas fa-edit text-gray-500 cursor-pointer" wire:click="edit({{$item}})"></i>
+                            <i class="far fa-trash-alt text-red-500 cursor-pointer ml-2" wire:click="destroy({{$item}})"></i>
                         </div>
                     </header>
                     <!-- Show instructor lessons -->
