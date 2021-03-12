@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\CourseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,8 @@ Route::resource('roles', RoleController::class)->names('roles');
 //Route::resource('users', UserController::class)->names('users'); // Create all (7) routes for CRUD
 
 Route::resource('users', UserController::class)->only(['index', 'edit', 'update'])->names('users');
+
+/**
+ * Route for courses in revision
+ */
+Route::get('courses', [CourseController::class, 'index'])->name('courses.index');
