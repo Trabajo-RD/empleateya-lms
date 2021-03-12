@@ -35,12 +35,12 @@
             @endif --}}
 
             <!-- Page Content -->
-            <div class="container py-8 grid grid-cols-5">
+            <div class="container py-8 grid grid-cols-5 gap-6">
 
                 <aside class="col-span-5 md:col-span-1 mb-8">
 
                     <h2 class="font-bold text-lg">Editar curso</h2>
-                    <h1 class="capitalize text-2xl mt-1">{{str_replace('-', ' ', $course)}}</h1>
+                    <h1 class="capitalize text-2xl mt-1">{{ $course->title }}</h1>
                     <!-- sidebar menu -->
                     <ul class="text-sm text-gray-600 mt-6">
                         <li class="leading-7 mb-1 border-l-4 @routeIs('instructor.courses.edit', $course) border-blue-400 @else border-transparent @endif pl-2">
@@ -56,6 +56,40 @@
                             <a href="{{ route('instructor.courses.students', $course) }}">Estudiantes</a>
                         </li>
                     </ul>
+
+                    <hr class="my-6">
+
+                    @switch($course->status)
+                        @case(1)
+                            <!-- Request change course status -->
+                            <form action="{{ route('instructor.courses.status', $course) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-accent shadow">Solicitar revisión</button>
+                            </form>
+                            @break
+                        @case(2)
+                            <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4" role="alert">
+                                <p class="font-bold">Revisión</p>
+                                <p>Este curso se encuentra en revisión</p>
+                            </div>
+
+                            @break
+                        @case(3)
+                            <div class="bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md" role="alert">
+                                <div class="flex">
+                                <div class="py-1"><svg class="fill-current h-6 w-6 text-green-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+                                <div>
+                                    <p class="font-bold">Publicado</p>
+                                    <p class="text-sm">Este curso se encuentra publicado.</p>
+                                </div>
+                                </div>
+                            </div>
+                            @break
+                        @default
+
+                    @endswitch
+
+
 
                 </aside>
 

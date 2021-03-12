@@ -36,3 +36,8 @@ Route::get('courses/{course}/goals', [CourseController::class, 'goals'])->name('
  * Route for manage the course students
  */
 Route::get('courses/{course}/students', CoursesStudents::class)->middleware('can:LMS Actualizar cursos')->name('courses.students');
+
+/**
+ * Route to request change course status
+ */
+Route::post('courses/{course}/status', [CourseController::class, 'status'])->name('courses.status');

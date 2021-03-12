@@ -37,6 +37,6 @@ class CoursesStudents extends Component
 
 
 
-        return view('livewire.instructor.courses-students', compact('students'))->layout('layouts.instructor');
+        return view('livewire.instructor.courses-students', compact('students'))->layout('layouts.instructor', ['course' => $this->course]);
     }
 }

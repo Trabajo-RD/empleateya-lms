@@ -1,10 +1,10 @@
-<x-instructor-layout>
+<x-instructor-layout :course="$course">
 
-    <x-slot name="course">
+    {{-- <x-slot name="course">
 
         {{  $course->slug }}
 
-    </x-slot>
+    </x-slot> --}}
 
     <!-- livewire courses goals -->
     <div>
