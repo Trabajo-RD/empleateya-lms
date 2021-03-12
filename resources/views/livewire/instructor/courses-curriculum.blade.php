@@ -3,7 +3,7 @@
         {{ $course->slug }}
     </x-slot>
 
-    <h1 class="text-2xl font-bold">Lecciones del curso</h1>
+    <h1 class="text-2xl font-bold"><i class="fas fa-chalkboard-teacher mr-2"></i>Lecciones del curso</h1>
     <hr class="mt-2 mb-6">
 
     <!-- course sections -->
@@ -24,7 +24,7 @@
                 @else
                     <!-- Show instructor sections -->
                     <header class="flex justify-between items-center">
-                        <h2 x-on:click="open = !open" class="cursor-pointer text-xl"><i class="fas fa-chalkboard-teacher mr-4"></i><strong>Sección: </strong>{{ $item->name }}</h2>
+                        <h2 x-on:click="open = !open" class="cursor-pointer text-xl"><strong>Sección: </strong>{{ $item->name }}</h2>
                         <div>
                             <i class="fas fa-edit text-gray-500 cursor-pointer" wire:click="edit({{$item}})"></i>
                             <i class="far fa-trash-alt text-red-500 cursor-pointer ml-2" wire:click="destroy({{$item}})"></i>

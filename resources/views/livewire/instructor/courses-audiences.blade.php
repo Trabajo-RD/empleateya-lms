@@ -37,14 +37,14 @@
     <article class="card">
         <div class="card-body bg-gray-100">
             <form wire:submit.prevent="store">
-                <input wire:model="name" type="text" class="form-input w-full rounded {{($errors->has('name') ? 'border-red-600' : '')}}" placeholder="Añade el nombre de la meta">
+                <input wire:model="name" type="text" class="form-input w-full rounded {{($errors->has('name') ? 'border-red-600' : '')}}" placeholder="Añade una audiencia">
                 @error('name')
                     <span class="invalid-feedback">
                         <strong class="text-xs text-red-700">{{ $message }}</strong>
                     </span>
                 @enderror
                 <div class="flex justify-end mt-2">
-                    <button type="submit" class="btn btn-primary">Añadir meta</button>
+                    <button type="submit" class="btn btn-primary">Añadir audiencia</button>
                 </div>
             </form>
         </div>

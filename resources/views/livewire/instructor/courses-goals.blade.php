@@ -19,6 +19,7 @@
                     </form>
 
                 @else
+
                     <header class="flex items-center justify-between">
                         <h2 class="text-xl">{{ $item->name }}</h2>
 
@@ -27,6 +28,7 @@
                             <i wire:click="destroy({{ $item }})" class="far fa-trash-alt text-red-500 cursor-pointer ml-2" ></i>
                         </div>
                     </header>
+
                 @endif
 
             </div>

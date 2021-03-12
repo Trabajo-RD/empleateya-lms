@@ -4,7 +4,7 @@
         {{ $course->slug }}
     </x-slot>
 
-    <h1 class="text-2xl font-bold">Información del curso</h1>
+    <h1 class="text-2xl font-bold"><i class="fas fa-info-circle mr-2"></i>Información del curso</h1>
         <hr class="mt-2 mb-6">
 
         {!! Form::model($course, ['route' => ['instructor.courses.update', $course], 'method'=> 'put', 'files' => true ]) !!}

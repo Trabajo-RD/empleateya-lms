@@ -56,30 +56,30 @@
                         <!-- TODO: First <td> responsive -->
                             <td class="px-6 py-4">
                                 <div class="flex items-center">
-                                <div class="flex-shrink-0 h-32 w-32">
-                                @isset( $course->image )
-                                    <img class="h-32 w-32 object-cover" src="{{ Storage::url($course->image->url)}}" alt="">
-                                @else
-                                    <img id="picture" class="h-32 w-32 object-cover" src="{{ asset('images/courses/default.jpg') }}" alt="" >
-                                @endisset
-                                </div>
-                                <div class="ml-4">
-                                    <div class="text-md font-bold text-gray-900">
-                                        {{ $course->title }}
+                                    <div class="flex-shrink-0 h-32 w-32">
+                                    @isset( $course->image )
+                                        <img class="h-32 w-32 object-cover" src="{{ Storage::url($course->image->url)}}" alt="">
+                                    @else
+                                        <img id="picture" class="h-32 w-32 object-cover" src="{{ asset('images/courses/default.jpg') }}" alt="" >
+                                    @endisset
                                     </div>
-                                    <div class="text-sm text-gray-500">
-                                        Categoría: <strong>{{ $course->category->name }}</strong>
+                                    <div class="ml-4">
+                                        <div class="text-md font-bold text-gray-900">
+                                            {{ $course->title }}
+                                        </div>
+                                        <div class="text-sm text-gray-500">
+                                            Categoría: <strong>{{ $course->category->name }}</strong>
+                                        </div>
+                                        <div class="text-sm text-gray-500">
+                                            Tipo: <strong>{{ $course->type->name }}</strong>
+                                        </div>
+                                        <div class="text-sm text-gray-500">
+                                            Nivel: <strong>{{ $course->level->name }}</strong>
+                                        </div>
+                                        <div class="text-sm text-gray-500">
+                                            Modalidad: <strong>{{ $course->modality->name }}</strong>
+                                        </div>
                                     </div>
-                                    <div class="text-sm text-gray-500">
-                                        Tipo: <strong>{{ $course->type->name }}</strong>
-                                    </div>
-                                    <div class="text-sm text-gray-500">
-                                        Nivel: <strong>{{ $course->level->name }}</strong>
-                                    </div>
-                                    <div class="text-sm text-gray-500">
-                                        Modalidad: <strong>{{ $course->modality->name }}</strong>
-                                    </div>
-                                </div>
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">

@@ -18,7 +18,7 @@ class AddColumnsToUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('document_id')->after('id')->nullable();
             $table->enum('document_type', [User::IDENTITY, User::PASSPORT])->nullable()->after('document_id');
-            $table->string('surname')->after('name');
+            $table->string('surname')->after('name')->nullable();
         });
     }
 
