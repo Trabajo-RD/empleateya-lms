@@ -6,14 +6,20 @@ use Livewire\Component;
 use App\Models\Course;
 use Livewire\WithPagination;
 
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
 class CoursesStudents extends Component
 {
     use WithPagination;
+    use AuthorizesRequests;
 
     public $course, $search;
 
     public function mount( Course $course ){
         $this->course = $course;
+
+        // Policy to check if an instructor is modifying a course created by another instructor
+        $this->authorize('dictated', $course);
     }
 
     // Livewire live cicle

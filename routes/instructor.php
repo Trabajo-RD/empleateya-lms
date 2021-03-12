@@ -28,11 +28,11 @@ Route::resource('courses', CourseController::class)->names('courses');
 /**
  * Route for manage the course sections, lessons and lesson resources
  */
-Route::get('courses/{course}/curriculum', CoursesCurriculum::class)->name('courses.curriculum');
+Route::get('courses/{course}/curriculum', CoursesCurriculum::class)->middleware('can:LMS Actualizar cursos')->name('courses.curriculum');
 
 Route::get('courses/{course}/goals', [CourseController::class, 'goals'])->name('courses.goals');
 
 /**
  * Route for manage the course students
  */
-Route::get('courses/{course}/students', CoursesStudents::class)->name('courses.students');
+Route::get('courses/{course}/students', CoursesStudents::class)->middleware('can:LMS Actualizar cursos')->name('courses.students');

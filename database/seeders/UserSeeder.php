@@ -60,13 +60,14 @@ class UserSeeder extends Seeder
 
         $user->assignRole('Creator');
 
-        //TODO: uncomment to create test users $users = User::factory(98)->create();
+        //TODO: uncomment to create test users
+        $users = User::factory(98)->create();
 
-        // foreach($users as $user){
-        //     Gender::factory()->create([
-        //         'user_id' => $user->id
-        //     ]);
-        // }
+        foreach($users as $user){
+            Gender::factory()->create([
+                'user_id' => $user->id
+            ]);
+        }
 
 
     }

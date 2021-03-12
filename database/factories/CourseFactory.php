@@ -39,7 +39,7 @@ class CourseFactory extends Factory
             'duration_in_minutes' => 60,
             'status' => $this->faker->randomElement([Course::DRAFT, Course::PENDING, Course::PUBLISH, Course::TRASH]),
             'slug' => Str::slug($title),
-            'user_id' => 1,
+            'user_id' => $this->faker->randomElement([1, 2, 3, 4, 5]),
             //'user_id' => User::all()->random()->id,
             'level_id' => Level::all()->random()->id,
             'category_id' => Category::all()->random()->id,

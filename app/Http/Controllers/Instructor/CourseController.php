@@ -16,6 +16,15 @@ use Illuminate\Support\Facades\Storage;
 
 class CourseController extends Controller
 {
+    public function __construct()
+    {
+        // Add middleware to Resource Routes
+        $this->middleware('can:LMS Leer cursos')->only('index');
+        $this->middleware('can:LMS Crear cursos')->only('create', 'store');
+        $this->middleware('can:LMS Actualizar cursos')->only('edit', 'update', 'goals');
+        $this->middleware('can:LMS Eliminar cursos')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -95,6 +104,9 @@ class CourseController extends Controller
      */
     public function edit(Course $course)
     {
+        // Policy to check if an instructor is modifying a course created by another instructor
+        $this->authorize('dictated', $course);
+
         $categories = Category::pluck('name', 'id');
         $types = Type::pluck('name', 'id');
         $levels = Level::pluck('name', 'id');
@@ -113,6 +125,9 @@ class CourseController extends Controller
      */
     public function update(Request $request, Course $course)
     {
+        // Policy to check if an instructor is modifying a course created by another instructor
+        $this->authorize('dictated', $course);
+
         $request->validate([
             'title' => 'required',
             'slug' => 'required|unique:courses,slug,' . $course->id,
@@ -164,6 +179,9 @@ class CourseController extends Controller
      * @return      view
      */
     public function goals( Course $course ){
+
+        // Policy to check if an instructor is modifying a course created by another instructor
+        $this->authorize('dictated', $course);
 
         return view('instructor.courses.goals', compact('course'));
 
