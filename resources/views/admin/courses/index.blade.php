@@ -39,6 +39,17 @@
             {{ $courses->links('vendor.pagination.bootstrap-4') }}
         </div>
     </div>
+
+    <div class="card">
+        <div class="card-body">
+           <!-- TODO: uncomment if Microsoft Learning API is enabled -->
+            {{-- @foreach( $microsoft_courses as $ms_course)
+                @foreach ($ms_course['results'] as $item)
+                    {{$item->roles}}
+                @endforeach
+            @endforeach --}}
+        </div>
+    </div>
 @stop
 
 @section('css')
