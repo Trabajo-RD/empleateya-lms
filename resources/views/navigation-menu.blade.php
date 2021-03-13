@@ -124,7 +124,14 @@
                                     </x-jet-dropdown-link>
                                 @endcan
 
-                                @can ('LMS Crear cursos')
+                                <!-- TODO: Create permission LMS Crear contenido -->
+                                @can ('LMS Crear contenido')
+                                    <x-jet-dropdown-link href="{{ route('creator.courses.index') }}">
+                                        {{ __('Administrar Cursos') }}
+                                    </x-jet-dropdown-link>
+                                @endcan
+
+                                @can ('LMS Calificar item')
                                     <x-jet-dropdown-link href="{{ route('instructor.courses.index') }}">
                                         {{ __('Instructor') }}
                                     </x-jet-dropdown-link>
@@ -209,7 +216,14 @@
                         </x-jet-responsive-nav-link>
                     @endcan
 
-                    @can('LMS Crear cursos')
+                    <!-- TODO: Create permission LMS Crear contenido -->
+                    @can('LMS Crear contenido')
+                        <x-jet-responsive-nav-link href="{{ route('creator.courses.index') }}" :active="request()->routeIs('creator.courses.index')">
+                            {{ __('Administrar cursos') }}
+                        </x-jet-responsive-nav-link>
+                    @endcan
+
+                    @can('LMS Calificar item')
                         <x-jet-responsive-nav-link href="{{ route('instructor.courses.index') }}" :active="request()->routeIs('instructor.courses.index')">
                             {{ __('Instructor') }}
                         </x-jet-responsive-nav-link>

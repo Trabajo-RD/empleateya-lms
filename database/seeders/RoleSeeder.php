@@ -60,6 +60,9 @@ class RoleSeeder extends Seeder
         ]);
 
         $creator->syncPermissions([
+            'LMS Crear contenido',
+            'LMS Editar contenido',
+            'LMS Eliminar contenido',
             'LMS Crear cursos',
             'LMS Leer cursos',
             'LMS Actualizar cursos',
@@ -76,6 +79,8 @@ class RoleSeeder extends Seeder
             'LMS Crear cursos',
             'LMS Leer cursos',
             'LMS Actualizar cursos',
+            'LMS Calificar sección',
+            'LMS Calificar item',
         ]);
 
         /**

@@ -72,6 +72,32 @@ class PermissionSeeder extends Seeder
             'name' => 'LMS Eliminar cursos',
         ]);
 
+        /**
+         * Contenido
+         */
+        Permission::create([
+            'name' => 'LMS Crear contenido',
+        ]);
+
+        Permission::create([
+            'name' => 'LMS Editar contenido',
+        ]);
+
+        Permission::create([
+            'name' => 'LMS Eliminar contenido',
+        ]);
+
+        /**
+         * Calificaciones
+         */
+        Permission::create([
+            'name' => 'LMS Calificar sección',
+        ]);
+
+        Permission::create([
+            'name' => 'LMS Calificar item',
+        ]);
+
 
     }
 }

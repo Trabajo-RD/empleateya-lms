@@ -43,11 +43,13 @@
     <div class="card">
         <div class="card-body">
            <!-- TODO: uncomment if Microsoft Learning API is enabled -->
-            {{-- @foreach( $microsoft_courses as $ms_course)
-                @foreach ($ms_course['results'] as $item)
-                    {{$item->roles}}
-                @endforeach
-            @endforeach --}}
+           @php echo print_r($microsoft_courses['results'][0]) @endphp
+
+            @foreach( $microsoft_courses['results'] as $ms_course)
+
+                    <p>{{$ms_course['url']}}</p>
+
+            @endforeach
         </div>
     </div>
 @stop

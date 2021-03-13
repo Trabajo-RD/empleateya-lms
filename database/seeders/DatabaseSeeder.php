@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Http\Controllers\Api\MicrosoftLearnController;
 use Illuminate\Database\Seeder;
 
 use Illuminate\Support\Facades\Storage;
@@ -31,7 +32,8 @@ class DatabaseSeeder extends Seeder
         $this->call(TypeSeeder::class);
         $this->call(ModalitySeeder::class);
         $this->call(PlatformSeeder::class);
+        $this->call(MicrosoftLearnCourseSeeder::class);
         // TODO: uncomment to create test courses
-        $this->call(CourseSeeder::class);
+        //$this->call(CourseSeeder::class);
     }
 }

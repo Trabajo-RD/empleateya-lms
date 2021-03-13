@@ -7,7 +7,7 @@ use App\Models\Course;
 use Spatie\Permission\Models\Role;
 
 class CourseController extends Controller
-{   
+{
 
     /**
      * Controller to manage the courses home page
@@ -27,7 +27,7 @@ class CourseController extends Controller
         /**
          * Retur related courses
          */
-        $related_courses = 
+        $related_courses =
         Course::where( 'category_id', $course->category_id )
             ->where( 'id', '!=', $course->id )
             ->where( 'status', 3 )
@@ -60,5 +60,5 @@ class CourseController extends Controller
         }
 
     }
-    
+
 }
