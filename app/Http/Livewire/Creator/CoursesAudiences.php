@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Instructor;
+namespace App\Http\Livewire\Creator;
 
 use Livewire\Component;
 use App\Models\Audience;
@@ -20,10 +20,10 @@ class CoursesAudiences extends Component
         $this->audience = new Audience();
 
     }
-    
+
     public function render()
     {
-        return view('livewire.instructor.courses-audiences');
+        return view('livewire.creator.courses-audiences');
     }
 
     public function store(){

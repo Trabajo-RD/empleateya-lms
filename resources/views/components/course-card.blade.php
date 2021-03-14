@@ -2,8 +2,15 @@
 
 
 <!-- Card -->
-<article class="card">
-    <img src="{{ Storage::url( $course->image->url ) }}" alt="" class="h-36 w-full object-cover" />
+<article class="card">   
+    
+    <!-- card image -->
+    @isset( $course->image )
+        <img src="{{ Storage::url( $course->image->url ) }}" alt="" class="h-36 w-full object-cover" />
+    @else
+        <img id="picture" class="h-36 w-full object-cover" src="{{ asset('images/courses/default.jpg') }}" alt="" >
+    @endisset
+ 
 
     <!-- card body -->
     <div class="card-body">

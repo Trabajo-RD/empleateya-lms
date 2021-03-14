@@ -11,8 +11,8 @@
             <div x-data="{isTyped: false}">
                 <input class="form-input shadow-sm w-full"
                         type="search"
-                        name="search-instructor"
-                        id="search-instructor"
+                        name="search-creator"
+                        id="search-creator"
                         x-ref="searchField"
                         x-on:input.debounce.400ms="isTyped = ($event.target.value != '')"
                         placeholder='¿Qué estudiante quieres buscar?'
@@ -113,3 +113,4 @@
 
     </x-table-responsive>
 </div>
+

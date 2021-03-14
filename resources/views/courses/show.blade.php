@@ -3,7 +3,12 @@
     <section class="bg-blue-900 py-12">
         <div class="container grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
             <figure>
-                <img class="h-80 w-full object-cover shadow" src="{{ Storage::url( $course->image->url ) }}" alt=""/>
+            <!-- card image -->
+                @isset( $course->image )
+                    <img src="{{ Storage::url( $course->image->url ) }}" alt="" class="h-80 w-full object-cover shadow" />
+                @else
+                    <img id="picture" class="h-80 w-full object-cover shadow" src="{{ asset('images/courses/default.jpg') }}" alt="" >
+                @endisset            
             </figure>
             <div>
                 <button type="button" class="bg-opacity-25 mr-2 bg-gray-300 text-gray-300 text-sm py-2 px-4 leading-none flex items-center mb-4 focus:outline-none">
@@ -188,7 +193,13 @@
 
                 @foreach ( $related_courses as $related_course )
                     <article class="flex py-3 grid md:grid-cols-1 lg:grid-cols-2">
-                        <img class="h-32 md:w-full lg:w-40 object-cover md:col-span-1 lg:col-span-1" src="{{ Storage::url( $related_course->image->url ) }}" alt="{{ $related_course->name }}" />
+                        <!-- related course image -->
+                        @isset( $related_course->image )
+                            <img src="{{ Storage::url( $related_course->image->url ) }}" alt="{{ $related_course->name }}" class="h-32 md:w-full lg:w-40 object-cover md:col-span-1 lg:col-span-1" />
+                        @else
+                            <img id="picture" class="h-32 md:w-full lg:w-40 object-cover md:col-span-1 lg:col-span-1" src="{{ asset('images/courses/default.jpg') }}" alt="{{ $related_course->name }}" >
+                        @endisset  
+                        
                         <div class="ml-3 md:col-span-1 lg:col-span-1">
                             <h3>
                                 <a class="font-bold text-gray-600 mb-3" href="{{ route('courses.show', $related_course ) }}">{{ Str::limit( $related_course->title, 40 ) }}</a>

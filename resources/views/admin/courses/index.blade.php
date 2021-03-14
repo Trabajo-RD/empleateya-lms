@@ -22,7 +22,7 @@
                 </thead>
                 <tbody>
                     @foreach ($courses as $course )
-                        <tr>
+                        <tr class="items-center">
                             <td>{{ $course->id }}</td>
                             <td>{{ $course->title }}</td>
                             <td>{{ $course->category->name }}</td>
