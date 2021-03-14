@@ -45,6 +45,18 @@
 
     <div class="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-24">
 
+        @if( session('info') )
+            <div class="lg:col-span-3" x-data="{open: true}" x-show="open">
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <strong class="font-bold">Error de aprobación!</strong>
+                    <span class="block sm:inline">{{ session('info') }}</span>
+                    <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                    <svg x-on:click="open = false" class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+                    </span>
+                </div>
+            </div>
+        @endif
+
         <div class="order-2 md:col-span-1 lg:col-span-2 md:order-1 lg:order-1">
 
             <!-- section description -->
@@ -61,13 +73,19 @@
 
                 <ul class="list-disc list-inside">
 
-                    @foreach ($course->requirements as $requirement )
+                    @forelse ($course->requirements as $requirement )
 
                         <li class="text-gray-600 text-base">
                             {{ $requirement->name }}
                         </li>
 
-                    @endforeach
+                    @empty
+
+                        <li class="text-gray-600 text-base">
+                            Este curso no tiene requerimientos asignados.
+                        </li>
+
+                    @endforelse
 
                 </ul>
             </section>
@@ -78,11 +96,11 @@
                     <h2 class="font-bold text-2xl mb-2 text-gray-600">Lo que aprenderás</h2>
                     <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
 
-                        @foreach ( $course->goals as $goal )
-
+                        @forelse ( $course->goals as $goal )
                             <li class="text-gray-600 text-base"><i class="fas fa-check text-sm text-gray-500 mr-2"></i>{{ $goal->name }}</li>
-
-                        @endforeach
+                        @empty
+                            <li class="text-gray-600 text-base">Este curso no tiene metas asignadas</li>
+                        @endforelse
 
                     </ul>
                 </div>
@@ -92,7 +110,7 @@
             <section class="mb-12">
                 <h2 class="font-bold text-2xl mb-12 text-gray-600">Contenido del curso</h2>
 
-                @foreach ( $course->sections as $section )
+                @forelse ( $course->sections as $section )
 
                     <article class="mb-2 shadow" @if( $loop->first) x-data="{ open: true}"  @else x-data="{ open: false}" @endif>
                         <header class="border border-gray-200 px-4 pt-2 cursor-pointer bg-gray-100 bg-opacity-25 transition duration-700 ease-in-out" x-on:click=" open = !open ">
@@ -113,8 +131,13 @@
                             </ul>
                         </div>
                     </article>
-
-                @endforeach
+                @empty
+                    <div class="card">
+                        <div class="card-body">
+                            Este curso no tiene secciones asignadas.
+                        </div>
+                    </div>
+                @endforelse
 
             </section>
 
@@ -142,52 +165,15 @@
                         </div>
                     </div>
 
-                    @can( 'enrolled', $course )
-
-                    <!-- TODO: Condition if course last lesson platform is Microsoft or Linkedin -->
-                    {{-- {{$course->url}}               --}}
-
-                        @if( $course->url != '' )
-
-                            <!-- CTA button : user enrolled -->
-                            <a href="{{ $course->url }}" class="btn-cta btn-success btn-block mt-4 hover:shadow">Continuar con el curso</a>
-
-                        @else
-
-                            <!-- CTA button : user enrolled -->
-                            <a href="{{ route('courses.status', $course ) }}" class="btn-cta btn-success btn-block mt-4 hover:shadow">Continuar con el curso</a>
-
-                        @endif
-
-                    @else
-
-                        {{-- @if( $course->url != '' )
-
-                            <!-- CTA button : user enrolled -->
-                            <a href="{{ $course->url }}" class="btn-cta btn-accent btn-block mt-4 hover:shadow">Iniciar este curso</a>
-
-                            <!-- TODO: Register user clicks -->
-
-                        @else
-
-                            <!-- CTA button -->
-                            <form action="{{ route('courses.enrolled', $course ) }}" method="post">
-                                @csrf
-                                <button type="submit" class="btn-cta btn-accent btn-block mt-4 hover:shadow">Iniciar este curso</button>
-                            </form>
-                        @endif --}}
-
-                        <form action="{{ route('courses.enrolled', $course ) }}" method="post">
-                            @csrf
-                            <button type="submit" class="btn-cta btn-accent btn-block mt-4 hover:shadow">Iniciar este curso</button>
-                        </form>
-
-                    @endcan
+                    <form action="{{ route('admin.courses.approved', $course ) }}" class="mt-4" method="POST">
+                        @csrf
+                        <button type="submit" class="btn-cta btn-accent btn-block mt-4 hover:shadow">Aprobar este curso</button>
+                    </form>
 
                 </div>
             </section>
 
-            <aside class="hidden md:block divide-y divide-gray-300">
+            {{-- <aside class="hidden md:block divide-y divide-gray-300">
 
                 <h2 class="font-bold text-2xl mb-2 text-gray-600 mb-12">Cursos relacionados</h2>
 
@@ -226,7 +212,7 @@
                     </article>
                 @endforeach
 
-            </aside>
+            </aside> --}}
 
         </div>
 

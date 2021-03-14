@@ -88,10 +88,11 @@
         </span>
     @enderror
     <!-- course status -->
-    <div>
+    <!-- TODO: El curso debe estar debidamente completado para pasar a estatus publicado -->
+    {{-- <div>
         <p class="mb-1">{!! Form::label('status', 'Estatus:') !!}</p>
         {!! Form::select('status', [1 => 'Borrador', 2 => 'Revisión', 3 => 'Publicado']) !!}
-    </div>
+    </div> --}}
 </div>
 
 <hr class="mt-2 mb-6">

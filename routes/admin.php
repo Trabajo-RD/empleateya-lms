@@ -30,3 +30,15 @@ Route::resource('users', UserController::class)->only(['index', 'edit', 'update'
  * Route for courses in revision
  */
 Route::get('courses', [CourseController::class, 'index'])->name('courses.index');
+
+/**
+ * Route to review the courses in revision status
+ */
+Route::get('courses/{course}', [CourseController::class, 'show'])->name('courses.show');
+
+/**
+ * Route to aprove courses to publish
+ */
+Route::post('courses/{course}/approved', [CourseController::class, 'approved'])->name('courses.approved');
+
+
