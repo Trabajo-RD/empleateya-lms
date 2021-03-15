@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use App\Models\Course;
 use Illuminate\Support\Facades\Http;
 
+// To send email
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ApprovedCourse;
+
 class CourseController extends Controller
 {
     public function index(){
@@ -65,6 +69,16 @@ class CourseController extends Controller
         $course->status = 3;
 
         $course->save();
+
+        // Send approved course confirmation email to user
+        $mail = new ApprovedCourse($course);
+
+        // Send inmediately the confirmation email
+        //Mail::to($course->editor->email)->send($mail);
+
+        // Put the email in queue in jobs database table
+        Mail::to($course->editor->email)->queue($mail);
+
 
         return redirect()->route('admin.courses.index')->with('success', 'El curso ha sido aprobado correctamente');
 
