@@ -189,10 +189,10 @@
 
             <aside class="hidden md:block divide-y divide-gray-300">
 
-                <h2 class="font-bold text-2xl mb-2 text-gray-600 mb-12">Cursos relacionados</h2>
+                <h2 class="font-bold text-2xl text-gray-600 mb-12">Cursos relacionados</h2>
 
                 @foreach ( $related_courses as $related_course )
-                    <article class="flex py-3 grid md:grid-cols-1 lg:grid-cols-3">
+                    <article class="py-3 grid md:grid-cols-1 lg:grid-cols-3 items-center">
                         <!-- related course image -->
                         @isset( $related_course->image )
                             <img src="{{ Storage::url( $related_course->image->url ) }}" alt="{{ $related_course->name }}" class="h-28 md:w-full lg:w-32 object-cover md:col-span-1 lg:col-span-1" />

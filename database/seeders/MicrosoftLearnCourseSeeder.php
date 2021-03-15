@@ -26,7 +26,7 @@ class MicrosoftLearnCourseSeeder extends Seeder
      */
     public function run()
     {
-
+        $locale = 'es-es';
 
         $response = Http::get('https://docs.microsoft.com/api/contentbrowser/search?environment=prod&locale=es-es&facet=roles&facet=levels&facet=products&facet=resource_type&%24filter=((resource_type%20eq%20%27learning%20path%27))&%24orderBy=popularity%20desc%2Clast_modified%20desc%2Ctitle&%24top=30&showHidden=false');
 
@@ -37,6 +37,8 @@ class MicrosoftLearnCourseSeeder extends Seeder
 
             $level_id = 0;
             $type_id = '';
+            $platform_id = 1;
+            $uid = $ms_course['uid'];
 
             // level of course
             switch($ms_course['levels'][0]){
@@ -82,44 +84,40 @@ class MicrosoftLearnCourseSeeder extends Seeder
             ]);
 
 
-                DB::table('course_user')->insert([
-                    'user_id' => 4,
-                    'course_id' => $courses->id
-                ]);
+                // DB::table('course_user')->insert([
+                //     'user_id' => 4,
+                //     'course_id' => $courses->id
+                // ]);
+
+                $modules = Http::get('https://docs.microsoft.com/api/hierarchy/paths/'. $uid . '?locale=' . $locale);
 
 
-            // foreach($courses as $course){
-            //     Image::create([
-            //         'imageable_id' => $course->id,
-            //         'imageable_type' => 'App\Models\Course'
-            //     ]);
 
-            //     Requirement::create([
-            //         'course_id' => $course->id
-            //     ]);
+                foreach ($modules['modules'] as $module ){
+                    $module_inserted = DB::table('sections')->insertGetId([
+                        'name' => $module['achievement']['title'],
+                        'course_id' => $courses->id,
+                    ]);
 
-            //     Goal::create([
-            //         'course_id' => $course->id
-            //     ]);
+                    // $iten_id = $module['units'];
 
-            //     Audience::create([
-            //         'course_id' => $course->id
-            //     ]);
+                    // $units = Http::get('https://docs.microsoft.com/api/hierarchy/modules?unitId='. $iten_id . '&locale=' . $locale);
 
-            //     $sections =  Section::create(['course_id' => $course->id]);
+                    foreach( $module['units'] as $unit ){
+                        DB::table('lessons')->insert([
+                            'name' => $unit['title'],
+                            'url' => 'https://docs.microsoft.com/es-es' . $unit['url'],
+                            'iframe' => null,
+                            'section_id'=> $module_inserted,
+                            'platform_id' => $platform_id,
+                        ]);
+                    }
 
-            //     foreach($sections as $section){
-            //         $lessons = Lesson::create(['section_id' => $section->id]);
+                }
 
-            //         foreach($lessons as $lesson){
-            //             Description::create(['lesson_id' => $lesson->id]);
-            //         }
-            //     }
-            // }
-
+            }
         }
 
 
 
     }
-}

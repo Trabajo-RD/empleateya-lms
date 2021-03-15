@@ -29,7 +29,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($courses as $course )
+                    @forelse ($courses as $course )
                         <tr class="items-center">
                             <td>{{ $course->id }}</td>
                             <td>{{ $course->title }}</td>
@@ -38,7 +38,15 @@
                                 <a class="btn btn-primary" href="{{ route('admin.courses.show', $course ) }}">Revisar</a>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="4">
+                                <div class="alert alert-warning mt-3" role="alert">
+                                    Por el momento no existen cursos en revisión.
+                                  </div>
+                            </td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

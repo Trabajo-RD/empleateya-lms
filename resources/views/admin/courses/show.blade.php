@@ -173,46 +173,7 @@
                 </div>
             </section>
 
-            {{-- <aside class="hidden md:block divide-y divide-gray-300">
 
-                <h2 class="font-bold text-2xl mb-2 text-gray-600 mb-12">Cursos relacionados</h2>
-
-                @foreach ( $related_courses as $related_course )
-                    <article class="flex py-3 grid md:grid-cols-1 lg:grid-cols-3">
-                        <!-- related course image -->
-                        @isset( $related_course->image )
-                            <img src="{{ Storage::url( $related_course->image->url ) }}" alt="{{ $related_course->name }}" class="h-28 md:w-full lg:w-32 object-cover md:col-span-1 lg:col-span-1" />
-                        @else
-                            <img id="picture" class="h-28 md:w-full lg:w-32 object-cover md:col-span-1 lg:col-span-1" src="{{ asset('images/courses/default.jpg') }}" alt="{{ $related_course->name }}" >
-                        @endisset
-
-                        <div class="ml-3 md:col-span-1 lg:col-span-2">
-                            <h3>
-                                <a class="font-bold text-gray-600 mb-3" href="{{ route('courses.show', $related_course ) }}">{{ Str::limit( $related_course->title, 40 ) }}</a>
-                            </h3>
-                            <div class="flex items-center mb-4">
-                                <img class="h-8 w-8 object-cover rounded-full shadow-lg" src="{{ $related_course->editor->profile_photo_url }}" alt="" />
-                                <p class="font-bold text-sm text-gray-500 ml-2"> {{ $related_course->editor->name . ' ' . $related_course->editor->surname }} </p>
-                            </div>
-                            <div class="flex items-center">
-                                <!-- rating -->
-                                <p class="text-yellow-400 font-extrabold text-md mr-4">
-                                    {{ $related_course->rating }}<i class="fas fa-star text-yellow-400 ml-2"></i>
-                                </p>
-                                <!-- users enrolled -->
-                                <p class="text-gray-600 text-sm">
-                                    <i class="fas fa-users text-sm mr-2"></i>{{ $related_course->students_count }}
-                                </p>
-                                <!-- course price -->
-                                <p class="text-md text-gray-700 font-bold ml-auto">
-                                    {{ $related_course->price->value > 0 ? $related_course->price->value : 'Gratis' }}
-                                </p>
-                            </div>
-                        </div>
-                    </article>
-                @endforeach
-
-            </aside> --}}
 
         </div>
 
