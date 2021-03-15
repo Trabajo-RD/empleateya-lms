@@ -5,8 +5,10 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Course;
+use App\Models\User;
 use App\Models\Image;
 use App\Models\Requirement;
 use App\Models\Goal;
@@ -78,6 +80,13 @@ class MicrosoftLearnCourseSeeder extends Seeder
                 'type_id' => $type_id,
                 'modality_id' => 1,
             ]);
+
+
+                DB::table('course_user')->insert([
+                    'user_id' => 4,
+                    'course_id' => $courses->id
+                ]);
+
 
             // foreach($courses as $course){
             //     Image::create([

@@ -25,13 +25,7 @@ ClassicEditor
     .create( document.querySelector( '#summary' ) )
     .catch( error => {
         console.error( error );
-    } )
-    .replace( document.querySelector( '#summary' ), {
-      // Pressing Enter will create a new <div> element.
-      enterMode: CKEDITOR.ENTER_DIV,
-      // Pressing Shift+Enter will create a new <p> element.
-      shiftEnterMode: CKEDITOR.ENTER_BR
-    });;
+    } );
 
 /* CKEDITOR CUSTOM OPTIONS */
 // ClassicEditor

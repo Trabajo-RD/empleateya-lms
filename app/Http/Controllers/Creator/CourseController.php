@@ -24,7 +24,7 @@ class CourseController extends Controller
         $this->middleware('can:LMS Actualizar cursos')->only('edit', 'update', 'goals');
         $this->middleware('can:LMS Eliminar cursos')->only('destroy');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -68,8 +68,19 @@ class CourseController extends Controller
             'type_id' => 'required',
             'level_id' => 'required',
             'price_id' => 'required',
-            'file' => 'image',
+            //'file' => 'image',
         ]);
+
+        // $course = Course::create([
+        //     'title' => $request->title,
+        //     'slug' => $request->slug,
+        //     'duration_in_minutes' => $request->duration_in_minutes,
+        //     'summary' => $request->summary,
+        //     'category_id' => $request->category_id,
+        //     'type_id' => $request->type_id,
+        //     'level_id' => $request->level_id,
+        //     'price_id' => $request->price_id,
+        // ]);
 
         $course = Course::create( $request->all() );
 
@@ -136,13 +147,27 @@ class CourseController extends Controller
             'type_id' => 'required',
             'level_id' => 'required',
             'price_id' => 'required',
-            'file' => 'image',
+            //'file' => 'image',
         ]);
+
+        // $course->update([
+        //     'title' => $request->title,
+        //     'slug' => $request->slug,
+        //     'duration_in_minutes' => $request->duration_in_minutes,
+        //     'summary' => $request->summary,
+        //     'category_id' => $request->category_id,
+        //     'type_id' => $request->type_id,
+        //     'level_id' => $request->level_id,
+        //     'price_id' => $request->price_id,
+        // ]);
 
         $course->update($request->all());
 
         if( $request->file('file') ){
-            $url = Storage::put('courses', $request->file('file') );
+
+            $url = Storage::put('courses', $request->file('file'));
+
+            //return $url;
 
             if( $course->image ){
                 Storage::delete($course->image->url);
@@ -151,7 +176,7 @@ class CourseController extends Controller
                     'url' => $url
                 ]);
             } else {
-                $course->image->create([
+                $course->image()->create([
                     'url' => $url
                 ]);
             }

@@ -122,11 +122,15 @@
             <img id="picture" class="w-full h-64 object-cover object-center" src="{{ asset('images/courses/default.jpg') }}" alt="" >
         @endisset
     </figure>
+    <div class="text-blue-500 font-bold mt-1" wire:loading wire:target="picture">
+        Cargando...
+    </div>
     <div>
         <p class="mb-2">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus consequatur beatae, sed eaque, ipsa labore tenetur aliquid eum vitae iste ad laborum modi esse iure eligendi fuga hic, sint nemo?
         </p>
         {!! Form::file('file', ['class' => 'form-input w-full' . ($errors->has('file') ? ' border-red-600' : ''), 'id' => 'file', 'accept' => 'image/*']) !!}
+
         @error('file')
             <span class="invalid-feedback">
                 <strong class="text-xs text-red-700">{{ $message }}</strong>

@@ -59,6 +59,8 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
+        //return $request;
+
         $request->validate([
             'title' => 'required',
             'slug' => 'required|unique:courses',
@@ -68,8 +70,19 @@ class CourseController extends Controller
             'type_id' => 'required',
             'level_id' => 'required',
             'price_id' => 'required',
-            'file' => 'image',
+            //'file' => 'image',
         ]);
+
+        // $course = Course::create([
+        //     'title' => $request->title,
+        //     'slug' => $request->slug,
+        //     'duration_in_minutes' => $request->duration_in_minutes,
+        //     'summary' => $request->summary,
+        //     'category_id' => $request->category_id,
+        //     'type_id' => $request->type_id,
+        //     'level_id' => $request->level_id,
+        //     'price_id' => $request->price_id,
+        // ]);
 
         $course = Course::create( $request->all() );
 
@@ -140,6 +153,17 @@ class CourseController extends Controller
             'file' => 'image',
         ]);
 
+        // $course->update([
+        //     'title' => $request->title,
+        //     'slug' => $request->slug,
+        //     'duration_in_minutes' => $request->duration_in_minutes,
+        //     'summary' => $request->summary,
+        //     'category_id' => $request->category_id,
+        //     'type_id' => $request->type_id,
+        //     'level_id' => $request->level_id,
+        //     'price_id' => $request->price_id,
+        // ]);
+
         $course->update($request->all());
 
         if( $request->file('file') ){
@@ -152,7 +176,7 @@ class CourseController extends Controller
                     'url' => $url
                 ]);
             } else {
-                $course->image->create([
+                $course->image()->create([
                     'url' => $url
                 ]);
             }

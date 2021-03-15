@@ -10,8 +10,8 @@ class Course extends Model
     use HasFactory;
 
     // Guarded: do not allow massive income
-    protected $guarded = [];
-    //protected $guarded = ['id', 'status'];
+    //protected $guarded = [];
+    protected $guarded = ['id', 'status'];
     protected $withCount = ['students', 'reviews']; // add attr students_count to Course Model
 
     const DRAFT = 1;
