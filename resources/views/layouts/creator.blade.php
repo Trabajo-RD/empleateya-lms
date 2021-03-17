@@ -13,6 +13,7 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css')}}">
+        <link  href="http://fonts.googleapis.com/css?family=Reenie+Beanie:regular" rel="stylesheet" type="text/css">
 
         @livewireStyles
 
@@ -55,6 +56,18 @@
                         <li class="leading-7 mb-1 border-l-4 @routeIs('creator.courses.students', $course) border-blue-400 @else border-transparent @endif pl-2">
                             <a href="{{ route('creator.courses.students', $course) }}">Estudiantes</a>
                         </li>
+
+                        @if( $course->observation )
+                            <li class="flex leading-7 mb-1 border-l-4 @routeIs('creator.courses.observation', $course) border-blue-400 @else border-transparent @endif pl-2">
+                                <a href="{{ route('creator.courses.observation', $course) }}">Observaciones</a>
+                                <!-- Tailwind animate ping -->
+                                <span class="flex h-3 w-3">
+                                    <span class="animate-ping h-3 w-3 absolute inline-flex rounded-full bg-red-400 opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                                </span>
+                                <!-- /Tailwind animate ping -->
+                            </li>
+                        @endif
                     </ul>
 
                     <hr class="my-6">

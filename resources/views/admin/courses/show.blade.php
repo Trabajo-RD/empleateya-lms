@@ -167,8 +167,10 @@
 
                     <form action="{{ route('admin.courses.approved', $course ) }}" class="mt-4" method="POST">
                         @csrf
-                        <button type="submit" class="btn-cta btn-accent btn-block mt-4 hover:shadow">Aprobar este curso</button>
+                        <button type="submit" class="btn-cta btn-primary btn-block mt-4 hover:shadow">Aprobar este curso</button>
                     </form>
+
+                    <a href="{{ route('admin.courses.observation', $course ) }}" class="btn-cta btn-block text-center mt-4 bg-transparent hover:bg-gray-500 text-gray-700 font-semibold hover:text-white border border-gray-500 hover:border-transparent rounded">Añadir observación</a>
 
                 </div>
             </section>

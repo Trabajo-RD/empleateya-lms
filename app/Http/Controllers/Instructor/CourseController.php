@@ -211,10 +211,22 @@ class CourseController extends Controller
 
     }
 
+    /**
+     * Change the course status when click on Request Revision button
+     */
     public function status( Course $course ){
         $course->status = 2;
         $course->save();
 
-        return back();
+        $course->observation->delete();
+
+        return redirect()->route('instructor.courses.edit', $course );
+    }
+
+    /**
+     * Return course observation view
+     */
+    public function observation( Course $course ){
+        return view('instructor.courses.observation', compact('course') );
     }
 }

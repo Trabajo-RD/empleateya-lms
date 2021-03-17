@@ -60,6 +60,13 @@ class Course extends Model
         return "slug";
     }
 
+    /**
+     * Relation 1:1
+     */
+    public function observation(){
+        return $this->hasOne('App\Models\Observation');
+        //return $this->hasMany('App\Models\Observation');
+    }
 
     /**
      * Relation 1:N

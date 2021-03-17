@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Http;
 // To send email
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ApprovedCourse;
+use App\Mail\RejectCourse;
 
 class CourseController extends Controller
 {
@@ -73,7 +74,7 @@ class CourseController extends Controller
         // Send approved course confirmation email to user
         $mail = new ApprovedCourse($course);
 
-        // Send inmediately the confirmation email
+        // Send confirmation email inmediately
         //Mail::to($course->editor->email)->send($mail);
 
         // Put the email in queue in jobs database table
@@ -82,5 +83,39 @@ class CourseController extends Controller
 
         return redirect()->route('admin.courses.index')->with('success', 'El curso ha sido aprobado correctamente');
 
+    }
+
+    /**
+     * Return observation course form
+     */
+    public function observation( Course $course ){
+        return view('admin.courses.observation', compact('course'));
+    }
+
+    /**
+     * Process the course feedback form
+     */
+    public function reject( Request $request, Course $course ){
+
+        $request->validate([
+            'body' => 'required'
+        ]);
+
+        // return $request->all();
+        $course->observation()->create( $request->all() );
+
+        $course->status = 1;
+        $course->save();
+
+        // Send reject email with observation to course dictated user
+        $mail = new RejectCourse($course);
+
+        // Send reject email inmediately
+        // Mail::to( $course->editor->email )->send( $mail );
+
+        // Put the email in queue in jobs database table
+        Mail::to( $course->editor->email )->queue( $mail );
+
+        return redirect()->route('admin.courses.index')->with('success', 'El curso ha sido rechazado');
     }
 }

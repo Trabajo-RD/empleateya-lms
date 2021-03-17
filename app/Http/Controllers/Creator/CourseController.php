@@ -11,11 +11,13 @@ use App\Models\Type;
 use App\Models\Level;
 use App\Models\Price;
 use App\Models\Modality;
-
+use App\Models\Observation;
 use Illuminate\Support\Facades\Storage;
 
 class CourseController extends Controller
 {
+
+
     public function __construct()
     {
         // Add middleware to Resource Routes
@@ -211,10 +213,27 @@ class CourseController extends Controller
 
     }
 
+    /**
+     * Change the course status when click on Request Revision button
+     */
     public function status( Course $course ){
         $course->status = 2;
         $course->save();
 
-        return back();
+        // Delete old observation when course status change to revision
+        $course->observation->delete();
+
+        return redirect()->route( 'creator.courses.edit', $course );
     }
+
+    /**
+     * Return course observation view
+     */
+    public function observation( Course $course ){
+
+        return view('creator.courses.observation', compact( 'course' ) );
+
+    }
+
+
 }

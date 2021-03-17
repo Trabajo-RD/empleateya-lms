@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Curso aprobado</title>
+    <title>Curso rechazado</title>
 
     <style>
         h1 {
@@ -13,10 +13,10 @@
         .container, .alert {
             padding: 8rem;
         }
-        .alert-success {
-            color: #155724;
-            background-color: #d4edda;
-            border-color: #c3e6cb;
+        .alert-danger {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
         }
     </style>
 </head>
@@ -27,13 +27,17 @@
             <p>Slogan</p>
         </header>
 
-        <div class="alert alert-success">
-            <h2>Hemos aprobado tu curso</h2>
+        <div>
+            <h2>Hemos rechazado este curso</h2>
 
-            <div class="alert alert-success">
+            <div class="alert alert-danger">
                 <p>
                     El curso <a href="http://empleateya-lms.test/cursos/{{$course->slug}}" target="_blank"><strong>{{$course->title}}</strong></a> para el que solicitaste revisión en nuestra plataforma LMS,
-                    ha sido aprobado con éxito.
+                    ha sido rechazado.
+                </p>
+                <h3>Observaciones:</h3>
+                <p>
+                    {!! $course->observation->body !!}
                 </p>
             </div>
         </div>

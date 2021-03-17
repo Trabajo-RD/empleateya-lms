@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Observation extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['body', 'course_id'];
+
+    /**
+     * Relation 1:1
+     */
+    public function course(){
+        return $this->belongsTo('App\Models\Course');
+    }
 }

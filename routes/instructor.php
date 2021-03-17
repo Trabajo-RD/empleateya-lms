@@ -41,3 +41,8 @@ Route::get('courses/{course}/students', CoursesStudents::class)->middleware('can
  * Route to request change course status
  */
 Route::post('courses/{course}/status', [CourseController::class, 'status'])->name('courses.status');
+
+/**
+ * Route to display the observations in course info view
+ */
+Route::get('courses/{course}/observation', [CourseController::class, 'observation'])->name('courses.observation');

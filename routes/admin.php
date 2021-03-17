@@ -41,4 +41,12 @@ Route::get('courses/{course}', [CourseController::class, 'show'])->name('courses
  */
 Route::post('courses/{course}/approved', [CourseController::class, 'approved'])->name('courses.approved');
 
+/**
+ * Route to display the course observation form
+ */
+Route::get('courses/{course}/observation', [CourseController::class, 'observation'])->name('courses.observation');
 
+/**
+ * Route to process the sending observation
+ */
+Route::post('courses/{course}/reject', [CourseController::class, 'reject'])->name('courses.reject');

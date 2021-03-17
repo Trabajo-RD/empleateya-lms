@@ -34,6 +34,11 @@ Route::get('courses/{course}/goals', [CourseController::class, 'goals'])->name('
   */
  Route::post('courses/{course}/status', [CourseController::class, 'status'])->name('courses.status');
 
+ /**
+ * Route to display the observations in course info view
+ */
+Route::get('courses/{course}/observation', [CourseController::class, 'observation'])->name('courses.observation');
+
 
 
 

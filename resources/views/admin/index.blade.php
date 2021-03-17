@@ -15,5 +15,5 @@
 @stop
 
 @section('js')
-    <script> console.log('LMS funcionando!'); </script>
+    <script></script>
 @stop

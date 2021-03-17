@@ -16,7 +16,7 @@ class CreateObservationsTable extends Migration
         Schema::create('observations', function (Blueprint $table) {
             $table->id();
 
-            $table->text('name');
+            $table->text('body');
             $table->unsignedBigInteger('course_id');
 
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
