@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\Admin\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,11 @@ Route::resource('roles', RoleController::class)->names('roles');
 //Route::resource('users', UserController::class)->names('users'); // Create all (7) routes for CRUD
 
 Route::resource('users', UserController::class)->only(['index', 'edit', 'update'])->names('users');
+
+/**
+ * Route to manage course categories
+ */
+Route::resource('categories', CategoryController::class)->names('categories');
 
 /**
  * Route for courses in revision
