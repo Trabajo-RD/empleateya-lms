@@ -274,6 +274,11 @@ return [
             'icon' => 'fas fa-tags',
         ],
         [
+            'text' => 'Niveles',
+            'route'  => 'admin.levels.index',
+            'icon' => 'fas fa-layer-group',
+        ],
+        [
             'text' => 'change_password',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',

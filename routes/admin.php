@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\LevelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,11 @@ Route::resource('users', UserController::class)->only(['index', 'edit', 'update'
  * Route to manage course categories
  */
 Route::resource('categories', CategoryController::class)->names('categories');
+
+/**
+ * Route to manage course levels
+ */
+Route::resource('levels', LevelController::class)->names('levels');
 
 /**
  * Route for courses in revision

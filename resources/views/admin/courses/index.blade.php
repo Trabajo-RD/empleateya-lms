@@ -31,11 +31,11 @@
                 <tbody>
                     @forelse ($courses as $course )
                         <tr class="items-center">
-                            <td>{{ $course->id }}</td>
+                            <td width="10px">{{ $course->id }}</td>
                             <td>{{ $course->title }}</td>
                             <td>{{ $course->category->name }}</td>
-                            <td>
-                                <a class="btn btn-primary" href="{{ route('admin.courses.show', $course ) }}">Revisar</a>
+                            <td width="12%">
+                                <a class="btn btn-outline-secondary" href="{{ route('admin.courses.show', $course ) }}">Revisar</a>
                             </td>
                         </tr>
                     @empty
