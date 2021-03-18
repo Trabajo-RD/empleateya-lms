@@ -3,8 +3,8 @@
 @section('title', 'Empleateya LMS')
 
 @section('content_header')
-    <a href="{{ route('admin.partners.create') }}" class="btn btn-primary float-right"><i class="fas fa-plus mr-1"></i>Nueva asociación</a>
-    <h1 class="text-primary"><i class="far fa-handshake mr-1"></i>Asociaciones y Convenios</h1>
+    <a href="{{ route('admin.partners.create') }}" class="btn btn-primary float-right"><i class="fas fa-plus mr-1"></i>Nueva sociedad</a>
+    <h1 class="text-dark">Sociedades y Convenios</h1>
 @stop
 
 @section('content')
@@ -15,13 +15,13 @@
 
     <div class="card">
         <div class="card-header">
-            Listado de asociaciones
+            Listado de sociedades
         </div>
         <div class="card-body">
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>Logo</th>
                         <th>Nombre</th>
                         <th>Estado</th>
                         <th colspan="2"></th>
@@ -30,24 +30,32 @@
                 <tbody>
                     @foreach( $partners as $partner )
                         <tr>
-                            <td width="10px">{{ $partner->id }}</td>
-                            <td>{{ $partner->name }}</td>
-                            <td>
+                            <td class="align-middle" width="15%">
+                               
+                                    @isset( $partner->image )
+                                        <img id="picture" class="img-fluid" src="{{ Storage::url($partner->image->url) }}" alt="" style="max-height: 75px;">
+                                    @else
+                                        <img id="picture" class="img-fluid" src="{{ asset('images/courses/logo-cloud.png') }}" alt="" style="max-height: 75px;" >
+                                    @endisset
+                               
+                            </td>
+                            <td class="align-middle">{{ $partner->name }}</td>
+                            <td class="align-middle">
                                 @switch($partner->visible)
                                 @case(1)
-                                    <span class="badge badge-warning">Ocultar</span>
+                                    <span class="badge badge-warning py-2 px-2 text-uppercase text-md">Oculto</span>
                                     @break
                                 @case(2)
-                                    <span class="badge badge-success">Mostrar</span>
+                                    <span class="badge badge-success py-2 px-2 text-uppercase text-md">Visible</span>
                                     @break
                                 @default
 
                             @endswitch
                             </td>
-                            <td width="12%">
+                            <td width="12%" class="align-middle">
                                 <a href="{{ route('admin.partners.edit', $partner) }}" class="btn btn-outline-secondary"><i class="far fa-edit mr-1"></i>Editar</a>
                             </td>
-                            <td width="14%">
+                            <td width="14%" class="align-middle">
                                 <form action="{{ route( 'admin.partners.destroy', $partner ) }}" method="POST">
                                     @csrf
                                     @method('delete')

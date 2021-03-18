@@ -3,11 +3,11 @@
 @section('title', 'Empleateya LMS')
 
 @section('content_header')
-    <h1 class="text-primary"><i class="fas fa-laptop mr-2"></i>Cursos en revisión</h1>
+    <h1 class="text-dark">Cursos en revisión</h1>
 @stop
 
 @section('content')
-    <p>Listado de todos los cursos que se encuentran pendientes de aprobación.</p>
+    <p class="text-secondary">Listado de todos los cursos que se encuentran pendientes de aprobación.</p>
 
     @if( session('success') )
 

@@ -4,7 +4,7 @@
 
 @section('content_header')
     <a href="{{ route('admin.prices.create') }}" class="btn btn-primary float-right"><i class="fas fa-plus mr-1"></i>Nuevo precio</a>
-    <h1 class="text-primary"><i class="fas fa-dollar-sign mr-1"></i>Precios</h1>
+    <h1 class="text-dark">Precios</h1>
 @stop
 
 @section('content')

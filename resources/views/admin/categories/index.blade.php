@@ -4,7 +4,7 @@
 
 @section('content_header')
     <a href="{{ route('admin.categories.create') }}" class="btn btn-primary float-right"><i class="fas fa-plus mr-1"></i>Nueva categoría</a>
-    <h1 class="text-primary"><i class="fas fa-tags mr-1"></i>Categorías</h1>
+    <h1 class="text-dark">Categorías</h1>
 @stop
 
 @section('content')

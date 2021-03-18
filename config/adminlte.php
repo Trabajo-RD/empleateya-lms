@@ -238,20 +238,20 @@ return [
         [
             'text'        => 'Dashboard',
             'route'       => 'admin.home',
-            'icon'        => 'fas fa-fw fa-tachometer-alt',
+            'icon'        => 'fas fa-fw fa-tachometer-alt text-muted',
             'can'         => 'LMS Ver Dashboard',
         ],
         [
             'text'        => 'Roles',
             'route'       => 'admin.roles.index',
-            'icon'        => 'fas fa-fw fa-users-cog',
+            'icon'        => 'fas fa-fw fa-users-cog text-muted',
             'active'      => ['admin/roles*'],
             'can'         => 'LMS Editar roles',
         ],
         [
             'text'        => 'Usuarios',
             'route'       => 'admin.users.index',
-            'icon'        => 'fas fa-fw fa-users',
+            'icon'        => 'fas fa-fw fa-users text-muted',
             'active'      => ['admin/users*'],
             'can'         => 'LMS Leer usuarios',
         ],
@@ -266,27 +266,27 @@ return [
         [
             'text' => 'Cursos en revisión',
             'route'  => 'admin.courses.index',
-            'icon' => 'fas fa-laptop',
+            'icon' => 'fas fa-laptop mr-1 text-muted',
         ],
         [
             'text' => 'Categorías',
             'route'  => 'admin.categories.index',
-            'icon' => 'fas fa-tags',
+            'icon' => 'fas fa-tags mr-1 text-muted',
         ],
         [
             'text' => 'Niveles',
             'route'  => 'admin.levels.index',
-            'icon' => 'fas fa-layer-group',
+            'icon' => 'fas fa-layer-group mr-1 text-muted',
         ],
         [
             'text' => 'Precios',
             'route'  => 'admin.prices.index',
-            'icon' => 'fas fa-dollar-sign',
+            'icon' => 'fas fa-dollar-sign mr-1 text-muted',
         ],
         [
-            'text' => 'Asociaciones y Convenios',
+            'text' => 'Sociedades y Convenios',
             'route'  => 'admin.partners.index',
-            'icon' => 'far fa-handshake',
+            'icon' => 'far fa-handshake mr-1 text-muted',
         ],
         // [
         //     'text' => 'change_password',

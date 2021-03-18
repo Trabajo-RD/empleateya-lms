@@ -84,8 +84,7 @@
     </section>
 
     <!-- latest posts -->
-    <section class="pt-24">
-        {{ $courses }}
+    <section class="pt-24">       
         <h2 class="text-center font-display font-semibold text-gray-600 text-2xl sm:text-3xl md:text-4xl mb-6">Últimos cursos</h2>
         @if( count( $courses ) >= 1 )
             <p class="text-center text-gray-500 text-sm mb-6">Estos son los últimos cursos que hemos publicado para tí</p>
@@ -94,8 +93,7 @@
                 @foreach ( $courses as $course )
                     <x-course-card :course="$course" />
                 @endforeach
-            </div>
-            <hr class="mt-24">
+            </div>            
         @else
             <p class="text-center text-gray-500 text-md mb-6">Por el momento no tenemos cursos publicados</p>
         @endif
@@ -103,18 +101,21 @@
 
     <!-- partnerships -->
     <section class="pt-24">
+        <hr class="pt-24">
         <h2 class="text-center font-display font-semibold text-gray-600 text-2xl sm:text-3xl md:text-4xl mb-6">Convenios con instituciones y empresas reconocidas</h2>
         <p class="text-center text-gray-500 text-md mb-6">Con el objetivo de ofrecerte una capacitación optima, y que puedas incorporarte al mercado laboral</p>
         <!-- courses -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap justify-center gap-x-6 gap-y-8 ">
             @foreach ( $partners as $partner )
-                <div class="card">
-                    <div class="card-body ">
-                        {{ $partner->name }}
-                    </div>
-                </div>
+                <figure>
+                    @isset( $partner->image )
+                        <img id="picture" class="img-fluid px-10" src="{{ Storage::url($partner->image->url) }}" title="{{ $partner->name }}" alt="{{ $partner->name }}" style="max-height: 100px;">
+                    @else
+                        <img id="picture" class="img-fluid px-10" src="{{ asset('images/courses/logo-cloud.png') }}" title="{{ $partner->name }}" alt="{{ $partner->name }}" style="max-height: 100px;" >
+                    @endisset
+                </figure>
                 {{-- <x-course-card :course="$course" /> --}}
-            @endforeach
+            @endforeach            
         </div>
         <hr class="mt-24">
     </section>

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Partner;
 
+use Illuminate\Support\Facades\Storage;
+
 class PartnerController extends Controller
 {
     /**
@@ -46,6 +48,14 @@ class PartnerController extends Controller
         ]);
 
         $partner = Partner::create( $request->all() );
+
+        if($request->file('file') ){
+            $url = Storage::put('partners', $request->file('file'));
+
+            $partner->image()->create([
+                'url' => $url
+            ]);
+        }
 
         return redirect()->route('admin.partners.edit', compact('partner'))->with('info', 'Se ha creado una nueva asociación.');
 
@@ -87,6 +97,22 @@ class PartnerController extends Controller
         ]);
 
         $partner->update( $request->all() );
+
+        if( $request->file('file') ){
+            $url = Storage::put('partners', $request->file('file') );
+
+            if( $partner->image ){
+                Storage::delete($partner->image->url);
+
+                $partner->image->update([
+                    'url' => $url
+                ]);
+            } else {
+                $partner->image()->create([
+                    'url' => $url
+                ]);
+            }
+        }
 
         return redirect()->route('admin.partners.edit', compact('partner'))->with('info', 'Se han actualizado los datos de la asociación.');
     }
