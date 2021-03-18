@@ -84,15 +84,39 @@
     </section>
 
     <!-- latest posts -->
-    <section class="py-24">
+    <section class="pt-24">
+        {{ $courses }}
         <h2 class="text-center font-display font-semibold text-gray-600 text-2xl sm:text-3xl md:text-4xl mb-6">Últimos cursos</h2>
-        <p class="text-center text-gray-500 text-sm mb-6">Estos son los últimos cursos que hemos publicado para tí</p>
+        @if( count( $courses ) >= 1 )
+            <p class="text-center text-gray-500 text-sm mb-6">Estos son los últimos cursos que hemos publicado para tí</p>
+            <!-- courses -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8">
+                @foreach ( $courses as $course )
+                    <x-course-card :course="$course" />
+                @endforeach
+            </div>
+            <hr class="mt-24">
+        @else
+            <p class="text-center text-gray-500 text-md mb-6">Por el momento no tenemos cursos publicados</p>
+        @endif
+    </section>
+
+    <!-- partnerships -->
+    <section class="pt-24">
+        <h2 class="text-center font-display font-semibold text-gray-600 text-2xl sm:text-3xl md:text-4xl mb-6">Convenios con instituciones y empresas reconocidas</h2>
+        <p class="text-center text-gray-500 text-md mb-6">Con el objetivo de ofrecerte una capacitación optima, y que puedas incorporarte al mercado laboral</p>
         <!-- courses -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8">
-            @foreach ( $courses as $course )
-                <x-course-card :course="$course" />
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap justify-center gap-x-6 gap-y-8 ">
+            @foreach ( $partners as $partner )
+                <div class="card">
+                    <div class="card-body ">
+                        {{ $partner->name }}
+                    </div>
+                </div>
+                {{-- <x-course-card :course="$course" /> --}}
             @endforeach
         </div>
+        <hr class="mt-24">
     </section>
 
 </x-app-layout>

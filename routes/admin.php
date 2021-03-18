@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\LevelController;
 use App\Http\Controllers\Admin\PriceController;
+use App\Http\Controllers\Admin\PartnerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,11 @@ Route::resource('levels', LevelController::class)->names('levels');
  * Route to manage course levels
  */
 Route::resource('prices', PriceController::class)->names('prices');
+
+/**
+ * Route to manage partners informations
+ */
+Route::resource('partners', PartnerController::class)->names('partners');
 
 /**
  * Route for courses in revision

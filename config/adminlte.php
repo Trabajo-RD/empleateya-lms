@@ -283,6 +283,11 @@ return [
             'route'  => 'admin.prices.index',
             'icon' => 'fas fa-dollar-sign',
         ],
+        [
+            'text' => 'Asociaciones y Convenios',
+            'route'  => 'admin.partners.index',
+            'icon' => 'far fa-handshake',
+        ],
         // [
         //     'text' => 'change_password',
         //     'url'  => 'admin/settings',
