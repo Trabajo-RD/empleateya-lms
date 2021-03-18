@@ -3,7 +3,7 @@
 @section('title', 'Empleateya LMS')
 
 @section('content_header')
-    <h1 class="text-primary"><i class="far fa-edit mr-2"></i>Cursos en revisión</h1>
+    <h1 class="text-primary"><i class="fas fa-laptop mr-2"></i>Cursos en revisión</h1>
 @stop
 
 @section('content')

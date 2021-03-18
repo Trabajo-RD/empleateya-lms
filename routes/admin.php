@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\LevelController;
+use App\Http\Controllers\Admin\PriceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,11 @@ Route::resource('categories', CategoryController::class)->names('categories');
  * Route to manage course levels
  */
 Route::resource('levels', LevelController::class)->names('levels');
+
+/**
+ * Route to manage course levels
+ */
+Route::resource('prices', PriceController::class)->names('prices');
 
 /**
  * Route for courses in revision
