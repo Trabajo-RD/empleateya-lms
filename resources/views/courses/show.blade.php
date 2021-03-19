@@ -26,11 +26,11 @@
                     </p>
                     <!-- rating stars -->
                     <ul class="flex text-sm">
-                        <li class="ml-2 mr-1 pt-1"><i class="fas fa-star text-{{ $course->rating >= 1 ? 'yellow' : 'gray' }}-400"></i></li>
-                        <li class="mr-1 pt-1"><i class="fas fa-star text-{{ $course->rating >= 1 ? 'yellow' : 'gray' }}-400"></i></li>
-                        <li class="mr-1 pt-1"><i class="fas fa-star text-{{ $course->rating >= 1 ? 'yellow' : 'gray' }}-400"></i></li>
-                        <li class="mr-1 pt-1"><i class="fas fa-star text-{{ $course->rating >= 1 ? 'yellow' : 'gray' }}-400"></i></li>
-                        <li class="mr-6 pt-1"><i class="fas fa-star text-{{ $course->rating >= 1 ? 'yellow' : 'gray' }}-400"></i></li>
+                        <li class="ml-2 mr-1 pt-1"><i class="fas fa-star text-{{ $course->rating >= 1 ? 'yellow' : 'gray' }}-300"></i></li>
+                        <li class="mr-1 pt-1"><i class="fas fa-star text-{{ $course->rating >= 2 ? 'yellow' : 'gray' }}-300"></i></li>
+                        <li class="mr-1 pt-1"><i class="fas fa-star text-{{ $course->rating >= 3 ? 'yellow' : 'gray' }}-300"></i></li>
+                        <li class="mr-1 pt-1"><i class="fas fa-star text-{{ $course->rating >= 4 ? 'yellow' : 'gray' }}-300"></i></li>
+                        <li class="mr-6 pt-1"><i class="fas fa-star text-{{ $course->rating == 5 ? 'yellow' : 'gray' }}-300"></i></li>
                     </ul>
                     <!-- users enrolled -->
                     <p class="text-white sm:text-md md:text-lg lg:mx-0">
@@ -117,6 +117,8 @@
                 @endforeach
 
             </section>
+
+            @livewire('courses-reviews', ['course' => $course])
 
         </div>
 
@@ -211,7 +213,7 @@
                             <div class="flex items-center">
                                 <!-- rating -->
                                 <p class="text-yellow-400 font-extrabold text-md mr-4">
-                                    {{ $related_course->rating }}<i class="fas fa-star text-yellow-400 ml-2"></i>
+                                    {{ $related_course->rating }}<i class="fas fa-star text-yellow-300 ml-2"></i>
                                 </p>
                                 <!-- users enrolled -->
                                 <p class="text-gray-600 text-sm">
@@ -231,5 +233,15 @@
         </div>
 
     </div>
+
+    <x-slot name="js">
+
+        <!-- CDN CKEditor 5 Classic -->
+        <script src="https://cdn.ckeditor.com/ckeditor5/26.0.0/classic/ckeditor.js"></script>
+
+        <!-- instructor js -->
+        <script src="{{ asset('js/student/courses/review.js') }}"></script>
+
+    </x-slot>
 
 </x-app-layout>
