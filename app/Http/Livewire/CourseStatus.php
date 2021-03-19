@@ -26,13 +26,13 @@ class CourseStatus extends Component
         // Return the first incomplete lesson
         foreach( $course->lessons as $lesson ){
             if( !$lesson->completed ){
-                $this->current = $lesson;     
+                $this->current = $lesson;
                 break;
             }
         }
 
         if( ! $this->current ){
-            // In case of having completed all the lessons, assign the last lesson to the current property           
+            // In case of having completed all the lessons, assign the last lesson to the current property
             $this->current = $course->lessons->last();
         }
 
@@ -50,7 +50,7 @@ class CourseStatus extends Component
 
     public function changeLesson( Lesson $lesson )
     {
-        return $this->current = $lesson;        
+        return $this->current = $lesson;
     }
 
     /**
@@ -98,7 +98,7 @@ class CourseStatus extends Component
             return null;
         } else {
             return $this->course->lessons[ $this->index + 1 ];
-        }     
+        }
     }
 
     /**
@@ -107,7 +107,7 @@ class CourseStatus extends Component
      * @access      public
      */
     public function getAdvanceProperty(){
-        // 
+        //
         $i = 0;
 
         foreach( $this->course->lessons as $lesson ){
@@ -119,5 +119,9 @@ class CourseStatus extends Component
         $advance = ( $i * 100 ) / ( $this->course->lessons->count() );
 
         return round( $advance, 2 );
+    }
+
+    public function download(){
+        return response()->download(storage_path('app/public/' . $this->current->resource->url));
     }
 }

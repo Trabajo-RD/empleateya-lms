@@ -221,7 +221,9 @@ class CourseController extends Controller
         $course->save();
 
         // Delete old observation when course status change to revision
-        $course->observation->delete();
+        if($course->observation){
+            $course->observation->delete();
+        }
 
         return redirect()->route( 'creator.courses.edit', $course );
     }

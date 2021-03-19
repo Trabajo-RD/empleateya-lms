@@ -7,7 +7,7 @@
             <div class="embed-responsive mb-4">
                 {!! $current->iframe !!}
             </div>
-            
+
             {{-- TODO: Display category name --}}
             <div class="mr-2 text-blue-500 text-sm p-1 rounded  leading-none flex items-center uppercase">
                 {{ $course->category->name }}
@@ -16,7 +16,7 @@
             <!-- lesson title -->
             <h2 class="text-bold text-3xl mb-2">
                 {{ $this->index + 1 }} - {{ $current->name }}
-            </h2>            
+            </h2>
 
             @if( $current->description )
                 <div class="text-gray-600 mb-8">
@@ -24,21 +24,30 @@
                 </div>
             @endif
 
-            <div class="flex mb-8">                
+            <div class="flex mb-8">
                 <button type="button" class="mr-2 bg-gray-300 text-gray text-sm py-2 px-4 leading-none flex items-center focus:outline-none">
                     {{ $course->level->name }}
                 </button>
             </div>
 
             <!-- complete lesson button -->
-            <div class="flex items-center cursor-pointer" wire:click="completed">
-                @if ($current->completed)
-                    <i class="fas fa-toggle-on text-2xl text-blue-400 mr-2"></i>
-                    
-                @else 
-                    <i class="fas fa-toggle-off text-2xl text-gray-400 mr-2"></i>
-                @endif                 
-                    <p class="text-base text-gray-700">Marcar esta lección como finalizada.</p>
+            <div class="flex justify-between">
+                <div class="flex items-center cursor-pointer" wire:click="completed">
+                    @if ($current->completed)
+                        <i class="fas fa-toggle-on text-2xl text-blue-400 mr-2"></i>
+
+                    @else
+                        <i class="fas fa-toggle-off text-2xl text-gray-400 mr-2"></i>
+                    @endif
+                        <p class="text-base text-gray-700">Marcar esta lección como finalizada.</p>
+                </div>
+                <!-- resources -->
+                @if( $current->resource )
+                    <div class="flex items-center cursor-pointer bg-gray-200 text-gray-500 hover:bg-gray-300 hover:text-gray-600 py-2 px-4 rounded shadow " wire:click="download">
+                        <i class="fas fa-download text-lg"></i>
+                        <p class="ml-2">Descargar recurso</p>
+                    </div>
+                @endif
             </div>
 
             <div class="card mt-3">
@@ -46,10 +55,10 @@
                     @if($this->previous) <a wire:click="changeLesson({{$this->previous}})" class="cursor-pointer text-gray-400 hover:text-gray-700"><i class="fas fa-arrow-left mr-2"></i>Lección anterior</a> @endif
                     @if($this->next) <a wire:click="changeLesson({{$this->next}})" class="ml-auto cursor-pointer text-gray-400 hover:text-gray-700">Lección siguiente<i class="fas fa-arrow-right ml-2"></i></a> @endif
                 </div>
-            </div>           
+            </div>
 
         </div>
-        
+
         <!-- sidebar -->
         <div class="card">
             <div class="card-body">
@@ -87,19 +96,19 @@
                                             @if( $lesson->completed )
                                                 @if( $current->id == $lesson->id )
                                                     <span class="inline-block w-4 h-4 border-2 border-blue-400 rounded-full mr-2 mt-1"></span>
-                                                @else 
+                                                @else
                                                     <span class="inline-block w-4 h-4 bg-blue-400 rounded-full mr-2 mt-1"></span>
                                                 @endif
-                                            @else 
+                                            @else
                                                 @if( $current->id == $lesson->id )
                                                     <span class="inline-block w-4 h-4 border-2 border-gray-400 rounded-full mr-2 mt-1"></span>
-                                                @else 
+                                                @else
                                                     <span class="inline-block w-4 h-4 bg-gray-400 rounded-full mr-2 mt-1"></span>
                                                 @endif
                                             @endif
                                         </div>
                                         <a class="cursor-pointer" wire:click="changeLesson({{ $lesson }})" >
-                                            {{ $lesson->name }}                                          
+                                            {{ $lesson->name }}
                                         </a>
                                     </li>
                                 @endforeach
