@@ -238,20 +238,20 @@ return [
         [
             'text'        => 'Dashboard',
             'route'       => 'admin.home',
-            'icon'        => 'fas fa-fw fa-tachometer-alt text-muted',
+            'icon'        => 'fas fa-fw fa-tachometer-alt',
             'can'         => 'LMS Ver Dashboard',
         ],
         [
             'text'        => 'Roles',
             'route'       => 'admin.roles.index',
-            'icon'        => 'fas fa-fw fa-users-cog text-muted',
+            'icon'        => 'fas fa-fw fa-users-cog',
             'active'      => ['admin/roles*'],
             'can'         => 'LMS Editar roles',
         ],
         [
             'text'        => 'Usuarios',
             'route'       => 'admin.users.index',
-            'icon'        => 'fas fa-fw fa-users text-muted',
+            'icon'        => 'fas fa-fw fa-users',
             'active'      => ['admin/users*'],
             'can'         => 'LMS Leer usuarios',
         ],
@@ -266,37 +266,42 @@ return [
         [
             'text' => 'Cursos en revisión',
             'route'  => 'admin.courses.index',
-            'icon' => 'fas fa-laptop mr-1 text-muted',
+            'icon' => 'fas fa-laptop mr-1',
         ],
         [
             'text' => 'Categorías',
             'route'  => 'admin.categories.index',
-            'icon' => 'fas fa-tags mr-1 text-muted',
+            'icon' => 'fas fa-tags mr-1',
         ],
         [
             'text' => 'Tipos',
             'route'  => 'admin.types.index',
-            'icon' => 'fas fa-photo-video mr-1 text-muted',
+            'icon' => 'fas fa-photo-video mr-1',
         ],
         [
             'text' => 'Niveles',
             'route'  => 'admin.levels.index',
-            'icon' => 'fas fa-layer-group mr-1 text-muted',
+            'icon' => 'fas fa-layer-group mr-1',
         ],
         [
             'text' => 'Modalidades',
             'route'  => 'admin.modalities.index',
-            'icon' => 'fas fa-laptop-house mr-1 text-muted',
+            'icon' => 'fas fa-laptop-house mr-1',
+        ],
+        [
+            'text' => 'Plataformas',
+            'route'  => 'admin.platforms.index',
+            'icon' => 'fas fa-server mr-1',
         ],
         [
             'text' => 'Precios',
             'route'  => 'admin.prices.index',
-            'icon' => 'fas fa-dollar-sign mr-1 text-muted',
+            'icon' => 'fas fa-dollar-sign mr-1',
         ],
         [
             'text' => 'Sociedades y Convenios',
             'route'  => 'admin.partners.index',
-            'icon' => 'far fa-handshake mr-1 text-muted',
+            'icon' => 'far fa-handshake mr-1',
         ],
         // [
         //     'text' => 'change_password',

@@ -3,7 +3,8 @@
 @section('title', 'Empleateya LMS')
 
 @section('content_header')
-    <h1 class="text-primary"><i class="far fa-edit mr-1"></i>Editar sociedad</h1>
+    <a href="{{ route('admin.partners.create') }}" class="btn btn-primary float-right"><i class="fas fa-plus mr-1"></i>Nueva sociedad</a>
+    <h1><i class="far fa-edit mr-1"></i>Editar sociedad</h1>
 @stop
 
 @section('content')
@@ -15,7 +16,7 @@
     <div class="card">
         <div class="card-body">
             {!! Form::model($partner, ['route' => ['admin.partners.update', $partner], 'method' => 'put', 'files' => true ]) !!}
-            
+
                 @include('admin.partners.partials.form')
 
                 {!! Form::submit('Actualizar sociedad', ['class' => 'btn btn-primary float-right']) !!}

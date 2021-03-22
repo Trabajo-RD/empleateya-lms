@@ -46,6 +46,9 @@
                 </tbody>
             </table>
         </div>
+        <div class="card-footer text-sm text-muted">
+            Los <strong>niveles</strong> se utilizan para asignarle a un curso el nivel mínimo que requiere un usuario para postularse.
+        </div>
     </div>
 @stop
 

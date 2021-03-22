@@ -46,6 +46,9 @@
                 </tbody>
             </table>
         </div>
+        <div class="card-footer text-sm text-muted">
+            Los <strong>tipos</strong> se utilizan para diferenciar entre un curso tipo itinerario de aprendizaje, módulo o video.
+        </div>
     </div>
 @stop
 

@@ -28,16 +28,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach( $partners as $partner )
+                    @forelse( $partners as $partner )
                         <tr>
                             <td class="align-middle" width="15%">
-                               
+
                                     @isset( $partner->image )
                                         <img id="picture" class="img-fluid" src="{{ Storage::url($partner->image->url) }}" alt="" style="max-height: 75px;">
                                     @else
                                         <img id="picture" class="img-fluid" src="{{ asset('images/courses/logo-cloud.png') }}" alt="" style="max-height: 75px;" >
                                     @endisset
-                               
+
                             </td>
                             <td class="align-middle">{{ $partner->name }}</td>
                             <td class="align-middle">
@@ -63,9 +63,20 @@
                                 </form>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="4">
+                                <div class="alert alert-light" role="alert">
+                                    Por el momento no se han registrado sociedades ni convenios.
+                                  </div>
+                            </td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
+        </div>
+        <div class="card-footer text-sm text-muted">
+            Las <strong>sociedades</strong> cuyo estatus sea "VISIBLE" se mostrarán en la página principal, en la sección "Partnerships". Hacen referencia a aquellas instituciones o empresas con las cuales se tiene algún acuerdo o convenio.
         </div>
     </div>
 @stop

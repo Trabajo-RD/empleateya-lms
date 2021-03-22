@@ -99,7 +99,7 @@
 
     <!-- partnerships -->
     @if( count( $partners) >= 1 )
-        <section class="pt-24">
+        <section>
             <hr class="pt-24">
             <h2 class="text-center font-display font-semibold text-gray-600 text-2xl sm:text-3xl md:text-4xl mb-6">Convenios con instituciones y empresas reconocidas</h2>
             <p class="text-center text-gray-500 text-md mb-6">Con el objetivo de ofrecerte una capacitación optima, y que puedas incorporarte al mercado laboral</p>

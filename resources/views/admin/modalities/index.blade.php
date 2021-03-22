@@ -46,6 +46,9 @@
                 </tbody>
             </table>
         </div>
+        <div class="card-footer text-sm text-muted">
+            Las <strong>modalidades</strong> hacen referencia a la modalidad de enseñanza con la cuál se impartirán los cursos.
+        </div>
     </div>
 @stop
 

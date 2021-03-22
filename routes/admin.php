@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\PriceController;
 use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Admin\ModalityController;
+use App\Http\Controllers\Admin\PlatformController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +57,11 @@ Route::resource('types', TypeController::class)->names('types');
  * Route to manage modalities
  */
 Route::resource('modalities', ModalityController::class)->names('modalities');
+
+/**
+ * Route to manage lesson video platforms
+ */
+Route::resource('platforms', PlatformController::class)->names('platforms');
 
 /**
  * Route to manage partners informations

@@ -46,6 +46,9 @@
                 </tbody>
             </table>
         </div>
+        <div class="card-footer text-sm text-muted">
+            El <strong>precio</strong> o costo del curso. En caso de ser Gratuito, el valor debe ser igual a cero (0).
+        </div>
     </div>
 @stop
 
