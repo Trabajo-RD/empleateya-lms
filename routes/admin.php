@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\LevelController;
 use App\Http\Controllers\Admin\PriceController;
 use App\Http\Controllers\Admin\PartnerController;
+use App\Http\Controllers\Admin\TypeController;
+use App\Http\Controllers\Admin\ModalityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,9 +43,19 @@ Route::resource('categories', CategoryController::class)->names('categories');
 Route::resource('levels', LevelController::class)->names('levels');
 
 /**
- * Route to manage course levels
+ * Route to manage course prices
  */
 Route::resource('prices', PriceController::class)->names('prices');
+
+/**
+ * Route to manage types
+ */
+Route::resource('types', TypeController::class)->names('types');
+
+/**
+ * Route to manage modalities
+ */
+Route::resource('modalities', ModalityController::class)->names('modalities');
 
 /**
  * Route to manage partners informations

@@ -255,13 +255,13 @@ return [
             'active'      => ['admin/users*'],
             'can'         => 'LMS Leer usuarios',
         ],
-        [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
-        ],
+        // [
+        //     'text'        => 'pages',
+        //     'url'         => 'admin/pages',
+        //     'icon'        => 'far fa-fw fa-file',
+        //     'label'       => 4,
+        //     'label_color' => 'success',
+        // ],
         ['header' => 'OPCIONES DE CURSOS'],
         [
             'text' => 'Cursos en revisión',
@@ -274,9 +274,19 @@ return [
             'icon' => 'fas fa-tags mr-1 text-muted',
         ],
         [
+            'text' => 'Tipos',
+            'route'  => 'admin.types.index',
+            'icon' => 'fas fa-photo-video mr-1 text-muted',
+        ],
+        [
             'text' => 'Niveles',
             'route'  => 'admin.levels.index',
             'icon' => 'fas fa-layer-group mr-1 text-muted',
+        ],
+        [
+            'text' => 'Modalidades',
+            'route'  => 'admin.modalities.index',
+            'icon' => 'fas fa-laptop-house mr-1 text-muted',
         ],
         [
             'text' => 'Precios',

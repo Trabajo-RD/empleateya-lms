@@ -73,7 +73,7 @@
     </section> --}}
 
     <!-- CTA -->
-    <section class="bg-blue-900 py-12">
+    <section class="bg-blue-900 py-12 mb-24">
         <h2 class="text-center text-white text-5xl sm:text-4xl md:text-3xl">¿No sabes qué curso elegir?</h2>
         <p class="text-center text-white">Visita nuestro catálogo de cursos donde encontrarás el curso adecuado para tí</p>
         <div class="flex justify-center mt-6">
@@ -84,41 +84,44 @@
     </section>
 
     <!-- latest posts -->
-    <section class="pt-24">       
-        <h2 class="text-center font-display font-semibold text-gray-600 text-2xl sm:text-3xl md:text-4xl mb-6">Últimos cursos</h2>
-        @if( count( $courses ) >= 1 )
-            <p class="text-center text-gray-500 text-sm mb-6">Estos son los últimos cursos que hemos publicado para tí</p>
-            <!-- courses -->
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8">
-                @foreach ( $courses as $course )
-                    <x-course-card :course="$course" />
-                @endforeach
-            </div>            
-        @else
-            <p class="text-center text-gray-500 text-md mb-6">Por el momento no tenemos cursos publicados</p>
-        @endif
-    </section>
+    @if( count( $latest_courses ) >= 1 )
+        <section class="pb-24">
+            <h2 class="text-center font-display font-semibold text-gray-600 text-2xl sm:text-3xl md:text-4xl mb-6">Últimos cursos</h2>
+                <p class="text-center text-gray-500 text-sm mb-6">Estos son los últimos cursos que hemos publicado para tí</p>
+                <!-- courses -->
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8">
+                    @foreach ( $latest_courses as $course )
+                        <x-course-card :course="$course" />
+                    @endforeach
+                </div>
+        </section>
+    @endif
 
     <!-- partnerships -->
-    <section class="pt-24">
-        <hr class="pt-24">
-        <h2 class="text-center font-display font-semibold text-gray-600 text-2xl sm:text-3xl md:text-4xl mb-6">Convenios con instituciones y empresas reconocidas</h2>
-        <p class="text-center text-gray-500 text-md mb-6">Con el objetivo de ofrecerte una capacitación optima, y que puedas incorporarte al mercado laboral</p>
-        <!-- courses -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap justify-center gap-x-6 gap-y-8 ">
-            @foreach ( $partners as $partner )
-                <figure>
-                    @isset( $partner->image )
-                        <img id="picture" class="img-fluid px-10" src="{{ Storage::url($partner->image->url) }}" title="{{ $partner->name }}" alt="{{ $partner->name }}" style="max-height: 100px;">
-                    @else
-                        <img id="picture" class="img-fluid px-10" src="{{ asset('images/courses/logo-cloud.png') }}" title="{{ $partner->name }}" alt="{{ $partner->name }}" style="max-height: 100px;" >
-                    @endisset
-                </figure>
-                {{-- <x-course-card :course="$course" /> --}}
-            @endforeach            
-        </div>
-        <hr class="mt-24">
-    </section>
+    @if( count( $partners) >= 1 )
+        <section class="pt-24">
+            <hr class="pt-24">
+            <h2 class="text-center font-display font-semibold text-gray-600 text-2xl sm:text-3xl md:text-4xl mb-6">Convenios con instituciones y empresas reconocidas</h2>
+            <p class="text-center text-gray-500 text-md mb-6">Con el objetivo de ofrecerte una capacitación optima, y que puedas incorporarte al mercado laboral</p>
+            <!-- courses -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap justify-center gap-x-6 gap-y-8 ">
+                @foreach ( $partners as $partner )
+                    <figure>
+                        @isset( $partner->image )
+                            <img id="picture" class="img-fluid px-10" src="{{ Storage::url($partner->image->url) }}" title="{{ $partner->name }}" alt="{{ $partner->name }}" style="max-height: 100px;">
+                        @else
+                            <img id="picture" class="img-fluid px-10" src="{{ asset('images/courses/logo-cloud.png') }}" title="{{ $partner->name }}" alt="{{ $partner->name }}" style="max-height: 100px;" >
+                        @endisset
+                    </figure>
+                    {{-- <x-course-card :course="$course" /> --}}
+                @endforeach
+            </div>
+            <hr class="mt-24">
+        </section>
+    @endif
+
+
+
 
 </x-app-layout>
 

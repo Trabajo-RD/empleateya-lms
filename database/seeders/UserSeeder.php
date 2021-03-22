@@ -52,9 +52,9 @@ class UserSeeder extends Seeder
         $user = User::create([
             'document_id' => null,
             'document_type' => null,
-            'name' => 'Madelin',
+            'name' => 'SENAE',
             'surname' => 'Estevez',
-            'email' => 'madelin.estevez@mt.gob.do',
+            'email' => 'senae@mt.gob.do',
             'password' => bcrypt('lms123456'),
         ]);
 
