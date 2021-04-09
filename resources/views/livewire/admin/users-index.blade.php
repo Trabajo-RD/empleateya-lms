@@ -34,11 +34,11 @@
                     </thead>
                     <tbody>
                         @foreach ( $users as $user )
-                            @if(  $user->id != 1 )                         
+                            @if(  $user->id != 1 )
                                 <tr>
                                     <td>{{ $user->id }}</td>
                                     <td>{{ $user->document_id }}</td>
-                                    <td>{{ $user->surname }}, {{ $user->name }}</td>
+                                    <td>{{ $user->lastname }}, {{ $user->firstname }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>
                                         @foreach ( $user->roles as $role )

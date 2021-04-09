@@ -10,8 +10,36 @@
             @csrf
 
             <div>
-                <x-jet-label for="name" value="{{ __('Name') }}" />
-                <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                <x-jet-label for="document_type" value="{{ __('Document type') }}" />
+                <select name="document_type" class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                    <option value="CED">{{ __('Identification_Card') }}</option>
+                    <option value="PAS" @if (old('document_type') == "PAS") selected @endif >{{ __('Passport') }}</option>
+                </select>
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="document_id" value="{{ __('Document ID') }}" />
+                <x-jet-input id="document_id" class="block mt-1 w-full" type="text" name="document_id" :value="old('document_id')" required autofocus autocomplete="document_id" />
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="firstname" value="{{ __('Firstname') }}" />
+                <x-jet-input id="firstname" class="block mt-1 w-full" type="text" name="firstname" :value="old('firstname')" required autofocus autocomplete="firstname" />
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="lastname" value="{{ __('Lastname') }}" />
+                <x-jet-input id="lastname" class="block mt-1 w-full" type="text" name="lastname" :value="old('lastname')" required autofocus autocomplete="lastname" />
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="gender" value="{{ __('Gender') }}" />
+                <select name="gender" class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                    <option value="M">{{ __('Male') }}</option>
+                    <option value="F" @if (old('document_type') == "F") selected @endif >{{ __('Female') }}</option>
+                    <option value="O" @if (old('document_type') == "O") selected @endif >{{ __('Other') }}</option>
+                    <option value="NS" @if (old('document_type') == "NS") selected @endif >{{ __('Not Specified') }}</option>
+                </select>
             </div>
 
             <div class="mt-4">
@@ -51,7 +79,7 @@
                     {{ __('Already registered?') }}
                 </a>
 
-                <x-jet-button class="ml-4">
+                <x-jet-button class="ml-4 bg-blue-600 hover:bg-blue-700">
                     {{ __('Register') }}
                 </x-jet-button>
             </div>

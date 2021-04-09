@@ -3,10 +3,13 @@
 
         <!-- Course content -->
         <div class="col-span-1 lg:col-span-2">
+
             <!-- embed content -->
-            <div class="embed-responsive mb-4">
-                {!! $current->iframe !!}
-            </div>
+            @if( isset($current->iframe) )
+                <div class="embed-responsive mb-4">
+                    {!! $current->iframe !!}
+                </div>
+            @endif
 
             {{-- TODO: Display category name --}}
             <div class="mr-2 text-blue-500 text-sm p-1 rounded  leading-none flex items-center uppercase">
@@ -29,6 +32,14 @@
                     {{ $course->level->name }}
                 </button>
             </div>
+
+            <a href="{{ $current->url }}" title="{{ $current->name }}" target="_blank">
+                <div class="mb-8 flex justify-center">
+                    <button type="button" class="btn btn-cta btn-primary hover:bg-blue-700 text-md py-2 px-4 leading-none flex items-center focus:outline-none">
+                        Ver en {{ $current->platform->name }}
+                    </button>
+                </div>
+            </a>
 
             <!-- complete lesson button -->
             <div class="flex justify-between">
@@ -67,11 +78,11 @@
                 <!-- Author info -->
                 <div class="flex items-center mb-4">
                     <figure>
-                        <img class="h-12 w-12 object-cover rounded-full shadow" src="{{ $course->editor->profile_photo_url }}" alt="Foto de perfil de {{ $course->editor->name }}"/>
+                        <img class="h-12 w-12 object-cover rounded-full shadow" src="{{ $course->editor->profile_photo_url }}" alt="Foto de perfil de {{ $course->editor->firstname }}"/>
                     </figure>
                     <div class="ml-4">
-                        <h3 class="font-bold text-lg text-gray-600">{{ $course->editor->name . ' ' . $course->editor->surname }}</h3>
-                        <a class="text-blue-400 text-sm font-bold" href="">{{ '@' . Str::slug( $course->editor->name . $course->editor->surname, '' ) }}</a>
+                        <h3 class="font-bold text-lg text-gray-600">{{ $course->editor->firstname . ' ' . $course->editor->lastname }}</h3>
+                        <a class="text-blue-400 text-sm font-bold" href="">{{ '@' . Str::slug( $course->editor->firstname . $course->editor->lastname, '' ) }}</a>
                     </div>
                 </div>
 

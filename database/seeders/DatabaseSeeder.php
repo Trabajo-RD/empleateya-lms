@@ -26,8 +26,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call(PermissionSeeder::class);
         $this->call(RoleSeeder::class);
+        $this->call(TeamSeeder::class);
         $this->call(UserSeeder::class);
-        //$this->call(GenderSeeder::class);
         $this->call(CountriesTableSeeder::class);
         $this->call(LevelSeeder::class);
         $this->call(CategorySeeder::class);
@@ -37,6 +37,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PlatformSeeder::class);
         $this->call(MicrosoftLearnCourseSeeder::class);
         // TODO: uncomment to create test courses
-        $this->call(CourseSeeder::class);
+        // $this->call(CourseSeeder::class);
     }
 }

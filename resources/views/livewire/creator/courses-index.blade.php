@@ -2,7 +2,7 @@
 
     <header class="mb-4 flex">
         <span class="text-2xl text-gray-500 mr-2">Bienvenid@</span>
-        <h2 class="text-2xl text-gray-800 font-bold">{{{ isset(Auth::user()->name) ? Auth::user()->name : '' }}}</h2>
+        <h2 class="text-2xl text-gray-800 font-bold">{{{ isset(Auth::user()->firstname) ? Auth::user()->firstname : '' }}}</h2>
     </header>
 
     <p class="text-1xl text-gray-500 mb-4">Aquí tienes un listado de tus cursos</p>

@@ -22,6 +22,16 @@ use App\Http\Livewire\CourseStatus;
  */
 Route::get('/', HomeController::class)->name('home');
 
+/**
+ * TODO: Make it work
+ * Route to set locale
+ */
+Route::get('/set-locale/{locale}', function($locale){
+    App::setLocale($locale);
+    session()->put('locale', $locale);
+    return redirect()->back();
+})->middleware('auth')->name('locale.setting');
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
@@ -45,3 +55,5 @@ Route::post('courses/{course}/enrolled', [CourseController::class, 'enrolled'])-
  * Route to control the user enrolled courses
  */
 Route::get('course-status/{course}', CourseStatus::class)->name('courses.status')->middleware('auth');
+
+// Auth::routes(['verify' => true]);

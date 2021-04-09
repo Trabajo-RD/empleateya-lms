@@ -27,6 +27,15 @@ class RedirectIfAuthenticated
             }
         }
 
+        /**
+         * TODO: Make it work
+         * middleware that will set the appropriate language for other routes
+         */
+        if(session()->has('locale')){
+            app()->setLocale(session('locale'));
+            app()->setLocale(config('app.locale'));
+        }
+
         return $next($request);
     }
 }

@@ -18,7 +18,7 @@ class HomeController extends Controller
 
         $publish_courses = Course::where('status', '3'); // All publish courses
 
-        $latest_courses = $publish_courses->latest('id')->get()->take(12); // Latest publish courses
+        $latest_courses = $publish_courses->latest('updated_at')->get()->take(12); // Latest publish courses
 
         $partners = Partner::where('visible', '2')->get()->take(6);
 

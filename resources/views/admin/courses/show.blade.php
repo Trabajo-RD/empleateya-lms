@@ -149,10 +149,10 @@
                     <!-- Author info -->
                     <div class="flex items-center">
                         <figure>
-                            <img class="h-12 w-12 object-cover rounded-full shadow" src="{{ $course->editor->profile_photo_url }}" alt="Foto de perfil de {{ $course->editor->name }}"/>
+                            <img class="h-12 w-12 object-cover rounded-full shadow" src="{{ $course->editor->profile_photo_url }}" alt="Foto de perfil de {{ $course->editor->firstname }}"/>
                         </figure>
                         <div class="ml-4">
-                            <p class="font-bold text-lg text-gray-600">{{ $course->editor->name . ' ' . $course->editor->surname }}</p>
+                            <p class="font-bold text-lg text-gray-600">{{ $course->editor->firstname . ' ' . $course->editor->lastname }}</p>
                                 @foreach($course->editor->roles as $role)
                                     @if($role->name == 'Creator')
                                         <p class="text-md text-gray-600 mr-2">Analista de Empleo</p>
@@ -161,7 +161,7 @@
                                         <p class="text-md text-gray-600 mr-2">Instructor</p>
                                     @endif
                                 @endforeach
-                            <a class="text-blue-400 text-sm font-bold" href="">{{ '@' . Str::slug( $course->editor->name . $course->editor->surname, '' ) }}</a>
+                            <a class="text-blue-400 text-sm font-bold" href="">{{ '@' . Str::slug( $course->editor->firstname . $course->editor->lastname, '' ) }}</a>
                         </div>
                     </div>
 

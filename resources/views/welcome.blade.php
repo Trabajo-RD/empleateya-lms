@@ -22,7 +22,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-8">
             <article>
                 <figure>
-                    <img class="rounded h-36 w-full object-cover" src="{{ asset( 'images/home/online-3412473_640.jpg' ) }}" alt="" />
+                    <img class="rounded h-36 w-full object-cover" src="{{ asset( 'images/dashboard/online-3412473_640.jpg' ) }}" alt="" />
                 </figure>
                 <header class="mt-2">
                     <h2 class="text-xl text-gray-700">Cursos gratuitos</h2>
@@ -32,7 +32,7 @@
 
             <article>
                 <figure>
-                    <img class="rounded h-36 w-full object-cover" src="{{asset('images/home/virus-4999857_640.png')}}" alt="" />
+                    <img class="rounded h-36 w-full object-cover" src="{{asset('images/dashboard/virus-4999857_640.png')}}" alt="" />
                 </figure>
                 <header class="mt-2">
                     <h2 class="text-xl text-gray-700">Escuela Taller</h2>
@@ -42,7 +42,7 @@
 
             <article>
                 <figure>
-                    <img class="rounded h-36 w-full object-cover" src="{{asset('images/home/pexels-christina-morillo-1181244.jpg')}}" alt="" />
+                    <img class="rounded h-36 w-full object-cover" src="{{asset('images/dashboard/pexels-christina-morillo-1181244.jpg')}}" alt="" />
                 </figure>
                 <header class="mt-2">
                     <h2 class="text-xl text-gray-700">Orientación ocupacional</h2>
@@ -52,7 +52,7 @@
 
             <article>
                 <figure>
-                    <img class="rounded h-36 w-full object-cover" src="{{asset('images/home/pexels-markus-spiske-3806753.jpg')}}" alt="" />
+                    <img class="rounded h-36 w-full object-cover" src="{{asset('images/dashboard/pexels-markus-spiske-3806753.jpg')}}" alt="" />
                 </figure>
                 <header class="mt-2">
                     <h2 class="text-xl text-gray-700">Servicio Nacional de Empleo</h2>
@@ -62,7 +62,7 @@
 
             <article>
                 <figure>
-                    <img class="rounded h-36 w-full object-cover" src="{{asset('images/home/video-conference-5162927_640.jpg')}}" alt="" />
+                    <img class="rounded h-36 w-full object-cover" src="{{asset('images/dashboard/video-conference-5162927_640.jpg')}}" alt="" />
                 </figure>
                 <header class="mt-2">
                     <h2 class="text-xl text-gray-700">Blog</h2>

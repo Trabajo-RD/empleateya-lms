@@ -75,7 +75,7 @@ class MicrosoftLearnCourseSeeder extends Seeder
                 'duration_in_minutes' => $ms_course['duration_in_minutes'],
                 'status' => 1,
                 'slug' => Str::slug($ms_course['title']),
-                'user_id' => 4,
+                'user_id' => 2,
                 'level_id' => $level_id,
                 'category_id' => 3,
                 'price_id' => 1,
@@ -104,13 +104,20 @@ class MicrosoftLearnCourseSeeder extends Seeder
                     // $units = Http::get('https://docs.microsoft.com/api/hierarchy/modules?unitId='. $iten_id . '&locale=' . $locale);
 
                     foreach( $module['units'] as $unit ){
-                        DB::table('lessons')->insert([
+                        $lesson_inserted = DB::table('lessons')->insertGetId([
                             'name' => $unit['title'],
                             'url' => 'https://docs.microsoft.com/es-es' . $unit['url'],
                             'iframe' => null,
+                            //'iframe' => '<iframe src="https://docs.microsoft.com/es-es' . $unit['url'] . '"></iframe>',
                             'section_id'=> $module_inserted,
                             'platform_id' => $platform_id,
                         ]);
+
+                        DB::table('descriptions')->insert([
+                            'name' => $module['summary'],
+                            'lesson_id' => $lesson_inserted
+                        ]);
+
                     }
 
                 }

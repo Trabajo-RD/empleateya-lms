@@ -16,9 +16,12 @@ class AddColumnsToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('document_id')->after('id')->nullable();
-            $table->enum('document_type', [User::IDENTITY, User::PASSPORT])->nullable()->after('document_id');
-            $table->string('surname')->after('name')->nullable();
+            $table->renameColumn('name', 'firstname');
+            $table->string('document_id')->after('id')->unique();
+            $table->enum('document_type', ['CED', 'PAS'])->after('document_id');
+            $table->string('lastname')->after('name')->nullable();
+            $table->enum('gender', ['M', 'F', 'O', 'NS'])->after('lastname');
+            $table->string('email')->nullable()->change(); // Set email nullable to use login with Document ID
         });
     }
 
@@ -32,7 +35,8 @@ class AddColumnsToUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('document_id');
             $table->dropColumn('document_type');
-            $table->dropColumn('surname');
+            $table->dropColumn('lastname');
+            $table->dropColumn('gender');
         });
     }
 }

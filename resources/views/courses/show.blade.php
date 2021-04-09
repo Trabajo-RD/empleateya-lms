@@ -128,10 +128,10 @@
                     <!-- Author info -->
                     <div class="flex items-center">
                         <figure>
-                            <img class="h-12 w-12 object-cover rounded-full shadow" src="{{ $course->editor->profile_photo_url }}" alt="Foto de perfil de {{ $course->editor->name }}"/>
+                            <img class="h-12 w-12 object-cover rounded-full shadow" src="{{ $course->editor->profile_photo_url }}" alt="Foto de perfil de {{ $course->editor->firstname }}"/>
                         </figure>
                         <div class="ml-4">
-                            <p class="font-bold text-lg text-gray-600">{{ $course->editor->name . ' ' . $course->editor->surname }}</p>
+                            <p class="font-bold text-lg text-gray-600">{{ $course->editor->firstname . ' ' . $course->editor->lastname }}</p>
                                 @foreach($course->editor->roles as $role)
                                     @if($role->name == 'Creator')
                                         <p class="text-md text-gray-600 mr-2">Analista de Empleo</p>
@@ -140,7 +140,7 @@
                                         <p class="text-md text-gray-600 mr-2">Instructor</p>
                                     @endif
                                 @endforeach
-                            <a class="text-blue-400 text-sm font-bold" href="">{{ '@' . Str::slug( $course->editor->name . $course->editor->surname, '' ) }}</a>
+                            <a class="text-blue-400 text-sm font-bold" href="">{{ '@' . Str::slug( $course->editor->firstname . $course->editor->lastname, '' ) }}</a>
                         </div>
                     </div>
 
@@ -149,7 +149,7 @@
                     <!-- TODO: Condition if course last lesson platform is Microsoft or Linkedin -->
                     {{-- {{$course->url}}               --}}
 
-                        @if( $course->url != '' )
+                        {{-- @if( $course->url != '' )
 
                             <!-- CTA button : user enrolled -->
                             <a href="{{ $course->url }}" class="btn-cta btn-success btn-block mt-4 hover:shadow">Continuar con el curso</a>
@@ -159,7 +159,10 @@
                             <!-- CTA button : user enrolled -->
                             <a href="{{ route('courses.status', $course ) }}" class="btn-cta btn-success btn-block mt-4 hover:shadow">Continuar con el curso</a>
 
-                        @endif
+                        @endif --}}
+
+                        <!-- CTA button : user enrolled -->
+                        <a href="{{ route('courses.status', $course ) }}" class="btn-cta btn-success btn-block mt-4 hover:shadow">Continuar con el curso</a>
 
                     @else
 
@@ -179,22 +182,31 @@
                             </form>
                         @endif --}}
 
-                        <form action="{{ route('courses.enrolled', $course ) }}" method="post">
-                            @csrf
-                            <button type="submit" class="btn-cta btn-accent btn-block mt-4 hover:shadow">Iniciar este curso</button>
-                        </form>
+                        @if( $course->price->value == 0 )
+                            <p class="text-2xl font-bold text-gray-500 mt-3 mb-2">Gratis</p>
+                            <form action="{{ route('courses.enrolled', $course ) }}" method="post">
+                                @csrf
+                                <button type="submit" class="btn-cta btn-accent btn-block mt-4 hover:shadow">Iniciar este curso</button>
+                            </form>
+                        @else
+                            <p class="text-2xl font-bold text-gray-500 mt-3 mb-2">US$ {{ $course->price->value }}</p>
+                            <a href="{{ route('payment.checkout', $course ) }}" class="btn-cta btn-accent btn-block hover:shadow">Comprar este curso</a>
+                        @endif
+
+
 
                     @endcan
 
                 </div>
             </section>
 
-            <aside class="hidden md:block divide-y divide-gray-300">
+            <aside class="hidden md:block">
 
                 <h2 class="font-bold text-2xl text-gray-600 mb-12">Cursos relacionados</h2>
 
                 @foreach ( $related_courses as $related_course )
-                    <article class="py-3 grid md:grid-cols-1 lg:grid-cols-3 items-center">
+
+                    <article class="py-3 mb-12 grid md:grid-cols-1 lg:grid-cols-3 items-center">
                         <!-- related course image -->
                         @isset( $related_course->image )
                             <img src="{{ Storage::url( $related_course->image->url ) }}" alt="{{ $related_course->name }}" class="h-28 md:w-full lg:w-32 object-cover md:col-span-1 lg:col-span-1" />
@@ -208,7 +220,7 @@
                             </h3>
                             <div class="flex items-center mb-4">
                                 <img class="h-8 w-8 object-cover rounded-full shadow-lg" src="{{ $related_course->editor->profile_photo_url }}" alt="" />
-                                <p class="font-bold text-sm text-gray-500 ml-2"> {{ $related_course->editor->name . ' ' . $related_course->editor->surname }} </p>
+                                <p class="font-bold text-sm text-gray-500 ml-2"> {{ $related_course->editor->firstname . ' ' . $related_course->editor->lastname }} </p>
                             </div>
                             <div class="flex items-center">
                                 <!-- rating -->
@@ -226,7 +238,20 @@
                             </div>
                         </div>
                     </article>
+                    <hr>
                 @endforeach
+
+                <h2 class="font-bold text-2xl text-gray-600 my-12">Encuesta de Satisfacción</h2>
+                <article>
+                    <div class="card">
+                        <div class="card-header">
+
+                        </div>
+                        <div class="card-body">
+
+                        </div>
+                    </div>
+                </article>
 
             </aside>
 

@@ -25,7 +25,7 @@
         <script src="https://cdn.ckeditor.com/ckeditor5/26.0.0/classic/ckeditor.js"></script>
 
         <!-- instructor js -->
-        <script src="{{ asset('js/instructor/courses/form.js') }}"></script>
+        <script src="{{ asset('js/creator/courses/form.js') }}"></script>
 
     </x-slot>
 

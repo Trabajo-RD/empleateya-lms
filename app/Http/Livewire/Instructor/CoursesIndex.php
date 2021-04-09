@@ -21,7 +21,8 @@ class CoursesIndex extends Component
 
         $courses = Course::where('title', 'LIKE', '%' . $this->search . '%')
             ->where('user_id', auth()->user()->id )
-            ->latest('id')
+            //->latest('id')
+            ->orderBy('updated_at', 'desc')
             ->paginate(10);
 
         return view('livewire.instructor.courses-index', compact('courses'));

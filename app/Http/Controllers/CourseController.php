@@ -48,17 +48,30 @@ class CourseController extends Controller
         // insert user auth id in course_user table
         $course->students()->attach( auth()->user()->id );
 
-        if( $course->url != '' ){
-
-            return redirect()->away($course->url);
-
-            // return Redirect::to( $course->url );
-
-        } else {
-            // redirect user to enrolled course;
-            return redirect()->route('courses.status', $course);
-        }
+        // redirect user to enrolled course;
+        return redirect()->route('courses.status', $course);
 
     }
+
+    /**
+     * (OPTIONAL)
+     * Controller to enrolled users and redirect to external URL
+     */
+    // public function enrolled( Course $course ){
+
+    //     // insert user auth id in course_user table
+    //     $course->students()->attach( auth()->user()->id );
+
+    //     if( $course->url != '' ){
+
+    //         // return Redirect to external URL
+    //         return redirect()->away($course->url);
+
+    //     } else {
+    //         // redirect user to enrolled course;
+    //         return redirect()->route('courses.status', $course);
+    //     }
+
+    // }
 
 }

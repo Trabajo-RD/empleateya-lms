@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
+use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 
 use Spatie\Permission\Traits\HasRoles;
@@ -15,11 +16,12 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     use HasApiTokens;
+    use HasRoles;
     use HasFactory;
     use HasProfilePhoto;
+    use HasTeams;
     use Notifiable;
     use TwoFactorAuthenticatable;
-    use HasRoles;
 
     const IDENTITY = 'CED';
     const PASSPORT = 'PAS';
@@ -30,9 +32,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
-        'surename',
+        'firstname',
+        'lastname',
         'document_id',
+        'document_type',
+        'gender',
         'email',
         'password',
     ];
@@ -74,10 +78,6 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\Profile');
     }
 
-    public function gender(){
-        return $this->hasOne('App\Models\Gender');
-    }
-
     /**
      * Relation 1:N : User courses dictated
      */
@@ -113,7 +113,4 @@ class User extends Authenticatable
     public function lessons(){
         return $this->belongsToMany('App\Models\Lesson');
     }
-
-    
-
 }

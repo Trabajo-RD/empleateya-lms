@@ -5,7 +5,7 @@
 
 <!-- course-title -->
 <div class="mb-4">
-    {!! Form::label( 'title', 'Título del curso:' ) !!}
+    {!! Form::label( 'title', Lang::get('Course_title') ) !!}
     {!! Form::text('title', null, ['class' => 'form-input block w-full mt-1' . ($errors->has('title') ? ' border-red-600' : '') ]) !!}
 
     @error('title')
