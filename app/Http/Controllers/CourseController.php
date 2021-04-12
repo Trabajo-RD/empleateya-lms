@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Course;
 use Spatie\Permission\Models\Role;
-
 class CourseController extends Controller
 {
 
