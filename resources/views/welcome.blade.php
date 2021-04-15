@@ -120,7 +120,42 @@
         </section>
     @endif
 
+    <!-- Page Footer -->
+    <x-slot name="footer">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8">
+            @livewire('link.social-media')
+            <div>
+                <ul>
+                    <li>
+                        <a target="_top" href="" class="text-sm text-gray-200 hover:text-gray-100">{{ __('About us') }}</a>
+                    </li>
+                    <li class="mt-1">
+                        <a target="_top" href="" class="text-sm text-gray-200 hover:text-gray-100">{{ __('Contact') }}</a>',
+                    </li>
+                    <li class="mt-1">
+                        <a target="_top" href="" class="text-sm text-gray-200 hover:text-gray-100">{{ __('Glossary of terms') }}</a>',
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <ul>
+                    <li>
+                        <a target="_top" href="{{ route('terms.show') }}" class="text-sm text-gray-200 hover:text-gray-100">{{ __('Terms of Service') }}</a>
+                    </li>
+                    <li class="mt-1">
+                        <a target="_top" href="{{ route('policy.show') }}" class="text-sm text-gray-200 hover:text-gray-100">{{ __('Privacy Policy') }}</a>',
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </x-slot>
 
+    <!-- Page Copyright -->
+    <x-slot name="copyright">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap justify-center gap-x-6 gap-y-8 ">
+            &copy;Ministerio de Trabajo 2021
+        </div>
+    </x-slot>
 
 
 </x-app-layout>

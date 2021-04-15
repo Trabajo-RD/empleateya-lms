@@ -99,6 +99,6 @@ class PriceController extends Controller
     {
         $price->delete();
 
-        return redirect()->route('admin.prices.index')->with('info', 'El precio ha sido eliminado.');
+        return redirect()->route('admin.prices.index')->with('delete', 'success');
     }
 }

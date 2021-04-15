@@ -75,10 +75,10 @@ class CourseController extends Controller
         $mail = new ApprovedCourse($course);
 
         // Send confirmation email inmediately
-        //Mail::to($course->editor->email)->send($mail);
+        Mail::to($course->editor->email)->send($mail);
 
         // Put the email in queue in jobs database table
-        Mail::to($course->editor->email)->queue($mail);
+        // Mail::to($course->editor->email)->queue($mail);
 
 
         return redirect()->route('admin.courses.index')->with('success', 'El curso ha sido aprobado correctamente');
@@ -111,10 +111,10 @@ class CourseController extends Controller
         $mail = new RejectCourse($course);
 
         // Send reject email inmediately
-        // Mail::to( $course->editor->email )->send( $mail );
+        Mail::to( $course->editor->email )->send( $mail );
 
         // Put the email in queue in jobs database table
-        Mail::to( $course->editor->email )->queue( $mail );
+        // Mail::to( $course->editor->email )->queue( $mail );
 
         return redirect()->route('admin.courses.index')->with('success', 'El curso ha sido rechazado');
     }

@@ -1,4 +1,5 @@
 @php
+
     $nav_links = [
         [
             'name' => 'Inicio',
@@ -11,6 +12,7 @@
             'active' => request()->routeIs('courses.*') // bool: verify is active route dashboard
         ],
     ];
+
 @endphp
 
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100 shadow">
@@ -27,9 +29,15 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    @foreach ($nav_links as $nav_link)
+                    {{-- @foreach ($nav_links as $nav_link)
                         <x-jet-nav-link href="{{ $nav_link['route'] }}" :active="$nav_link['active']">
                             {{ $nav_link['name'] }}
+                        </x-jet-nav-link>
+                    @endforeach --}}
+
+                    @foreach ($menuItems as $item)
+                        <x-jet-nav-link href="{{ route($item->link) }}">
+                            {{ $item->name }}
                         </x-jet-nav-link>
                     @endforeach
                 </div>
@@ -134,6 +142,13 @@
                                     </x-jet-dropdown-link>
                                 @endcan
 
+                                <!-- TODO: Create permission LMS Crear contenido -->
+                                @can ('LMS Crear contenido')
+                                    <x-jet-dropdown-link href="{{ route('dashboard', request()->segment(1)) }}">
+                                        {{ __('Ajustes') }}
+                                    </x-jet-dropdown-link>
+                                @endcan
+
                                 @can ('LMS Calificar item')
                                     <x-jet-dropdown-link href="{{ route('instructor.courses.index') }}">
                                         {{ __('Instructor') }}
@@ -221,7 +236,7 @@
 
                     <!-- TODO: Create permission LMS Crear contenido -->
                     @can('LMS Crear contenido')
-                        <x-jet-responsive-nav-link href="{{ route('creator.courses.index') }}" :active="request()->routeIs('creator.courses.index')">
+                        <x-jet-responsive-nav-link href="{{ route('creator.courses.index', request()->segment(1)) }}" :active="request()->routeIs('creator.courses.index', request()->segment(1))">
                             {{ __('Administrar cursos') }}
                         </x-jet-responsive-nav-link>
                     @endcan

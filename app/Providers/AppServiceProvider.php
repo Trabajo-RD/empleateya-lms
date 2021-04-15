@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Lesson;
 use App\Models\Section;
+use App\Models\MenuItem;
 use App\Observers\LessonObserver;
 use App\Observers\SectionObserver;
 
@@ -46,5 +47,8 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('icon', function($expression){
             return "<i class=\"fas fa-fw fa-{{ $expression }}\"></i>";
         });
+
+        $menuItems = MenuItem::where('status', 2)->get();
+        view()->share('menuItems', $menuItems);
     }
 }

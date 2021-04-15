@@ -36,6 +36,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ModalitySeeder::class);
         $this->call(PlatformSeeder::class);
         $this->call(MicrosoftLearnCourseSeeder::class);
+        $this->call(LinkSeeder::class);
         // TODO: uncomment to create test courses
         // $this->call(CourseSeeder::class);
     }

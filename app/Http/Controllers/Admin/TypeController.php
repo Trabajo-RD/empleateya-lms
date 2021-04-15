@@ -98,6 +98,6 @@ class TypeController extends Controller
     {
         $type->delete();
 
-        return redirect()->route('admin.types.index')->with('info', 'Se ha eliminado el tipo de curso solicitado.');
+        return redirect()->route('admin.types.index')->with('delete', 'success');
     }
 }

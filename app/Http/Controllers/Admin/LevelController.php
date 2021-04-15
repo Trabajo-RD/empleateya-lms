@@ -97,6 +97,6 @@ class LevelController extends Controller
     {
         $level->delete();
 
-        return redirect()->route('admin.levels.index')->with('info', 'Se ha eliminado el nivel solicitado.');
+        return redirect()->route('admin.levels.index')->with('delete', 'success');
     }
 }

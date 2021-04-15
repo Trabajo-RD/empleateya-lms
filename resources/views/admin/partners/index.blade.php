@@ -2,6 +2,8 @@
 
 @section('title', 'Empleateya LMS')
 
+@section('plugins.Sweetalert2', true)
+
 @section('content_header')
     <a href="{{ route('admin.partners.create') }}" class="btn btn-primary float-right"><i class="fas fa-plus mr-1"></i>Nueva sociedad</a>
     <h1 class="text-dark">Sociedades y Convenios</h1>
@@ -9,9 +11,9 @@
 
 @section('content')
 
-    @if (session('info'))
+    {{-- @if (session('info'))
         <div class="alert alert-success">{{ session('info') }}</div>
-    @endif
+    @endif --}}
 
     <div class="card">
         <div class="card-header">
@@ -39,14 +41,14 @@
                                     @endisset
 
                             </td>
-                            <td class="align-middle">{{ $partner->name }}</td>
+                            <td class="align-middle {{ (($partner->visible == 1) ? 'text-muted' : '') }}">{{ $partner->name }}</td>
                             <td class="align-middle">
                                 @switch($partner->visible)
                                 @case(1)
-                                    <span class="badge badge-warning py-2 px-2 text-uppercase text-md">Oculto</span>
+                                    <span class="badge py-2 px-2 text-uppercase text-md text-muted" title="Oculto"><i class="far fa-eye-slash"></i></span>
                                     @break
                                 @case(2)
-                                    <span class="badge badge-success py-2 px-2 text-uppercase text-md">Visible</span>
+                                    <span class="badge py-2 px-2 text-uppercase text-md" title="Visible"><i class="far fa-eye"></i></span>
                                     @break
                                 @default
 
@@ -56,7 +58,7 @@
                                 <a href="{{ route('admin.partners.edit', $partner) }}" class="btn btn-outline-secondary"><i class="far fa-edit mr-1"></i>Editar</a>
                             </td>
                             <td width="14%" class="align-middle">
-                                <form action="{{ route( 'admin.partners.destroy', $partner ) }}" method="POST">
+                                <form action="{{ route( 'admin.partners.destroy', $partner ) }}" method="POST" class="delete-partner">
                                     @csrf
                                     @method('delete')
                                     <button class="btn btn-outline-danger" type="submit"><i class="far fa-trash-alt mr-1"></i>Eliminar</button>
@@ -82,3 +84,41 @@
 @stop
 
 
+@section('js')
+
+    {{-- Delete confirmed --}}
+    @if (session('delete') == 'success')
+        <script>
+            Swal.fire(
+                '¡Eliminada!',
+                'La asociación ha sido eliminada correctamente.',
+                'success'
+                );
+        </script>
+    @endif
+
+    <script>
+
+        $('.delete-partner').submit(function(e){
+            e.preventDefault();
+
+            Swal.fire({
+            title: '¿Seguro que quieres eliminar esta sociedad?',
+            text: "La operación no podrá ser revertida y la información no será mostrada en la página!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '¡Si, eliminar!',
+            cancelButtonText: 'Cancelar'
+            }).then((result) => {
+            if (result.value) {
+
+                // Submit the form
+                this.submit();
+
+            }
+            })
+        });
+    </script>
+@stop

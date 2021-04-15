@@ -127,6 +127,6 @@ class PartnerController extends Controller
     {
         $partner->delete();
 
-        return redirect()->route('admin.partners.index')->with('info', 'La asociación ha sido eliminada correctamente.');
+        return redirect()->route('admin.partners.index')->with('delete', 'success');
     }
 }

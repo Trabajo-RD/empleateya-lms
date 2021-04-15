@@ -98,6 +98,6 @@ class PlatformController extends Controller
     {
         $platform->delete();
 
-        return redirect()->route('info', 'Se ha eliminado la plataforma.');
+        return redirect()->route('delete', 'success');
     }
 }

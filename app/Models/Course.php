@@ -127,6 +127,10 @@ class Course extends Model
         return $this->belongsToMany('App\Models\User');
     }
 
+    public function tags(){
+        return $this->belongsToMany('App\Models\Tag');
+    }
+
     /**
      * Relation 1:1 Polymorphic
      */

@@ -60,21 +60,14 @@
     @if (session('delete') == 'success')
         <script>
             Swal.fire(
-                'Eliminada!',
+                '¡Eliminada!',
                 'Se eliminó la categoría solicitada.',
                 'success'
-                )
+                );
         </script>
     @endif
 
-
-
     <script>
-        // Swal.fire(
-        // 'Good job!',
-        // 'You clicked the button!',
-        // 'success'
-        // )
 
         $('.delete-category').submit(function(e){
             e.preventDefault();
@@ -90,12 +83,10 @@
             cancelButtonText: 'Cancelar'
             }).then((result) => {
             if (result.value) {
-                // Swal.fire(
-                // 'Deleted!',
-                // 'Your file has been deleted.',
-                // 'success'
-                // )
+
+                // Submit the form
                 this.submit();
+
             }
             })
         });

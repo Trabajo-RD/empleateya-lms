@@ -62,7 +62,7 @@ class RoleController extends Controller
 
         $role->permissions()->attach( $request->permissions );
 
-        return redirect()->route('admin.roles.index')->with('rol_created', 'Has creado satisfactoriamente un nuevo rol');
+        return redirect()->route('admin.roles.index')->with('create', 'success');
 
         //return $request->all();
     }
@@ -125,6 +125,6 @@ class RoleController extends Controller
     {
         $role->delete();
 
-        return redirect()->route('admin.roles.index')->with('rol_destroyed', 'El rol ha sido eliminado');
+        return redirect()->route('admin.roles.index')->with('delete', 'success');
     }
 }

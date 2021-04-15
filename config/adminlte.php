@@ -242,6 +242,13 @@ return [
             'can'         => 'LMS Ver Dashboard',
         ],
         [
+            'text'        => 'Menú',
+            'route'       => 'admin.items.index',
+            'icon'        => 'fas fa-fw fa-sitemap',
+            'active'      => ['admin/items*'],
+
+        ],
+        [
             'text'        => 'Roles',
             'route'       => 'admin.roles.index',
             'icon'        => 'fas fa-fw fa-users-cog',

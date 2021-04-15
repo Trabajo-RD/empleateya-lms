@@ -21,6 +21,7 @@ class AddColumnsToUsersTable extends Migration
             $table->enum('document_type', ['CED', 'PAS'])->after('document_id');
             $table->string('lastname')->after('name')->nullable();
             $table->enum('gender', ['M', 'F', 'O', 'NS'])->after('lastname');
+            $table->json('options')->nullable();
             $table->string('email')->nullable()->change(); // Set email nullable to use login with Document ID
         });
     }
@@ -37,6 +38,7 @@ class AddColumnsToUsersTable extends Migration
             $table->dropColumn('document_type');
             $table->dropColumn('lastname');
             $table->dropColumn('gender');
+            $table->dropColumn('options');
         });
     }
 }

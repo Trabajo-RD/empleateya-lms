@@ -23,6 +23,9 @@ class UserSeeder extends Seeder
             'firstname' => 'Ramon Leonardo',
             'lastname' => 'Fabian Roman',
             'email' => 'admin@admin.com',
+            'options' => [
+                'languages' => 'es'
+            ],
             'current_team_id' => 1,
             'password' => bcrypt('lms123456'),
         ]);
@@ -62,6 +65,9 @@ class UserSeeder extends Seeder
             'firstname' => 'SENAE',
             'lastname' => null,
             'email' => 'senae@mt.gob.do',
+            'options' => [
+                'languages' => 'es'
+            ],
             'current_team_id' => 1,
             'password' => bcrypt('lms123456'),
         ]);

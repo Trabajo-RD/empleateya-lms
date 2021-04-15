@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Admin\ModalityController;
 use App\Http\Controllers\Admin\PlatformController;
+use App\Http\Controllers\Admin\MenuItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,11 @@ Route::resource('roles', RoleController::class)->names('roles');
 //Route::resource('users', UserController::class)->names('users'); // Create all (7) routes for CRUD
 
 Route::resource('users', UserController::class)->only(['index', 'edit', 'update'])->names('users');
+
+/**
+ * Route to manage menu items
+ */
+Route::resource('items', MenuItemController::class)->names('items');
 
 /**
  * Route to manage course categories

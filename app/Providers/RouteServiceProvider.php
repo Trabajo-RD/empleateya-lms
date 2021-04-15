@@ -62,7 +62,7 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web', 'auth')
                 ->name('creator.')
-                ->prefix('creator')
+                // ->prefix('creator')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/creator.php'));
 

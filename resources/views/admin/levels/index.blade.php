@@ -2,6 +2,8 @@
 
 @section('title', 'Empleateya LMS')
 
+@section('plugins.Sweetalert2', true)
+
 @section('content_header')
     <a href="{{ route('admin.levels.create') }}" class="btn btn-primary float-right"><i class="fas fa-plus mr-1"></i>Nuevo nivel</a>
     <h1 class="text-dark">Niveles</h1>
@@ -35,7 +37,7 @@
                                 <a href="{{ route('admin.levels.edit', $level) }}" class="btn btn-outline-secondary"><i class="far fa-edit mr-1"></i>Editar</a>
                             </td>
                             <td width="14%">
-                                <form action="{{ route( 'admin.levels.destroy', $level ) }}" method="POST">
+                                <form action="{{ route( 'admin.levels.destroy', $level ) }}" method="POST" class="delete-level">
                                     @csrf
                                     @method('delete')
                                     <button class="btn btn-outline-danger" type="submit"><i class="far fa-trash-alt mr-1"></i>Eliminar</button>
@@ -52,4 +54,41 @@
     </div>
 @stop
 
+@section('js')
 
+    {{-- Delete confirmed --}}
+    @if (session('delete') == 'success')
+        <script>
+            Swal.fire(
+                '¡Eliminado!',
+                'Se ha eliminado el nivel solicitado.',
+                'success'
+                );
+        </script>
+    @endif
+
+    <script>
+
+        $('.delete-level').submit(function(e){
+            e.preventDefault();
+
+            Swal.fire({
+            title: '¿Seguro que quieres eliminar este nivel de aprendizaje?',
+            text: "La operación no podrá ser revertida y los cursos que hayan sido asignados a este nivel serán mostrados 'Sin nivel definido'!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '¡Si, eliminar!',
+            cancelButtonText: 'Cancelar'
+            }).then((result) => {
+            if (result.value) {
+
+                // Submit the form
+                this.submit();
+
+            }
+            })
+        });
+    </script>
+@stop

@@ -23,8 +23,8 @@
 <body>
     <div class="container">
         <header>
-            <h1>RD Trabaja</h1>
-            <p>Slogan</p>
+            <h1>CAPACITATE.MT.GOB.DO</h1>
+            <p>Sistema de Gestión de Aprendizaje del Ministerio de Trabajo</p>
         </header>
 
         <div>

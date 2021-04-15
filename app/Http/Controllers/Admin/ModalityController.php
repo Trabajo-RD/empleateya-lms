@@ -98,6 +98,6 @@ class ModalityController extends Controller
     {
         $modality->delete();
 
-        return redirect()->route('admin.modalities.index')->with('info', 'Se ha eliminado la modalidad solicitada.');
+        return redirect()->route('admin.modalities.index')->with('delete', 'success');
     }
 }
