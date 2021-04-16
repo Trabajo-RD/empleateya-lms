@@ -38,7 +38,7 @@
                                 <tr>
                                     <td>{{ $user->id }}</td>
                                     <td>{{ $user->document_id }}</td>
-                                    <td>{{ $user->lastname }}, {{ $user->firstname }}</td>
+                                    <td>{{ $user->lastname }}, {{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>
                                         @foreach ( $user->roles as $role )

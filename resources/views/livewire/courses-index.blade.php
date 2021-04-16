@@ -6,7 +6,7 @@
             <div class="relative mr-4 flex items-center">
                 {{-- <i class="fas fa-sliders-h text-gray-500 text-2xl md:text-sm md:mr-2"></i> --}}
                 <i class="fas fa-filter text-gray-500 text-2xl md:text-sm md:mr-2"></i>
-                <span class="hidden md:inline">Filtrar por</span>
+                <span class="hidden md:inline">{{ __('Filter by') }}</span>
             </div>
 
             <!-- dropdown categories -->
@@ -71,7 +71,7 @@
 
             <!-- Clear filters -->
             <button class="bg-blue-100 shadow h-12 px-4 rounded text-gray-500 focus:outline-none mr-4" wire:click="resetFilters">
-                <i class="fas fa-eraser text-2xl md:text-sm md:mr-2"></i><span class="hidden md:inline">Borrar filtros</span>
+                <i class="fas fa-eraser text-2xl md:text-sm md:mr-2"></i><span class="hidden md:inline">{{ __('Clear filters') }}</span>
             </button>
 
         </div>
@@ -79,8 +79,8 @@
 
     <!-- Latest Courses -->
     <section class="mt-24">
-        <h2 class="text-center font-display font-semibold text-gray-600 text-2xl sm:text-3xl md:text-4xl mb-6">Catálogo de cursos</h2>
-        <p class="text-center text-gray-500 text-sm mb-6">Estos son los últimos cursos que hemos publicado para tí</p>
+        <h2 class="text-center font-display font-semibold text-gray-600 text-2xl sm:text-3xl md:text-4xl mb-6">{{ __('Course catalog') }}</h2>
+        <p class="text-center text-gray-500 text-sm mb-6">{{ __('These are the last courses that we have published for you') }}</p>
         <!-- courses -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8">
             @foreach ( $courses as $course )

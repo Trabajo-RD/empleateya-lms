@@ -59,7 +59,7 @@ class CourseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $locale)
     {
         $request->validate([
             'title' => 'required',
@@ -94,7 +94,7 @@ class CourseController extends Controller
             ]);
         }
 
-        return redirect()->route('creator.courses.edit', $course);
+        return redirect()->route('creator.courses.edit', [$locale, $course]);
     }
 
     /**
@@ -114,7 +114,7 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Course $course)
+    public function edit($locale, Course $course)
     {
         // Policy to check if an instructor is modifying a course created by another instructor
         $this->authorize('dictated', $course);
@@ -135,8 +135,9 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Course $course)
+    public function update(Request $request, $locale, Course $course)
     {
+
         // Policy to check if an instructor is modifying a course created by another instructor
         $this->authorize('dictated', $course);
 
@@ -184,7 +185,7 @@ class CourseController extends Controller
             }
         }
 
-        return redirect()->route('creator.courses.edit', $course);
+        return redirect()->route('creator.courses.edit', [$locale, $course]);
     }
 
     /**
@@ -204,7 +205,7 @@ class CourseController extends Controller
      * @param       App\Models\Course   $course
      * @return      view
      */
-     public function goals( Course $course ){
+     public function goals($locale, Course $course ){
 
         // Policy to check if an instructor is modifying a course created by another instructor
         $this->authorize('dictated', $course);
@@ -216,7 +217,7 @@ class CourseController extends Controller
     /**
      * Change the course status when click on Request Revision button
      */
-    public function status( Course $course ){
+    public function status($locale, Course $course ){
         $course->status = 2;
         $course->save();
 
@@ -225,7 +226,7 @@ class CourseController extends Controller
             $course->observation->delete();
         }
 
-        return redirect()->route( 'creator.courses.edit', $course );
+        return redirect()->route( 'creator.courses.edit', [$locale, $course] );
     }
 
     /**

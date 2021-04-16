@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
         $user = User::create([
             'document_id' => '00117910042',
             'document_type' => 'CED',
-            'firstname' => 'Ramon Leonardo',
+            'name' => 'Ramon Leonardo',
             'lastname' => 'Fabian Roman',
             'email' => 'admin@admin.com',
             'options' => [
@@ -40,7 +40,7 @@ class UserSeeder extends Seeder
         // $user = User::create([
         //     'document_id' => null,
         //     'document_type' => null,
-        //     'firstname' => 'Samir',
+        //     'name' => 'Samir',
         //     'lastname' => 'Santos',
         //     'email' => 'samir.santos@mt.gob.do',
         //     'password' => bcrypt('lms123456'),
@@ -48,21 +48,10 @@ class UserSeeder extends Seeder
 
         // $user->assignRole('Manager');
 
-        // $user = User::create([
-        //     'document_id' => null,
-        //     'document_type' => null,
-        //     'firstname' => 'Instructor',
-        //     'lastname' => 'LMS',
-        //     'email' => 'instructor@instructor.com',
-        //     'password' => bcrypt('lms123456'),
-        // ]);
-
-        // $user->assignRole('Instructor');
-
         $user = User::create([
             'document_id' => '00000000000',
             'document_type' => 'CED',
-            'firstname' => 'SENAE',
+            'name' => 'SENAE',
             'lastname' => null,
             'email' => 'senae@mt.gob.do',
             'options' => [
@@ -74,6 +63,21 @@ class UserSeeder extends Seeder
 
         $user->assignRole('Creator');
 
+        $user = User::create([
+            'document_id' => '00000000001',
+            'document_type' => 'CED',
+            'name' => 'Instructor',
+            'lastname' => null,
+            'email' => 'instructor@instructor.com',
+            'options' => [
+                'languages' => 'es'
+            ],
+            'current_team_id' => 1,
+            'password' => bcrypt('lms123456'),
+        ]);
+
+        $user->assignRole('Instructor');
+
         // $teamToAssign = Team::find(1); // This gets passed in but for demonstration purposes, assume its the first team
         // $teamToAssign->users()->attach($user, array('role' => 'participant'));
         // TeamMemberAdded::dispatch($teamToAssign, $user);
@@ -82,7 +86,7 @@ class UserSeeder extends Seeder
         // $user = User::create([
         //     'document_id' => null,
         //     'document_type' => null,
-        //     'firstname' => 'John',
+        //     'name' => 'John',
         //     'lastname' => 'Doe',
         //     'email' => 'student@student.com',
         //     'password' => bcrypt('lms123456'),

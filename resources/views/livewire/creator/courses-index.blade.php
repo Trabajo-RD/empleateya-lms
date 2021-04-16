@@ -2,7 +2,7 @@
 
     <header class="mb-4 flex">
         <span class="text-2xl text-gray-500 mr-2">Bienvenid@</span>
-        <h2 class="text-2xl text-gray-800 font-bold">{{{ isset(Auth::user()->firstname) ? Auth::user()->firstname : '' }}}</h2>
+        <h2 class="text-2xl text-gray-800 font-bold">{{{ isset(Auth::user()->name) ? Auth::user()->name : '' }}}</h2>
     </header>
 
     <p class="text-1xl text-gray-500 mb-4">Aquí tienes un listado de tus cursos</p>
@@ -23,7 +23,7 @@
                         wire:model.debounce.500ms="search"
                         x-on:keydown.window.prevent.slash="$refs.searchField.focus()"
                         x-on:keyup.escape="isTyped = false; $refs.searchField.blur()">
-                <a class="btn btn-primary ml-2" href="{{ route('creator.courses.create') }}">Nuevo curso</a>
+                <a class="btn btn-primary ml-2" href="{{ route('creator.courses.create', app()->getLocale() ) }}">Nuevo curso</a>
             </div>
         </div>
 
@@ -132,7 +132,7 @@
 
 
 
-                                    <a href="{{ route('creator.courses.edit', $course ) }}" class="{{ ($course->observation) ? 'border-red-300 text-red-700 hover:bg-red-50' : 'border-gray-300 text-gray-700 hover:bg-gray-50' }} inline-flex items-center px-4 py-2 border rounded-md shadow-sm text-sm font-medium  bg-white focus:outline-none">
+                                    <a href="{{ route('creator.courses.edit', [app()->getLocale(), $course] ) }}" class="{{ ($course->observation) ? 'border-red-300 text-red-700 hover:bg-red-50' : 'border-gray-300 text-gray-700 hover:bg-gray-50' }} inline-flex items-center px-4 py-2 border rounded-md shadow-sm text-sm font-medium  bg-white focus:outline-none">
                                         <!-- Heroicon name: solid/pencil -->
                                         <svg class="-ml-1 mr-2 h-5 w-5 {{ ($course->observation) ? 'text-red-500' : 'text-gray-500' }} " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                             <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />

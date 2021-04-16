@@ -57,7 +57,7 @@
                                     </div>
                                     <div class="ml-4">
                                         <div class="text-md font-bold text-gray-900">
-                                            {{ ($student->lastname != null) ? $student->lastname : '' }}, {{ $student->firstname }}
+                                            {{ ($student->lastname != null) ? $student->lastname : '' }}, {{ $student->name }}
                                         </div>
                                         @if( $student->document_type != null || $student->document_id != null )
                                             <div class="text-sm text-gray-500">

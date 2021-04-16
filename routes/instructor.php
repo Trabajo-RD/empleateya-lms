@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Instructor\CourseController;
 use App\Http\Livewire\Instructor\CoursesCurriculum;
 use App\Http\Livewire\Instructor\CoursesStudents;
+use App\Http\Controllers\HomeController;
 
 //use App\Http\Livewire\InstructorCourses;
 
@@ -19,30 +20,44 @@ use App\Http\Livewire\Instructor\CoursesStudents;
 */
 
 // Redirect: if prefix instructor. exists and user access with domain.com/instructor
-Route::redirect('', 'instructor/courses');
+// Route::redirect('', 'instructor/courses');
 
-//Route::get('courses', InstructorCourses::class)->middleware('can:LMS Leer cursos')->name('courses.index');
 
-Route::resource('courses', CourseController::class)->names('courses');
+Route::group(['prefix' => '{locale}',
+    'as' => 'instructor.',
+    'where' => ['locale', '[a-zA-Z]{2}'],
+    'middleware' => ['setlocale', 'language']
+], function(){
 
-/**
- * Route for manage the course sections, lessons and lesson resources
- */
-Route::get('courses/{course}/curriculum', CoursesCurriculum::class)->middleware('can:LMS Actualizar cursos')->name('courses.curriculum');
+    // Route::get('courses', CourseController::class);
 
-Route::get('courses/{course}/goals', [CourseController::class, 'goals'])->name('courses.goals');
+    // Route::get('courses', CourseController::class)->name('instructor.courses.index');
 
-/**
- * Route for manage the course students
- */
-Route::get('courses/{course}/students', CoursesStudents::class)->middleware('can:LMS Actualizar cursos')->name('courses.students');
+    // Route::get('courses', CourseController::class)->middleware('can:LMS Leer cursos')->name('instructor.courses.index');
 
-/**
- * Route to request change course status
- */
-Route::post('courses/{course}/status', [CourseController::class, 'status'])->name('courses.status');
+    Route::resource('instructor/courses', CourseController::class)->names('courses');
 
-/**
- * Route to display the observations in course info view
- */
-Route::get('courses/{course}/observation', [CourseController::class, 'observation'])->name('courses.observation');
+
+    /**
+     * Route for manage the course sections, lessons and lesson resources
+     */
+    Route::get('instructor/courses/{course}/curriculum', CoursesCurriculum::class)->middleware('can:LMS Actualizar cursos')->name('courses.curriculum');
+
+    Route::get('instructor/courses/{course}/goals', [CourseController::class, 'goals'])->name('courses.goals');
+
+    /**
+     * Route for manage the course students
+     */
+    Route::get('instructor/courses/{course}/students', CoursesStudents::class)->middleware('can:LMS Actualizar cursos')->name('courses.students');
+
+    /**
+     * Route to request change course status
+     */
+    Route::post('instructor/courses/{course}/status', [CourseController::class, 'status'])->name('courses.status');
+
+    /**
+     * Route to display the observations in course info view
+     */
+    Route::get('instructor/courses/{course}/observation', [CourseController::class, 'observation'])->name('courses.observation');
+
+});

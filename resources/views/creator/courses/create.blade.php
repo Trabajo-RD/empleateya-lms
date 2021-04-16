@@ -6,7 +6,7 @@
                 <h1 class="text-2xl font-bold">{{ __('New_course') }}</h1>
                 <hr class="mt-2 mb-6">
 
-                {!! Form::open(['route' => 'creator.courses.store', 'files' => true, 'autocomplete' => 'off' ]) !!}
+                {!! Form::open(['route' => ['creator.courses.store', app()->getLocale()], 'files' => true, 'autocomplete' => 'off' ]) !!}
 
                     @include('creator.courses.partials.form')
 

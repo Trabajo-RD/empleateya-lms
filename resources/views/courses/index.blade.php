@@ -5,9 +5,9 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-36">
             <div class="w-full md:w-3/4 lg:w-1/2">
                 <!-- titulo -->
-                <h1 class="text-white font-extrabold text-3xl sm:text-4xl md:text-5xl">Bienvenido a la era de la transformación digital</h1>
+                <h1 class="text-white font-extrabold text-3xl sm:text-4xl md:text-5xl">{{ __('Welcome to the era of digital transformation') }}</h1>
                 <!-- parrafo -->
-                <p class="text-white mt-3 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0 mb-4">Si estas buscando ser más competitivo, obtener un trabajo o emprender tu propio negocio, estos cursos son para tí</p>
+                <p class="text-white mt-3 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0 mb-4">{{ __('If you are looking to be more competitive, get a job or start your own business, these courses are for you') }}</p>
                 <!-- Buscador -->
                 @livewire('search')
             </div>

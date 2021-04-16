@@ -13,7 +13,7 @@ class Modality extends Model
     use HasFactory;
 
     const E_LEARNING = 'E-learning';
-    const B_LEARNING = 'Blended';
+    const B_LEARNING = 'Mixta';
     const M_LEARNING = 'M-learning';
     const PRESENCIAL = 'Presencial';
 

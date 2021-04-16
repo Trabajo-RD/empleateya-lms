@@ -128,11 +128,11 @@
                 <!-- Team Member List -->
                 <x-slot name="content">
                     <div class="space-y-6">
-                        @foreach ($team->users->sortBy('firstname') as $user)
+                        @foreach ($team->users->sortBy('name') as $user)
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                    <img class="w-8 h-8 rounded-full" src="{{ $user->profile_photo_url }}" alt="{{ $user->firstname }}">
-                                    <div class="ml-4">{{ $user->firstname }}</div>
+                                    <img class="w-8 h-8 rounded-full" src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}">
+                                    <div class="ml-4">{{ $user->name }}</div>
                                 </div>
 
                                 <div class="flex items-center">

@@ -23,7 +23,7 @@ class CreateNewUser implements CreatesNewUsers
     public function create(array $input)
     {
         Validator::make($input, [
-            'firstname' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
             'document_id' => ['required', 'string', 'max:15', 'unique:users'],
             //'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -34,7 +34,7 @@ class CreateNewUser implements CreatesNewUsers
 
         return DB::transaction(function () use ($input) {
             return tap(User::create([
-                'firstname' => $input['firstname'],
+                'name' => $input['name'],
                 'lastname' => $input['lastname'],
                 'document_type' => $input['document_type'],
                 'document_id' => $input['document_id'],
@@ -57,7 +57,7 @@ class CreateNewUser implements CreatesNewUsers
     {
         $user->ownedTeams()->save(Team::forceCreate([
             'user_id' => $user->id,
-            'name' => explode(' ', $user->firstname, 2)[0]."'s Team",
+            'name' => explode(' ', $user->name, 2)[0]."'s Team",
             'personal_team' => true,
         ]));
     }

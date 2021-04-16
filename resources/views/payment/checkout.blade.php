@@ -9,7 +9,7 @@
                         <img src="{{ Storage::url($course->image->url) }}" class="h-24 w-24 object-cover mr-4" alt="">
                         <div>
                             <h2 class="text-xl font-semibold">{{ $course->title }}</h2>
-                            <p>{{ $course->editor->firstname }}</p>
+                            <p>{{ $course->editor->name }}</p>
                         </div>
                     </div>
 

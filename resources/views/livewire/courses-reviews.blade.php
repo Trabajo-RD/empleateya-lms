@@ -48,7 +48,7 @@
                     </figure>
                     <div class="card flex-1">
                         <div class="card-body bg-gray-100">
-                            <p><b>{{ $review->user->firstname }}</b></p>
+                            <p><b>{{ $review->user->name }}</b></p>
                             <div class="flex items-center mt-2 mb-2">
                                 <ul class="flex text-sm mr-4">
                                     <li class="mr-1 cursor-pointer"><i class="fas fa-star text-{{ $review->rating >= 1 ? 'yellow' : 'gray' }}-300"></i></li>

@@ -16,7 +16,7 @@ class AddColumnsToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->renameColumn('name', 'firstname');
+            // $table->renameColumn('name', 'name');
             $table->string('document_id')->after('id')->unique();
             $table->enum('document_type', ['CED', 'PAS'])->after('document_id');
             $table->string('lastname')->after('name')->nullable();

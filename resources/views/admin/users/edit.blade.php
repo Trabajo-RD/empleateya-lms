@@ -28,7 +28,7 @@
                     </div>
                     <div class="col-12 col-md-9">
                         <label class="text-muted">Nombre: </label>
-                        <p class="form-control">{{ $user->firstname }} {{ $user->lastname }}</p>
+                        <p class="form-control">{{ $user->name }} {{ $user->lastname }}</p>
                     </div>
                 </div>
                 <div class="row">

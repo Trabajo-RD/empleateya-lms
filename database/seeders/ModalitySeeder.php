@@ -19,7 +19,7 @@ class ModalitySeeder extends Seeder
         ]);
 
         Modality::create([
-            'name' => 'Blended'
+            'name' => 'Mixta'
         ]);
 
         Modality::create([

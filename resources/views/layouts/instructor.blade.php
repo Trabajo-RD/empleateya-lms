@@ -23,7 +23,7 @@
     <body class="font-sans antialiased">
         <x-jet-banner />
 
-        <div class="min-h-screen bg-gray-100">
+        <div class="flex flex-col min-h-screen justify-between bg-gray-100">
             @livewire('navigation-menu')
 
             <!-- Page Heading -->
@@ -44,22 +44,22 @@
                     <h1 class="capitalize text-2xl mt-1">{{ $course->title }}</h1>
                     <!-- sidebar menu -->
                     <ul class="text-sm text-gray-600 mt-6">
-                        <li class="leading-7 mb-1 border-l-4 @routeIs('instructor.courses.edit', $course) border-blue-400 @else border-transparent @endif pl-2">
-                            <a href="{{ route('instructor.courses.edit', $course )}}">Información del curso</a>
+                        <li class="leading-7 mb-1 border-l-4 @routeIs('instructor.courses.edit', [app()->getLocale(), $course]) border-blue-400 @else border-transparent @endif pl-2">
+                            <a href="{{ route('instructor.courses.edit', [app()->getLocale(), $course] )}}">Información del curso</a>
                         </li>
-                        <li class="leading-7 mb-1 border-l-4 @routeIs('instructor.courses.curriculum', $course) border-blue-400 @else border-transparent @endif pl-2">
-                            <a href="{{ route('instructor.courses.curriculum', $course )}}">Lecciones</a>
+                        <li class="leading-7 mb-1 border-l-4 @routeIs('instructor.courses.curriculum', [app()->getLocale(), $course]) border-blue-400 @else border-transparent @endif pl-2">
+                            <a href="{{ route('instructor.courses.curriculum', [app()->getLocale(), $course] )}}">Lecciones</a>
                         </li>
-                        <li class="leading-7 mb-1 border-l-4 @routeIs('instructor.courses.goals', $course) border-blue-400 @else border-transparent @endif pl-2">
-                            <a href="{{ route('instructor.courses.goals', $course) }}">Metas del curso</a>
+                        <li class="leading-7 mb-1 border-l-4 @routeIs('instructor.courses.goals', [app()->getLocale(), $course]) border-blue-400 @else border-transparent @endif pl-2">
+                            <a href="{{ route('instructor.courses.goals', [app()->getLocale(), $course]) }}">Metas del curso</a>
                         </li>
-                        <li class="leading-7 mb-1 border-l-4 @routeIs('instructor.courses.students', $course) border-blue-400 @else border-transparent @endif pl-2">
-                            <a href="{{ route('instructor.courses.students', $course) }}">Estudiantes</a>
+                        <li class="leading-7 mb-1 border-l-4 @routeIs('instructor.courses.students', [app()->getLocale(), $course]) border-blue-400 @else border-transparent @endif pl-2">
+                            <a href="{{ route('instructor.courses.students', [app()->getLocale(), $course]) }}">Estudiantes</a>
                         </li>
 
                         @if( $course->observation )
-                            <li class="flex leading-7 mb-1 border-l-4 @routeIs('instructor.courses.observation', $course) border-blue-400 @else border-transparent @endif pl-2">
-                                <a href="{{ route('instructor.courses.observation', $course) }}">Observaciones</a>
+                            <li class="flex leading-7 mb-1 border-l-4 @routeIs('instructor.courses.observation', [app()->getLocale(), $course]) border-blue-400 @else border-transparent @endif pl-2">
+                                <a href="{{ route('instructor.courses.observation', [app()->getLocale(), $course]) }}">Observaciones</a>
                                 <!-- Tailwind animate ping -->
                                 <span class="flex h-3 w-3">
                                     <span class="animate-ping h-3 w-3 absolute inline-flex rounded-full bg-red-400 opacity-75"></span>
@@ -75,7 +75,7 @@
                     @switch($course->status)
                         @case(1)
                             <!-- Request change course status -->
-                            <form action="{{ route('instructor.courses.status', $course) }}" method="POST">
+                            <form action="{{ route('instructor.courses.status', [app()->getLocale(), $course]) }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-accent shadow">Solicitar revisión</button>
                             </form>
@@ -106,17 +106,30 @@
 
                 </aside>
 
-                <div class="col-span-5 md:col-span-4 card">
+                <main class="col-span-5 md:col-span-4 card">
 
-                    <main class="card-body text-gray-600">
+                    <div class="card-body text-gray-600">
 
                         {{ $slot }}
 
-                    </main>
+                    </div>
 
-                </div>
+                </main>
 
             </div>
+
+            <!-- Page Footer -->
+            <footer class="main-footer bg-gray-800">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    @include('partials.footer.footer')
+                </div>
+                <!-- Footer Copyright -->
+                <section class="bg-gray-900">
+                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-white">
+                        @include('partials.footer.copyright')
+                    </div>
+                </section>
+            </footer>
         </div>
 
         @stack('modals')

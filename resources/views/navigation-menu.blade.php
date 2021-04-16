@@ -2,13 +2,13 @@
 
     $nav_links = [
         [
-            'name' => 'Inicio',
-            'route' => route('home'), // routes/web.php dashboard route
+            'name' => 'Home',
+            'route' => route('home', app()->getLocale()), // routes/web.php dashboard route
             'active' => request()->routeIs('home') // bool: verify is active route dashboard
         ],
         [
-            'name' => 'Cursos',
-            'route' => route('courses.index'), // routes/web.php dashboard route
+            'name' => 'Courses',
+            'route' => route('courses.index', app()->getLocale()), // routes/web.php dashboard route
             'active' => request()->routeIs('courses.*') // bool: verify is active route dashboard
         ],
     ];
@@ -22,28 +22,40 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="{{ route('home') }}">
+                    <a href="{{ route('home', app()->getLocale()) }}">
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    {{-- @foreach ($nav_links as $nav_link)
+                    @foreach ($nav_links as $nav_link)
                         <x-jet-nav-link href="{{ $nav_link['route'] }}" :active="$nav_link['active']">
-                            {{ $nav_link['name'] }}
+                            {{ __($nav_link['name']) }}
                         </x-jet-nav-link>
-                    @endforeach --}}
+                    @endforeach
 
-                    @foreach ($menuItems as $item)
+                    <!-- TODO: Admin menu items -->
+                    {{-- @foreach ($menuItems as $item)
                         <x-jet-nav-link href="{{ route($item->link) }}">
                             {{ $item->name }}
                         </x-jet-nav-link>
-                    @endforeach
+                    @endforeach --}}
                 </div>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
+
+                <!-- Right Side Of Navbar -->
+                {{-- <ul class="navbar-nav ml-auto">
+                    @foreach (config('app.available_locales') as $locale)
+                        <li class="nav-item">
+                            <a class="nav-link"
+                            href="{{ route(\Illuminate\Support\Facades\Route::currentRouteName(), $locale) }}"
+                                @if (app()->getLocale() == $locale) style="font-weight: bold; text-decoration: underline" @endif>{{ strtoupper($locale) }}</a>
+                        </li>
+                    @endforeach
+                </ul> --}}
 
                 @auth
                     <!-- Teams Dropdown -->
@@ -104,12 +116,12 @@
                             <x-slot name="trigger">
                                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                                     <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
-                                        <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->firstname }}" />
+                                        <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                                     </button>
                                 @else
                                     <span class="inline-flex rounded-md">
                                         <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                                            {{ Auth::user()->firstname }}
+                                            {{ Auth::user()->name }}
 
                                             <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -122,35 +134,35 @@
                             <x-slot name="content">
                                 <!-- Account Management -->
                                 <div class="block px-4 py-2 text-xs text-gray-400">
-                                    {{ __('Administrar cuenta') }}
+                                    {{ __('Manage account') }}
                                 </div>
 
-                                <x-jet-dropdown-link href="{{ route('profile.show') }}">
-                                    {{ __('Perfil') }}
+                                <x-jet-dropdown-link href="{{ route('profile.show', app()->getLocale() ) }}">
+                                    {{ __('Profile') }}
                                 </x-jet-dropdown-link>
 
                                 @can ('LMS Ver Dashboard')
-                                    <x-jet-dropdown-link href="{{ route('admin.home') }}">
-                                        {{ __('Administrador') }}
+                                    <x-jet-dropdown-link href="{{ route('admin.home' ) }}">
+                                        {{ __('Administrator') }}
                                     </x-jet-dropdown-link>
                                 @endcan
 
                                 <!-- TODO: Create permission LMS Crear contenido -->
                                 @can ('LMS Crear contenido')
-                                    <x-jet-dropdown-link href="{{ route('creator.courses.index') }}">
-                                        {{ __('Administrar Cursos') }}
+                                    <x-jet-dropdown-link href="{{ route('creator.courses.index', app()->getLocale() ) }}">
+                                        {{ __('Manage Courses') }}
                                     </x-jet-dropdown-link>
                                 @endcan
 
                                 <!-- TODO: Create permission LMS Crear contenido -->
                                 @can ('LMS Crear contenido')
-                                    <x-jet-dropdown-link href="{{ route('dashboard', request()->segment(1)) }}">
-                                        {{ __('Ajustes') }}
+                                    <x-jet-dropdown-link href="{{ route('dashboard', app()->getLocale()) }}">
+                                        {{ __('Settings') }}
                                     </x-jet-dropdown-link>
                                 @endcan
 
                                 @can ('LMS Calificar item')
-                                    <x-jet-dropdown-link href="{{ route('instructor.courses.index') }}">
+                                    <x-jet-dropdown-link href="{{ route('instructor.courses.index', app()->getLocale() ) }}">
                                         {{ __('Instructor') }}
                                     </x-jet-dropdown-link>
                                 @endcan
@@ -164,21 +176,21 @@
                                 <div class="border-t border-gray-100"></div>
 
                                 <!-- Authentication -->
-                                <form method="POST" action="{{ route('logout') }}">
+                                <form method="POST" action="{{ route('logout', app()->getLocale() ) }}">
                                     @csrf
 
-                                    <x-jet-dropdown-link href="{{ route('logout') }}"
+                                    <x-jet-dropdown-link href="{{ route('logout', app()->getLocale() ) }}"
                                             onclick="event.preventDefault();
                                                     this.closest('form').submit();">
-                                        {{ __('Cerrar sesión') }}
+                                        {{ __('Logout') }}
                                     </x-jet-dropdown-link>
                                 </form>
                             </x-slot>
                         </x-jet-dropdown>
                     @else
-                        <a href="{{ route('login') }}" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-gray-400 hover:border-gray-600 rounded-md shadow-sm text-base font-medium text-gray-400 hover:text-gray-600 bg-white-100 hover:bg-gray-100">Iniciar sesión</a>
+                        <a href="{{ route('login', app()->getLocale() ) }}" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-gray-400 hover:border-gray-600 rounded-md shadow-sm text-base font-medium text-gray-400 hover:text-gray-600 bg-white-100 hover:bg-gray-100">{{ __('Sign In') }}</a>
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">Registrarse</a>
+                            <a href="{{ route('register', app()->getLocale() ) }}" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">{{ __('Register') }}</a>
                         @endif
                     @endauth
                 </div>
@@ -212,37 +224,37 @@
                 <div class="flex items-center px-4">
                     @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                         <div class="flex-shrink-0 mr-3">
-                            <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->firstname }}" />
+                            <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                         </div>
                     @endif
 
                     <div>
-                        <div class="font-medium text-base text-gray-800">{{ Auth::user()->firstname }}</div>
+                        <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
                         <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
                     </div>
                 </div>
 
                 <div class="mt-3 space-y-1">
                     <!-- Account Management -->
-                    <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
+                    <x-jet-responsive-nav-link href="{{ route('profile.show', app()->getLocale() ) }}" :active="request()->routeIs('profile.show')">
                         {{ __('Perfil') }}
                     </x-jet-responsive-nav-link>
 
                     @can('LMS Ver Dashboard')
-                        <x-jet-responsive-nav-link href="{{ route('admin.home') }}" :active="request()->routeIs('admin.home')">
+                        <x-jet-responsive-nav-link href="{{ route('admin.home' ) }}" :active="request()->routeIs('admin.home')">
                             {{ __('Administrador') }}
                         </x-jet-responsive-nav-link>
                     @endcan
 
                     <!-- TODO: Create permission LMS Crear contenido -->
                     @can('LMS Crear contenido')
-                        <x-jet-responsive-nav-link href="{{ route('creator.courses.index', request()->segment(1)) }}" :active="request()->routeIs('creator.courses.index', request()->segment(1))">
+                        <x-jet-responsive-nav-link href="{{ route('creator.courses.index', app()->getLocale()) }}" :active="request()->routeIs('creator.courses.index', app()->getLocale())">
                             {{ __('Administrar cursos') }}
                         </x-jet-responsive-nav-link>
                     @endcan
 
                     @can('LMS Calificar item')
-                        <x-jet-responsive-nav-link href="{{ route('instructor.courses.index') }}" :active="request()->routeIs('instructor.courses.index')">
+                        <x-jet-responsive-nav-link href="{{ route('instructor.courses.index', app()->getLocale() ) }}" :active="request()->routeIs('instructor.courses.index', app()->getLocale())">
                             {{ __('Instructor') }}
                         </x-jet-responsive-nav-link>
                     @endcan
@@ -254,10 +266,10 @@
                     @endif
 
                     <!-- Authentication -->
-                    <form method="POST" action="{{ route('logout') }}">
+                    <form method="POST" action="{{ route('logout', app()->getLocale() ) }}">
                         @csrf
 
-                        <x-jet-responsive-nav-link href="{{ route('logout') }}"
+                        <x-jet-responsive-nav-link href="{{ route('logout', app()->getLocale() ) }}"
                                     onclick="event.preventDefault();
                                         this.closest('form').submit();">
                             {{ __('Cerrar sesión') }}
@@ -298,11 +310,11 @@
             </div>
         @else
             <div class="py-1 border-t border-gray-200">
-                <x-jet-responsive-nav-link href="{{ route('login') }}" :active="request()->routeIs('login')">
+                <x-jet-responsive-nav-link href="{{ route('login', app()->getLocale() ) }}" :active="request()->routeIs('login')">
                     Login
                 </x-jet-responsive-nav-link>
 
-                <x-jet-responsive-nav-link href="{{ route('register') }}" :active="request()->routeIs('register')">
+                <x-jet-responsive-nav-link href="{{ route('register', app()->getLocale() ) }}" :active="request()->routeIs('register')">
                     Register
                 </x-jet-responsive-nav-link>
             </div>

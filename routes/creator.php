@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Creator\CourseController;
 use App\Http\Livewire\Creator\CoursesCurriculum;
-use App\Http\Livewire\Instructor\CoursesStudents;
+use App\Http\Livewire\Creator\CoursesStudents;
 use App\Http\Controllers\HomeController;
 
 /*
@@ -17,19 +17,23 @@ use App\Http\Controllers\HomeController;
 |
 */
 
+/**
+ * Route to redirect user to correct creator courses route
+ */
+// Route::redirect('', 'creator/courses');
+
 Route::group(['prefix' => '{locale}',
-    'where' => ['locale', '[a-zA-Z]{2}']
+    'as' => 'creator.',
+    'where' => ['locale', '[a-zA-Z]{2}'],
+    'middleware' => ['setlocale', 'language']
 ], function(){
 
-    /**
-     * Route to redirect user to correct creator courses route
-     */
-    Route::redirect('', 'creator/courses');
+
 
     /**
      * Route to manage creator courses using a Livewire component
      */
-    Route::resource('courses', CourseController::class)->names('creator.courses');
+    Route::resource('courses', CourseController::class)->names('courses');
 
     /**
      * Route to manage the LMS Frontend content

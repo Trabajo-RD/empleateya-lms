@@ -89,6 +89,8 @@ return [
     |
     */
 
+    // 'path' => '{locale}',
+    // 'middleware' => ['web', 'setLocale'],
     'middleware' => ['web'],
 
     /*

@@ -19,7 +19,7 @@
         <a href="{{ route( 'courses.show', $course ) }}">
             <h2 class="card-title">{{ Str::limit( $course->title, 55 ) }}</h2>
         </a>
-        <p class="text-gray-500 text-sm mb-2 mt-auto">{{ $course->editor->firstname}}</p>
+        <p class="text-gray-500 text-sm mb-2 mt-auto">{{ $course->editor->name}}</p>
         <div class="flex mb-4">
             <!-- rating -->
             <ul class="flex text-sm">

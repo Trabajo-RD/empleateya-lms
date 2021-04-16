@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CourseController;
+use Illuminate\Support\Facades\Session;
 
 use App\Http\Livewire\CourseStatus;
 
@@ -17,43 +19,63 @@ use App\Http\Livewire\CourseStatus;
 |
 */
 
-/**
- * Route to display the home page
- */
-Route::get('/', HomeController::class)->name('home');
 
-/**
- * TODO: Make it work
- * Route to set locale
- */
-Route::get('/set-locale/{locale}', function($locale){
-    App::setLocale($locale);
-    session()->put('locale', $locale);
+Route::get('/', function(){
+    return redirect(app()->getLocale());
+});
+
+Route::get('setlocale/{locale}',function($lang){
+    Session::put('locale',$lang);
     return redirect()->back();
-})->middleware('auth')->name('locale.setting');
+})->name('set.locale');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
 
-/**
- * Route to display the courses home page
- */
-Route::get('cursos', [CourseController::class, 'index'])->name('courses.index');
+Route::group(['prefix' => '{locale}',
+    'where' => ['locale', '[a-zA-Z]{2}'],
+    'middleware' => ['setlocale', 'language']
+], function(){
 
-/**
- * Route to display single course information
- */
-Route::get('cursos/{course}', [CourseController::class, 'show'])->name('courses.show');
+    /**
+     * Route to display the home page
+     */
+    Route::get('/', HomeController::class)->name('home');
 
-/**
- * Route to enroll users
- */
-Route::post('courses/{course}/enrolled', [CourseController::class, 'enrolled'])->middleware('auth')->name('courses.enrolled');
+    // Auth::routes();
 
-/**
- * Route to control the user enrolled courses
- */
-Route::get('course-status/{course}', CourseStatus::class)->name('courses.status')->middleware('auth');
+    /**
+     * TODO: Make it work
+     * Route to set locale
+     */
+    // Route::get('/set-locale/{locale}', function ($locale) {
+    //     App::setLocale($locale);
+    //     session()->put('locale', $locale);
+    //     return redirect()->back();
+    // })->middleware('auth')->name('locale.setting');
 
-// Auth::routes(['verify' => true]);
+    Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    /**
+     * Route to display the courses home page
+     */
+    Route::get('cursos', [CourseController::class, 'index'])->name('courses.index');
+
+    /**
+     * Route to display single course information
+     */
+    Route::get('cursos/{course}', [CourseController::class, 'show'])->name('courses.show');
+
+    /**
+     * Route to enroll users
+     */
+    Route::post('courses/{course}/enrolled', [CourseController::class, 'enrolled'])->middleware('auth')->name('courses.enrolled');
+
+    /**
+     * Route to control the user enrolled courses
+     */
+    Route::get('course-status/{course}', CourseStatus::class)->name('courses.status')->middleware('auth');
+
+    // Auth::routes(['verify' => true]);
+
+});

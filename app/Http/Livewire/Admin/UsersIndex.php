@@ -17,7 +17,7 @@ class UsersIndex extends Component
 
     public function render()
     {
-        $users = User::where('firstname', 'LIKE', '%' . $this->search . '%')
+        $users = User::where('name', 'LIKE', '%' . $this->search . '%')
                 ->orWhere('lastname', 'LIKE', '%' . $this->search . '%')
                 ->orWhere('document_id', 'LIKE', '%' . $this->search . '%')
                 ->orWhere('email', 'LIKE', '%' . $this->search . '%')

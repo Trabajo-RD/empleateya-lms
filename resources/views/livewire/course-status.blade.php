@@ -78,11 +78,11 @@
                 <!-- Author info -->
                 <div class="flex items-center mb-4">
                     <figure>
-                        <img class="h-12 w-12 object-cover rounded-full shadow" src="{{ $course->editor->profile_photo_url }}" alt="Foto de perfil de {{ $course->editor->firstname }}"/>
+                        <img class="h-12 w-12 object-cover rounded-full shadow" src="{{ $course->editor->profile_photo_url }}" alt="Foto de perfil de {{ $course->editor->name }}"/>
                     </figure>
                     <div class="ml-4">
-                        <h3 class="font-bold text-lg text-gray-600">{{ $course->editor->firstname . ' ' . $course->editor->lastname }}</h3>
-                        <a class="text-blue-400 text-sm font-bold" href="">{{ '@' . Str::slug( $course->editor->firstname . $course->editor->lastname, '' ) }}</a>
+                        <h3 class="font-bold text-lg text-gray-600">{{ $course->editor->name . ' ' . $course->editor->lastname }}</h3>
+                        <a class="text-blue-400 text-sm font-bold" href="">{{ '@' . Str::slug( $course->editor->name . $course->editor->lastname, '' ) }}</a>
                     </div>
                 </div>
 

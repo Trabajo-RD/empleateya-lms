@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\Partner;
+use Illuminate\Support\Facades\Config;
 use App\Models\Review;
 
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
+    private $locale;
+
     public function __invoke()
     {
 
@@ -31,6 +34,12 @@ class HomeController extends Controller
         //return Course::find(1)->getRatingAttribute(); // Test Course rating
 
         //return view('welcome');
+
+
+        // $app = Config::get('app');
+
+        // $locale = $app['available_locales'];
+
         return view('welcome', compact('latest_courses', 'partners')); // Add collection to welcome view
     }
 

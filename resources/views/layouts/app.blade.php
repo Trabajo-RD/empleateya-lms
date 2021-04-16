@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale() ) }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
     <body class="font-sans antialiased">
         <x-jet-banner />
 
-        <div class="min-h-screen bg-gray-100">
+        <div class="flex flex-col min-h-screen justify-between bg-gray-100">
             @livewire('navigation-menu')
 
             <!-- Page Heading -->
@@ -40,23 +40,17 @@
             </main>
 
             <!-- Page Footer -->
-            @if(isset($footer))
-                <footer class="bg-gray-800">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $footer }}
-                    </div>
-                </footer>
-            @endif
-
-            <!-- Page Copyright -->
-            @if(isset($copyright))
+            <footer class="main-footer bg-gray-800">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    @include('partials.footer.footer')
+                </div>
+                <!-- Footer Copyright -->
                 <section class="bg-gray-900">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-white">
-                        {{ $copyright }}
+                        @include('partials.footer.copyright')
                     </div>
                 </section>
-            @endif
-
+            </footer>
 
         </div>
 

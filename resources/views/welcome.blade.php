@@ -5,10 +5,9 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-36">
             <div class="w-full md:w-3/4 lg:w-1/2">
                 <!-- titulo -->
-                <h1 class="text-white font-extrabold text-4xl sm:text-5xl md:text-6xl">Cursos gratuitos</h1>
+                <h1 class="text-white font-extrabold text-4xl sm:text-5xl md:text-6xl">{{ __('Free courses') }}</h1>
                 <!-- parrafo -->
-                <p class="text-white mt-3 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0 mb-4">En nuestro Sistema de Gestión de Aprendizaje encontrarás cursos y artículos de distintas áreas
-                que te ayudarán en tu desarrollo profesional</p>
+                <p class="text-white mt-3 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0 mb-4">{{ __('In our Learning Management System you will find courses and articles from different areas that will help you in your professional development')}}</p>
                 <!-- Buscador -->
                 @livewire('search')
             </div>
@@ -74,11 +73,11 @@
 
     <!-- CTA -->
     <section class="bg-blue-900 py-12 mb-24">
-        <h2 class="text-center text-white text-5xl sm:text-4xl md:text-3xl">¿No sabes qué curso elegir?</h2>
-        <p class="text-center text-white">Visita nuestro catálogo de cursos donde encontrarás el curso adecuado para tí</p>
+        <h2 class="text-center text-white text-5xl sm:text-4xl md:text-3xl">{{ __('Not sure what to choose?') }}</h2>
+        <p class="text-center text-white">{{ __('Visit our course catalog where you will find the right course for you') }}</p>
         <div class="flex justify-center mt-6">
-            <a href="{{ route( 'courses.index' ) }}" class="btn-cta btn-accent font-bold py-2 px-4 rounded">
-                Ver catálogo de cursos
+            <a href="{{ route( 'courses.index', app()->getLocale() ) }}" class="btn-cta btn-accent font-bold py-2 px-4 rounded">
+                {{ __('See course catalog') }}
             </a>
         </div>
     </section>
@@ -120,45 +119,12 @@
         </section>
     @endif
 
-    <!-- Page Footer -->
-    <x-slot name="footer">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8">
-            @livewire('link.social-media')
-            <div>
-                <ul>
-                    <li>
-                        <a target="_top" href="" class="text-sm text-gray-200 hover:text-gray-100">{{ __('About us') }}</a>
-                    </li>
-                    <li class="mt-1">
-                        <a target="_top" href="" class="text-sm text-gray-200 hover:text-gray-100">{{ __('Contact') }}</a>',
-                    </li>
-                    <li class="mt-1">
-                        <a target="_top" href="" class="text-sm text-gray-200 hover:text-gray-100">{{ __('Glossary of terms') }}</a>',
-                    </li>
-                </ul>
-            </div>
-            <div>
-                <ul>
-                    <li>
-                        <a target="_top" href="{{ route('terms.show') }}" class="text-sm text-gray-200 hover:text-gray-100">{{ __('Terms of Service') }}</a>
-                    </li>
-                    <li class="mt-1">
-                        <a target="_top" href="{{ route('policy.show') }}" class="text-sm text-gray-200 hover:text-gray-100">{{ __('Privacy Policy') }}</a>',
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </x-slot>
-
-    <!-- Page Copyright -->
-    <x-slot name="copyright">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap justify-center gap-x-6 gap-y-8 ">
-            &copy;Ministerio de Trabajo 2021
-        </div>
-    </x-slot>
 
 
 </x-app-layout>
+
+
+
 
 {{-- <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
