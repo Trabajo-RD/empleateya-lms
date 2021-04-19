@@ -65,7 +65,7 @@ class PlatformController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Platform $platform)
+    public function edit($locale, Platform $platform)
     {
         return view('admin.platforms.edit', compact('platform'));
     }
@@ -77,7 +77,7 @@ class PlatformController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Platform $platform)
+    public function update(Request $request, $locale, Platform $platform)
     {
         $request->validate([
             'name' => 'required|unique:platforms,name,' . $platform->id
@@ -94,10 +94,10 @@ class PlatformController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Platform $platform)
+    public function destroy($locale, Platform $platform)
     {
         $platform->delete();
 
-        return redirect()->route('delete', 'success');
+        return redirect()->route('admin.platforms.index')->with('delete', 'success');
     }
 }

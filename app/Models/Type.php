@@ -10,6 +10,10 @@ class Type extends Model
     // Guarded: do not allow massive income
     protected $guarded = ['id'];
 
+    protected $fillable = [
+        'name'
+    ];
+
     use HasFactory;
 
     const LEARNING_PATH = 'Itinerario de Aprendizaje';

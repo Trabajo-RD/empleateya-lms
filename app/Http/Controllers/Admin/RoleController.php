@@ -84,11 +84,11 @@ class RoleController extends Controller
      * @param  \Spatie\Permission\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $role)
+    public function edit($locale, Role $role)
     {
         $permissions = Permission::all();
 
-        return view('admin.roles.edit', compact('role', 'permissions'));
+        return view('admin.roles.edit', compact('locale', 'role', 'permissions'));
     }
 
     /**
@@ -98,7 +98,7 @@ class RoleController extends Controller
      * @param  \Spatie\Permission\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request, $locale, Role $role)
     {
         $request->validate([
             'name' => 'required',
@@ -121,7 +121,7 @@ class RoleController extends Controller
      * @param  \Spatie\Permission\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
+    public function destroy($locale, Role $role)
     {
         $role->delete();
 

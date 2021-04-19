@@ -45,13 +45,13 @@ return [
     |
     */
 
-    'logo' => '<b>Empleateya</b> LMS',
+    'logo' => '<b>CAPACITATE</b> RD',
     //'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img' => 'images/admin/EmpleateyaLMSLogo.svg',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'Empleateya LMS',
+    'logo_img_alt' => 'CAPACITATE RD',
 
     /*
     |--------------------------------------------------------------------------
@@ -226,42 +226,44 @@ return [
 
     'menu' => [
         [
-            'text' => 'search',
-            'search' => true,
-            'topnav' => true,
+            'key'       => 'search',
+            'text'      => 'search',
+            'search'    => true,
+            'topnav'    => true,
         ],
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
+            'key'       => 'blog',
+            'text'      => 'blog',
+            'url'       => 'admin/blog',
+            'can'       => 'manage-blog',
         ],
-        [
-            'text'        => 'Dashboard',
-            'route'       => 'admin.home',
-            'icon'        => 'fas fa-fw fa-tachometer-alt',
-            'can'         => 'LMS Ver Dashboard',
-        ],
-        [
-            'text'        => 'Menú',
-            'route'       => 'admin.items.index',
-            'icon'        => 'fas fa-fw fa-sitemap',
-            'active'      => ['admin/items*'],
+        // [
+        //     'text'        => 'Dashboard',
+        //     'route'       => 'admin.home',
+        //     'icon'        => 'fas fa-fw fa-tachometer-alt',
+        //     'can'         => 'LMS Ver Dashboard',
+        // ],
+        // [
+        //     'text'        => 'Menú',
+        //     'route'       => 'admin.items.index',
+        //     'icon'        => 'fas fa-fw fa-sitemap',
+        //     'active'      => ['admin/items*'],
 
-        ],
-        [
-            'text'        => 'Roles',
-            'route'       => 'admin.roles.index',
-            'icon'        => 'fas fa-fw fa-users-cog',
-            'active'      => ['admin/roles*'],
-            'can'         => 'LMS Editar roles',
-        ],
-        [
-            'text'        => 'Usuarios',
-            'route'       => 'admin.users.index',
-            'icon'        => 'fas fa-fw fa-users',
-            'active'      => ['admin/users*'],
-            'can'         => 'LMS Leer usuarios',
-        ],
+        // ],
+        // [
+        //     'text'        => 'Roles',
+        //     'route'       => 'admin.roles.index',
+        //     'icon'        => 'fas fa-fw fa-users-cog',
+        //     'active'      => ['admin/roles*'],
+        //     'can'         => 'LMS Editar roles',
+        // ],
+        // [
+        //     'text'        => 'Usuarios',
+        //     'route'       => 'admin.users.index',
+        //     'icon'        => 'fas fa-fw fa-users',
+        //     'active'      => ['admin/users*'],
+        //     'can'         => 'LMS Leer usuarios',
+        // ],
         // [
         //     'text'        => 'pages',
         //     'url'         => 'admin/pages',
@@ -270,46 +272,46 @@ return [
         //     'label_color' => 'success',
         // ],
         ['header' => 'OPCIONES DE CURSOS'],
-        [
-            'text' => 'Cursos en revisión',
-            'route'  => 'admin.courses.index',
-            'icon' => 'fas fa-laptop mr-1',
-        ],
-        [
-            'text' => 'Categorías',
-            'route'  => 'admin.categories.index',
-            'icon' => 'fas fa-tags mr-1',
-        ],
-        [
-            'text' => 'Tipos',
-            'route'  => 'admin.types.index',
-            'icon' => 'fas fa-photo-video mr-1',
-        ],
-        [
-            'text' => 'Niveles',
-            'route'  => 'admin.levels.index',
-            'icon' => 'fas fa-layer-group mr-1',
-        ],
-        [
-            'text' => 'Modalidades',
-            'route'  => 'admin.modalities.index',
-            'icon' => 'fas fa-laptop-house mr-1',
-        ],
-        [
-            'text' => 'Plataformas',
-            'route'  => 'admin.platforms.index',
-            'icon' => 'fas fa-server mr-1',
-        ],
-        [
-            'text' => 'Precios',
-            'route'  => 'admin.prices.index',
-            'icon' => 'fas fa-dollar-sign mr-1',
-        ],
-        [
-            'text' => 'Sociedades y Convenios',
-            'route'  => 'admin.partners.index',
-            'icon' => 'far fa-handshake mr-1',
-        ],
+        // [
+        //     'text' => 'Cursos en revisión',
+        //     'route'  => 'admin.courses.index',
+        //     'icon' => 'fas fa-laptop mr-1',
+        // ],
+        // [
+        //     'text' => 'Categorías',
+        //     'route'  => 'admin.categories.index',
+        //     'icon' => 'fas fa-tags mr-1',
+        // ],
+        // [
+        //     'text' => 'Tipos',
+        //     'route'  => 'admin.types.index',
+        //     'icon' => 'fas fa-photo-video mr-1',
+        // ],
+        // [
+        //     'text' => 'Niveles',
+        //     'route'  => 'admin.levels.index',
+        //     'icon' => 'fas fa-layer-group mr-1',
+        // ],
+        // [
+        //     'text' => 'Modalidades',
+        //     'route'  => 'admin.modalities.index',
+        //     'icon' => 'fas fa-laptop-house mr-1',
+        // ],
+        // [
+        //     'text' => 'Plataformas',
+        //     'route'  => 'admin.platforms.index',
+        //     'icon' => 'fas fa-server mr-1',
+        // ],
+        // [
+        //     'text' => 'Precios',
+        //     'route'  => 'admin.prices.index',
+        //     'icon' => 'fas fa-dollar-sign mr-1',
+        // ],
+        // [
+        //     'text' => 'Sociedades y Convenios',
+        //     'route'  => 'admin.partners.index',
+        //     'icon' => 'far fa-handshake mr-1',
+        // ],
         // [
         //     'text' => 'change_password',
         //     'url'  => 'admin/settings',

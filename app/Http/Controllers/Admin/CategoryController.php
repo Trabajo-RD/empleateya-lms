@@ -36,15 +36,17 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $locale)
     {
         $request->validate([
             'name' => 'required|unique:categories'
         ]);
 
-        $category = Category::create( $request->all() );
+        $data = $request->all();
 
-        return redirect()->route('admin.categories.edit', $category)->with('info', 'Categoría creada exitosamente.');
+        $category = Category::create( $data );
+
+        return redirect()->route('admin.categories.edit', compact('locale', 'category') )->with('info', 'Categoría creada exitosamente.');
     }
 
     /**
@@ -64,9 +66,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($locale, Category $category)
     {
-        return view('admin.categories.edit', compact('category'));
+        return view('admin.categories.edit', compact('locale', 'category'));
     }
 
     /**
@@ -76,15 +78,19 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $locale, Category $category)
     {
         $request->validate([
             'name' => 'required|unique:categories,name,' . $category->id
         ]);
 
-        $category->update( $request->all() );
+        $data = $request->all();
 
-        return redirect()->route('admin.categories.edit', $category)->with('info', 'La categoría ha sido actualizada.');
+        $category->update([
+            'name' => $data['name']
+        ]);
+
+        return redirect()->route('admin.categories.edit', compact('locale', 'category') )->with('info', 'La categoría ha sido actualizada.');
     }
 
     /**
@@ -93,7 +99,7 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($locale, Category $category)
     {
         $category->delete();
 

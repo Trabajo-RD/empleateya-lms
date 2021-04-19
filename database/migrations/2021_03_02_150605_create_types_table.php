@@ -17,8 +17,8 @@ class CreateTypesTable extends Migration
     {
         Schema::create('types', function (Blueprint $table) {
             $table->id();
-            //$table->string('name');
-            $table->enum('name', [Type::LEARNING_PATH, Type::MODULE, Type::VIDEO]);
+            $table->string('name');
+            // $table->enum('name', [Type::LEARNING_PATH, Type::MODULE, Type::VIDEO]);
             $table->timestamps();
         });
     }

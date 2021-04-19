@@ -24,6 +24,7 @@ class UserController extends Controller
      */
     public function index()
     {
+
         return view('admin.users.index');
     }
 
@@ -33,8 +34,10 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($locale, User $user)
     {
+        // return $user;
+
         $roles = Role::all();
 
         return view('admin.users.edit', compact('user', 'roles'));
@@ -47,11 +50,11 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $locale, User $user)
     {
         $user->roles()->sync($request->roles);
 
-        return redirect()->route('admin.users.edit', $user)->with('rol_granted', 'Se ha actualizado el rol del usuario');
+        return redirect()->route('admin.users.edit', compact('user'))->with('rol_granted', 'Se ha actualizado el rol del usuario');
     }
 
 }

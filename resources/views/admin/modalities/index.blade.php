@@ -5,7 +5,7 @@
 @section('plugins.Sweetalert2', true)
 
 @section('content_header')
-    <a href="{{ route('admin.modalities.create') }}" class="btn btn-primary float-right"><i class="fas fa-plus mr-1"></i>Nueva modalidad</a>
+    <a href="{{ route('admin.modalities.create' ) }}" class="btn btn-primary float-right"><i class="fas fa-plus mr-1"></i>Nueva modalidad</a>
     <h1 class="text-dark">Modalidades</h1>
 @stop
 
@@ -34,7 +34,7 @@
                             <td width="10px">{{ $modality->id }}</td>
                             <td>{{ $modality->name }}</td>
                             <td width="12%">
-                                <a href="{{ route('admin.modalities.edit', $modality) }}" class="btn btn-outline-secondary"><i class="far fa-edit mr-1"></i>Editar</a>
+                                <a href="{{ route('admin.modalities.edit', $modality ) }}" class="btn btn-outline-secondary"><i class="far fa-edit mr-1"></i>Editar</a>
                             </td>
                             <td width="14%">
                                 <form action="{{ route( 'admin.modalities.destroy', $modality ) }}" method="POST" class="delete-modality">

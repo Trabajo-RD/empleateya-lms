@@ -16,7 +16,7 @@
 
     <div class="card">
         {!! Form::model($role, ['route' => ['admin.roles.update', $role], 'method' => 'put']) !!}
-            
+
             @include('admin.roles.partials.form')
 
             <div class="card-footer">

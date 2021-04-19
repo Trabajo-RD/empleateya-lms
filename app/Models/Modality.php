@@ -10,6 +10,10 @@ class Modality extends Model
     // Guarded: do not allow massive income
     protected $guarded = ['id'];
 
+    protected $fillable = [
+        'name'
+    ];
+
     use HasFactory;
 
     const E_LEARNING = 'E-learning';

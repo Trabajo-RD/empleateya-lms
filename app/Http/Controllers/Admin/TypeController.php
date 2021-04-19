@@ -37,15 +37,25 @@ class TypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $locale)
     {
+        // return $request->name;
+
         $request->validate([
             'name' => 'required|unique:types'
         ]);
 
-        $type = Type::create( $request->all );
+        $data = $request->all();
 
-        return redirect()->route('admin.types.edit', compact('type'))->with('info', 'Se ha creado un nuevo tipo de curso.');
+        $type = Type::create([
+            'name' => $data['name']
+        ]);
+
+        // dd($type);
+
+        // return $type;
+
+        return redirect()->route('admin.types.edit', compact('locale', 'type'))->with('info', 'Se ha creado un nuevo tipo de curso.');
     }
 
     /**
@@ -65,9 +75,11 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Type $type)
+    public function edit($locale, Type $type)
     {
-        return view('admin.types.edit', compact('type'));
+        //return $type;
+        //$type = Type::find($type->id);
+        return view('admin.types.edit', compact('locale', 'type'));
     }
 
     /**
@@ -77,15 +89,25 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Type $type)
+    public function update(Request $request, $locale, Type $type)
     {
+        // return $type;
+
         $request->validate([
             'name' => 'required|unique:types,name,' . $type->id
         ]);
 
-        $type->update( $request->all );
+        $data = $request->all();
 
-        return redirect()->route('admin.types.edit', compact('type'))->with('info', 'Se ha actualizado el tipo de curso.');
+        $type->update([
+            'name' => $data['name']
+        ]);
+
+        // $type->update([
+        //     'name' => $request->name
+        // ]);
+
+        return redirect()->route('admin.types.edit', compact('locale', 'type'))->with('info', 'Se ha actualizado el tipo de curso.');
     }
 
     /**
@@ -94,7 +116,7 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Type $type)
+    public function destroy($locale, Type $type)
     {
         $type->delete();
 

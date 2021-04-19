@@ -25,13 +25,15 @@ use App\Http\Controllers\Admin\PlatformController;
 |
 */
 
+
+
 Route::group(['prefix' => '{locale}',
     'as' => 'admin.',
     'where' => ['locale', '[a-zA-Z]{2}'],
-    'middleware' => ['setlocale', 'language']
+    'middleware' => ['setlocale', 'language', 'default.language']
 ], function(){
 
-    Route::get('admin', [HomeController::class, 'index'])->middleware('can:LMS Ver Dashboard')->name('home');
+    Route::get('', [HomeController::class, 'index'])->middleware('can:LMS Ver Dashboard')->name('home');
 
     Route::resource('roles', RoleController::class)->names('roles');
 
@@ -77,7 +79,7 @@ Route::group(['prefix' => '{locale}',
     /**
      * Route for courses in revision
      */
-    Route::get('courses', [CourseController::class, 'index'])->name('courses.index');
+    Route::get('courses/revision', [CourseController::class, 'index'])->name('courses.index');
 
     /**
      * Route to review the courses in revision status

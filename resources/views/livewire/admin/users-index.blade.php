@@ -1,6 +1,8 @@
 <div>
     <div class="card">
 
+        <!-- TODO: Reparar error al buscar: Missing required parameter for [Route: admin.users.edit] [URI: {locale}/users/{user}/edit] [Missing parameter: user]. (View: C:\xampp\htdocs\empleateya-lms\resources\views\livewire\admin\users-index.blade.php)  -->
+
         <div class="card-header">
             <div x-data="{isTyped: false}">
             <input class="form-control w-100"
@@ -43,10 +45,11 @@
                                     <td>
                                         @foreach ( $user->roles as $role )
                                             {{ $role->name }}
+                                            <br>
                                         @endforeach
                                     </td>
                                     <td>
-                                        <a class="btn btn-outline-secondary" href="{{ route('admin.users.edit', $user) }}">Editar</a>
+                                        <a class="btn btn-outline-secondary" href="{{ route('admin.users.edit', $user ) }}">Editar</a>
                                     </td>
                                 </tr>
                             @endif

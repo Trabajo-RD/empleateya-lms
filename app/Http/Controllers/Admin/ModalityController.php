@@ -65,7 +65,7 @@ class ModalityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Modality $modality)
+    public function edit($locale, Modality $modality)
     {
         return view('admin.modalities.edit', compact('modality'));
     }
@@ -77,7 +77,7 @@ class ModalityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Modality $modality)
+    public function update(Request $request, $locale, Modality $modality)
     {
         $request->validate([
             'name' => 'required|unique:modalities,name,' . $modality->id
@@ -94,7 +94,7 @@ class ModalityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Modality $modality)
+    public function destroy($locale, Modality $modality)
     {
         $modality->delete();
 

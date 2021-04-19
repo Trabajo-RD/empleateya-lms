@@ -165,12 +165,12 @@
                         </div>
                     </div>
 
-                    <form action="{{ route('admin.courses.approved', $course ) }}" class="mt-4" method="POST">
+                    <form action="{{ route('admin.courses.approved', [app()->getLocale(), $course] ) }}" class="mt-4" method="POST">
                         @csrf
                         <button type="submit" class="btn-cta btn-primary btn-block mt-4 hover:shadow">Aprobar este curso</button>
                     </form>
 
-                    <a href="{{ route('admin.courses.observation', $course ) }}" wire:click="sendDisapprovedNotification" class="btn-cta btn-block text-center mt-4 bg-transparent hover:bg-gray-500 text-gray-700 font-semibold hover:text-white border border-gray-500 hover:border-transparent rounded">Añadir observación</a>
+                    <a href="{{ route('admin.courses.observation', [app()->getLocale(), $course] ) }}" wire:click="sendDisapprovedNotification" class="btn-cta btn-block text-center mt-4 bg-transparent hover:bg-gray-500 text-gray-700 font-semibold hover:text-white border border-gray-500 hover:border-transparent rounded">Añadir observación</a>
 
                     <x-jet-button wire:click="">
                         Hi

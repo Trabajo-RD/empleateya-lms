@@ -5,7 +5,7 @@
 @section('plugins.Sweetalert2', true)
 
 @section('content_header')
-    <a href="{{ route('admin.roles.create') }}" class="btn btn-primary float-right"><i class="fas fa-plus mr-1"></i>Nuevo rol</a>
+    <a href="{{ route('admin.roles.create', app()->getLocale() ) }}" class="btn btn-primary float-right"><i class="fas fa-plus mr-1"></i>Nuevo rol</a>
     <h1 class="text-primary"><i class="fas fa-users-cog mr-2"></i>Listado de Roles</h1>
 @stop
 
@@ -45,7 +45,7 @@
                                 <a class="btn btn-outline-secondary" href="{{ route('admin.roles.edit', $role ) }}">Editar</a>
                             </td>
                             <td width="10px">
-                                <form action="{{ route('admin.roles.destroy', $role) }}" method="POST" class="delete-role">
+                                <form action="{{ route('admin.roles.destroy', $role ) }}" method="POST" class="delete-role">
                                     @method('delete')
                                     @csrf
                                     <button class="btn btn-outline-danger" type="submit">Eliminar</button>

@@ -43,7 +43,7 @@
 
 
         <div class="card">
-            {!! Form::model($user, ['route' => ['admin.users.update', $user], 'method' => 'put']) !!}
+            {!! Form::model($user, ['route' => ['admin.users.update', $user ], 'method' => 'put']) !!}
                 <div class="card-header">
                     <span class="text-primary text-uppercase">Roles</span>
                 </div>

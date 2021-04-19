@@ -35,7 +35,7 @@
                             <td>{{ $course->title }}</td>
                             <td>{{ $course->category->name }}</td>
                             <td width="12%">
-                                <a class="btn btn-outline-secondary" href="{{ route('admin.courses.show', $course ) }}">Revisar</a>
+                                <a class="btn btn-outline-secondary" href="{{ route('admin.courses.show', [app()->getLocale(), $course] ) }}">Revisar</a>
                             </td>
                         </tr>
                     @empty

@@ -19,10 +19,17 @@ use App\Http\Livewire\CourseStatus;
 |
 */
 
+/**
+     * Route to display the home page
+     */
+    Route::get('/', HomeController::class)->name('home');
 
-Route::get('/', function(){
-    return redirect(app()->getLocale());
-});
+// Route::get('/', function(){
+//     return redirect(app()->getLocale());
+// });
+
+// Redirect: if prefix instructor. exists and user access with domain.com/instructor
+// Route::redirect('', 'home');
 
 Route::get('setlocale/{locale}',function($lang){
     Session::put('locale',$lang);
@@ -35,22 +42,15 @@ Route::group(['prefix' => '{locale}',
     'middleware' => ['setlocale', 'language']
 ], function(){
 
-    /**
-     * Route to display the home page
-     */
-    Route::get('/', HomeController::class)->name('home');
+
+
 
     // Auth::routes();
 
-    /**
-     * TODO: Make it work
-     * Route to set locale
+   /**
+     * Route to display the home page
      */
-    // Route::get('/set-locale/{locale}', function ($locale) {
-    //     App::setLocale($locale);
-    //     session()->put('locale', $locale);
-    //     return redirect()->back();
-    // })->middleware('auth')->name('locale.setting');
+    // Route::get('/home', HomeController::class)->name('home'); // TODO: repair home route
 
     Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
         return view('dashboard');

@@ -14,7 +14,7 @@
 
     <div class="card">
         <div class="card-body">
-            {!! Form::model($level, ['route' => ['admin.levels.update', $level], 'method' => 'put' ]) !!}
+            {!! Form::model($level, ['route' => ['admin.levels.update', $level ], 'method' => 'put' ]) !!}
                 <div class="form-group">
                     {!! Form::label('name', 'Nombre') !!}
                     {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el nombre del nivel']) !!}

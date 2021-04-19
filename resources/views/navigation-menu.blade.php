@@ -35,6 +35,12 @@
                         </x-jet-nav-link>
                     @endforeach
 
+                    {{-- TODO: Link Dashboard --}}
+                    {{-- <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                        {{ __('Dashboard') }}
+                    </x-jet-nav-link> --}}
+
+
                     <!-- TODO: Admin menu items -->
                     {{-- @foreach ($menuItems as $item)
                         <x-jet-nav-link href="{{ route($item->link) }}">
@@ -142,7 +148,7 @@
                                 </x-jet-dropdown-link>
 
                                 @can ('LMS Ver Dashboard')
-                                    <x-jet-dropdown-link href="{{ route('admin.home' ) }}">
+                                    <x-jet-dropdown-link href="{{ route('admin.home', app()->getLocale() ) }}">
                                         {{ __('Administrator') }}
                                     </x-jet-dropdown-link>
                                 @endcan
@@ -241,7 +247,7 @@
                     </x-jet-responsive-nav-link>
 
                     @can('LMS Ver Dashboard')
-                        <x-jet-responsive-nav-link href="{{ route('admin.home' ) }}" :active="request()->routeIs('admin.home')">
+                        <x-jet-responsive-nav-link href="{{ route('admin.home', app()->getLocale() ) }}" :active="request()->routeIs('admin.home', app()->getLocale() )">
                             {{ __('Administrador') }}
                         </x-jet-responsive-nav-link>
                     @endcan

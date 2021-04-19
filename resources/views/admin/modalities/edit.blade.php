@@ -14,7 +14,7 @@
 
     <div class="card">
         <div class="card-body">
-            {!! Form::model($modality, ['route' => ['admin.modalities.update', $modality], 'method' => 'put' ]) !!}
+            {!! Form::model($modality, ['route' => ['admin.modalities.update', $modality ], 'method' => 'put' ]) !!}
                 <div class="form-group">
                     {!! Form::label('name', 'Nombre') !!}
                     {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el nombre de la modalidad']) !!}

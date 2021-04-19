@@ -78,7 +78,7 @@ class PartnerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Partner $partner)
+    public function edit($locale, Partner $partner)
     {
         return view('admin.partners.edit', compact('partner'));
     }
@@ -90,7 +90,7 @@ class PartnerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Partner $partner)
+    public function update(Request $request, $locale, Partner $partner)
     {
         $request->validate([
             'name' => 'required|unique:partners,name,' . $partner->id,
@@ -123,7 +123,7 @@ class PartnerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Partner $partner)
+    public function destroy($locale, Partner $partner)
     {
         $partner->delete();
 

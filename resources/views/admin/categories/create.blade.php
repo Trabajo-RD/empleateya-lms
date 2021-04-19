@@ -9,7 +9,7 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            {!! Form::open(['route' => 'admin.categories.store']) !!}
+            {!! Form::open(['route' => 'admin.categories.store' ]) !!}
                 <div class="form-group">
                     {!! Form::label('name', 'Nombre') !!}
                     {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el nombre de la categoría']) !!}
