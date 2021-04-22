@@ -33,7 +33,7 @@ Route::group(['prefix' => '{locale}',
     'middleware' => ['setlocale', 'language', 'default.language']
 ], function(){
 
-    Route::get('', [HomeController::class, 'index'])->middleware('can:LMS Ver Dashboard')->name('home');
+    Route::get('/admin', [HomeController::class, 'index'])->middleware('can:LMS Ver Dashboard')->name('cpanel');
 
     Route::resource('roles', RoleController::class)->names('roles');
 

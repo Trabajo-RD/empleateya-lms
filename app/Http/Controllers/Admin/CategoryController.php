@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 
+// TODO: Implement model translations with astrotomic/laravel-translatable
+
 class CategoryController extends Controller
 {
     /**
@@ -46,7 +48,7 @@ class CategoryController extends Controller
 
         $category = Category::create( $data );
 
-        return redirect()->route('admin.categories.edit', compact('locale', 'category') )->with('info', 'Categoría creada exitosamente.');
+        return redirect()->route('admin.categories.edit', compact('locale', 'category') )->with('info', __('Category created successfully'));
     }
 
     /**
@@ -90,7 +92,7 @@ class CategoryController extends Controller
             'name' => $data['name']
         ]);
 
-        return redirect()->route('admin.categories.edit', compact('locale', 'category') )->with('info', 'La categoría ha sido actualizada.');
+        return redirect()->route('admin.categories.edit', compact('locale', 'category') )->with('info', __('The category has been updated'));
     }
 
     /**

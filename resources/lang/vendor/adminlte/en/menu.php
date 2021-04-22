@@ -16,4 +16,6 @@ return [
     'important'                     => 'Important',
     'warning'                       => 'Warning',
     'information'                   => 'Information',
+
+    'categories_trans_key'          => 'Categorías',
 ];

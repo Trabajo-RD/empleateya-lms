@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Category;
+use Illuminate\Support\Str;
 
 class CategorySeeder extends Seeder
 {
@@ -14,16 +15,39 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        Category::create([
-            'name' => 'Creatividad'
-        ]);
+        $names = [
+            'Creatividad',
+            'Negocios',
+            'Tecnología',
+        ];
 
-        Category::create([
-            'name' => 'Negocios'
-        ]);
+        foreach($names as $name){
 
-        Category::create([
-            'name' => 'Tecnología'
-        ]);
+            $categories = [
+                'name' => $name,
+                'slug' => Str::slug($name),
+            ];
+
+            Category::create([
+                'name' => $categories['name'],
+                'slug' => $categories['slug'],
+            ]);
+
+        }
+
+
+
+        // Category::create([
+        //     'name' => 'Creatividad',
+
+        // ]);
+
+        // Category::create([
+        //     'name' => 'Negocios'
+        // ]);
+
+        // Category::create([
+        //     'name' => 'Tecnología'
+        // ]);
     }
 }

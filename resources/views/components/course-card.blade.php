@@ -16,7 +16,7 @@
         <!-- resource type -->
         <p class="text-sm text-gray-500 mb-2">{{ $course->type->name }}</p>
         <!-- course title -->
-        <a href="{{ route( 'courses.show', $course ) }}">
+        <a href="{{ route( 'courses.show', [app()->getLocale(), $course] ) }}">
             <h2 class="card-title">{{ Str::limit( $course->title, 55 ) }}</h2>
         </a>
         <p class="text-gray-500 text-sm mb-2 mt-auto">{{ $course->editor->name}}</p>

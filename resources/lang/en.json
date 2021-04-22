@@ -40,7 +40,7 @@
     "Sign In": "Sign In",
     "Glossary of terms": "Glossary of terms",
     "About us": "About us",
-    "Contact": "Contact",
+    "Contact us": "Contact us",
     "Free courses": "Free courses",
     "Manage Courses": "Manage Courses",
     "Settings": "Settings",
@@ -62,5 +62,14 @@
     "Welcome to the era of digital transformation": "Welcome to the New Digital Era",
     "If you are looking to be more competitive, get a job or start your own business, these courses are for you": "If you are looking to be more competitive, get a job or start your own business, these courses are for you",
     "Clear filters": "Clear filters",
-    "Filter by": "Filter by"
+    "Filter by": "Filter by",
+    "Category created successfully": "Category created successfully",
+    "The category has been updated": "The category has been updated",
+    "You cannot publish a course that is not properly completed": "You cannot publish a course that is not properly completed",
+    "The course has been successfully approved": "The course has been successfully approved",
+    "The course has been rejected": "The course has been rejected",
+    "About Capacitate": "About Capacitate",
+    "Navigations": "Navigations",
+    "Pages": "Pages",
+    "Follow us": "Follow us"
 }

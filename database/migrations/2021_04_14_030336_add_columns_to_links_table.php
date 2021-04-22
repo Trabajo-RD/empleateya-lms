@@ -28,7 +28,7 @@ class AddColumnsToLinksTable extends Migration
     public function down()
     {
         Schema::table('links', function (Blueprint $table) {
-            $table->dropColumn('link_category_id');
+            $table->dropForeign('links_link_category_id_foreign');
         });
     }
 }

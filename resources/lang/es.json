@@ -42,7 +42,7 @@
     "Sign In": "Iniciar sesión",
     "Glossary of terms": "Glosario de términos",
     "About us": "Sobre nosotros",
-    "Contact": "Contacto",
+    "Contact us": "Contáctanos",
     "Free courses": "Cursos gratuitos",
     "Manage Courses": "Administrar Cursos",
     "Settings": "Ajustes",
@@ -64,5 +64,14 @@
     "Welcome to the era of digital transformation": "Bienvenido a la era de la transformación digital",
     "If you are looking to be more competitive, get a job or start your own business, these courses are for you": "Si estas buscando ser más competitivo, obtener un trabajo o emprender tu propio negocio, estos cursos son para tí",
     "Clear filters": "Borrar filtros",
-    "Filter by": "Filtrar por"
+    "Filter by": "Filtrar por",
+    "Category created successfully": "Categoría creada exitosamente",
+    "The category has been updated": "La categoría ha sido actualizada",
+    "You cannot publish a course that is not properly completed": "No se puede publicar un curso que no esté debidamente completado",
+    "The course has been successfully approved": "El curso ha sido aprobado correctamente",
+    "The course has been rejected": "El curso ha sido rechazado",
+    "About Capacitate": "Acerca de Capacitate",
+    "Navigations": "Navegación",
+    "Pages": "Páginas",
+    "Follow us": "Síguenos en"
 }

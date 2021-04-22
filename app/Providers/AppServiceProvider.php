@@ -8,8 +8,10 @@ use Illuminate\Support\ServiceProvider;
 use App\Models\Lesson;
 use App\Models\Section;
 use App\Models\MenuItem;
+use App\Models\Category;
 use App\Models\Type;
 use App\Models\User;
+
 use App\Observers\LessonObserver;
 use App\Observers\SectionObserver;
 
@@ -57,17 +59,25 @@ class AppServiceProvider extends ServiceProvider
         $menuItems = MenuItem::where('status', 2)->get();
         view()->share('menuItems', $menuItems);
 
+        $categories = Category::all();
+        view()->share('categories', $categories);
+
+
         // Create dynamic url/route to adminLTE menu
         $events->listen(BuildingMenu::class, function(BuildingMenu $event){
+
+
 
             // Dashboard Home
             $event->menu->add([
                 'key'   => 'dashboard',
                 'text'  => 'Dashboard',
-                'url' => route( 'admin.home' ),
+                'url' => route( 'admin.cpanel' ),
                 'icon'  => 'fas fa-fw fa-tachometer-alt',
                 'can'   => 'LMS Ver Dashboard',
             ]);
+
+
 
             // Manage menu items
             // $event->menu->addAfter('dashboard', [
@@ -112,13 +122,16 @@ class AppServiceProvider extends ServiceProvider
                 'icon'          => 'fas fa-laptop mr-1',
             ]);
 
+
+
             // Manage Categories
             $event->menu->addAfter('course_revision', [
                 'key'           => 'categories',
-                'text'          => 'Categorías',
+                'text'          => 'categories_trans_key',
                 'url'           => route('admin.categories.index' ), // url/route
                 'icon'          => 'fas fa-tags mr-1',
             ]);
+
 
             // Manage Types
             $event->menu->addAfter('categories', [
@@ -160,13 +173,15 @@ class AppServiceProvider extends ServiceProvider
                 'icon'          => 'fas fa-dollar-sign mr-1',
             ]);
 
-            // Manage Prices
+            // Manage Partners
             $event->menu->addAfter('prices', [
                 'key'           => 'partners',
                 'text'          => 'Sociedades y Convenios',
                 'url'           => route('admin.partners.index'), // url/route
                 'icon'          => 'far fa-handshake mr-1',
             ]);
+
+
 
 
 

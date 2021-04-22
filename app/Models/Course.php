@@ -11,7 +11,7 @@ class Course extends Model
 
     // Guarded: do not allow massive income
     //protected $guarded = [];
-    protected $guarded = ['id', 'status'];
+    protected $guarded = ['id'];
     protected $withCount = ['students', 'reviews']; // add attr students_count to Course Model
 
     const DRAFT = 1;

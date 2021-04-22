@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
+use App\Models\Modality;
+use App\Models\Category;
 use Spatie\Permission\Models\Role;
 class CourseController extends Controller
 {
@@ -50,6 +52,10 @@ class CourseController extends Controller
         // redirect user to enrolled course;
         return redirect()->route('courses.status', $course);
 
+    }
+
+    public function category( $locale, Category $category){
+        return view('courses.category', compact('category'));
     }
 
     /**

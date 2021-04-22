@@ -20,37 +20,35 @@ use App\Http\Livewire\CourseStatus;
 */
 
 /**
-     * Route to display the home page
-     */
-    Route::get('/', HomeController::class)->name('home');
+ * Route to display the home page
+ */
+Route::get('/', HomeController::class)->name('home');
 
-// Route::get('/', function(){
-//     return redirect(app()->getLocale());
-// });
+Route::get('/', function () {
+    return redirect()->route('home-locale', app()->getLocale());
+})->name('home');
 
 // Redirect: if prefix instructor. exists and user access with domain.com/instructor
 // Route::redirect('', 'home');
 
-Route::get('setlocale/{locale}',function($lang){
-    Session::put('locale',$lang);
+Route::get('setlocale/{locale}', function ($lang) {
+    Session::put('locale', $lang);
     return redirect()->back();
 })->name('set.locale');
 
 
-Route::group(['prefix' => '{locale}',
+Route::group([
+    'prefix' => '{locale}',
     'where' => ['locale', '[a-zA-Z]{2}'],
     'middleware' => ['setlocale', 'language']
-], function(){
-
-
-
+], function () {
 
     // Auth::routes();
 
-   /**
+    /**
      * Route to display the home page
      */
-    // Route::get('/home', HomeController::class)->name('home'); // TODO: repair home route
+    Route::get('/', HomeController::class)->name('home-locale'); // TODO: repair home route
 
     Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
         return view('dashboard');
@@ -60,6 +58,11 @@ Route::group(['prefix' => '{locale}',
      * Route to display the courses home page
      */
     Route::get('cursos', [CourseController::class, 'index'])->name('courses.index');
+
+    /**
+     * Route to display the courses categories
+     */
+    Route::get('courses/{category}', [CourseController::class, 'category'])->name('courses.category');
 
     /**
      * Route to display single course information
@@ -78,4 +81,17 @@ Route::group(['prefix' => '{locale}',
 
     // Auth::routes(['verify' => true]);
 
+    /**
+     * Route to show course by modality
+     */
+    Route::get('courses/modality/{id}', function($id){
+        return "Aqui va la modalidad";
+    })->name('courses.modality');
+
 });
+
+Route::redirect('/home', '/');
+
+// Route::group(['middleware' => ['setlocale']], function(){
+
+// })

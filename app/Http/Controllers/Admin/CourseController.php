@@ -64,7 +64,7 @@ class CourseController extends Controller
         // }
 
         if( !$course->sections || !$course->goals || !$course->requirements || !$course->image ){
-            return back()->with('info', 'No se puede publicar un curso que no esté debidamente completado');
+            return back()->with('info', __('You cannot publish a course that is not properly completed'));
         }
 
         $course->status = 3;
@@ -81,7 +81,7 @@ class CourseController extends Controller
         // Mail::to($course->editor->email)->queue($mail);
 
 
-        return redirect()->route('admin.courses.index')->with('success', 'El curso ha sido aprobado correctamente');
+        return redirect()->route('admin.courses.index')->with('success', __('The course has been successfully approved'));
 
     }
 
@@ -116,6 +116,6 @@ class CourseController extends Controller
         // Put the email in queue in jobs database table
         // Mail::to( $course->editor->email )->queue( $mail );
 
-        return redirect()->route('admin.courses.index')->with('success', 'El curso ha sido rechazado');
+        return redirect()->route('admin.courses.index')->with('success', 'The course has been rejected  El curso ha sido rechazado');
     }
 }

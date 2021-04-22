@@ -9,8 +9,13 @@
         [
             'name' => 'Courses',
             'route' => route('courses.index', app()->getLocale()), // routes/web.php dashboard route
-            'active' => request()->routeIs('courses.*') // bool: verify is active route dashboard
+            'active' => request()->routeIs('courses.*'), // bool: verify is active route dashboard
         ],
+        // [
+        //     'name' => 'Categories',
+        //     'route' => route('courses.category', [app()->getLocale(), $category]), // routes/web.php dashboard route
+        //     'active' => request()->routeIs('courses.*'), // bool: verify is active route dashboard
+        // ],
     ];
 
 @endphp
@@ -28,12 +33,50 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex items-center">
                     @foreach ($nav_links as $nav_link)
                         <x-jet-nav-link href="{{ $nav_link['route'] }}" :active="$nav_link['active']">
+
                             {{ __($nav_link['name']) }}
+
                         </x-jet-nav-link>
                     @endforeach
+
+                    <x-jet-dropdown width="60 text-gray-500">
+                        <x-slot name="trigger">
+                            <a class="nav-link text-gray-500" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-laptop mr-2"></i>{{ __('Courses') }}
+                            </a>
+                        </x-slot>
+                        <x-slot name="content">
+                            <div class="w-40">
+
+                                <x-jet-dropdown-link href="{{ route('courses.modality', [app()->getLocale(), 4] ) }}">
+                                    {{ __('Face_to_Face') }}
+                                </x-jet-dropdown-link>
+
+                            </div>
+                        </x-slot>
+                    </x-jet-dropdown>
+
+                    <x-jet-dropdown width="60 text-gray-500">
+                        <x-slot name="trigger">
+                            <a class="nav-link text-gray-500" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-tags mr-2"></i>{{ __('Categories') }}
+                            </a>
+                        </x-slot>
+                        <x-slot name="content">
+                            <div class="w-40">
+                                @if(count($categories))
+                                    @foreach($categories as $category)
+                                    <x-jet-dropdown-link href="{{ route('courses.category', [app()->getLocale(), $category] ) }}">
+                                        {{ __($category->name) }}
+                                    </x-jet-dropdown-link>
+                                    @endforeach
+                                @endif
+                            </div>
+                        </x-slot>
+                    </x-jet-dropdown>
 
                     {{-- TODO: Link Dashboard --}}
                     {{-- <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
@@ -62,6 +105,27 @@
                         </li>
                     @endforeach
                 </ul> --}}
+
+                @if(count(config('app.languages')) > 1)
+                    <x-jet-dropdown width="60 text-gray-500">
+                                <x-slot name="trigger">
+                                    <a class="nav-link text-gray-500" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-globe mr-2"></i>{{ strtoupper(app()->getLocale()) }}
+                                    </a>
+                                </x-slot>
+                                <x-slot name="content">
+                                    <div class="w-40">
+                                        @foreach(config('app.languages') as $langLocale => $langName)
+                                        <x-jet-dropdown-link href="{{ route('set.locale', $langLocale) }}">
+                                            {{ $langName }}
+                                        </x-jet-dropdown-link>
+                                            {{-- <a class="dropdown-item px-4 py-24" href="{{ route('set.locale', $langLocale) }}">{{ $langName }}</a><br> --}}
+                                            {{-- <a class="dropdown-item" href="{{ url()->current() }}?change_language={{ $langLocale }}">{{ strtoupper($langLocale) }} ({{ $langName }})</a> --}}
+                                        @endforeach
+                                    </div>
+                                </x-slot>
+                    </x-jet-dropdown>
+                @endif
 
                 @auth
                     <!-- Teams Dropdown -->
@@ -148,7 +212,7 @@
                                 </x-jet-dropdown-link>
 
                                 @can ('LMS Ver Dashboard')
-                                    <x-jet-dropdown-link href="{{ route('admin.home', app()->getLocale() ) }}">
+                                    <x-jet-dropdown-link href="{{ route('admin.cpanel', app()->getLocale() ) }}">
                                         {{ __('Administrator') }}
                                     </x-jet-dropdown-link>
                                 @endcan
@@ -162,7 +226,7 @@
 
                                 <!-- TODO: Create permission LMS Crear contenido -->
                                 @can ('LMS Crear contenido')
-                                    <x-jet-dropdown-link href="{{ route('dashboard', app()->getLocale()) }}">
+                                    <x-jet-dropdown-link href="{{ route('creator.dashboard', app()->getLocale()) }}">
                                         {{ __('Settings') }}
                                     </x-jet-dropdown-link>
                                 @endcan
@@ -247,7 +311,7 @@
                     </x-jet-responsive-nav-link>
 
                     @can('LMS Ver Dashboard')
-                        <x-jet-responsive-nav-link href="{{ route('admin.home', app()->getLocale() ) }}" :active="request()->routeIs('admin.home', app()->getLocale() )">
+                        <x-jet-responsive-nav-link href="{{ route('admin.cpanel', app()->getLocale() ) }}" :active="request()->routeIs('admin.cpanel', app()->getLocale() )">
                             {{ __('Administrador') }}
                         </x-jet-responsive-nav-link>
                     @endcan

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Capacitate'),
 
     /*
     |--------------------------------------------------------------------------
@@ -237,6 +237,11 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+    ],
+
+    'languages' => [
+        'en' => 'English',
+        'es' => 'Español',
     ],
 
 ];

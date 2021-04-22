@@ -19,10 +19,10 @@
         {{-- {{ $social_links }} --}}
 
         @foreach ($social_links as $social_link)
-            <a href="{{ $social_link->url }}" target="{{ $social_link->target }}" class="block px-1 py-1 text-white">
+            <a href="{{ $social_link->url }}" target="{{ $social_link->target }}" class="block px-1 py-1 text-gray-400 hover:text-gray-100">
                 @if(isset($social_link->metadata['icon']))
 
-                    <i class="flex items-center justify-center py-1 px-1 mx-1 fill-current text-white text-xl {{ $social_link->metadata['icon'] }}"></i>
+                    <i class="flex items-center justify-center py-1 px-1 mx-1 fill-current text-gray-400 hover:text-gray-100 text-xl {{ $social_link->metadata['icon'] }}"></i>
 
                 @else
                     {{ $social_link->name }}
