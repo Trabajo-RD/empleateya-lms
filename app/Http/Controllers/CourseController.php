@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\Modality;
 use App\Models\Category;
+use App\Models\Topic;
 use Spatie\Permission\Models\Role;
 class CourseController extends Controller
 {
@@ -55,7 +56,11 @@ class CourseController extends Controller
     }
 
     public function category( $locale, Category $category){
-        return view('courses.category', compact('category'));
+
+        //return $category;
+        $topics = Topic::where('category_id', $category->id)->get();
+
+        return view('courses.category', compact('category', 'topics'));
     }
 
     /**

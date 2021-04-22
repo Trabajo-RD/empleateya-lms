@@ -14,9 +14,30 @@
         </div>
     </section>
 
+
+
     <main>
         @livewire('courses-index')
+
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <h2 class="text-center font-display font-semibold text-gray-600 text-2xl sm:text-3xl md:text-4xl mb-6" >Subcategorías en {{ $category->name }}</h2>
+            <!-- This is the tags container -->
+            <div class='mt-8 flex flex-wrap justify-center -m-1'>
+                @foreach ($topics as $topic)
+                    <a class="cursor-pointer my-2 text-normal text-gray-700">
+                        <span class="m-1 bg-gray-200 hover:bg-gray-300 rounded-full py-4 px-6 font-bold text-sm leading-loose cursor-pointer" >
+                            {{ $topic->name }}
+                        </span>
+                    </a>
+                @endforeach
+            </div>
+        </div>
     </main>
+
+
+
+
+
 
     <!-- Page Footer -->
     @if(isset($footer))
