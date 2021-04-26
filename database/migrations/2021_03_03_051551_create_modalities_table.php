@@ -19,6 +19,7 @@ class CreateModalitiesTable extends Migration
             $table->id();
             $table->string('name');
             // $table->enum('name', [Modality::E_LEARNING, Modality::B_LEARNING, Modality::M_LEARNING, Modality::PRESENCIAL]);
+            $table->text('description');
             $table->timestamps();
         });
     }

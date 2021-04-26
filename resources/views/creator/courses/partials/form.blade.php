@@ -57,6 +57,11 @@
         {!! Form::label('category_id', 'Categoría:') !!}
         {!! Form::select('category_id', $categories, null, ['class' => 'form-input block w-full mt-1']) !!}
     </div>
+    <!-- course topic select -->
+    {{-- <div>
+        {!! Form::label('topic_id', 'Tema:') !!}
+        {!! Form::select('topic_id', $topics, null, ['class' => 'form-input block w-full mt-1']) !!}
+    </div> --}}
     <!-- course types select -->
     <div>
         {!! Form::label('type_id', 'Tipo:') !!}

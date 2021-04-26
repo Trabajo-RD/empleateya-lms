@@ -15,15 +15,17 @@ class AddColumnsToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            // $table->renameColumn('name', 'name');
-            $table->string('document_id')->after('id')->unique();
-            $table->enum('document_type', ['CED', 'PAS'])->after('document_id');
-            $table->string('lastname')->after('name')->nullable();
-            $table->enum('gender', ['M', 'F', 'O', 'NS'])->after('lastname');
-            $table->json('options')->nullable();
-            $table->string('email')->nullable()->change(); // Set email nullable to use login with Document ID
-        });
+        if(Schema::hasTable('users')){
+            Schema::table('users', function (Blueprint $table) {
+                // $table->renameColumn('name', 'name');
+                $table->string('document_id')->after('id')->unique();
+                $table->enum('document_type', ['CED', 'PAS'])->after('document_id');
+                $table->string('lastname')->nullable()->after('name');
+                $table->enum('gender', ['M', 'F', 'O', 'NS'])->nullable()->after('lastname');
+                $table->text('options')->nullable();
+                $table->string('email')->nullable()->change(); // Set email nullable to use login with Document ID
+            });
+        }
     }
 
     /**

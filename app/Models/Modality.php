@@ -27,4 +27,8 @@ class Modality extends Model
     public function course(){
         return $this->hasMany('App\Models\Course');
     }
+
+    public function categories(){
+        return $this->hasMany('App\Models\Category');
+    }
 }

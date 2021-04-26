@@ -33,7 +33,7 @@ Route::group(['prefix' => '{locale}',
     /**
      * Route to manage creator courses using a Livewire component
      */
-    Route::resource('courses', CourseController::class)->names('courses');
+    Route::resource('creator/courses', CourseController::class)->names('courses');
 
     /**
      * Route to manage the LMS Frontend content
@@ -61,24 +61,24 @@ Route::group(['prefix' => '{locale}',
     // });
 
 
-    Route::get('courses/{course}/curriculum', CoursesCurriculum::class)->middleware('can:LMS Actualizar cursos')->name('courses.curriculum');
+    Route::get('creator/courses/{course}/curriculum', CoursesCurriculum::class)->middleware('can:LMS Actualizar cursos')->name('courses.curriculum');
 
-    Route::get('courses/{course}/goals', [CourseController::class, 'goals'])->name('courses.goals');
+    Route::get('creator/courses/{course}/goals', [CourseController::class, 'goals'])->name('courses.goals');
 
     /**
      * Route for manage the course students
      */
-    Route::get('courses/{course}/students', CoursesStudents::class)->middleware('can:LMS Actualizar cursos')->name('courses.students');
+    Route::get('creator/courses/{course}/students', CoursesStudents::class)->middleware('can:LMS Actualizar cursos')->name('courses.students');
 
     /**
      * Route to request change course status
     */
-    Route::post('courses/{course}/status', [CourseController::class, 'status'])->name('courses.status');
+    Route::post('creator/courses/{course}/status', [CourseController::class, 'status'])->name('courses.status');
 
     /**
      * Route to display the observations in course info view
      */
-    Route::get('courses/{course}/observation', [CourseController::class, 'observation'])->name('courses.observation');
+    Route::get('creator/courses/{course}/observation', [CourseController::class, 'observation'])->name('courses.observation');
 
     // require __DIR__.'/auth.php';
 

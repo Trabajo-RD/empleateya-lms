@@ -228,7 +228,7 @@ class CourseController extends Controller
     /**
      * Return course observation view
      */
-    public function observation( Course $course ){
+    public function observation( $locale, Course $course ){
         return view('instructor.courses.observation', compact('course') );
     }
 }

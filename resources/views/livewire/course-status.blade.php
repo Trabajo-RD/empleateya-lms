@@ -1,5 +1,10 @@
-<div class="py-12">
-    <div class="container grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+
+<div class="pb-12">
+
+    <x-breadcrumbs />
+
+    <div class="container grid grid-cols-1 lg:grid-cols-3 gap-8 py-12">
 
         <!-- Course content -->
         <div class="col-span-1 lg:col-span-2">
@@ -13,7 +18,7 @@
 
             {{-- TODO: Display category name --}}
             <div class="mr-2 text-blue-500 text-sm p-1 rounded  leading-none flex items-center uppercase">
-                {{ $course->category->name }}
+                {{ __($course->category->name) }}
             </div>
 
             <!-- lesson title -->
@@ -29,14 +34,14 @@
 
             <div class="flex mb-8">
                 <button type="button" class="mr-2 bg-gray-300 text-gray text-sm py-2 px-4 leading-none flex items-center focus:outline-none">
-                    {{ $course->level->name }}
+                    {{ __($course->level->name) }}
                 </button>
             </div>
 
             <a href="{{ $current->url }}" title="{{ $current->name }}" target="_blank">
                 <div class="mb-8 flex justify-center">
                     <button type="button" class="btn btn-cta btn-primary hover:bg-blue-700 text-md py-2 px-4 leading-none flex items-center focus:outline-none">
-                        Ver en {{ $current->platform->name }}
+                        {{ __('Watch on') }} {{ $current->platform->name }}
                     </button>
                 </div>
             </a>
@@ -50,13 +55,13 @@
                     @else
                         <i class="fas fa-toggle-off text-2xl text-gray-400 mr-2"></i>
                     @endif
-                        <p class="text-base text-gray-700">Marcar esta lección como finalizada.</p>
+                        <p class="text-base text-gray-700">{{ __('Mark this lesson as finished.') }}</p>
                 </div>
                 <!-- resources -->
                 @if( $current->resource )
                     <div class="flex items-center cursor-pointer bg-gray-200 text-gray-500 hover:bg-gray-300 hover:text-gray-600 py-2 px-4 rounded shadow " wire:click="download">
                         <i class="fas fa-download text-lg"></i>
-                        <p class="ml-2">Descargar recurso</p>
+                        <p class="ml-2">{{ __('Download resource') }}</p>
                     </div>
                 @endif
             </div>

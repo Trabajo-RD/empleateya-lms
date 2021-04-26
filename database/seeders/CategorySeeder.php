@@ -226,7 +226,7 @@ class CategorySeeder extends Seeder
                         ],
                     ],
                     [
-                        'name' => 'Sistema Operativo',
+                        'name' => 'Sistemas Operativos',
                         'icon' => 'fas fa-laptop',
                         'tags' => [
                             [

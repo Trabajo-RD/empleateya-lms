@@ -12,12 +12,12 @@
             </figure>
             <div>
                 <button type="button" class="bg-opacity-25 mr-2 bg-gray-300 text-gray-300 text-sm py-2 px-4 leading-none flex items-center mb-4 focus:outline-none">
-                    {{ $course->type->name }}
+                    {{ __($course->type->name) }}
                 </button>
                 <h1 class="text-white font-extrabold text-2xl sm:text-3xl md:text-4xl">{{ $course->title }}</h1>
                 <h2 class="text-white mt-3 sm:mt-5 sm:text-lg md:mt-5 md:text-xl lg:mx-0 mb-4">{{ $course->subtitle }}</h2>
-                <p class="text-white sm:text-md md:text-lg lg:mx-0 mb-2"><span class="text-gray-400"><i class="fas fa-tags text-sm mr-2"></i>Categoría:&nbsp;</span>{{ $course->category->name }}</p>
-                <p class="text-white sm:text-md md:text-lg lg:mx-0 mb-2"><span class="text-gray-400"><i class="fas fa-layer-group text-sm mr-2"></i>Nivel:&nbsp;</span>{{ $course->level->name }}</p>
+                <p class="text-white sm:text-md md:text-lg lg:mx-0 mb-2"><span class="text-gray-400"><i class="fas fa-tags text-sm mr-2"></i>{{ __('Category') }}:&nbsp;</span>{{ __($course->category->name) }}</p>
+                <p class="text-white sm:text-md md:text-lg lg:mx-0 mb-2"><span class="text-gray-400"><i class="fas fa-layer-group text-sm mr-2"></i>{{ __('Level') }}:&nbsp;</span>{{ __($course->level->name) }}</p>
 
                 <div class="flex mb-4">
                     <!-- rating -->
@@ -34,7 +34,7 @@
                     </ul>
                     <!-- users enrolled -->
                     <p class="text-white sm:text-md md:text-lg lg:mx-0">
-                        <i class="fas fa-users text-sm mr-2"></i>{{ $course->students_count }} Usuarios
+                        <i class="fas fa-users text-sm mr-2"></i>{{ $course->students_count }} {{ $course->students_count > 1 ? __('Users') : __('User') }}
                     </p>
                 </div>
             </div>
@@ -43,23 +43,23 @@
     </section>
 
 
-    <div class="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-24">
+    <div class="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-12">
 
         <div class="order-2 md:col-span-1 lg:col-span-2 md:order-1 lg:order-1">
 
             <!-- section description -->
             <section class="mb-12">
-                <h2 class="font-bold text-2xl mb-12 text-gray-600">Descripción</h2>
-                <div class="text-gray-600 text-base">
+                <h2 class="font-bold text-2xl text-gray-600">{{ __('Description') }}</h2>
+                <div class="text-gray-600 text-base mt-4">
                     {!! $course->summary !!}
                 </div>
             </section>
 
             <!-- section requirements  -->
             <section class="mb-12">
-                <h2 class="font-bold text-2xl mb-12 text-gray-600">Requisitos</h2>
+                <h2 class="font-bold text-2xl text-gray-600">{{ __('Requirements') }}</h2>
 
-                <ul class="list-disc list-inside">
+                <ul class="list-disc list-inside mt-4">
 
                     @foreach ($course->requirements as $requirement )
 
@@ -73,28 +73,28 @@
             </section>
 
             <!-- section goals -->
-            <section class="card mb-12">
-                <div class="card-body">
-                    <h2 class="font-bold text-2xl mb-2 text-gray-600">Lo que aprenderás</h2>
-                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
+            <section class="mb-12">
 
-                        @foreach ( $course->goals as $goal )
+                <h2 class="font-bold text-2xl mb-2 text-gray-600">{{ __('What you will learn') }}</h2>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
 
-                            <li class="text-gray-600 text-base"><i class="fas fa-check text-sm text-gray-500 mr-2"></i>{{ $goal->name }}</li>
+                    @foreach ( $course->goals as $goal )
 
-                        @endforeach
+                        <li class="text-gray-600 text-base"><i class="fas fa-check text-sm text-gray-500 mr-2"></i>{{ $goal->name }}</li>
 
-                    </ul>
-                </div>
+                    @endforeach
+
+                </ul>
+
             </section>
 
             <!-- section subjects -->
             <section class="mb-12">
-                <h2 class="font-bold text-2xl mb-12 text-gray-600">Contenido del curso</h2>
+                <h2 class="font-bold text-2xl text-gray-600">{{ __('Course content') }}</h2>
 
                 @foreach ( $course->sections as $section )
 
-                    <article class="mb-2 shadow" @if( $loop->first) x-data="{ open: true}"  @else x-data="{ open: false}" @endif>
+                    <article class="mt-4 shadow" @if( $loop->first) x-data="{ open: true}"  @else x-data="{ open: false}" @endif>
                         <header class="border border-gray-200 px-4 pt-2 cursor-pointer bg-gray-100 bg-opacity-25 transition duration-700 ease-in-out" x-on:click=" open = !open ">
                             <h3 class="font-bold text-xl mb-2 text-gray-600">
                                 <i class="fas fa-chevron-down mr-2" x-show=" open "></i>
@@ -162,7 +162,7 @@
                         @endif --}}
 
                         <!-- CTA button : user enrolled -->
-                        <a href="{{ route('courses.status', $course ) }}" class="btn-cta btn-success btn-block mt-4 hover:shadow">Continuar con el curso</a>
+                        <a href="{{ route('courses.status', [app()->getLocale(), $course] ) }}" class="btn-cta btn-success btn-block mt-4 hover:shadow">{{ __('Continue with the course') }}</a>
 
                     @else
 
@@ -183,14 +183,14 @@
                         @endif --}}
 
                         @if( $course->price->value == 0 )
-                            <p class="text-2xl font-bold text-gray-500 mt-3 mb-2">Gratis</p>
-                            <form action="{{ route('courses.enrolled', $course ) }}" method="post">
+                            <p class="text-2xl font-bold text-gray-500 mt-3 mb-2">{{ __('Free') }}</p>
+                            <form action="{{ route('courses.enrolled', [app()->getLocale(), $course] ) }}" method="post">
                                 @csrf
-                                <button type="submit" class="btn-cta btn-accent btn-block mt-4 hover:shadow">Iniciar este curso</button>
+                                <button type="submit" class="btn-cta btn-accent btn-block mt-4 hover:shadow">{{ __('Start this course') }}</button>
                             </form>
                         @else
                             <p class="text-2xl font-bold text-gray-500 mt-3 mb-2">US$ {{ $course->price->value }}</p>
-                            <a href="{{ route('payment.checkout', $course ) }}" class="btn-cta btn-accent btn-block hover:shadow">Comprar este curso</a>
+                            <a href="{{ route('payment.checkout', $course ) }}" class="btn-cta btn-accent btn-block hover:shadow">{{ __('Buy this course') }}</a>
                         @endif
 
 
@@ -200,48 +200,50 @@
                 </div>
             </section>
 
-            <aside class="hidden md:block">
+            <aside class="hidden md:block divide-y divide-gray-300">
 
-                <h2 class="font-bold text-2xl text-gray-600 mb-12">Cursos relacionados</h2>
+                @if(count($related_courses))
+                    <h2 class="font-bold text-2xl text-gray-600 mb-12">{{ __('Related courses') }}</h2>
 
-                @foreach ( $related_courses as $related_course )
+                    @foreach ( $related_courses as $related_course )
 
-                    <article class="py-3 mb-12 grid md:grid-cols-1 lg:grid-cols-3 items-center">
-                        <!-- related course image -->
-                        @isset( $related_course->image )
-                            <img src="{{ Storage::url( $related_course->image->url ) }}" alt="{{ $related_course->name }}" class="h-28 md:w-full lg:w-32 object-cover md:col-span-1 lg:col-span-1" />
-                        @else
-                            <img id="picture" class="h-28 md:w-full lg:w-32 object-cover md:col-span-1 lg:col-span-1" src="{{ asset('images/courses/default.jpg') }}" alt="{{ $related_course->name }}" >
-                        @endisset
+                        <article class="py-3 grid md:grid-cols-1 lg:grid-cols-3 items-center">
+                            <!-- related course image -->
+                            @isset( $related_course->image )
+                                <img src="{{ Storage::url( $related_course->image->url ) }}" alt="{{ $related_course->name }}" class="h-28 md:w-full lg:w-32 object-cover md:col-span-1 lg:col-span-1" />
+                            @else
+                                <img id="picture" class="h-28 md:w-full lg:w-32 object-cover md:col-span-1 lg:col-span-1" src="{{ asset('images/courses/default.jpg') }}" alt="{{ $related_course->name }}" >
+                            @endisset
 
-                        <div class="ml-3 md:col-span-1 lg:col-span-2">
-                            <h3>
-                                <a class="font-bold text-gray-600 mb-3" href="{{ route('courses.show', $related_course ) }}">{{ Str::limit( $related_course->title, 40 ) }}</a>
-                            </h3>
-                            <div class="flex items-center mb-4">
-                                <img class="h-8 w-8 object-cover rounded-full shadow-lg" src="{{ $related_course->editor->profile_photo_url }}" alt="" />
-                                <p class="font-bold text-sm text-gray-500 ml-2"> {{ $related_course->editor->name . ' ' . $related_course->editor->lastname }} </p>
+                            <div class="ml-3 md:col-span-1 lg:col-span-2">
+                                <h3>
+                                    <a class="font-bold text-gray-600 mb-3" href="{{ route('courses.show', [app()->getLocale(), $related_course] ) }}">{{ Str::limit( $related_course->title, 40 ) }}</a>
+                                </h3>
+                                <div class="flex items-center mb-4">
+                                    <img class="h-8 w-8 object-cover rounded-full shadow-lg" src="{{ $related_course->editor->profile_photo_url }}" alt="" />
+                                    <p class="font-bold text-sm text-gray-500 ml-2"> {{ $related_course->editor->name . ' ' . $related_course->editor->lastname }} </p>
+                                </div>
+                                <div class="flex items-center">
+                                    <!-- rating -->
+                                    <p class="text-yellow-400 font-extrabold text-md mr-4">
+                                        {{ $related_course->rating }}<i class="fas fa-star text-yellow-300 ml-2"></i>
+                                    </p>
+                                    <!-- users enrolled -->
+                                    <p class="text-gray-600 text-sm">
+                                        <i class="fas fa-users text-sm mr-2"></i>{{ $related_course->students_count }}
+                                    </p>
+                                    <!-- course price -->
+                                    <p class="text-md text-gray-700 font-bold ml-auto">
+                                        {{ $related_course->price->value > 0 ? $related_course->price->value : __('Free') }}
+                                    </p>
+                                </div>
                             </div>
-                            <div class="flex items-center">
-                                <!-- rating -->
-                                <p class="text-yellow-400 font-extrabold text-md mr-4">
-                                    {{ $related_course->rating }}<i class="fas fa-star text-yellow-300 ml-2"></i>
-                                </p>
-                                <!-- users enrolled -->
-                                <p class="text-gray-600 text-sm">
-                                    <i class="fas fa-users text-sm mr-2"></i>{{ $related_course->students_count }}
-                                </p>
-                                <!-- course price -->
-                                <p class="text-md text-gray-700 font-bold ml-auto">
-                                    {{ $related_course->price->value > 0 ? $related_course->price->value : 'Gratis' }}
-                                </p>
-                            </div>
-                        </div>
-                    </article>
-                    <hr>
-                @endforeach
+                        </article>
 
-                <h2 class="font-bold text-2xl text-gray-600 my-12">Encuesta de Satisfacción</h2>
+                    @endforeach
+                @endif
+                {{-- TODO: Encuesta de satisfaccion --}}
+                {{-- <h2 class="font-bold text-2xl text-gray-600 my-12">Encuesta de Satisfacción</h2>
                 <article>
                     <div class="card">
                         <div class="card-header">
@@ -251,7 +253,7 @@
 
                         </div>
                     </div>
-                </article>
+                </article> --}}
 
             </aside>
 

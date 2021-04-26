@@ -57,12 +57,17 @@ Route::group([
     /**
      * Route to display the courses home page
      */
-    Route::get('cursos', [CourseController::class, 'index'])->name('courses.index');
+    Route::get('courses', [CourseController::class, 'index'])->name('courses.index');
 
     /**
      * Route to display the courses categories
      */
-    Route::get('courses/{category}', [CourseController::class, 'category'])->name('courses.category');
+    Route::get('courses/category/{category}', [CourseController::class, 'category'])->name('courses.category');
+
+    /**
+     * Route to display the courses categories
+     */
+    Route::get('courses/modality/{modality}', [CourseController::class, 'modality'])->name('courses.modality');
 
     /**
      * Route to display single course information
@@ -84,9 +89,9 @@ Route::group([
     /**
      * Route to show course by modality
      */
-    Route::get('courses/modality/{id}', function($id){
-        return "Aqui va la modalidad";
-    })->name('courses.modality');
+    // Route::get('courses/modality/{id}', function($id){
+    //     return "Aqui va la modalidad";
+    // })->name('courses.modality');
 
 });
 

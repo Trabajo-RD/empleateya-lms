@@ -14,10 +14,14 @@ class Category extends Model
 
     protected $fillable = [
         'name',
-        'slug'
+        'slug',
+        'icon'
     ];
 
-    protected $withCount = ['topics'];
+    // Return the slug, not id
+    public function getRouteKeyName(){
+        return "slug";
+    }
 
     /**
      * Relation 1:N

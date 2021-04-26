@@ -14,65 +14,8 @@
         </div>
     </section>
 
-    <!-- content -->
-    <!-- TODO: uncomment to view section content in home page -->
-    {{-- <section class="my-24">
-        <h2 class="text-center font-display font-semibold text-gray-600 text-2xl sm:text-3xl md:text-4xl mb-6">Contenido</h2>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-8">
-            <article>
-                <figure>
-                    <img class="rounded h-36 w-full object-cover" src="{{ asset( 'images/dashboard/online-3412473_640.jpg' ) }}" alt="" />
-                </figure>
-                <header class="mt-2">
-                    <h2 class="text-xl text-gray-700">Cursos gratuitos</h2>
-                </header>
-                <p class="text-sm text-gray-500">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet dolorum distinctio eaque ipsum</p>
-            </article>
-
-            <article>
-                <figure>
-                    <img class="rounded h-36 w-full object-cover" src="{{asset('images/dashboard/virus-4999857_640.png')}}" alt="" />
-                </figure>
-                <header class="mt-2">
-                    <h2 class="text-xl text-gray-700">Escuela Taller</h2>
-                </header>
-                <p class="text-sm text-gray-500">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet dolorum distinctio</p>
-            </article>
-
-            <article>
-                <figure>
-                    <img class="rounded h-36 w-full object-cover" src="{{asset('images/dashboard/pexels-christina-morillo-1181244.jpg')}}" alt="" />
-                </figure>
-                <header class="mt-2">
-                    <h2 class="text-xl text-gray-700">Orientación ocupacional</h2>
-                </header>
-                <p class="text-sm text-gray-500">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet</p>
-            </article>
-
-            <article>
-                <figure>
-                    <img class="rounded h-36 w-full object-cover" src="{{asset('images/dashboard/pexels-markus-spiske-3806753.jpg')}}" alt="" />
-                </figure>
-                <header class="mt-2">
-                    <h2 class="text-xl text-gray-700">Servicio Nacional de Empleo</h2>
-                </header>
-                <p class="text-sm text-gray-500">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet dolorum disti</p>
-            </article>
-
-            <article>
-                <figure>
-                    <img class="rounded h-36 w-full object-cover" src="{{asset('images/dashboard/video-conference-5162927_640.jpg')}}" alt="" />
-                </figure>
-                <header class="mt-2">
-                    <h2 class="text-xl text-gray-700">Blog</h2>
-                </header>
-                <p class="text-sm text-gray-500">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
-            </article>
-        </div>
-    </section> --}}
-
     <!-- CTA -->
-    <section class="bg-blue-900 py-12 mb-24">
+    <section class="bg-blue-900 py-12">
         <h2 class="text-center text-white text-5xl sm:text-4xl md:text-3xl">{{ __('Not sure what to choose?') }}</h2>
         <p class="text-center text-white">{{ __('Visit our course catalog where you will find the right course for you') }}</p>
         <div class="flex justify-center mt-6">
@@ -82,44 +25,59 @@
         </div>
     </section>
 
-    <!-- latest posts -->
-    @if( count( $latest_courses ) >= 1 )
-        <section class="pb-24">
-            <h2 class="text-center font-display font-semibold text-gray-600 text-2xl sm:text-3xl md:text-4xl mb-6">Últimos cursos</h2>
-                <p class="text-center text-gray-500 text-sm mb-6">Estos son los últimos cursos que hemos publicado para tí</p>
+    <div class="divide-y divide-gray-300">
+
+        @if (Auth::check())
+            @if(count($user_courses))
+                <!-- Student courses in this category -->
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-12">
+                    <h2 class="text-center font-display font-semibold text-gray-600 text-xl sm:text-2xl md:text-3xl mb-6"><span class="font-bold">{{ auth()->user()->name }}</span>, {{  __('these are your latest courses') }}</h2>
+                    <!-- courses -->
+                    <div class="px-4 sm:px-6 lg:px-8 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-8 mt-12">
+                        @foreach ( $user_courses as $course )
+                            <x-user-course :course="$course" />
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+        @endif
+
+        <!-- latest posts -->
+        @if( count( $latest_courses ) >= 1 )
+            <section class="py-12">
+                <h2 class="text-center font-display font-semibold text-gray-600 text-xl sm:text-2xl md:text-3xl mb-6">{{ __('Latest courses') }}</h2>
+                    <p class="text-center text-gray-500 text-sm mb-6">{{ __('These are the last courses that we have published for you') }}</p>
+                    <!-- courses -->
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8">
+                        @foreach ( $latest_courses as $course )
+                            <x-course-card :course="$course" />
+                        @endforeach
+                    </div>
+            </section>
+        @endif
+
+        <!-- partnerships -->
+        @if( count( $partners) >= 1 )
+            <section class="py-12">
+                <h2 class="text-center font-display font-semibold text-gray-600 text-2xl sm:text-3xl md:text-4xl mb-6">{{ __('Agreements with recognized institutions and companies') }}</h2>
+                <p class="text-center text-gray-500 text-md mb-6">{{ __('In order to offer you optimal training, and that you can join the labor market') }}</p>
                 <!-- courses -->
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8">
-                    @foreach ( $latest_courses as $course )
-                        <x-course-card :course="$course" />
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap justify-center gap-x-6 gap-y-8 ">
+                    @foreach ( $partners as $partner )
+                        <figure>
+                            @isset( $partner->image )
+                                <img id="picture" class="img-fluid px-10" src="{{ Storage::url($partner->image->url) }}" title="{{ $partner->name }}" alt="{{ $partner->name }}" style="max-height: 100px;">
+                            @else
+                                <img id="picture" class="img-fluid px-10" src="{{ asset('images/courses/logo-cloud.png') }}" title="{{ $partner->name }}" alt="{{ $partner->name }}" style="max-height: 100px;" >
+                            @endisset
+                        </figure>
+                        {{-- <x-course-card :course="$course" /> --}}
                     @endforeach
                 </div>
-        </section>
-    @endif
-
-    <!-- partnerships -->
-    @if( count( $partners) >= 1 )
-        <section>
-            <hr class="pt-24">
-            <h2 class="text-center font-display font-semibold text-gray-600 text-2xl sm:text-3xl md:text-4xl mb-6">Convenios con instituciones y empresas reconocidas</h2>
-            <p class="text-center text-gray-500 text-md mb-6">Con el objetivo de ofrecerte una capacitación optima, y que puedas incorporarte al mercado laboral</p>
-            <!-- courses -->
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap justify-center gap-x-6 gap-y-8 ">
-                @foreach ( $partners as $partner )
-                    <figure>
-                        @isset( $partner->image )
-                            <img id="picture" class="img-fluid px-10" src="{{ Storage::url($partner->image->url) }}" title="{{ $partner->name }}" alt="{{ $partner->name }}" style="max-height: 100px;">
-                        @else
-                            <img id="picture" class="img-fluid px-10" src="{{ asset('images/courses/logo-cloud.png') }}" title="{{ $partner->name }}" alt="{{ $partner->name }}" style="max-height: 100px;" >
-                        @endisset
-                    </figure>
-                    {{-- <x-course-card :course="$course" /> --}}
-                @endforeach
-            </div>
-            <hr class="mt-24">
-        </section>
-    @endif
-
-
+                <hr class="mt-24">
+            </section>
+        @endif
+    </div>
 
 </x-app-layout>
 

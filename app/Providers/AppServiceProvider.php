@@ -9,6 +9,7 @@ use App\Models\Lesson;
 use App\Models\Section;
 use App\Models\MenuItem;
 use App\Models\Category;
+use App\Models\Modality;
 use App\Models\Type;
 use App\Models\User;
 
@@ -56,11 +57,18 @@ class AppServiceProvider extends ServiceProvider
             return "<i class=\"fas fa-fw fa-{{ $expression }}\"></i>";
         });
 
-        $menuItems = MenuItem::where('status', 2)->get();
-        view()->share('menuItems', $menuItems);
+        // $menuItems = MenuItem::where('status', 2)->get();
+        // view()->share('menuItems', $menuItems);
 
-        $categories = Category::all();
-        view()->share('categories', $categories);
+        if(Schema::hasTable('categories')) {
+            $categories = Category::all();
+            view()->share('categories', $categories);
+        }
+
+        if(Schema::hasTable('modalities')) {
+            $modalities = Modality::all();
+            view()->share('modalities', $modalities);
+        }
 
 
         // Create dynamic url/route to adminLTE menu

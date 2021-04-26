@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Course;
 use App\Models\Category;
+use App\Models\Topic;
 use App\Models\Type;
 use App\Models\Level;
 use App\Models\Price;
@@ -45,12 +46,13 @@ class CourseController extends Controller
     public function create()
     {
         $categories = Category::pluck('name', 'id');
+        $topics = Topic::pluck('name', 'id');
         $types = Type::pluck('name', 'id');
         $levels = Level::pluck('name', 'id');
         $prices = Price::pluck('name', 'id');
         $modalities = Modality::pluck('name', 'id');
 
-        return view('creator.courses.create', compact('categories', 'types', 'levels', 'prices', 'modalities' ));
+        return view('creator.courses.create', compact('categories', 'topics', 'types', 'levels', 'prices', 'modalities' ));
     }
 
     /**
@@ -232,7 +234,7 @@ class CourseController extends Controller
     /**
      * Return course observation view
      */
-    public function observation( Course $course ){
+    public function observation( $locale, Course $course ){
 
         return view('creator.courses.observation', compact( 'course' ) );
 

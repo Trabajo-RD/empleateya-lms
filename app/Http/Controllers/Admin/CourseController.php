@@ -34,7 +34,7 @@ class CourseController extends Controller
     /**
      * Return the course in revision status
      */
-    public function show( Course $course ){
+    public function show( $locale, Course $course ){
 
         $this->authorize('revision', $course );
 
@@ -45,7 +45,7 @@ class CourseController extends Controller
     /**
      *
      */
-    public function approved( Course $course ){
+    public function approved( $locale, Course $course ){
 
         $this->authorize('revision', $course );
 
@@ -88,14 +88,14 @@ class CourseController extends Controller
     /**
      * Return observation course form
      */
-    public function observation( Course $course ){
+    public function observation( $locale, Course $course ){
         return view('admin.courses.observation', compact('course'));
     }
 
     /**
      * Process the course feedback form
      */
-    public function reject( Request $request, Course $course ){
+    public function reject( Request $request, $locale, Course $course ){
 
         $request->validate([
             'body' => 'required'

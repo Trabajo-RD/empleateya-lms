@@ -21,7 +21,7 @@ class CourseController extends Controller
     /**
      * Controller to manage the courses single page
      */
-    public function show( Course $course ){
+    public function show( $locale, Course $course ){
 
         // Show only published courses to autenticated users
         $this->authorize('published', $course );
@@ -30,7 +30,7 @@ class CourseController extends Controller
          * Retur related courses
          */
         $related_courses =
-        Course::where( 'category_id', $course->category_id )
+        Course::where( 'topic_id', $course->topic_id )
             ->where( 'id', '!=', $course->id )
             ->where( 'status', 3 )
             ->latest()
@@ -45,22 +45,32 @@ class CourseController extends Controller
     /**
      * Controller to enrolled users
      */
-    public function enrolled( Course $course ){
+    public function enrolled( $locale, Course $course ){
 
         // insert user auth id in course_user table
         $course->students()->attach( auth()->user()->id );
 
         // redirect user to enrolled course;
-        return redirect()->route('courses.status', $course);
+        return redirect()->route('courses.status', [$locale, $course]);
 
     }
+
 
     public function category( $locale, Category $category){
 
         //return $category;
         $topics = Topic::where('category_id', $category->id)->get();
 
-        return view('courses.category', compact('category', 'topics'));
+        return view('courses.category', compact('locale', 'category', 'topics'));
+    }
+
+
+    public function modality( $locale, Modality $modality){
+
+        //return $category;
+        // $topics = Topic::where('category_id', $category->id)->get();
+
+        return view('courses.modality', compact('locale', 'modality'));
     }
 
     /**

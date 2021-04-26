@@ -6,11 +6,11 @@
             'route' => route('home', app()->getLocale()), // routes/web.php dashboard route
             'active' => request()->routeIs('home') // bool: verify is active route dashboard
         ],
-        [
-            'name' => 'Courses',
-            'route' => route('courses.index', app()->getLocale()), // routes/web.php dashboard route
-            'active' => request()->routeIs('courses.*'), // bool: verify is active route dashboard
-        ],
+        // [
+        //     'name' => 'Courses',
+        //     'route' => route('courses.index', app()->getLocale()), // routes/web.php dashboard route
+        //     'active' => request()->routeIs('courses.*'), // bool: verify is active route dashboard
+        // ],
         // [
         //     'name' => 'Categories',
         //     'route' => route('courses.category', [app()->getLocale(), $category]), // routes/web.php dashboard route
@@ -34,42 +34,53 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex items-center">
-                    @foreach ($nav_links as $nav_link)
-                        <x-jet-nav-link href="{{ $nav_link['route'] }}" :active="$nav_link['active']">
+
+                    {{-- @foreach ($nav_links as $nav_link)
+                        <x-jet-nav-link href="{{ $nav_link['route'] }}" :active="$nav_link['active']" class="items-center px-1 pt-1 text-md font-medium leading-5 hover:text-gray-700 block py-2 text-gray-500">
 
                             {{ __($nav_link['name']) }}
 
                         </x-jet-nav-link>
-                    @endforeach
+                    @endforeach --}}
 
-                    <x-jet-dropdown width="60 text-gray-500">
+                    <x-jet-nav-link href="{{ route('home', [app()->getLocale()] ) }}" :active="request()->routeIs('home')">
+                        <i class="fas fa-home mr-2"></i>{{ __('Home') }}
+                    </x-jet-nav-link>
+
+                    <x-jet-nav-link href="{{ route('courses.index', [app()->getLocale()] ) }}" :active="request()->routeIs('home')">
+                        <i class="fas fa-laptop mr-2"></i>{{ __('Courses') }}
+                    </x-jet-nav-link>
+
+                    <x-jet-dropdown align="left" width="60" :active="request()->routeIs('courses.modality.*')">
                         <x-slot name="trigger">
                             <a class="nav-link text-gray-500" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-laptop mr-2"></i>{{ __('Courses') }}
+                                <i class="fas fa-laptop-house  mr-2"></i>{{ __('Modalities') }}
                             </a>
                         </x-slot>
                         <x-slot name="content">
-                            <div class="w-40">
-
-                                <x-jet-dropdown-link href="{{ route('courses.modality', [app()->getLocale(), 4] ) }}">
-                                    {{ __('Face_to_Face') }}
-                                </x-jet-dropdown-link>
-
+                            <div class="w-80">
+                                @if(count($modalities))
+                                    @foreach($modalities as $modality)
+                                    <x-jet-dropdown-link href="{{ route('courses.modality', [app()->getLocale(), $modality] ) }}" :active="request()->routeIs('courses.modality.*')">
+                                        {{ __($modality->name) }}
+                                    </x-jet-dropdown-link>
+                                    @endforeach
+                                @endif
                             </div>
                         </x-slot>
                     </x-jet-dropdown>
 
-                    <x-jet-dropdown width="60 text-gray-500">
+                    <x-jet-dropdown align="left" width="60" :active="request()->routeIs('courses.category.*')">
                         <x-slot name="trigger">
                             <a class="nav-link text-gray-500" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-tags mr-2"></i>{{ __('Categories') }}
                             </a>
                         </x-slot>
                         <x-slot name="content">
-                            <div class="w-40">
+                            <div class="w-80">
                                 @if(count($categories))
                                     @foreach($categories as $category)
-                                    <x-jet-dropdown-link href="{{ route('courses.category', [app()->getLocale(), $category] ) }}">
+                                    <x-jet-dropdown-link href="{{ route('courses.category', [app()->getLocale(), $category] ) }}" :active="request()->routeIs('courses.category.*')">
                                         {{ __($category->name) }}
                                     </x-jet-dropdown-link>
                                     @endforeach
@@ -225,7 +236,7 @@
                                 @endcan
 
                                 <!-- TODO: Create permission LMS Crear contenido -->
-                                @can ('LMS Crear contenido')
+                                @can ('LMS Administrar ajustes')
                                     <x-jet-dropdown-link href="{{ route('creator.dashboard', app()->getLocale()) }}">
                                         {{ __('Settings') }}
                                     </x-jet-dropdown-link>
@@ -260,7 +271,7 @@
                     @else
                         <a href="{{ route('login', app()->getLocale() ) }}" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-gray-400 hover:border-gray-600 rounded-md shadow-sm text-base font-medium text-gray-400 hover:text-gray-600 bg-white-100 hover:bg-gray-100">{{ __('Sign In') }}</a>
                         @if (Route::has('register'))
-                            <a href="{{ route('register', app()->getLocale() ) }}" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">{{ __('Register') }}</a>
+                            <a href="{{ route('register', app()->getLocale() ) }}" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700">{{ __('Register') }}</a>
                         @endif
                     @endauth
                 </div>
@@ -287,6 +298,51 @@
                 </x-jet-responsive-nav-link>
             @endforeach
         </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-jet-dropdown width="60" align="left">
+                <x-slot name="trigger">
+                    <a class="nav-link text-gray-500 ml-4 flex justify-left items-center" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        {{ __('Modalities') }}
+                        <i class="fas fa-caret-down ml-4"></i>
+                    </a>
+                </x-slot>
+                <x-slot name="content">
+                    <div class="w-64 bg-gray-100">
+                        @if(count($modalities))
+                            @foreach($modalities as $modality)
+                            <x-jet-dropdown-link href="{{ route('courses.modality', [app()->getLocale(), $modality] ) }}" :active="request()->routeIs('courses.modality.*')">
+                                {{ __($modality->name) }}
+                            </x-jet-dropdown-link>
+                            @endforeach
+                        @endif
+                    </div>
+                </x-slot>
+            </x-jet-dropdown>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-jet-dropdown width="60" align="left">
+                <x-slot name="trigger">
+                    <a class="nav-link text-gray-500 ml-4 flex justify-left items-center" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        {{ __('Categories') }}
+                        <i class="fas fa-caret-down ml-4"></i>
+                    </a>
+                </x-slot>
+                <x-slot name="content">
+                    <div class="w-64 bg-gray-100">
+                        @if(count($categories))
+                            @foreach($categories as $category)
+                            <x-jet-dropdown-link href="{{ route('courses.category', [app()->getLocale(), $category] ) }}" :active="request()->routeIs('courses.category.*')">
+                                {{ __($category->name) }}
+                            </x-jet-dropdown-link>
+                            @endforeach
+                        @endif
+                    </div>
+                </x-slot>
+            </x-jet-dropdown>
+        </div>
+
 
         <!-- Responsive Settings Options -->
         @auth

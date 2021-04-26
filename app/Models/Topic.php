@@ -20,6 +20,10 @@ class Topic extends Model
         return $this->hasMany('App\Models\Tag');
     }
 
+    public function courses(){
+        return $this->hasMany('App\Models\Course');
+    }
+
     /**
      * Relation 1:N reverse
      */

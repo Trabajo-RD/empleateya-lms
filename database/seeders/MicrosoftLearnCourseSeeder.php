@@ -75,7 +75,7 @@ class MicrosoftLearnCourseSeeder extends Seeder
                 'duration_in_minutes' => $ms_course['duration_in_minutes'],
                 'status' => 1,
                 'slug' => Str::slug($ms_course['title']),
-                'user_id' => 2,
+                'user_id' => 3,
                 'level_id' => $level_id,
                 'category_id' => 3,
                 'price_id' => 1,

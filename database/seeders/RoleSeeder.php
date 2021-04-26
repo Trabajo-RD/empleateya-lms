@@ -45,10 +45,15 @@ class RoleSeeder extends Seeder
 
         $manager->syncPermissions([
             'LMS Ver Dashboard',
+            'LMS Crear roles',
+            'LMS Editar roles',
             'LMS Leer roles',
+            'LMS Eliminar roles',
             'LMS Leer usuarios',
             'LMS Editar usuarios',
+            'LMS Crear cursos',
             'LMS Leer cursos',
+            'LMS Actualizar cursos',
             'LMS Eliminar cursos',
         ]);
 
@@ -60,6 +65,7 @@ class RoleSeeder extends Seeder
         ]);
 
         $creator->syncPermissions([
+            'LMS Administrar ajustes',
             'LMS Crear contenido',
             'LMS Editar contenido',
             'LMS Eliminar contenido',
@@ -91,6 +97,9 @@ class RoleSeeder extends Seeder
         ]);
 
         $contributor->syncPermissions([
+            'LMS Supervisar cursos',
+            'LMS Calificar item',
+            'LMS Crear contenido',
             'LMS Leer cursos',
         ]);
 

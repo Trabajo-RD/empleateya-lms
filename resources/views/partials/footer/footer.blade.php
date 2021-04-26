@@ -67,7 +67,7 @@
                         <x-slot name="trigger">
 
                             <button class="btn text-sm text-gray-400 border-2 border-gray-400 hover:text-gray-100 hover:border-gray-100 font-bold rounded focus:outline-none">
-                                <i class="fas fa-global mr-2"></i>{{ (app()->getLocale() == 'es') ? 'Español' : 'English' }}
+                                <i class="fas fa-globe mr-2"></i>{{ (app()->getLocale() == 'es') ? 'Español' : 'English' }}
                             </button>
 
                         </x-slot>

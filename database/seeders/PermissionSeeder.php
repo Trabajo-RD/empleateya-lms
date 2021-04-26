@@ -57,6 +57,10 @@ class PermissionSeeder extends Seeder
          * Cursos
          */
         Permission::create([
+            'name' => 'LMS Supervisar cursos',
+        ]);
+
+        Permission::create([
             'name' => 'LMS Crear cursos',
         ]);
 
@@ -75,6 +79,10 @@ class PermissionSeeder extends Seeder
         /**
          * Contenido
          */
+        Permission::create([
+            'name' => 'LMS Administrar ajustes',
+        ]);
+
         Permission::create([
             'name' => 'LMS Crear contenido',
         ]);

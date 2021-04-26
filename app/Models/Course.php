@@ -37,6 +37,12 @@ class Course extends Model
         }
     }
 
+    public function scopeTopic( $query, $topic_id ){
+        if( $topic_id ){
+            return $query->where('topic_id', $topic_id );
+        }
+    }
+
     public function scopeType( $query, $type_id ){
         if( $type_id ){
             return $query->where('type_id', $type_id );
@@ -104,6 +110,10 @@ class Course extends Model
 
     public function category(){
         return $this->belongsTo('App\Models\Category');
+    }
+
+    public function topic(){
+        return $this->belongsTo('App\Models\Topic');
     }
 
     public function modality(){

@@ -10,7 +10,7 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            {!! Form::open(['route' => [ 'admin.courses.reject', [app()->getLocale(), $course] ]]) !!}
+            {!! Form::open(['route' => [ 'admin.courses.reject', $course] ]) !!}
 
                 <div class="form-group">
                     {!! Form::label('body', 'Observaciones') !!}

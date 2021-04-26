@@ -20,7 +20,7 @@ class CreateLinksTable extends Migration
             $table->text('description')->nullable();
             $table->enum('target', ['none', '_top', '_blank' ])->default('none');
             $table->string('relationship')->nullable();
-            $table->json('metadata')->nullable();
+            $table->text('metadata')->nullable();
             $table->timestamps();
         });
     }

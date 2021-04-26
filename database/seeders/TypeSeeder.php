@@ -15,11 +15,11 @@ class TypeSeeder extends Seeder
     public function run()
     {
         Type::create([
-            'name' => 'Itinerario de Aprendizaje'
+            'name' => 'Ruta de Aprendizaje'
         ]);
 
         Type::create([
-            'name' => 'Modulo'
+            'name' => 'Módulo'
         ]);
 
         Type::create([

@@ -1,60 +1,60 @@
 <x-app-layout>
 
-    <section class="bg-blue-900 py-12">
-        <div class="container grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
-            <figure>
-            <!-- card image -->
-                <img id="picture" class="h-80 w-full object-cover shadow" src="{{ asset('images/courses/default.jpg') }}" alt="" >
-            </figure>
-            <div>
-
-                {{-- <h1 class="text-white font-extrabold text-2xl sm:text-3xl md:text-4xl">{{ $courses->modality->name }}</h1> --}}
-
-
+    <!-- hero -->
+    <section class="bg-cover" style="background-image:linear-gradient(rgba(0, 56, 118, 0.7), rgba(35, 73, 116, 0.6)), url({{ asset( 'images/courses/hero9.jpg' ) }})">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-36">
+            <div class="w-full md:w-3/4 lg:w-1/2">
+                <!-- titulo -->
+                <h1 class="text-white font-extrabold text-3xl sm:text-4xl md:text-5xl">{{ __($modality->name) }}</h1>
+                <!-- parrafo -->
+                <p class="text-white mt-3 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0 mb-4">{{ __($modality->name . '-description') }}</p>
+                <!-- Buscador -->
+                @livewire('search')
             </div>
-
         </div>
     </section>
 
 
-    <div class="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-24">
 
-        <div class="order-1  md:order-2 lg:order-2">
+    <main>
+        @livewire('course-modality')
 
-            <aside class="hidden md:block">
+        {{-- <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <h2 class="text-center font-display font-semibold text-gray-600 text-2xl sm:text-3xl md:text-4xl mb-6" >Subcategorías en {{ $modality->name }}</h2>
+            <!-- This is the tags container -->
+            <div class='mt-8 flex flex-wrap justify-center -m-1'>
+                @foreach ($topics as $topic)
+                    <a class="cursor-pointer my-2 text-normal text-gray-700">
+                        <span class="m-1 bg-gray-200 hover:bg-gray-300 rounded-full py-4 px-6 font-bold text-sm leading-loose cursor-pointer" >
+                            {{ $topic->name }}
+                        </span>
+                    </a>
+                @endforeach
+            </div>
+        </div> --}}
+    </main>
 
-                <h2 class="font-bold text-2xl text-gray-600 mb-12">Cursos relacionados</h2>
 
 
 
-                   {{ $courses }}
 
-                <h2 class="font-bold text-2xl text-gray-600 my-12">Encuesta de Satisfacción</h2>
-                <article>
-                    <div class="card">
-                        <div class="card-header">
 
-                        </div>
-                        <div class="card-body">
-
-                        </div>
-                    </div>
-                </article>
-
-            </aside>
-
+    <!-- Page Footer -->
+    @if(isset($footer))
+    <footer class="bg-gray-800">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            {{ $footer }}
         </div>
+    </footer>
+    @endif
 
-    </div>
-
-    <x-slot name="js">
-
-        <!-- CDN CKEditor 5 Classic -->
-        <script src="https://cdn.ckeditor.com/ckeditor5/26.0.0/classic/ckeditor.js"></script>
-
-        <!-- instructor js -->
-        <script src="{{ asset('js/student/courses/review.js') }}"></script>
-
-    </x-slot>
+    <!-- Page Copyright -->
+    @if(isset($copyright))
+    <section class="bg-gray-900">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-white">
+            {{ $copyright }}
+        </div>
+    </section>
+    @endif
 
 </x-app-layout>
