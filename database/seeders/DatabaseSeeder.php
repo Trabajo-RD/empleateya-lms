@@ -36,6 +36,9 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->command->info('User table seeded!');
 
+        $this->call(MonitorUserSeeder::class);
+        $this->command->info('Monitor to User table seeded!');
+
         $this->call(CountriesTableSeeder::class);
         $this->command->info('Countries table seeded!');
 
@@ -59,6 +62,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call(MicrosoftLearnCourseSeeder::class);
         $this->command->info('Microsoft Learn Courses seeded!');
+
+        $this->call(MicrosoftLearnModulesSeeder::class);
+        $this->command->info('Microsoft Learn Modules seeded!');
 
         $this->call(LinkSeeder::class);
         $this->command->info('Link table seeded!');

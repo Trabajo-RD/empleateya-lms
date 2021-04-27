@@ -3,14 +3,11 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-
-use App\Models\User;
-use App\Models\Team;
-use Laravel\Jetstream\Events\TeamMemberAdded;
 use Illuminate\Support\Facades\Config;
-class UserSeeder extends Seeder
-{
+use App\Models\User;
 
+class MonitorUserSeeder extends Seeder
+{
     /**
      * Run the database seeds.
      *
@@ -18,17 +15,9 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        $monitorUsersConfig = Config::get('monitors');
 
-        $usersConfig = Config::get('users');
-        $role = [
-            'Administrator',
-            'Manager',
-            'Creator',
-            'Instructor',
-            'Contributor'
-        ];
-
-        foreach( $usersConfig as $key => $user ){
+        foreach( $monitorUsersConfig as $key => $user ){
 
             $user = User::create([
 
@@ -46,7 +35,7 @@ class UserSeeder extends Seeder
             ]);
 
 
-            $user->assignRole($role[$key]);
+            $user->assignRole('Creator');
 
         }
     }
