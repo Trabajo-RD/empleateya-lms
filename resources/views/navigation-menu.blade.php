@@ -43,11 +43,11 @@
                         </x-jet-nav-link>
                     @endforeach --}}
 
-                    <x-jet-nav-link href="{{ route('home', [app()->getLocale()] ) }}" :active="request()->routeIs('home')">
+                    <x-jet-nav-link href="{{ route('home', [app()->getLocale()] ) }}" :active="request()->routeIs('home')" class="hidden md:inline-block">
                         <i class="fas fa-home mr-2"></i>{{ __('Home') }}
                     </x-jet-nav-link>
 
-                    <x-jet-nav-link href="{{ route('courses.index', [app()->getLocale()] ) }}" :active="request()->routeIs('home')">
+                    <x-jet-nav-link href="{{ route('courses.index', [app()->getLocale()] ) }}" :active="request()->routeIs('home')" class="hidden md:inline-block">
                         <i class="fas fa-laptop mr-2"></i>{{ __('Courses') }}
                     </x-jet-nav-link>
 
@@ -120,12 +120,12 @@
                 @if(count(config('app.languages')) > 1)
                     <x-jet-dropdown width="60 text-gray-500">
                                 <x-slot name="trigger">
-                                    <a class="nav-link text-gray-500" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link text-gray-500 hidden md:inline-block" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                         <i class="fas fa-globe mr-2"></i>{{ strtoupper(app()->getLocale()) }}
                                     </a>
                                 </x-slot>
                                 <x-slot name="content">
-                                    <div class="w-40">
+                                    <div class="w-40 hidden md:inline-block">
                                         @foreach(config('app.languages') as $langLocale => $langName)
                                         <x-jet-dropdown-link href="{{ route('set.locale', $langLocale) }}">
                                             {{ $langName }}
@@ -191,7 +191,7 @@
                 @endauth
 
                 <!-- Settings Dropdown -->
-                <div class="ml-3 relative">
+                <div class="ml-3 relative flex items-center">
                     @auth
                         <x-jet-dropdown align="right" width="48">
                             <x-slot name="trigger">

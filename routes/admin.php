@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Admin\ModalityController;
 use App\Http\Controllers\Admin\PlatformController;
+use App\Http\Controllers\Admin\SlideController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,6 +66,11 @@ Route::group(['prefix' => '{locale}',
      * Route to manage modalities
      */
     Route::resource('modalities', ModalityController::class)->names('modalities');
+
+    /**
+     * Route to manage slides items (Hero carousel)
+     */
+    Route::resource('slides', SlideController::class)->names('slides');
 
     /**
      * Route to manage lesson video platforms

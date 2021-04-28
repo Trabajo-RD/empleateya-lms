@@ -1,18 +1,57 @@
 <x-app-layout>
 
-    <!-- hero -->
-    <section class="bg-cover" style="background-image:linear-gradient(rgba(0, 56, 118, 0.7), rgba(35, 73, 116, 0.6)), url({{ asset( 'images/home/slider/hero2.jpg' ) }})">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-36">
-            <div class="w-full md:w-3/4 lg:w-1/2">
-                <!-- titulo -->
-                <h1 class="text-white font-extrabold text-4xl sm:text-5xl md:text-6xl">{{ __('Free courses') }}</h1>
-                <!-- parrafo -->
-                <p class="text-white mt-3 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0 mb-4">{{ __('In our Learning Management System you will find courses and articles from different areas that will help you in your professional development')}}</p>
-                <!-- Buscador -->
-                @livewire('search')
-            </div>
+    <section class="bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Buscador -->
+            @livewire('search')
         </div>
     </section>
+
+
+    @if(count( $publish_slides ))
+        <div class="slide-one-item home-slider owl-carousel">
+
+            @foreach( $publish_slides as $item)
+
+            <div class="site-blocks-cover" style="background-image: url(''); background-repeat: no-repeat;" data-aos="fade" data-stellar-background-ratio="0.5">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-96 flex items-center py-32 ">
+                    <div class="w-full md:w-3/4 lg:w-1/2 px-12 py-12 bg-white bg-opacity-25">
+
+                        <!-- titulo -->
+                        <h1 class="{{ ($item->title_color != '') ? $item->title_color : 'text-gray-700' }} font-extrabold text-4xl sm:text-5xl md:text-6xl">{{ __($item->title) }}</h1>
+                        <!-- parrafo -->
+                        <p class="{{ ($item->content_color != '') ? $item->content_color : 'text-gray-700' }} mt-3 sm:mt-5 sm:text-lg sm:mx-auto md:mt-5 md:text-xl lg:mx-0 mb-4">{{ __($item->content) }}</p>
+                        <!-- Buscador -->
+
+                    </div>
+                </div>
+            </div>
+
+            @endforeach
+
+        </div>
+    @else
+        <!-- hero -->
+        <section class="bg-cover" style="background-image:linear-gradient(rgba(0, 56, 118, 0.7), rgba(35, 73, 116, 0.6)), url({{ asset( 'images/home/slider/hero2.jpg' ) }})">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-36">
+                <div class="w-full md:w-3/4 lg:w-1/2">
+                    <!-- titulo -->
+                    <h1 class="text-white font-extrabold text-4xl sm:text-5xl md:text-6xl">{{ __('Free courses') }}</h1>
+                    <!-- parrafo -->
+                    <p class="text-white mt-3 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0 mb-4">{{ __('In our Learning Management System you will find courses and articles from different areas that will help you in your professional development')}}</p>
+                    <!-- Buscador -->
+                    @livewire('search')
+                </div>
+            </div>
+        </section>
+    @endif
+
+
+
+
+
+
+
 
     <!-- CTA -->
     <section class="bg-blue-900 py-12">

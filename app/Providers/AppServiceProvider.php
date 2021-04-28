@@ -116,8 +116,18 @@ class AppServiceProvider extends ServiceProvider
                 'can'         => 'LMS Leer usuarios',
             ]);
 
-            // ADD HEADER
+            // Manage users
             $event->menu->addAfter('users', [
+                'key'         => 'slides',
+                'text'        => 'Slider',
+                'url'           => route('admin.slides.index' ), // url/route
+                'icon'        => 'far fa-fw fa-images',
+                'active'      => ['admin/slides*'],
+                'can'         => 'LMS Ver Dashboard',
+            ]);
+
+            // ADD HEADER
+            $event->menu->addAfter('slides', [
                 'key'         => 'course_options',
                 'header'        => 'OPCIONES DE CURSOS',
             ]);

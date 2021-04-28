@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\Partner;
+use App\Models\Slide;
 use Illuminate\Support\Facades\Config;
 use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +21,9 @@ class HomeController extends Controller
     {
 
         $courses = Course::all();
+        $slides = Slide::all();
+
+        $publish_slides = Slide::where('status', '2')->get();
 
         if (Auth::user()) {
             $this->user = request()->user()->id;
@@ -60,6 +64,29 @@ class HomeController extends Controller
             ->limit(3)
         ->get();
 
+        $carousel_items = [
+            [
+                'image' => 'images/home/slider/hero2.jpg',
+                'title' => 'Free courses',
+                'subtitle' => '',
+                'content' => 'In our Learning Management System you will find courses and articles from different areas that will help you in your professional development',
+                'slug' => 'free-courses',
+                'title_color' => 'text-white',
+                'content_color' => 'text-white',
+            ],
+            [
+                'image' => 'images/home/slider/hero4.jpg',
+                'title' => 'Face-to-Face courses',
+                'subtitle' => '',
+                'content' => 'See all Face-to-Face courses',
+                'slug' => 'face-to-face-courses',
+                'title_color' => 'text-blue-900',
+                'content_color' => 'text-blue-900',
+            ],
+
+
+        ];
+
 
         $featured_courses = [];
 
@@ -76,10 +103,11 @@ class HomeController extends Controller
 
         // $locale = $app['available_locales'];
 
-        return view('welcome', compact('latest_courses', 'featured_courses', 'featured_modalities', 'user_courses', 'partners')); // Add collection to welcome view
+        return view('welcome', compact('latest_courses', 'publish_slides', 'carousel_items', 'featured_courses', 'featured_modalities', 'user_courses', 'partners')); // Add collection to welcome view
     }
 
     public function dashboard(){
         return view('dashboard');
     }
+
 }
