@@ -24,10 +24,10 @@ class CreateSlidesTable extends Migration
             $table->text('link')->nullable();
             $table->string('link_color')->nullable();
             $table->string('link_bg_color')->nullable();
-            
+
             $table->enum('target', ['none', '_top', '_blank' ])->default('none');
             // $table->string('status');
-            $table->enum('status', [1, 2 ])>default(2);
+            $table->enum('status', [1, 2 ])->default(2);
             $table->timestamps();
         });
     }
