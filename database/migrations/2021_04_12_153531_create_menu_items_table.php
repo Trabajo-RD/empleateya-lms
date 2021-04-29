@@ -17,7 +17,7 @@ class CreateMenuItemsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('link');
-            $table->enum('status',[1,2]);
+            $table->tinyInteger('status')->default('1');
             $table->timestamps();
         });
     }

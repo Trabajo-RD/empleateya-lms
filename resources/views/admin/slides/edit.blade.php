@@ -15,14 +15,9 @@
     <div class="card">
         <div class="card-body">
             {!! Form::model($slide, ['route' => ['admin.slides.update', $slide ], 'method' => 'put' ]) !!}
-                <div class="form-group">
-                    {!! Form::label('title', 'Título') !!}
-                    {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el título del slide']) !!}
-                </div>
 
-                @error('name')
-                    <span class="text-danger">{{ $message }}</span>
-                @enderror
+
+            @include('admin.slides.partials.form')
 
                 {!! Form::submit('Actualizar slide', ['class' => 'btn btn-primary float-right']) !!}
             {!! Form::close() !!}
@@ -35,5 +30,7 @@
 @stop
 
 @section('js')
-    <script></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/26.0.0/classic/ckeditor.js"></script>
+
+<script src="{{ asset('js/admin/slides/form.js') }}"></script>
 @stop

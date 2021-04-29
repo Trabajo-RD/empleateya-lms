@@ -17,7 +17,7 @@ class CreateReactionsTable extends Migration
     {
         Schema::create('reactions', function (Blueprint $table) {
             $table->id();
-            $table->enum('value', [Reaction::LIKE, Reaction::DISLIKE]);
+            $table->string('value')->nullable();
 
             $table->unsignedBigInteger('user_id');
 

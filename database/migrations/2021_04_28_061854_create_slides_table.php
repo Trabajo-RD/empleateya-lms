@@ -17,17 +17,25 @@ class CreateSlidesTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug');
-            $table->string('subtitle')->nullable();
             $table->text('content')->nullable();
             $table->string('title_color')->nullable();
+            $table->string('title_color_saturation')->nullable();
             $table->string('content_color')->nullable();
+            $table->string('content_color_saturation')->nullable();
+            $table->string('background_color')->nullable();
+            $table->string('background_color_saturation')->nullable();
+            $table->string('background_color_opacity')->nullable();
             $table->text('link')->nullable();
+            $table->string('link_text')->nullable();
+            $table->string('link_type')->default('font-italic');
             $table->string('link_color')->nullable();
+            $table->string('link_color_saturation')->nullable();
             $table->string('link_bg_color')->nullable();
-
-            $table->enum('target', ['none', '_top', '_blank' ])->default('none');
+            $table->string('link_bg_color_saturation')->nullable();
+            $table->text('information')->nullable();
+            $table->string('target')->default('none');
             // $table->string('status');
-            $table->enum('status', [1, 2 ])->default(2);
+            $table->tinyInteger('status')->default('1');
             $table->timestamps();
         });
     }

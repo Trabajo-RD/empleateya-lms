@@ -13,14 +13,14 @@
 
             @foreach( $publish_slides as $item)
 
-            <div class="site-blocks-cover" style="background-image: url(''); background-repeat: no-repeat;" data-aos="fade" data-stellar-background-ratio="0.5">
+            <div class="site-blocks-cover" style="background-image: url('{{ Storage::url( $item->image->url ) }}'); background-repeat: no-repeat; background-size: 100vw;" data-aos="fade" data-stellar-background-ratio="0.5">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-96 flex items-center py-32 ">
-                    <div class="w-full md:w-3/4 lg:w-1/2 px-12 py-12 bg-white bg-opacity-25">
+                    <div class="w-full md:w-3/4 lg:w-1/2 px-12 py-12 {{ ($item->background_color != '' && $item->background_color != 'bg-white' ) ? $item->background_color . '-' . $item->background_color_saturation : 'bg-white'}} {{ ($item->background_color_opacity != '') ? $item->background_color_opacity : 'bg-opacity-25'}} ">
 
                         <!-- titulo -->
-                        <h1 class="{{ ($item->title_color != '') ? $item->title_color : 'text-gray-700' }} font-extrabold text-4xl sm:text-5xl md:text-6xl">{{ __($item->title) }}</h1>
+                        <h1 class="{{ ($item->title_color != '' && $item->title_color != 'text-white' ) ? $item->title_color . '-' . $item->title_color_saturation : 'text-white' }} font-extrabold text-4xl sm:text-5xl md:text-6xl">{{ __($item->title) }}</h1>
                         <!-- parrafo -->
-                        <p class="{{ ($item->content_color != '') ? $item->content_color : 'text-gray-700' }} mt-3 sm:mt-5 sm:text-lg sm:mx-auto md:mt-5 md:text-xl lg:mx-0 mb-4">{{ __($item->content) }}</p>
+                        <p class="{{ ($item->content_color != '' && $item->content_color != 'text-white') ? $item->content_color . '-' . $item->content_color_saturation : 'text-white' }} mt-3 sm:mt-5 sm:text-lg sm:mx-auto md:mt-5 md:text-xl lg:mx-0 mb-4">{{ __($item->content) }}</p>
                         <!-- Buscador -->
 
                     </div>

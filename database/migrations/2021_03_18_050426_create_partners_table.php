@@ -20,7 +20,8 @@ class CreatePartnersTable extends Migration
             $table->string('name');
             $table->text('details')->nullable();
             $table->text('url')->nullable();
-            $table->enum('visible',[Partner::HIDDEN, Partner::VISIBLE]);
+            // $table->enum('visible',[Partner::HIDDEN, Partner::VISIBLE]);
+            $table->tinyInteger('visible')->default('1');
             $table->timestamps();
         });
     }

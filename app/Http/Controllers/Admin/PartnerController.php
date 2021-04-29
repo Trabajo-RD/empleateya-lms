@@ -47,7 +47,16 @@ class PartnerController extends Controller
             'name' => 'required|unique:partners',
         ]);
 
-        $partner = Partner::create( $request->all() );
+        $data = $request->all();
+
+        // $partner = Partner::create( $request->all() );
+
+        $partner = Partner::create([
+            'name' => $data['name'],
+            'details' => $data['details'],
+            'url' => $data['url'],
+            'visible' => $data['visible'],
+        ]);
 
         if($request->file('file') ){
             $url = Storage::put('partners', $request->file('file'));
@@ -96,7 +105,16 @@ class PartnerController extends Controller
             'name' => 'required|unique:partners,name,' . $partner->id,
         ]);
 
-        $partner->update( $request->all() );
+        $data = $request->all();
+
+        $partner->update([
+            'name' => $data['name'],
+            'details' => $data['details'],
+            'url' => $data['url'],
+            'visible' => $data['visible'],
+        ]);
+
+        // $partner->update( $request->all() );
 
         if( $request->file('file') ){
             $url = Storage::put('partners', $request->file('file') );

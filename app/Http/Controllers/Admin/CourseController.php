@@ -49,23 +49,16 @@ class CourseController extends Controller
 
         $this->authorize('revision', $course );
 
-        // Type Itinerario de aprendizaje
-        // if( $course->type_id == 1 ){
-        //     if( !$course->sections || !$course->goals || !$course->requirements ){
-        //         return redirect()->route('admin.courses.approved', $course )->with('approved_error', 'No se puede publicar un itinerario de aprendizaje que no esté debidamente completado');
-        //     }
+        /**
+         * (OPCIONAL)
+         *
+         * Si desea que al momento de un Administrador aprobar un curso el sistema valide
+         * si el curso tiene secciones añadidas, metas, requerimientos y una imagen distinta a la que trae por defecto
+         * para poder ser aprobado.
+         */
+        // if( !$course->sections || !$course->goals || !$course->requirements || !$course->image ){
+        //     return back()->with('info', __('You cannot publish a course that is not properly completed'));
         // }
-
-        // // Type Modulo
-        // if( $course->type_id == 2 ){
-        //     if( !$course->lessons || !$course->goals || !$course->requirements ){
-        //         return redirect()->route('admin.courses.approved', $course )->with('approved_error', 'No se puede publicar un módulo que no esté debidamente completado');
-        //     }
-        // }
-
-        if( !$course->sections || !$course->goals || !$course->requirements || !$course->image ){
-            return back()->with('info', __('You cannot publish a course that is not properly completed'));
-        }
 
         $course->status = 3;
 

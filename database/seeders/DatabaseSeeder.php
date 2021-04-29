@@ -60,8 +60,8 @@ class DatabaseSeeder extends Seeder
         $this->call(PlatformSeeder::class);
         $this->command->info('Platform table seeded!');
 
-        $this->call(SlideSeeder::class);
-        $this->command->info('Slides table seeded!');
+        // $this->call(SlideSeeder::class);
+        // $this->command->info('Slides table seeded!');
 
         $this->call(MicrosoftLearnCourseSeeder::class);
         $this->command->info('Microsoft Learn Courses seeded!');

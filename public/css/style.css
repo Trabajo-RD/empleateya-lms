@@ -548,7 +548,7 @@ a {
   border-color: #f2f2f2 !important; }
 
 .site-blocks-cover {
-  background-size: cover;
+  background-size: auto;
   background-repeat: no-repeat;
   background-position: center center; }
   .site-blocks-cover .text {
