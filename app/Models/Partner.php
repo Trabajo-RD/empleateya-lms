@@ -11,13 +11,19 @@ class Partner extends Model
 
     protected $guarded = ['id'];
 
-    const HIDDEN = 1;
-    const VISIBLE = 2;
+    protected $fillable = [
+        'title',
+        'slug',
+        'content',
+        'link',
+        'status',
+    ];
 
+   
     /**
      * Relation 1:1 Polymorphic
      */
-    public function image(){
+     public function image(){
         return $this->morphOne('App\Models\Image', 'imageable');
     }
 }

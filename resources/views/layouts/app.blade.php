@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'Capacitate') }}</title>
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="{{ asset('css/magnific-popup.css') }}">
         <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}">
         {{-- <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}"> --}}
-        <link rel="stylesheet" href="{{ URL::asset('css/owl.carousel.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}">
         {{-- <link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker.css') }}"> --}}
         <link rel="stylesheet" href="{{ asset('css/mediaelementplayer.css') }}">
@@ -26,7 +26,7 @@
         {{-- <link rel="stylesheet" href="{{ asset('fonts/flaticon/font/flaticon.css') }}"> --}}
         <link rel="stylesheet" href="{{ asset('css/fl-bigmug-line.css') }}">
 
-        <link rel="stylesheet" href="{{ URL::asset('css/aos.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/aos.css') }}" />
 
         {{-- <link rel="stylesheet" href="{{ asset('css/style.css') }}"> --}}
 
@@ -75,23 +75,20 @@
 
 
         {{-- <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script> --}}
-        <script
-  src="https://code.jquery.com/jquery-3.6.0.min.js"
-  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-  crossorigin="anonymous"></script>
-        <script src="{{ asset('js/jquery-migrate-3.0.1.min.js') }}"></script>
-        <script src="{{ asset('js/jquery-ui.js') }}"></script>
-        <script src="{{ asset('js/popper.min.js') }}"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="{{ asset('js/jquery-migrate-3.0.1.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/jquery-ui.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/popper.min.js') }}"></script>
         {{-- <script src="{{ asset('js/bootstrap.min.js') }}"></script> --}}
-        <script type="text/javascript" src="{{ URL::asset('js/owl.carousel.min.js') }}"></script>
-        <script src="{{ asset('js/mediaelement-and-player.min.js') }}"></script>
-        <script src="{{ asset('js/jquery.stellar.min.js') }}"></script>
-        <script src="{{ asset('js/jquery.countdown.min.js') }}"></script>
-        <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/owl.carousel.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/mediaelement-and-player.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/jquery.stellar.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/jquery.countdown.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
         {{-- <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script> --}}
-        <script src="{{ asset('js/aos.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/aos.js') }}"></script>
 
-        <script type="text/javascript" src="{{ URL::asset('js/main-front.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/main-front.js') }}"></script>
 
 
         @livewireScripts

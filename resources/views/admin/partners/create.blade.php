@@ -9,7 +9,7 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            {!! Form::open(['route' => 'admin.partners.store', 'files' => true ]) !!}      
+            {!! Form::open(['route' => 'admin.partners.store', 'files' => true]) !!}
 
 
                 @include('admin.partners.partials.form')
@@ -22,7 +22,7 @@
 @stop
 
 @section('css')
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+    <link rel="stylesheet" href="/css/admin_custom.css">
 @stop
 
 @section('js')

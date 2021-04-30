@@ -3,6 +3,7 @@
 @section('title', 'Empleateya LMS')
 
 @section('content_header')
+    <a href="{{ route('admin.slides.create' ) }}" class="btn btn-primary float-right"><i class="fas fa-plus mr-1"></i>Nuevo slide</a>
     <h1 class="text-primary"><i class="far fa-edit mr-1"></i>Editar slide</h1>
 @stop
 

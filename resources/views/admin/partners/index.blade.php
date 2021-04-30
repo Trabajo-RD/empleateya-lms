@@ -41,9 +41,9 @@
                                     @endisset
 
                             </td>
-                            <td class="align-middle {{ (($partner->visible == 1) ? 'text-muted' : '') }}">{{ $partner->name }}</td>
+                            <td class="align-middle {{ (($partner->status == 1) ? 'text-muted' : '') }}">{{ $partner->title }}</td>
                             <td class="align-middle">
-                                @switch($partner->visible)
+                                @switch($partner->status)
                                 @case(1)
                                     <span class="badge py-2 px-2 text-uppercase text-md text-muted" title="Oculto"><i class="far fa-eye-slash"></i></span>
                                     @break

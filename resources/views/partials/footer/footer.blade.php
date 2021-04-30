@@ -4,7 +4,7 @@
 
         <!-- About website column  -->
         <div class="col-span-2 sm:col-span-2 md:col-span-3 lg:col-span-2">
-            <h2 class="uppercase text-sm font-bold text-white text-center sm:text-left">{{ __('About Capacitate') }}</h2>
+            <h2 class="uppercase text-sm font-bold text-white text-center sm:text-left">{{ __('About Capacítate') }}</h2>
             <ul class="mt-4 text-gray-400 text-center sm:text-left">
                 <li>
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit itaque qui consectetur distinctio? Ipsam, dolorum. Et aliquid explicabo dolorem incidunt molestiae officia amet sapiente velit voluptate

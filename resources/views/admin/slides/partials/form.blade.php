@@ -1,7 +1,7 @@
 <h3 class="pt-4 mb-4">Texto</h3>
 <div class="form-group">
                 {!! Form::label('title', 'Título') !!}
-                {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el título del slide']) !!}
+                {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el título del slide', 'autocomplete' => 'off']) !!}
             </div>
             @error('title')
                 <span class="text-danger">{{ $message }}</span>
@@ -9,7 +9,7 @@
 
             <div class="form-group">
                 {!! Form::label('slug', 'Slug') !!}
-                {!! Form::text('slug', null, ['class' => 'form-control', 'readonly' => true] ) !!}
+                {!! Form::text('slug', null, ['class' => 'form-control', 'readonly' => 'readonly'] ) !!}
             </div>
 
             <div class="form-row">

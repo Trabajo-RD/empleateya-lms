@@ -3,9 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
-use App\Models\Partner;
-
 class CreatePartnersTable extends Migration
 {
     /**
@@ -17,11 +14,12 @@ class CreatePartnersTable extends Migration
     {
         Schema::create('partners', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('details')->nullable();
-            $table->text('url')->nullable();
+            $table->string('title');
+            $table->string('slug');
+            $table->text('content')->nullable();
+            $table->text('link')->nullable();
             // $table->enum('visible',[Partner::HIDDEN, Partner::VISIBLE]);
-            $table->tinyInteger('visible')->default('1');
+            $table->tinyInteger('status')->default('1');
             $table->timestamps();
         });
     }

@@ -80,7 +80,7 @@ Route::group(['prefix' => '{locale}',
     /**
      * Route to manage partners informations
      */
-    Route::resource('partners', PartnerController::class)->names('partners');
+    Route::resource('admin/partners', PartnerController::class)->names('partners');
 
     /**
      * Route for courses in revision

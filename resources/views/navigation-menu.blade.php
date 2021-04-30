@@ -236,11 +236,11 @@
                                 @endcan
 
                                 <!-- TODO: Create permission LMS Crear contenido -->
-                                @can ('LMS Administrar ajustes')
+                                {{-- @can ('LMS Administrar ajustes')
                                     <x-jet-dropdown-link href="{{ route('creator.dashboard', app()->getLocale()) }}">
                                         {{ __('Settings') }}
                                     </x-jet-dropdown-link>
-                                @endcan
+                                @endcan --}}
 
                                 @can ('LMS Calificar item')
                                     <x-jet-dropdown-link href="{{ route('instructor.courses.index', app()->getLocale() ) }}">

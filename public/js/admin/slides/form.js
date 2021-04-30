@@ -19,11 +19,11 @@ function slug(str){
     return $slug.toLowerCase();
 }
 
-ClassicEditor
-    .create( document.querySelector( '#details' ) )
-    .catch( error => {
-        console.error( error );
-    } );
+// ClassicEditor
+//     .create( document.querySelector( '#content' ) )
+//     .catch( error => {
+//         console.error( error );
+//     } );
 
 
 /* CHANGE IMAGE */

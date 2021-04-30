@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use App\Models\Partner;
-
 use Illuminate\Support\Facades\Storage;
 
 class PartnerController extends Controller
@@ -39,12 +37,12 @@ class PartnerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $locale)
     {
-        //return $request;
+       //return $request;
 
         $request->validate([
-            'name' => 'required|unique:partners',
+            'title' => 'required|unique:partners',
         ]);
 
         $data = $request->all();
@@ -52,10 +50,11 @@ class PartnerController extends Controller
         // $partner = Partner::create( $request->all() );
 
         $partner = Partner::create([
-            'name' => $data['name'],
-            'details' => $data['details'],
-            'url' => $data['url'],
-            'visible' => $data['visible'],
+            'title' => $data['title'],
+            'slug' => $data['slug'],
+            'content' => $data['content'],
+            'link' => $data['link'],
+            'status' => $data['status'],
         ]);
 
         if($request->file('file') ){
@@ -66,7 +65,7 @@ class PartnerController extends Controller
             ]);
         }
 
-        return redirect()->route('admin.partners.edit', compact('partner'))->with('info', 'Se ha creado una nueva asociación.');
+        return redirect()->route('admin.partners.edit', compact('locale', 'partner'))->with('info', 'Se ha creado una nueva asociación.');
 
     }
 
@@ -78,7 +77,7 @@ class PartnerController extends Controller
      */
     public function show(Partner $partner)
     {
-        return view('admin.partners.show', compact('partners'));
+        return view('admin.partners.show', compact('partner'));
     }
 
     /**
@@ -89,7 +88,7 @@ class PartnerController extends Controller
      */
     public function edit($locale, Partner $partner)
     {
-        return view('admin.partners.edit', compact('partner'));
+        return view('admin.partners.edit', compact('locale', 'partner'));
     }
 
     /**
@@ -102,16 +101,17 @@ class PartnerController extends Controller
     public function update(Request $request, $locale, Partner $partner)
     {
         $request->validate([
-            'name' => 'required|unique:partners,name,' . $partner->id,
+            'title' => 'required|unique:partners,title,' . $partner->id
         ]);
 
         $data = $request->all();
 
         $partner->update([
-            'name' => $data['name'],
-            'details' => $data['details'],
-            'url' => $data['url'],
-            'visible' => $data['visible'],
+            'title' => $data['title'],
+            'slug' => $data['slug'],
+            'content' => $data['content'],
+            'link' => $data['link'],
+            'status' => $data['status'],
         ]);
 
         // $partner->update( $request->all() );
@@ -132,7 +132,7 @@ class PartnerController extends Controller
             }
         }
 
-        return redirect()->route('admin.partners.edit', compact('partner'))->with('info', 'Se han actualizado los datos de la asociación.');
+        return redirect()->route('admin.partners.edit', compact('locale', 'partner'))->with('info', 'Se han actualizado los datos de la asociación.');
     }
 
     /**
