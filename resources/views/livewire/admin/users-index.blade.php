@@ -49,7 +49,7 @@
                                         @endforeach
                                     </td>
                                     <td>
-                                        <a class="btn btn-outline-secondary" href="{{ route('admin.users.edit', $user ) }}">Editar</a>
+                                        <a class="btn btn-outline-secondary" href="{{ route('admin.users.edit', [app()->getLocale(), $user] ) }}">Editar</a>
                                     </td>
                                 </tr>
                             @endif

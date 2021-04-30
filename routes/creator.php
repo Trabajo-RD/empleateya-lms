@@ -82,5 +82,10 @@ Route::group(['prefix' => '{locale}',
 
     // require __DIR__.'/auth.php';
 
+    /**
+     * Route to review the courses in revision status
+     */
+    Route::get('creator/courses/{course}/preview', [CourseController::class, 'preview'])->name('courses.preview');
+
 });
 

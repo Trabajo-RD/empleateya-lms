@@ -41,7 +41,7 @@ class CoursePolicy
     }
 
     /**
-     *Check if an instructor is modifying a course created by another instructor
+     * Prevent an instructor/creator from being able to modify a course created by another
      */
     public function dictated( User $user, Course $course){
 

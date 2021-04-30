@@ -25,13 +25,13 @@
 
                         @if( !is_null($item->information ) )
                             <p class="text-sm mb-6 {{ ($item->content_color != '' && $item->content_color != 'text-white') ? $item->content_color . '-' . $item->content_color_saturation : 'text-white' }}">{{ $item->information }}</p>
-                        @endif   
+                        @endif
 
                         @if( !is_null($item->link) )
-                            <a href="{{ $item->link }}" target="{{ $item->target }}" class=" {{ $item->link_type }} {{ ($item->link_bg_color != '' && $item->link_bg_color != 'bg-white') ? $item->link_bg_color . '-' . $item->link_bg_color_saturation : 'bg-white' }} {{ ($item->link_color != '' && $item->link_color != 'text-white') ? $item->link_color . '-' . $item->link_color_saturation : 'text-white' }}">
+                            <a href="{{ $item->link }}" target="{{ $item->target }}" class=" {{ $item->link_type }} {{ ($item->link_bg_color != '' && $item->link_bg_color != 'bg-white') ? $item->link_bg_color . '-' . $item->link_bg_color_saturation : 'bg-white' }} hover:{{ $item->link_bg_color . '-' . (((int)$item->link_bg_color_saturation) < 900 ? (int)$item->link_bg_color_saturation + 100 : $item->link_bg_color_saturation) }} hover:shadow {{ ($item->link_color != '' && $item->link_color != 'text-white') ? $item->link_color . '-' . $item->link_color_saturation : 'text-white' }}">
                                 {{ !is_null($item->link_text) ? __($item->link_text) : ''  }}
                             </a>
-                        @endif                                             
+                        @endif
 
                     </div>
                 </div>

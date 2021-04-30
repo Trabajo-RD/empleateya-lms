@@ -72,12 +72,16 @@
 
                     <hr class="my-6">
 
+                    <a href="{{ route('instructor.courses.preview', [app()->getLocale(), $course]) }}" target="_blank" class="btn bg-gray-300 text-gray-700 block w-full mb-4 text-center hover:shadow">
+                        {{ __('Preview') }}
+                    </a>
+
                     @switch($course->status)
                         @case(1)
                             <!-- Request change course status -->
                             <form action="{{ route('instructor.courses.status', [app()->getLocale(), $course]) }}" method="POST">
                                 @csrf
-                                <button type="submit" class="btn btn-accent shadow">Solicitar revisión</button>
+                                <button type="submit" class="btn btn-accent w-full shadow">Solicitar revisión</button>
                             </form>
                             @break
                         @case(2)

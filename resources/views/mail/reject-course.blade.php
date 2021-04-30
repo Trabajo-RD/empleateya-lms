@@ -7,32 +7,43 @@
     <title>Curso rechazado</title>
 
     <style>
-        h1 {
+
+        a {
+            text-decoration: none;
+        }
+        .container {
+            background-color: #eef0f0;
+            padding: 2rem 24rem;
+        }
+        .card {
+            color: #333333;
+            background-color: #ffffff;
+            padding: 2rem;
+        }
+        .card-header {
+            margin-bottom: 2rem;
+        }
+        .title {
             color: #003876;
         }
-        .container, .alert {
-            padding: 8rem;
-        }
-        .alert-danger {
-            color: #721c24;
-            background-color: #f8d7da;
-            border-color: #f5c6cb;
-        }
     </style>
+
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>CAPACITATE.MT.GOB.DO</h1>
-            <p>Sistema de Gestión de Aprendizaje del Ministerio de Trabajo</p>
-        </header>
+        <div class="card">
+            <div class="card-header">
+                <header>
+                    <a href="http://capacitate.mt.gob.do/es" target="_blank">
+                        <h1 class="title">CAPACITATE RD</h1>
+                    </a>
+                </header>
+            </div>
 
-        <div>
-            <h2>Hemos rechazado este curso</h2>
-
-            <div class="alert alert-danger">
+            <div class="card-body">
+                <h2>Hemos rechazado este curso</h2>
                 <p>
-                    El curso <a href="http://empleateya-lms.test/cursos/{{$course->slug}}" target="_blank"><strong>{{$course->title}}</strong></a> para el que solicitaste revisión en nuestra plataforma LMS,
+                    El curso <strong>{{$course->title}}</strong></a> para el que solicitaste revisión en nuestra plataforma LMS,
                     ha sido rechazado.
                 </p>
                 <h3>Observaciones:</h3>
@@ -40,6 +51,11 @@
                     {!! $course->observation->body !!}
                 </p>
             </div>
+
+            <div class="card-footer">
+
+            </div>
+
         </div>
     </div>
 </body>

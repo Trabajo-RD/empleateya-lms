@@ -240,5 +240,16 @@ class CourseController extends Controller
 
     }
 
+    /**
+     * Return the view course preview
+     */
+    public function preview( $locale, Course $course ){
+
+        // $this->authorize('revision', $course );
+
+        return view('creator.courses.preview', compact('course'));
+
+    }
+
 
 }

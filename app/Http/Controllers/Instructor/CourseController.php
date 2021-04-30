@@ -231,4 +231,15 @@ class CourseController extends Controller
     public function observation( $locale, Course $course ){
         return view('instructor.courses.observation', compact('course') );
     }
+
+    /**
+     * Return the view course preview
+     */
+    public function preview( $locale, Course $course ){
+
+        // $this->authorize('revision', $course );
+
+        return view('instructor.courses.preview', compact('course'));
+
+    }
 }

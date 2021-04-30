@@ -144,58 +144,62 @@
                         </div>
                     </div>
 
-                    @can( 'enrolled', $course )
 
-                    <!-- TODO: Condition if course last lesson platform is Microsoft or Linkedin -->
-                    {{-- {{$course->url}}               --}}
+                    @if( auth()->check() && !(Auth::user()->hasRole(['Administrator', 'Manager', 'Creator', 'Instructor']) ))
 
-                        {{-- @if( $course->url != '' )
+                        @can( 'enrolled', $course )
+
+                        <!-- TODO: Condition if course last lesson platform is Microsoft or Linkedin -->
+                        {{-- {{$course->url}}               --}}
+
+                            {{-- @if( $course->url != '' )
+
+                                <!-- CTA button : user enrolled -->
+                                <a href="{{ $course->url }}" class="btn-cta btn-success btn-block mt-4 hover:shadow">Continuar con el curso</a>
+
+                            @else
+
+                                <!-- CTA button : user enrolled -->
+                                <a href="{{ route('courses.status', $course ) }}" class="btn-cta btn-success btn-block mt-4 hover:shadow">Continuar con el curso</a>
+
+                            @endif --}}
 
                             <!-- CTA button : user enrolled -->
-                            <a href="{{ $course->url }}" class="btn-cta btn-success btn-block mt-4 hover:shadow">Continuar con el curso</a>
+                            <a href="{{ route('courses.status', [app()->getLocale(), $course] ) }}" class="btn-cta btn-success btn-block mt-4 hover:shadow">{{ __('Continue with the course') }}</a>
 
                         @else
 
-                            <!-- CTA button : user enrolled -->
-                            <a href="{{ route('courses.status', $course ) }}" class="btn-cta btn-success btn-block mt-4 hover:shadow">Continuar con el curso</a>
+                            {{-- @if( $course->url != '' )
 
-                        @endif --}}
+                                <!-- CTA button : user enrolled -->
+                                <a href="{{ $course->url }}" class="btn-cta btn-accent btn-block mt-4 hover:shadow">Iniciar este curso</a>
 
-                        <!-- CTA button : user enrolled -->
-                        <a href="{{ route('courses.status', [app()->getLocale(), $course] ) }}" class="btn-cta btn-success btn-block mt-4 hover:shadow">{{ __('Continue with the course') }}</a>
+                                <!-- TODO: Register user clicks -->
 
-                    @else
+                            @else
 
-                        {{-- @if( $course->url != '' )
+                                <!-- CTA button -->
+                                <form action="{{ route('courses.enrolled', $course ) }}" method="post">
+                                    @csrf
+                                    <button type="submit" class="btn-cta btn-accent btn-block mt-4 hover:shadow">Iniciar este curso</button>
+                                </form>
+                            @endif --}}
 
-                            <!-- CTA button : user enrolled -->
-                            <a href="{{ $course->url }}" class="btn-cta btn-accent btn-block mt-4 hover:shadow">Iniciar este curso</a>
-
-                            <!-- TODO: Register user clicks -->
-
-                        @else
-
-                            <!-- CTA button -->
-                            <form action="{{ route('courses.enrolled', $course ) }}" method="post">
-                                @csrf
-                                <button type="submit" class="btn-cta btn-accent btn-block mt-4 hover:shadow">Iniciar este curso</button>
-                            </form>
-                        @endif --}}
-
-                        @if( $course->price->value == 0 )
-                            <p class="text-2xl font-bold text-gray-500 mt-3 mb-2">{{ __('Free') }}</p>
-                            <form action="{{ route('courses.enrolled', [app()->getLocale(), $course] ) }}" method="post">
-                                @csrf
-                                <button type="submit" class="btn-cta btn-accent btn-block mt-4 hover:shadow">{{ __('Start this course') }}</button>
-                            </form>
-                        @else
-                            <p class="text-2xl font-bold text-gray-500 mt-3 mb-2">US$ {{ $course->price->value }}</p>
-                            <a href="{{ route('payment.checkout', $course ) }}" class="btn-cta btn-accent btn-block hover:shadow">{{ __('Buy this course') }}</a>
-                        @endif
+                            @if( $course->price->value == 0 )
+                                <p class="text-2xl font-bold text-gray-500 mt-3 mb-2">{{ __('Free') }}</p>
+                                <form action="{{ route('courses.enrolled', [app()->getLocale(), $course] ) }}" method="post">
+                                    @csrf
+                                    <button type="submit" class="btn-cta btn-accent btn-block mt-4 hover:shadow">{{ __('Start this course') }}</button>
+                                </form>
+                            @else
+                                <p class="text-2xl font-bold text-gray-500 mt-3 mb-2">US$ {{ $course->price->value }}</p>
+                                <a href="{{ route('payment.checkout', $course ) }}" class="btn-cta btn-accent btn-block hover:shadow">{{ __('Buy this course') }}</a>
+                            @endif
 
 
 
-                    @endcan
+                        @endcan
+                    @endif
 
                 </div>
             </section>

@@ -84,7 +84,7 @@
     </div>
     <!-- course duration -->
     <div>
-        {!! Form::label('duration_in_minutes', 'Duración del curso:') !!}
+        {!! Form::label('duration_in_minutes', 'Duración en minutos:') !!}
         {!! Form::text('duration_in_minutes', null, ['class' => 'form-input block w-full mt-1' . ($errors->has('duration_in_minutes') ? ' border-red-600' : '') ]) !!}
     </div>
     @error('duration_in_minutes')
@@ -105,7 +105,7 @@
 <!-- course-title -->
 <div class="mb-4">
     {!! Form::label( 'url', 'URL Externa:' ) !!}
-    {!! Form::text('url', null, ['class' => 'form-input block w-full mt-1' . ($errors->has('url') ? ' border-red-600' : '') ]) !!}
+    {!! Form::text('url', null, ['class' => 'form-input block select-auto w-full mt-1' . ($errors->has('url') ? ' border-red-600' : '') ]) !!}
 
     @error('url')
         <span class="invalid-feedback">

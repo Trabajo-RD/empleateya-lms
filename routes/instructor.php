@@ -60,4 +60,9 @@ Route::group(['prefix' => '{locale}',
      */
     Route::get('instructor/courses/{course}/observation', [CourseController::class, 'observation'])->name('courses.observation');
 
+    /**
+     * Route to review the courses in revision status
+     */
+    Route::get('instructor/courses/{course}/preview', [CourseController::class, 'preview'])->name('courses.preview');
+
 });
