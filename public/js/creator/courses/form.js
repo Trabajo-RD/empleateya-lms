@@ -21,11 +21,11 @@ function slug(str){
 
 /* CKEDITOR ALL OPTIONS */
 
-ClassicEditor
-    .create( document.querySelector( '#summary' ) )
-    .catch( error => {
-        console.error( error );
-    } );
+// ClassicEditor
+//     .create( document.querySelector( '#summary' ) )
+//     .catch( error => {
+//         console.error( error );
+//     } );
 
 /* CKEDITOR CUSTOM OPTIONS */
 // ClassicEditor
@@ -58,4 +58,25 @@ function imageChange( event ){
 
     reader.readAsDataURL( file );
 }
+
+// Copy to clipboard the input value by the ID
+function copyToClipboard(id) {
+    document.getElementById(id).select();
+    document.execCommand('copy');
+}
+
+// Paste from clipboard
+// function pasteFromClipboard() {
+//     var text = await navigator.clipboard.readText();
+//     var input = document.getElementById('url').val('').select();
+
+//     if(document.execCommand('paste')){
+//         input = text.val();
+//     }
+//     return input;
+// }
+
+
+
+
 

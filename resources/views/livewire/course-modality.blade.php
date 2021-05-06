@@ -19,7 +19,7 @@
         <!-- Featured course in this category -->
         @if(count($featured_courses))
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-12">
-                <h2 class="text-center md:text-left font-display font-semibold text-gray-600 text-xl sm:text-2xl md:text-3xl">{{ __('Featured courses in this category') }}</h2>
+                <h2 class="text-center md:text-left font-display font-semibold text-gray-600 text-xl sm:text-2xl md:text-3xl">{{ __('Featured courses in this modality') }}</h2>
 
                 <!-- courses -->
                 <div class="px-4 sm:px-6 lg:px-8 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-8 mt-12">
@@ -50,7 +50,7 @@
         <!-- All courses with this category -->
 
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <h2 class="text-center md:text-left font-display font-semibold text-gray-600 text-xl sm:text-2xl md:text-3xl mb-6">{{ __('Courses in this category') }}</h2>
+                <h2 class="text-center md:text-left font-display font-semibold text-gray-600 text-xl sm:text-2xl md:text-3xl mb-6">{{ __('Courses in this modality') }}</h2>
 
                 <!-- options -->
                 <div class="mt-12 flex justify-between">

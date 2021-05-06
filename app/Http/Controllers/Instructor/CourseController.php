@@ -20,7 +20,7 @@ class CourseController extends Controller
     {
         // Add middleware to Resource Routes
         $this->middleware('can:LMS Leer cursos')->only('index');
-        $this->middleware('can:LMS Crear cursos')->only('create', 'store');
+        $this->middleware('can:LMS Crear cursos')->only('create', 'store', 'new');
         $this->middleware('can:LMS Actualizar cursos')->only('edit', 'update', 'goals');
         $this->middleware('can:LMS Eliminar cursos')->only('destroy');
     }
@@ -241,5 +241,9 @@ class CourseController extends Controller
 
         return view('instructor.courses.preview', compact('course'));
 
+    }
+
+    public function new( Request $request, $locale ){
+        return view('instructor.courses.new');
     }
 }

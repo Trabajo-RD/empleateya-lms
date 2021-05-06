@@ -77,12 +77,12 @@ Route::group([
     /**
      * Route to enroll users
      */
-    Route::post('courses/{course}/enrolled', [CourseController::class, 'enrolled'])->middleware('auth')->name('courses.enrolled');
+    Route::post('courses/{course}/enrolled', [CourseController::class, 'enrolled'])->middleware(['auth', 'verified'])->name('courses.enrolled');
 
     /**
      * Route to control the user enrolled courses
      */
-    Route::get('course-status/{course}', CourseStatus::class)->name('courses.status')->middleware('auth');
+    Route::get('course-status/{course}', CourseStatus::class)->name('courses.status')->middleware(['auth', 'verified']);
 
     // Auth::routes(['verify' => true]);
 

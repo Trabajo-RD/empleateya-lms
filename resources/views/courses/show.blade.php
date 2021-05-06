@@ -140,7 +140,7 @@
                                         <p class="text-md text-gray-600 mr-2">Instructor</p>
                                     @endif
                                 @endforeach
-                            <a class="text-blue-400 text-sm font-bold" href="">{{ '@' . Str::slug( $course->editor->name . $course->editor->lastname, '' ) }}</a>
+                            <a class="text-gray-400 hover:text-gray-600 text-sm font-bold" href="mailto:{{ $course->editor->email }}" target="_blank"><i class="far fa-envelope fa-lg"></i></a>
                         </div>
                     </div>
 

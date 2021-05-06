@@ -31,7 +31,7 @@ use App\Http\Controllers\Admin\SlideController;
 Route::group(['prefix' => '{locale}',
     'as' => 'admin.',
     'where' => ['locale', '[a-zA-Z]{2}'],
-    'middleware' => ['setlocale', 'language', 'default.language']
+    'middleware' => ['setlocale', 'language', 'default.language', 'verified']
 ], function(){
 
     Route::get('/admin', [HomeController::class, 'index'])->middleware('can:LMS Ver Dashboard')->name('cpanel');
@@ -83,9 +83,19 @@ Route::group(['prefix' => '{locale}',
     Route::resource('admin/partners', PartnerController::class)->names('partners');
 
     /**
+     * Route for list all courses
+     */
+    Route::get('admin/courses', [CourseController::class, 'index'])->name('courses.index');
+
+    /**
+     * Route for list all courses
+     */
+    Route::get('admin/courses/published', [CourseController::class, 'published'])->name('courses.published');
+
+    /**
      * Route for courses in revision
      */
-    Route::get('courses/revision', [CourseController::class, 'index'])->name('courses.index');
+    Route::get('courses/revision', [CourseController::class, 'index'])->name('courses.revision');
 
     /**
      * Route to review the courses in revision status
@@ -96,6 +106,11 @@ Route::group(['prefix' => '{locale}',
      * Route to aprove courses to publish
      */
     Route::post('courses/{course}/approved', [CourseController::class, 'approved'])->name('courses.approved');
+
+    /**
+     * Route to aprove courses to publish
+     */
+    Route::post('courses/{course}/status', [CourseController::class, 'changeStatus'])->name('courses.status');
 
     /**
      * Route to display the course observation form

@@ -23,7 +23,7 @@
                         wire:model.debounce.500ms="search"
                         x-on:keydown.window.prevent.slash="$refs.searchField.focus()"
                         x-on:keyup.escape="isTyped = false; $refs.searchField.blur()">
-                <a class="btn btn-primary ml-2" href="{{ route('instructor.courses.create', app()->getLocale() ) }}">Nuevo Curso</a>
+                <a class="btn btn-primary ml-2" href="{{ route('instructor.courses.new', app()->getLocale() ) }}">Nuevo Curso</a>
             </div>
         </div>
 

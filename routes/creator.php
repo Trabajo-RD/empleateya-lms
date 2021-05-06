@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Creator\CourseController;
+use App\Http\Controllers\Creator\MicrosoftController;
+use App\Http\Controllers\Creator\LinkedinController;
 use App\Http\Livewire\Creator\CoursesCurriculum;
 use App\Http\Livewire\Creator\CoursesStudents;
 use App\Http\Controllers\HomeController;
@@ -25,7 +27,7 @@ use App\Http\Controllers\HomeController;
 Route::group(['prefix' => '{locale}',
     'as' => 'creator.',
     'where' => ['locale', '[a-zA-Z]{2}'],
-    'middleware' => ['setlocale', 'language']
+    'middleware' => ['setlocale', 'language', 'verified']
 ], function(){
 
 
@@ -34,6 +36,24 @@ Route::group(['prefix' => '{locale}',
      * Route to manage creator courses using a Livewire component
      */
     Route::resource('creator/courses', CourseController::class)->names('courses');
+
+    /**
+     * Route to display the diferent platform options to create a course
+     */
+    Route::get('creator/new/courses', [CourseController::class, 'new'])->name('courses.new');
+
+    /**
+     * Route to manage Microsoft Learn Courses
+     */
+    // Route::get('creator/courses/microsoft/create', [CourseController::class, 'createMicrosoftLearnCourse'])->name('courses.microsoft.create');
+    Route::resource('creator/microsoft/courses', MicrosoftController::class)->names('courses.microsoft');
+
+    Route::resource('creator/linkedin/courses', LinkedinController::class)->names('courses.linkedin');
+
+    /**
+     * Route to get course information using an external URL with AJAX
+     */
+    Route::post('creator/courses/get', [CourseController::class, 'get'])->name('courses.get.info');
 
     /**
      * Route to manage the LMS Frontend content
@@ -89,3 +109,10 @@ Route::group(['prefix' => '{locale}',
 
 });
 
+
+/**
+ * Route to request Microsoft Learn and LinkedIn Learning API
+ */
+Route::post('creator/courses/microsoft/request', [MicrosoftController::class, 'requestCourseData'])->name('creator.courses.microsoft.request');
+
+Route::post('creator/courses/linkedin/request', [LinkedinController::class, 'requestCourseData'])->name('creator.courses.linkedin.request');

@@ -5,11 +5,13 @@
 <article class="card flex flex-col">
 
     <!-- card image -->
-    @isset( $course->image )
-        <img src="{{ Storage::url( $course->image->url ) }}" alt="" class="h-36 w-full object-cover" />
-    @else
-        <img id="picture" class="h-36 w-full object-cover" src="{{ asset('images/courses/default.jpg') }}" alt="" >
-    @endisset
+    <div class="h-36 overflow-hidden">
+        @isset( $course->image )
+            <img src="{{ Storage::url( $course->image->url ) }}" alt="" class="h-36 w-full object-cover transition duration-300 transform hover:scale-125" />
+        @else
+            <img id="picture" class="h-36 w-full object-cover transition duration-300 transform hover:scale-125" src="{{ asset('images/courses/default.jpg') }}" alt="" >
+        @endisset
+    </div>
 
     <!-- card body -->
     <div class="card-body flex-1 flex flex-col">

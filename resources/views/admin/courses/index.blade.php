@@ -1,13 +1,16 @@
 @extends('adminlte::page')
 
-@section('title', 'Empleateya LMS')
+@section('title', 'Capacítate')
 
 @section('content_header')
-    <h1 class="text-dark">Cursos en revisión</h1>
+    <h1 class="text-dark">Cursos</h1>
 @stop
 
 @section('content')
-    <p class="text-secondary">Listado de todos los cursos que se encuentran pendientes de aprobación.</p>
+
+    @livewire('admin.courses-index')
+
+    {{-- <p class="text-secondary">Listado de todos los cursos que se encuentran registrados en la plataforma.</p>
 
     @if( session('success') )
 
@@ -23,9 +26,11 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Nombre</th>
+                        <th>Título</th>
                         <th>Categoría</th>
-                        <th></th>
+                        <th>Usuario</th>
+                        <th>Status</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -34,9 +39,9 @@
                             <td width="10px">{{ $course->id }}</td>
                             <td>{{ $course->title }}</td>
                             <td>{{ $course->category->name }}</td>
-                            <td width="12%">
-                                <a class="btn btn-outline-secondary" href="{{ route('admin.courses.show', $course ) }}">Revisar</a>
-                            </td>
+                            <td>{{ $course->editor->name }} {{ $course->editor->lastname }}</td>
+                            <td>{{ ($course->status == '2') ? 'Publicado' : 'Borrador' }}</td>
+
                         </tr>
                     @empty
                         <tr>
@@ -54,20 +59,9 @@
         <div class="card-footer">
             {{ $courses->links('vendor.pagination.bootstrap-4') }}
         </div>
-    </div>
-
-    {{-- <div class="card">
-        <div class="card-body">
-           <!-- TODO: uncomment if Microsoft Learning API is enabled -->
-           @php echo print_r($microsoft_courses['results'][0]) @endphp
-
-            @foreach( $microsoft_courses['results'] as $ms_course)
-
-                    <p>{{$ms_course['url']}}</p>
-
-            @endforeach
-        </div>
     </div> --}}
+
+
 @stop
 
 @section('css')

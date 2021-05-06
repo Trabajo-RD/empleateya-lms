@@ -13,7 +13,7 @@
                         x-on:input.debounce.400ms="isTyped = ($event.target.value != '')"
                         placeholder="{{ __('What do you want to learn?') }}"
                         autocomplete="off"
-                        wire:model.debounce.500ms="search"
+                        wire:model="search"
                         x-on:keydown.window.prevent.slash="$refs.searchField.focus()"
                         x-on:keyup.escape="isTyped = false; $refs.searchField.blur()">
 
@@ -30,8 +30,8 @@
     @if ( $search )
         <ul class="absolute z-50 left-0 w-full bg-white mt-1 rounded-lg overflow-hidden shadow-lg border-gray-300">
             @forelse( $this->results as $result )
-                <li class="leading-10 px-5 text-sm cursor-pointer hover:bg-gray-200">
-                    <a href="{{ route('courses.show', $result ) }}">
+                <li class="leading-10 px-5 text-md cursor-pointer hover:bg-gray-200">
+                    <a href="{{ route('courses.show', [app()->getLocale(), $result] ) }}">
                         {{ $result->title }}
                     </a>
                 </li>

@@ -11,10 +11,30 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ApprovedCourse;
 use App\Mail\RejectCourse;
-
 class CourseController extends Controller
 {
+
     public function index(){
+
+        // Courses index are managed by a livewire controller
+        // $courses = Course::orderBy('status', 'DESC')
+        //     ->paginate(20);
+
+
+       return view('admin.courses.index');
+
+        // TODO: uncomment to return Microsoft Learning API data
+        // return view('admin.courses.index', compact('courses', 'microsoft_courses'));
+    }
+
+    /**
+     * Return view to display published courses
+     */
+    public function published(){
+        return view('admin.courses.published');
+    }
+
+    public function revision(){
 
         // // TODO: Connect to Microsoft Learning API
         //  $response = Http::get('https://docs.microsoft.com/api/contentbrowser/search?environment=prod&locale=es-es&facet=roles&facet=levels&facet=products&facet=resource_type&%24filter=((resource_type%20eq%20%27learning%20path%27))&%24orderBy=popularity%20desc%2Clast_modified%20desc%2Ctitle&%24top=30&showHidden=false');
@@ -25,7 +45,7 @@ class CourseController extends Controller
         $courses = Course::where('status', 2)->paginate();
 
 
-       return view('admin.courses.index', compact('courses'));
+       return view('admin.courses.revision', compact('courses'));
 
         // TODO: uncomment to return Microsoft Learning API data
         // return view('admin.courses.index', compact('courses', 'microsoft_courses'));
@@ -110,5 +130,9 @@ class CourseController extends Controller
         // Mail::to( $course->editor->email )->queue( $mail );
 
         return redirect()->route('admin.courses.index')->with('success', 'The course has been rejected  El curso ha sido rechazado');
+    }
+
+    public function changeStatus(Request $request){
+        return $request;
     }
 }

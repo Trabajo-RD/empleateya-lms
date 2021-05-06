@@ -96,8 +96,58 @@ class AppServiceProvider extends ServiceProvider
             //     'active'      => ['admin/items*'],
             // ]);
 
-            // Manage roles
+            // List all courses for Admin users"
             $event->menu->addAfter('dashboard', [
+                'key'           => 'admin_courses',
+                'text'          => 'Cursos',
+                // 'url'           => route('admin.courses.index' ), // url/route
+                'icon'          => 'fas fa-laptop mr-1',
+                'can'           => 'LMS Ver Dashboard',
+                'submenu'       => [
+                    [
+                        'key'   => 'admin_all_courses',
+                        'text'  => 'Todos los cursos',
+                        'url'   => route('admin.courses.index'),
+                        'icon'  => 'fas fa-laptop mr-1',
+                    ],
+                    [
+                        'key'   => 'admin_published_courses',
+                        'text'  => 'Publicados',
+                        'url'   => route('admin.courses.published'),
+                        'icon'  => 'fas fa-check-circle mr-1',
+                    ],
+                    // [
+                    //     'key'   => 'course_revision',
+                    //     'text'  => 'Cursos en revisión',
+                    //     'url'   => route('admin.courses.revision'),
+                    //     'icon'  => 'fas fa-search mr-1',
+                    // ],
+                ]
+            ]);
+
+
+
+            // Dashboard for Designer users
+            // $event->menu->add([
+            //     'key'   => 'designer_dashboard',
+            //     'text'  => 'Dashboard',
+            //     'url' => route( 'designer.cpanel' ),
+            //     'icon'  => 'fas fa-fw fa-tachometer-alt',
+            //     'can'   => 'LMS Administrar diseno',
+            // ]);
+
+            // List all courses for Designer users
+            // $event->menu->addAfter('dashboard', [
+            //     'key'           => 'published_courses',
+            //     'text'          => 'Cursos',
+            //     'url'           => route('contributor.courses.index' ), // url/route
+            //     'icon'          => 'fas fa-laptop mr-1',
+            //     'active'        => ['contributor/courses*'],
+            //     'can'           => 'LMS Monitorear cursos',
+            // ]);
+
+            // Manage roles
+            $event->menu->addAfter('admin_courses', [
                 'key'         => 'roles',
                 'text'        => 'Roles',
                 'url'         => route( 'admin.roles.index' ),
@@ -136,8 +186,8 @@ class AppServiceProvider extends ServiceProvider
             $event->menu->addAfter('course_options', [
                 'key'           => 'course_revision',
                 'text'          => 'Cursos en revisión',
-                'url'           => route('admin.courses.index' ), // url/route
-                'icon'          => 'fas fa-laptop mr-1',
+                'url'           => route('admin.courses.revision' ), // url/route
+                'icon'          => 'fas fa-search mr-1',
             ]);
 
 
