@@ -1,7 +1,7 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 # empleateya-lms
-Configuración
+# Configuración (Dev)
 
 ## Instalar XAMPP:
 https://www.apachefriends.org/es/index.html
@@ -61,3 +61,31 @@ npm install
   
 ## Ejecutar las migraciones:
 * php artisan migrate:fresh --seed 
+
+# Producción 
+
+## Instalación
+* Abrir la consola
+* Clonar el repositorio
+* Dirigirse hacia la raiz del proyecto
+* Ejecutar el comando: composer install 
+* Renombrar el archivo .env y añadir nuestros ajustes
+* Entre los ajustes en .env añadir nuestras variables APP_URL y DB_DATABASE
+* Generar nuestra APP_KEY ejecutando el comando: php artisan key:generate
+* Generar el acceso directo de nuestra carpeta storage ejecutando: php artisan storage:link
+* Ejecutar las migraciones con los seeders: php artisan migrate:fresh --seed
+
+## Solucion de errores (comandos) 
+* Error de permisos en la carpeta storage (Apache): chmod -R 777 storage
+* Error Bootstrap cache (Apache): chmod -R 777 bootstrap/cache/
+* Limpiar cache (vistas): php artisan view:clear 
+* Limpiar cache: php artisan cache:clear
+* Limpiar cache (rutas): php artisan route:clear
+* Limpiar cache (Configuracion): php artisan config:clear
+* Limpiar y cargar configuracion: php artisan config:cache
+
+## Comandos de la app 
+* Enviar email a usuarios inactivos: php artisan email:inactive-users
+
+## Comandos Laravel 
+* Ejecutar CRON: php artisan schedule:run

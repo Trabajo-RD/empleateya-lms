@@ -23,8 +23,8 @@ class User extends Authenticatable implements MustVerifyEmail
     use Notifiable;
     use TwoFactorAuthenticatable;
 
-    const IDENTITY = 'CED';
-    const PASSPORT = 'PAS';
+    //const IDENTITY = 'CED';
+    //const PASSPORT = 'PAS';
 
     /**
      * The attributes that are mass assignable.

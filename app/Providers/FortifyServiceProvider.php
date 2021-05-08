@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Http\Requests\LoginRequest;
+use App\Events\LoginHistory;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
 class FortifyServiceProvider extends ServiceProvider
@@ -38,17 +40,41 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
+
+        /**
+         * Route to request email verification
+         */
         Fortify::verifyEmailView( function(){
             return view('auth.verify-email');
         });
+
+        // Fortify::confirmPasswordView( function(){
+        //     return view('auth.confirm-password');
+        // });
+
+        // Fortify::twoFactorChallengeView(function(){
+        //     return view('auth.two-factor-challenge');
+        // });
+
+        // Fortify::resetPasswordView( function($request){
+        //     return view('auth.reset-password', ['request' => $request]);
+        // });
 
         Fortify::authenticateUsing(function(LoginRequest $request){
             $user = User::where('email', $request->identity)
                 ->orWhere('document_id', $request->identity)->first();
 
             if( $user && Hash::check($request->password, $user->password)){
+
+                $user->last_login = Carbon::now();
+                $user->save();
+
+                // Event to save the user last login
+                event(new LoginHistory($user));
+
                 return $user;
             }
+
         });
 
         RateLimiter::for('login', function (Request $request) {
