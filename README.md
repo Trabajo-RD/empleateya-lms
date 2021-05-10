@@ -88,4 +88,6 @@ npm install
 * Enviar email a usuarios inactivos: php artisan email:inactive-users
 
 ## Comandos Laravel 
-* Ejecutar CRON: php artisan schedule:run
+* Mostrar listado de tareas: php artisan schedule:list
+* Ejecutar tareas programadas: php artisan schedule:run
+

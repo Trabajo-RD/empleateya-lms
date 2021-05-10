@@ -3,6 +3,7 @@
 @section('title', 'Capacítate')
 
 @section('content_header')
+    <a href="{{ route('admin.courses.excel.export' ) }}" class="btn float-right text-white" style="background-color:#1D6F42;"><i class="fas fa-share-square mr-1"></i>Exportar</a>
     <h1 class="text-dark">Cursos</h1>
 @stop
 

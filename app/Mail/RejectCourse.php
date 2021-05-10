@@ -11,18 +11,20 @@ use App\Models\Course;
 
 class RejectCourse extends Mailable
 {
-    public $course;
-
     use Queueable, SerializesModels;
+
+    protected $course;
+    protected $observation;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct( Course $course )
+    public function __construct( Course $course, $observation )
     {
         $this->course = $course;
+        $this->observation = $observation;
     }
 
     /**
@@ -33,6 +35,10 @@ class RejectCourse extends Mailable
     public function build()
     {
         return $this->view('mail.reject-course')
-            ->subject('Curso rechazado');
+            ->subject('Curso rechazado')
+            ->with([
+                'course' => $this->course['title'],
+                'observation' => $this->observation
+            ]);
     }
 }

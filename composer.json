@@ -23,6 +23,7 @@
         "laravel/ui": "^3.2",
         "laravelcollective/html": "^6.2",
         "livewire/livewire": "^2.0",
+        "maatwebsite/excel": "^3.1",
         "paypal/paypal-checkout-sdk": "1.0.1",
         "paypal/rest-api-sdk-php": "^1.14",
         "spatie/laravel-permission": "^4.0"

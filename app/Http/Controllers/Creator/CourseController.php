@@ -228,7 +228,7 @@ class CourseController extends Controller
             $course->observation->delete();
         }
 
-        return redirect()->route( 'creator.courses.edit', [$locale, $course] );
+        return redirect()->route( 'creator.courses.edit', compact('locale', 'course') );
     }
 
     /**
@@ -236,7 +236,7 @@ class CourseController extends Controller
      */
     public function observation( $locale, Course $course ){
 
-        return view('creator.courses.observation', compact( 'course' ) );
+        return view('creator.courses.observation', compact( 'locale', 'course' ) );
 
     }
 
@@ -264,7 +264,7 @@ class CourseController extends Controller
         if( $request->ajax() ){
             return "Hola";
         }
-        
+
     }
 
 

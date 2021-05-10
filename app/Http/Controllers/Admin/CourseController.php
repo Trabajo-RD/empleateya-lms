@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\CoursesExport;
+use App\Exports\PublishedCoursesExport;
+use App\Exports\UsersExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Course;
@@ -11,6 +14,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ApprovedCourse;
 use App\Mail\RejectCourse;
+use Maatwebsite\Excel\Facades\Excel;
 class CourseController extends Controller
 {
 
@@ -42,10 +46,10 @@ class CourseController extends Controller
         // Spicified the data format to use
         // $microsoft_courses = $response->json();
 
-        $courses = Course::where('status', 2)->paginate();
+        // $courses = Course::where('status', 2)->paginate();
 
 
-       return view('admin.courses.revision', compact('courses'));
+       return view('admin.courses.revision');
 
         // TODO: uncomment to return Microsoft Learning API data
         // return view('admin.courses.index', compact('courses', 'microsoft_courses'));
@@ -54,18 +58,21 @@ class CourseController extends Controller
     /**
      * Return the course in revision status
      */
-    public function show( $locale, Course $course ){
+    public function show($locale, Course $course ){
+
+        //return $locale;
 
         $this->authorize('revision', $course );
 
-        return view('admin.courses.show', compact('course'));
+        return view('admin.courses.show', compact('locale', 'course'));
 
     }
 
     /**
      *
      */
-    public function approved( $locale, Course $course ){
+    public function approved( Course $course ){
+
 
         $this->authorize('revision', $course );
 
@@ -79,6 +86,8 @@ class CourseController extends Controller
         // if( !$course->sections || !$course->goals || !$course->requirements || !$course->image ){
         //     return back()->with('info', __('You cannot publish a course that is not properly completed'));
         // }
+
+        $locale = app()->getLocale();
 
         $course->status = 3;
 
@@ -94,7 +103,8 @@ class CourseController extends Controller
         // Mail::to($course->editor->email)->queue($mail);
 
 
-        return redirect()->route('admin.courses.index')->with('success', __('The course has been successfully approved'));
+
+        return redirect()->route('admin.courses.revision', compact('locale'))->with('success', __('The course has been successfully approved'));
 
     }
 
@@ -121,7 +131,7 @@ class CourseController extends Controller
         $course->save();
 
         // Send reject email with observation to course dictated user
-        $mail = new RejectCourse($course);
+        $mail = new RejectCourse($course, $course->observation->body);
 
         // Send reject email inmediately
         Mail::to( $course->editor->email )->send( $mail );
@@ -129,10 +139,23 @@ class CourseController extends Controller
         // Put the email in queue in jobs database table
         // Mail::to( $course->editor->email )->queue( $mail );
 
-        return redirect()->route('admin.courses.index')->with('success', 'The course has been rejected  El curso ha sido rechazado');
+        return redirect()->route('admin.courses.revision')->with('success', 'The course has been rejected  El curso ha sido rechazado');
     }
 
     public function changeStatus(Request $request){
         return $request;
+    }
+
+    /**
+     * Export to excel the ModelExport class
+     */
+    public function exportAllCoursesToExcel(){
+        return Excel::download(new CoursesExport, 'capacitate.courses.all.xlsx');
+    }
+    public function exportAllPublishedCoursesToExcel(){
+        return Excel::download(new PublishedCoursesExport, 'capacitate.published.courses.all.xlsx');
+    }
+    public function exportAllUsersToExcel(){
+        return Excel::download(new UsersExport, 'capacitate.users.all.xlsx');
     }
 }

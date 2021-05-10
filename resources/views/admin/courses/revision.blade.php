@@ -17,7 +17,9 @@
 
     @endif
 
-    <div class="card">
+    @livewire('admin.courses-revision')
+
+    {{-- <div class="card">
         <div class="card-body">
             <table class="table table-striped">
                 <thead>
@@ -54,7 +56,7 @@
         <div class="card-footer">
             {{ $courses->links('vendor.pagination.bootstrap-4') }}
         </div>
-    </div>
+    </div> --}}
 
     {{-- <div class="card">
         <div class="card-body">

@@ -58,8 +58,8 @@
                         </li>
 
                         @if( $course->observation )
-                            <li class="flex leading-7 mb-1 border-l-4 @routeIs('creator.courses.observation', $course) border-blue-400 @else border-transparent @endif pl-2">
-                                <a href="{{ route('creator.courses.observation', $course) }}">Observaciones</a>
+                            <li class="flex leading-7 mb-1 border-l-4 @routeIs('creator.courses.observation', [app()->getLocale(), $course]) border-blue-400 @else border-transparent @endif pl-2">
+                                <a href="{{ route('creator.courses.observation', [app()->getLocale(), $course]) }}">Observaciones</a>
                                 <!-- Tailwind animate ping -->
                                 <span class="flex h-3 w-3">
                                     <span class="animate-ping h-3 w-3 absolute inline-flex rounded-full bg-red-400 opacity-75"></span>

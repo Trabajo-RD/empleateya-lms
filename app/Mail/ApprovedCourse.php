@@ -11,10 +11,10 @@ use App\Models\Course;
 
 class ApprovedCourse extends Mailable
 {
-
-    public $course;
-
     use Queueable, SerializesModels;
+
+    protected $course;
+
 
     /**
      * Create a new message instance.
@@ -34,6 +34,9 @@ class ApprovedCourse extends Mailable
     public function build()
     {
         return $this->view('mail.approved-course')
-            ->subject('Curso aprobado');
+            ->subject('Curso aprobado')
+            ->with([
+                'course' => $this->course['title']
+            ]);
     }
 }

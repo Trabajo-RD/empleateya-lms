@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Instructor;
 use Livewire\Component;
 use App\Models\Course;
 use Livewire\WithPagination;
+use App\Jobs\SendLoginReminderEmailJob;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
@@ -31,12 +32,15 @@ class CoursesStudents extends Component
     {
         $students = $this->course->students()
                     ->where('name', 'LIKE', '%' . $this->search . '%')
-                    //->orWhere('document_id', 'LIKE', '%' . $this->search . '%')
-                    //->orWhere('email', 'LIKE', '%' . $this->search . '%')
+                    ->orWhere('lastname', 'LIKE', '%' . $this->search . '%')
+                    ->orWhere('document_id', 'LIKE', '%' . $this->search . '%')
+                    ->orWhere('email', 'LIKE', '%' . $this->search . '%')
                     ->paginate(10);
 
-
-
         return view('livewire.instructor.courses-students', compact('students'))->layout('layouts.instructor', ['course' => $this->course]);
+    }
+
+    public function reminder( $email ){
+        SendLoginReminderEmailJob::dispatch( $email, 'Recordatorio de inicio de sesión' );
     }
 }

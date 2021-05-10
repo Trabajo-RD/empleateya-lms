@@ -30,19 +30,25 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
 
-        // Send notification email when users not loged before "7 days"
+        //Send notification email when users not loged before "7 days"
         $schedule->command('email:inactive-users')
             ->weekly();
+            // ->everyMinute();
 
-        $now = Carbon::now();
-        $month = $now->format('F');
-        $year = $now->format('yy');
+        // $now = Carbon::now();
+        // $month = $now->format('F');
+        // $year = $now->format('yy');
 
-        $fourthFridayMonthly = new Carbon('fourth friday of ' . $month . ' ' . $year);
+        // $fourthFridayMonthly = new Carbon('fourth friday of ' . $month . ' ' . $year);
 
-        // $schedule->job(new SendLoginReminderEmailJob)->monthlyOn($fourthFridayMonthly->format('d'), '16:30');
+        // $schedule->job(new SendLoginReminderEmailJob)->monthlyOn($fourthFridayMonthly->format('d'), '13:30');
 
-        $schedule->job(new SendLoginReminderEmailJob)->everyMinute();
+        // $schedule->job(new SendLoginReminderEmailJob)
+        //     //->dailyAt('13:55')
+        //     // ->everyMinute()
+        //     ->everyTwoMinutes()
+        //     //->between('8:00', '17:00')
+        //     ->timezone('America/Santo_Domingo');
 
 
     }

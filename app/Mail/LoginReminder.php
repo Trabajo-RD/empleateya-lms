@@ -6,21 +6,23 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use App\Models\User;
 
 class LoginReminder extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $details;
+    protected $title;
+
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct( $details )
+    public function __construct( $title )
     {
-        $this->details = $details;
+        $this->title = $title;
     }
 
     /**
@@ -30,8 +32,12 @@ class LoginReminder extends Mailable
      */
     public function build()
     {
-        return $this->subject('Recordatorio de inicio de sesión')
+        return $this->from('capacitate@mt.gob.do', 'Capacítate RD')
+            ->subject($this->title)
             ->view('mail.login-reminder')
-            ->from('capacitate@mt.gob.do');
+            ->with([
+                'title' => $this->title
+            ]);
+
     }
 }

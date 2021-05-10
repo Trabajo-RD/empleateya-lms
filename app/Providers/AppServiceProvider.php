@@ -116,14 +116,21 @@ class AppServiceProvider extends ServiceProvider
                         'url'   => route('admin.courses.published'),
                         'icon'  => 'fas fa-check-circle mr-1',
                     ],
-                    // [
-                    //     'key'   => 'course_revision',
-                    //     'text'  => 'Cursos en revisión',
-                    //     'url'   => route('admin.courses.revision'),
-                    //     'icon'  => 'fas fa-search mr-1',
-                    // ],
+                    [
+                        'key'   => 'admin_course_revision',
+                        'text'  => 'Cursos en revisión',
+                        'url'   => route('admin.courses.revision'),
+                        'icon'  => 'fas fa-search mr-1',
+                    ],
                 ]
             ]);
+
+            // $event->menu->addAfter('course_options', [
+            //     'key'           => 'admin_course_revision',
+            //     'text'          => 'Cursos en revisión',
+            //     'url'           => route('admin.courses.revision' ), // url/route
+            //     'icon'          => 'fas fa-search mr-1',
+            // ]);
 
 
 
@@ -183,17 +190,17 @@ class AppServiceProvider extends ServiceProvider
             ]);
 
             // Courses with status "REVISION"
-            $event->menu->addAfter('course_options', [
-                'key'           => 'course_revision',
-                'text'          => 'Cursos en revisión',
-                'url'           => route('admin.courses.revision' ), // url/route
-                'icon'          => 'fas fa-search mr-1',
-            ]);
+            // $event->menu->addAfter('course_options', [
+            //     'key'           => 'admin_course_revision',
+            //     'text'          => 'Cursos en revisión',
+            //     'url'           => route('admin.courses.revision' ), // url/route
+            //     'icon'          => 'fas fa-search mr-1',
+            // ]);
 
 
 
             // Manage Categories
-            $event->menu->addAfter('course_revision', [
+            $event->menu->addAfter('course_options', [
                 'key'           => 'categories',
                 'text'          => 'categories_trans_key',
                 'url'           => route('admin.categories.index' ), // url/route

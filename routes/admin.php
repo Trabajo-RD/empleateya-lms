@@ -95,17 +95,17 @@ Route::group(['prefix' => '{locale}',
     /**
      * Route for courses in revision
      */
-    Route::get('courses/revision', [CourseController::class, 'index'])->name('courses.revision');
+    Route::get('admin/courses/revision', [CourseController::class, 'revision'])->name('courses.revision');
 
     /**
      * Route to review the courses in revision status
      */
-    Route::get('courses/{course}', [CourseController::class, 'show'])->name('courses.show');
+    Route::get('courses/{course}/show', [CourseController::class, 'show'])->name('courses.show');
 
-    /**
-     * Route to aprove courses to publish
-     */
-    Route::post('courses/{course}/approved', [CourseController::class, 'approved'])->name('courses.approved');
+    // /**
+    //  * Route to aprove courses to publish
+    //  */
+    // Route::post('courses/{course}/approved', [CourseController::class, 'approved'])->name('courses.approved');
 
     /**
      * Route to aprove courses to publish
@@ -123,3 +123,18 @@ Route::group(['prefix' => '{locale}',
     Route::post('courses/{course}/reject', [CourseController::class, 'reject'])->name('courses.reject');
 
 });
+
+
+    /**
+     * Route to aprove courses to publish
+     */
+    Route::post('courses/{course}/approved', [CourseController::class, 'approved'])->name('admin.courses.approved');
+
+    /**
+     * Route to export a ModelExport list to excel
+     */
+    Route::get('courses/excel/courses-export', [CourseController::class, 'exportAllCoursesToExcel'])->name('admin.courses.excel.export');
+    Route::get('courses/excel/published-courses-export', [CourseController::class, 'exportAllPublishedCoursesToExcel'])->name('admin.published.courses.excel.export');
+    Route::get('users/excel/users-export', [CourseController::class, 'exportAllUsersToExcel'])->name('admin.users.excel.export');
+
+
