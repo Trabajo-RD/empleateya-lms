@@ -75,7 +75,8 @@ npm install
 * Generar el acceso directo de nuestra carpeta storage ejecutando: php artisan storage:link
 * Ejecutar las migraciones con los seeders: php artisan migrate:fresh --seed
 
-## Solucion de errores (comandos) 
+## Solucion de errores (ajustes, comandos) 
+* Caracteres especiales: Cambiar cotejamiento de la base de datos a: utf8mb4_general_ci
 * Error de permisos en la carpeta storage (Apache): chmod -R 777 storage
 * Error Bootstrap cache (Apache): chmod -R 777 bootstrap/cache/
 * Limpiar cache (vistas): php artisan view:clear 

@@ -1,12 +1,12 @@
 @extends('adminlte::page')
 
-@section('title', 'Empleateya LMS')
+@section('title', 'Capacítate RD')
 
 @section('plugins.Sweetalert2', true)
 
 @section('content_header')
     <a href="{{ route('admin.roles.create', app()->getLocale() ) }}" class="btn btn-primary float-right"><i class="fas fa-plus mr-1"></i>Nuevo rol</a>
-    <h1 class="text-primary"><i class="fas fa-users-cog mr-2"></i>Listado de Roles</h1>
+    <h1 class="text-dark">Roles</h1>
 @stop
 
 @section('content')

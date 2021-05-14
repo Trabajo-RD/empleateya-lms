@@ -1,6 +1,6 @@
 <div>
 
-    @foreach ( $section->lessons as $item )
+    @foreach ( $section->lessons as $key => $item )
 
         <article class="card mt-4" x-data="{open: false}">
             <div class="card-body">
@@ -46,7 +46,7 @@
                     </form>
                 @else
                     <header>
-                        <h3 x-on:click="open = !open" class="cursor-pointer"><i class="far fa-play-circle mr-2"></i><strong>Lección:</strong> {{$item->name}}</h3>
+                        <h3 x-on:click="open = !open" class="cursor-pointer"><i class="far fa-play-circle mr-2"></i><strong>Unidad  {{ ($key + 1) }}:</strong> {{$item->name}}</h3>
                     </header>
 
                     <div x-show="open">
@@ -81,17 +81,17 @@
     <div class="mt-6" x-data="{ open: false }">
         <a x-show="!open" x-on:click="open = true" class="flex items-center cursor-pointer mb-2">
             <i class="far fa-plus-square text-2xl text-blue-500 mr-2"></i>
-            <span class="text-blue-500 font-bold">Agregar nueva lección</span>
+            <span class="text-blue-500 font-bold">Añadir unidad</span>
         </a>
 
         <article class="card" x-show="open">
             <div class="card-body">
-                <h2 class="text-xl font-bold mb-4">Agregar nueva lección</h2>
+                <h2 class="text-xl font-bold mb-4">Añadir nueva unidad</h2>
 
                 <div class="mb-4">
                     <!-- lesson name input -->
                         <div class="flex items-center">
-                            <label class="w-32"><i class="far fa-play-circle mr-2"></i>Nombre:</label>
+                            <label class="w-32"><i class="far fa-play-circle mr-2"></i>{{ __('Title') }}:</label>
                             <input type="text" wire:model="name" class="form-input w-full rounded {{($errors->has('name') ? ' border-red-600' : '')}}">
                         </div>
                         @error('name')

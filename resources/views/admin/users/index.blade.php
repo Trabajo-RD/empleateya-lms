@@ -1,10 +1,36 @@
 @extends('adminlte::page')
 
-@section('title', 'Empleateya LMS')
+@section('title', 'Capacítate RD')
 
 @section('content_header')
-    <a href="{{ route('admin.users.excel.export' ) }}" class="btn float-right text-white" style="background-color:#1D6F42;"><i class="fas fa-share-square mr-1"></i>Exportar</a>
-    <h1 class="text-primary"><i class="fas fa-users mr-2"></i>Listado de Usuarios</h1>
+    {{-- <a href="{{ route('admin.users.excel.export' ) }}" class="btn float-right text-white" style="background-color:#1D6F42;"><i class="fas fa-share-square mr-1"></i>Exportar</a> --}}
+
+
+    <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 1rem;">
+        <div class="d-flex flex-row">
+            <h1 class="text-dark">Usuarios</h1>
+        </div>
+
+        <div class="d-flex flex-row-reverse">
+
+                <div class="btn-group">
+                    <button type="button" class="btn text-white" style="background-color:#1D6F42;"><i class="fas fa-share-square mr-1"></i>Exportar</button>
+                    <button type="button" class="btn text-white dropdown-toggle dropdown-toggle-split" style="background-color:#1D6F42;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                    <h6 class="dropdown-header">Formatos disponibles</h6>
+                    <a class="dropdown-item" href="{!! route('admin.all.users.export', ['format' => 'xlsx']) !!}">XLSX</a>
+                    <a class="dropdown-item" href="{!! route('admin.all.users.export', ['format' => 'csv']) !!}">CSV</a>
+                    <a class="dropdown-item" href="{!! route('admin.all.users.export', ['format' => 'ods']) !!}">ODS</a>
+                </div>
+
+        </div>
+    </div>
+
+
+
+
 @stop
 
 @section('content')

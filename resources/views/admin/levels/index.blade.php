@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Empleateya LMS')
+@section('title', 'Capacítate RD')
 
 @section('plugins.Sweetalert2', true)
 

@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Empleateya LMS')
+@section('title', 'Capacítate RD')
 
 @section('content_header')
     <h1 class="text-primary"><i class="fas fa-user-cog mr-2"></i>Editar Rol</h1>

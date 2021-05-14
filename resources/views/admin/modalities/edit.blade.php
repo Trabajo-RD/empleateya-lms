@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Empleateya LMS')
+@section('title', 'Capacítate RD')
 
 @section('content_header')
     <h1 class="text-primary"><i class="far fa-edit mr-1"></i>Editar modalidad</h1>

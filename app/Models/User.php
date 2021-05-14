@@ -72,6 +72,14 @@ class User extends Authenticatable implements MustVerifyEmail
         'profile_photo_url',
     ];
 
+    public static function getUsers(){
+
+        $record = User::select('document_id', 'name', 'lastname', 'gender', 'email', 'active', 'last_login')->orderBy('name', 'asc')->get()->toArray();
+
+        return $record;
+
+    }
+
     /**
      * Relation 1:1
      */

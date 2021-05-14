@@ -45,21 +45,21 @@
                     <!-- sidebar menu -->
                     <ul class="text-sm text-gray-600 mt-6">
                         <li class="leading-7 mb-1 border-l-4 @routeIs('instructor.courses.edit', [app()->getLocale(), $course]) border-blue-400 @else border-transparent @endif pl-2">
-                            <a href="{{ route('instructor.courses.edit', [app()->getLocale(), $course] )}}">Información del curso</a>
+                            <a href="{{ route('instructor.courses.edit', [app()->getLocale(), $course] )}}" class="@routeIs('instructor.courses.edit', [app()->getLocale(), $course]) text-blue-600 font-bold @endif">Información del curso</a>
                         </li>
                         <li class="leading-7 mb-1 border-l-4 @routeIs('instructor.courses.curriculum', [app()->getLocale(), $course]) border-blue-400 @else border-transparent @endif pl-2">
-                            <a href="{{ route('instructor.courses.curriculum', [app()->getLocale(), $course] )}}">Lecciones</a>
+                            <a href="{{ route('instructor.courses.curriculum', [app()->getLocale(), $course] )}}" class="@routeIs('instructor.courses.curriculum', [app()->getLocale(), $course]) text-blue-600 font-bold @endif">{{ __('Modules') }}</a>
                         </li>
                         <li class="leading-7 mb-1 border-l-4 @routeIs('instructor.courses.goals', [app()->getLocale(), $course]) border-blue-400 @else border-transparent @endif pl-2">
-                            <a href="{{ route('instructor.courses.goals', [app()->getLocale(), $course]) }}">Metas del curso</a>
+                            <a href="{{ route('instructor.courses.goals', [app()->getLocale(), $course]) }}" class="@routeIs('instructor.courses.goals', [app()->getLocale(), $course]) text-blue-600 font-bold @endif">Metas del curso</a>
                         </li>
                         <li class="leading-7 mb-1 border-l-4 @routeIs('instructor.courses.students', [app()->getLocale(), $course]) border-blue-400 @else border-transparent @endif pl-2">
-                            <a href="{{ route('instructor.courses.students', [app()->getLocale(), $course]) }}">Estudiantes</a>
+                            <a href="{{ route('instructor.courses.students', [app()->getLocale(), $course]) }}" class="@routeIs('instructor.courses.students', [app()->getLocale(), $course]) text-blue-600 font-bold @endif">Estudiantes</a>
                         </li>
 
                         @if( $course->observation )
                             <li class="flex leading-7 mb-1 border-l-4 @routeIs('instructor.courses.observation', [app()->getLocale(), $course]) border-blue-400 @else border-transparent @endif pl-2">
-                                <a href="{{ route('instructor.courses.observation', [app()->getLocale(), $course]) }}">Observaciones</a>
+                                <a href="{{ route('instructor.courses.observation', [app()->getLocale(), $course]) }}" class="@routeIs('instructor.courses.observation', [app()->getLocale(), $course]) text-blue-600 font-bold @endif">Observaciones</a>
                                 <!-- Tailwind animate ping -->
                                 <span class="flex h-3 w-3">
                                     <span class="animate-ping h-3 w-3 absolute inline-flex rounded-full bg-red-400 opacity-75"></span>
@@ -139,6 +139,54 @@
         @stack('modals')
 
         @livewireScripts
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        {{-- @include('sweetalert::alert') --}}
+        {{-- @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"]) --}}
+        <script>
+            window.addEventListener('swal:modal', event => {
+                swal({
+                    title: event.detail.title,
+                    text: event.detail.text,
+                    icon: event.detail.type,
+                });
+            });
+
+            // SweetAlert on delete Module/Section
+            window.addEventListener('swal:confirm', event => {
+                swal({
+                    title: event.detail.title,
+                    text: event.detail.text,
+                    icon: event.detail.type,
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if(willDelete) {
+                        window.livewire.emit('destroy', event.detail.id);
+                    }
+                });
+            });
+
+
+            // SweetAlert on edit Module/Section title
+            // SweetAlert on delete Module/Section
+            window.addEventListener('swal:edit', event => {
+                swal({
+                    title: event.detail.title,
+                    text: event.detail.text,
+                    icon: event.detail.type,
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willEdit) => {
+                    if(willEdit) {
+                        window.livewire.emit('edit', event.detail.section);
+                    }
+                });
+            });
+
+        </script>
 
         @isset ($js)
             {{ $js }}

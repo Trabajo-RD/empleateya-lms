@@ -39,6 +39,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(Dispatcher $events)
     {
+        // Blade::setEchoFormat('e(utf8_encode(%s))');
+
         Schema::defaultstringLength(191);
 
         // Observe changes in Lesson Model

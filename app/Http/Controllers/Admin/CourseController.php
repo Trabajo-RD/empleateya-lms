@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Exports\CoursesExport;
 use App\Exports\PublishedCoursesExport;
-use App\Exports\UsersExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Course;
@@ -15,6 +14,8 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\ApprovedCourse;
 use App\Mail\RejectCourse;
 use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
+
 class CourseController extends Controller
 {
 
@@ -149,13 +150,46 @@ class CourseController extends Controller
     /**
      * Export to excel the ModelExport class
      */
-    public function exportAllCoursesToExcel(){
-        return Excel::download(new CoursesExport, 'capacitate.courses.all.xlsx');
+
+    public function exportAllCourses( $format ){
+
+        // $contents = Excel::raw(new CoursesExport, \Maatwebsite\Excel\Excel::XLSX);
+
+
+        $date = Carbon::now()->format('Ymd');
+        $unix_timestamp = now()->timestamp;
+
+        if ($format == 'xlsx' ){
+            return Excel::download(new CoursesExport, $date . '_' . $unix_timestamp . '_capacitate.courses.all.xlsx');
+        }
+
+        if ($format == 'csv' ){
+            return Excel::download(new CoursesExport, $date . '_' . $unix_timestamp . '_capacitate.courses.all.csv');
+        }
+
+        if ($format == 'ods' ){
+            return Excel::download(new CoursesExport, $date . '_' . $unix_timestamp . '_capacitate.courses.all.ods');
+        }
+
     }
-    public function exportAllPublishedCoursesToExcel(){
-        return Excel::download(new PublishedCoursesExport, 'capacitate.published.courses.all.xlsx');
+
+    public function exportPublishedCourses( $format ){
+
+        $date = Carbon::now()->format('Ymd');
+        $unix_timestamp = now()->timestamp;
+
+        if ($format == 'xlsx' ){
+            return Excel::download(new PublishedCoursesExport, $date . '_' . $unix_timestamp .  '_capacitate.published.courses.xlsx');
+        }
+
+        if ($format == 'csv' ){
+            return Excel::download(new PublishedCoursesExport, $date . '_' . $unix_timestamp .  '_capacitate.published.courses.csv');
+        }
+
+        if ($format == 'ods' ){
+            return Excel::download(new PublishedCoursesExport, $date . '_' . $unix_timestamp .  '_capacitate.published.courses.ods');
+        }
+
     }
-    public function exportAllUsersToExcel(){
-        return Excel::download(new UsersExport, 'capacitate.users.all.xlsx');
-    }
+
 }

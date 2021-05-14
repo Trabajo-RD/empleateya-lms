@@ -46,7 +46,14 @@ class CategoryController extends Controller
 
         $data = $request->all();
 
-        $category = Category::create( $data );
+        $category = Category::create([
+            'name' => $data['name'],
+            'slug' => $data['slug'],
+            'icon' => $data['icon'],
+            'modality_id' => $data['modality_id']
+        ]);
+
+        // $category = Category::create( $data );
 
         return redirect()->route('admin.categories.edit', compact('locale', 'category') )->with('info', __('Category created successfully'));
     }
@@ -89,8 +96,15 @@ class CategoryController extends Controller
         $data = $request->all();
 
         $category->update([
-            'name' => $data['name']
+            'name' => $data['name'],
+            'slug' => $data['slug'],
+            'icon' => $data['icon'],
+            'modality_id' => $data['modality_id']
         ]);
+
+        // $category->update([
+        //     'name' => $data['name']
+        // ]);
 
         return redirect()->route('admin.categories.edit', compact('locale', 'category') )->with('info', __('The category has been updated'));
     }

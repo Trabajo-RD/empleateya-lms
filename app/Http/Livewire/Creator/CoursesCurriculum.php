@@ -21,6 +21,9 @@ class CoursesCurriculum extends Component
         'section.name' => 'required'
     ];
 
+    // Listeners to add SweetAlert event,
+    protected $listeners = ['destroy', 'editConfirm', 'edit'];
+
     public function mount( Course $course ){
         $this->course = $course;
         $this->section = new Section();
@@ -49,11 +52,30 @@ class CoursesCurriculum extends Component
             'course_id' => $this->course->id
         ]);
 
+        // SweetAlert
+        $this->dispatchBrowserEvent('swal:modal', [
+            'type' => 'success',
+            'title' => 'Módulo agregado con éxito',
+            'text' => '',
+        ]);
+
         // reset name property value
         $this->reset('name');
 
         // refresh this course info
         $this->course = Course::find($this->course->id);
+    }
+
+    /**
+     * SweetAlert to confirm edit
+     */
+    public function editConfirm(Section $section){
+        $this->dispatchBrowserEvent('swal:edit', [
+            'type' => 'warning',
+            'title' => 'Estas seguro de editar este título?',
+            'text' => '',
+            'section' => $section,
+        ]);
     }
 
     /**
@@ -73,8 +95,26 @@ class CoursesCurriculum extends Component
         $this->course = Course::find($this->course->id);
     }
 
-    public function destroy(Section $section){
-        $section->delete();
+    /**
+     * Return delete confirm
+     */
+    public function deleteConfirm($id){
+        $this->dispatchBrowserEvent('swal:confirm', [
+            'type' => 'warning',
+            'title' => 'Estas seguro de eliminar este módulo?',
+            'text' => '',
+            'id' => $id,
+        ]);
+    }
+
+    public function destroy($id){
+
+        Section::where('id', $id)->delete();
+
+        // refresh this course info
         $this->course = Course::find($this->course->id);
+
+        // $section->delete();
+        // $this->course = Course::find($this->course->id);
     }
 }

@@ -30,7 +30,8 @@
                             <th>Documento</th>
                             <th>Nombre</th>
                             <th>Email</th>
-                            <th>Roles</th>
+                            <th class="text-center">Roles</th>
+                            <th class="text-center">Última Conexión</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -42,12 +43,13 @@
                                     <td>{{ $user->document_id }}</td>
                                     <td>{{ $user->lastname }}, {{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td>
+                                    <td class="text-center">
                                         @foreach ( $user->roles as $role )
                                             {{ $role->name }}
                                             <br>
                                         @endforeach
                                     </td>
+                                    <td class="text-muted text-center">{{ ($user->last_login != null) ? $user->last_login : 'Sin registro' }}</td>
                                     <td>
                                         <a class="btn btn-outline-secondary" href="{{ route('admin.users.edit', [app()->getLocale(), $user] ) }}">Editar</a>
                                     </td>

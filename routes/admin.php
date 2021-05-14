@@ -133,8 +133,11 @@ Route::group(['prefix' => '{locale}',
     /**
      * Route to export a ModelExport list to excel
      */
-    Route::get('courses/excel/courses-export', [CourseController::class, 'exportAllCoursesToExcel'])->name('admin.courses.excel.export');
-    Route::get('courses/excel/published-courses-export', [CourseController::class, 'exportAllPublishedCoursesToExcel'])->name('admin.published.courses.excel.export');
-    Route::get('users/excel/users-export', [CourseController::class, 'exportAllUsersToExcel'])->name('admin.users.excel.export');
+    Route::get('/admin/courses/export/{format}', [CourseController::class, 'exportAllCourses'])->name('admin.all.courses.export');
+    Route::get('/admin/published-courses/export/{format}', [CourseController::class, 'exportPublishedCourses'])->name('admin.published.courses.export');
 
+    /**
+     * Routes to export UserModel
+     */
+    Route::get('/admin/users/export/{format}', [UserController::class, 'exportAllUsers'])->name('admin.all.users.export');
 

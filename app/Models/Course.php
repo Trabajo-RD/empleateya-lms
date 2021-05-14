@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Course extends Model
 {
@@ -19,6 +20,111 @@ class Course extends Model
     const PUBLISH = 3;
     const TRASH = 4;
 
+    public static function getCourses(){
+
+        $record = DB::table('courses')
+            ->join('users', 'courses.user_id', '=', 'users.id')
+            ->join('levels', 'courses.level_id', '=', 'levels.id')
+            ->join('categories', 'courses.category_id', '=', 'categories.id')
+            ->join('types', 'courses.type_id', '=', 'types.id')
+            ->join('modalities', 'courses.modality_id', '=', 'modalities.id')
+            ->select(
+                'courses.title AS Título',
+                'courses.summary AS Descripción',
+                'courses.url AS Url',
+                'courses.duration_in_minutes AS Duración',
+                'courses.status AS Status',
+                DB::raw("CONCAT(users.name, ' ', users.lastname) AS Usuario"),
+                // 'users.name AS Nombre',
+                // 'users.lastname AS Apellidos',
+                'levels.name AS Nivel',
+                'categories.name AS Categoría',
+                'types.name AS Tipo',
+                'modalities.name AS Modalidad'
+            )
+            ->groupBy(
+                'courses.title',
+                'courses.summary',
+                'courses.url',
+                'courses.duration_in_minutes',
+                'courses.status',
+                'users.name',
+                'users.lastname',
+                'levels.name',
+                'categories.name',
+                'types.name',
+                'modalities.name'
+            )
+            ->orderBy('courses.title', 'asc')
+            ->get()
+            ->toArray();
+
+        return $record;
+
+    }
+
+
+    public static function getPublishedCourses(){
+
+        $record = DB::table('courses')
+            ->join('users', 'courses.user_id', '=', 'users.id')
+            ->join('levels', 'courses.level_id', '=', 'levels.id')
+            ->join('categories', 'courses.category_id', '=', 'categories.id')
+            ->join('types', 'courses.type_id', '=', 'types.id')
+            ->join('modalities', 'courses.modality_id', '=', 'modalities.id')
+            ->select(
+                'courses.title AS Título',
+                'courses.summary AS Descripción',
+                'courses.url AS Url',
+                'courses.duration_in_minutes AS Duración',
+                'courses.status AS Status',
+                DB::raw("CONCAT(users.name, ' ', users.lastname) AS Usuario"),
+                // 'users.name AS Nombre',
+                // 'users.lastname AS Apellidos',
+                'levels.name AS Nivel',
+                'categories.name AS Categoría',
+                'types.name AS Tipo',
+                'modalities.name AS Modalidad'
+            )
+            ->where('courses.status', 3)
+            ->groupBy(
+                'courses.title',
+                'courses.summary',
+                'courses.url',
+                'courses.duration_in_minutes',
+                'courses.status',
+                'users.name',
+                'users.lastname',
+                'levels.name',
+                'categories.name',
+                'types.name',
+                'modalities.name'
+            )
+            ->orderBy('courses.title', 'asc')
+            ->get()
+            ->toArray();
+
+        return $record;
+
+    }
+
+
+    public static function search($query){
+
+        return empty($query) ? static::query()
+            : static::where('courses.status', 3)
+
+                ->where('courses.title', 'LIKE', '%' . $query . '%')
+                ->where('sections.name', 'LIKE', '%' . $query . '%')
+                ->where('courses.status', '=', 3);
+                //->where('lessons.name', 'LIKE', '%' . $query . '%');
+                // ->where(function($q){
+                //     $q->where('courses.status', 3);
+                // });
+                //->orWhere('lessons.name', 'LIKE', '%' . $query . '%');
+
+    }
+
     /**
      * New Attributes
      */
@@ -29,6 +135,8 @@ class Course extends Model
             return 5;
         }
     }
+
+
 
     // Query Scopes
     public function scopeCategory( $query, $category_id ){
