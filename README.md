@@ -2,7 +2,7 @@
 
 # Capacítate
 
-**Versión 1.0.0** - [Registro de cambios](CHANGELOG.md)
+**Versión 1.0.1** - [Control de versiones](CHANGELOG.md)
 
 
 # Configuración (Dev)
