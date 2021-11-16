@@ -2,14 +2,29 @@
 
 
 <!-- Card -->
-<article class="card flex flex-col">
+<article class="card flex flex-col" :key="{{ 'course-card-' . $course->id }}">
 
     <!-- card image -->
-    <div class="h-36 overflow-hidden">
+    <div class="h-36 overflow-hidden relative">
+
+        @if($course->user_id === Auth::id())
+            @hasrole('Creator')
+                <div class="absolute z-50 right-2 top-2">
+                    <a href="{{ route('creator.courses.edit', [app()->getLocale(), $course]) }}" class="text-white cursor-pointer z-50"><i class="fas fa-edit"></i></a>
+                </div>
+            @endhasrole
+
+            @hasrole('Instructor')
+                <div class="absolute z-50 right-2 top-2">
+                    <a href="{{ route('instructor.courses.edit', [app()->getLocale(), $course]) }}" class="text-white cursor-pointer z-50"><i class="fas fa-edit"></i></a>
+                </div>
+            @endhasrole
+        @endif
+
         @isset( $course->image )
-            <img src="{{ Storage::url( $course->image->url ) }}" alt="" class="h-36 w-full object-cover transition duration-300 transform hover:scale-125" />
+            <img :key="{{ 'image-' . $course->id }}" src="{{ Storage::url( $course->image->url ) }}" alt="{{ $course->title }}" class="h-36 w-full object-cover transition duration-300 transform hover:scale-125" />
         @else
-            <img id="picture" class="h-36 w-full object-cover transition duration-300 transform hover:scale-125" src="{{ asset('images/courses/default.jpg') }}" alt="" >
+            <img :key="{{ 'image-' . $course->id }}" class="h-36 w-full object-cover transition duration-300 transform hover:scale-125" src="{{ asset('images/courses/default.jpg') }}" alt="{{ $course->title }}" >
         @endisset
     </div>
 
@@ -21,10 +36,13 @@
         <a href="{{ route( 'courses.show', [app()->getLocale(), $course] ) }}">
             <h2 class="card-title">{{ Str::limit( $course->title, 55 ) }}</h2>
         </a>
-        <p class="text-gray-500 text-sm mb-2 mt-auto">{{ $course->editor->name}}</p>
-        <div class="flex mb-4">
-            <!-- rating -->
-            <ul class="flex text-sm">
+        {{-- <p class="text-gray-500 text-sm mb-2 mt-auto">{{ $course->editor->name}}</p> --}}
+        <div class="flex mb-4 items-center">
+            <!-- rating value -->
+            <span class="text-xl font-bold text-{{ $course->rating > 3 ? 'yellow' : 'gray' }}-300">{{ $course->rating }}</span>
+
+            <!-- rating stars -->
+            <ul class="flex text-sm ml-2">
                 <li class="mr-1"><i class="fas fa-star text-{{ $course->rating >= 1 ? 'yellow' : 'gray' }}-300"></i></li>
                 <li class="mr-1"><i class="fas fa-star text-{{ $course->rating >= 2 ? 'yellow' : 'gray' }}-300"></i></li>
                 <li class="mr-1"><i class="fas fa-star text-{{ $course->rating >= 3 ? 'yellow' : 'gray' }}-300"></i></li>

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Capacítate'),
+    'name' => env('APP_NAME', 'Capacitate'),
 
     /*
     |--------------------------------------------------------------------------
@@ -67,7 +67,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'America/Santo_Domingo',
+    // 'timezone' => 'UTC',
 
     /*
     |--------------------------------------------------------------------------
@@ -171,6 +172,10 @@ return [
          * Package Service Providers...
          */
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Jenssegers\Agent\AgentServiceProvider::class,
+        FruitCake\Cors\CorsServiceProvider::class,
+        UxWeb\SweetAlert\SweetAlertServiceProvider::class,
+
         // RealRashid\SweetAlert\SweetAlertServiceProvider::class,
 
         /*
@@ -178,7 +183,7 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
@@ -200,6 +205,7 @@ return [
 
     'aliases' => [
 
+        'Alert' => UxWeb\SweetAlert\SweetAlert::class,
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
@@ -238,6 +244,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Agent' => Jenssegers\Agent\Facades\Agent::class,
+
         // 'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
 
     ],

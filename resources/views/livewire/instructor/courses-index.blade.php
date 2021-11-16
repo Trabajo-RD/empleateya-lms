@@ -1,13 +1,18 @@
 <div class="container py-8">
 
     <header class="mb-4 flex">
-        <span class="text-2xl text-gray-500 mr-2">Bienvenid@</span>
-        <h2 class="text-2xl text-gray-800 font-bold">{{{ isset(Auth::user()->name) ? Auth::user()->name : '' }}}</h2>
+        <span class="text-2xl text-gray-500 mr-2">{{ __('Welcome to your dashboard') }}!</span>
     </header>
 
-    <p class="text-1xl text-gray-500 mb-4">Aquí tienes un listado de tus cursos</p>
+    <p class="text-1xl text-gray-500 mb-4">{{{ isset(Auth::user()->name) ? Auth::user()->name : '' }}}, {{ __('here you can find the list of courses that you have registered on our platform, and the courses of other users where you participate as a Moderator or Collaborator') }}.</p>
 
     <x-table-responsive>
+
+        <div class="px-6 pt-5">
+            <header class="mb-4 flex">
+                <h2 class="text-2xl text-gray-800 font-bold">{{ __('Dashboard') }}</h2>
+            </header>
+        </div>
 
         <div class="px-6 py-3">
             <div x-data="{isTyped: false}" class="flex w-full">
@@ -17,13 +22,13 @@
                         id="search-instructor"
                         x-ref="searchField"
                         x-on:input.debounce.400ms="isTyped = ($event.target.value != '')"
-                        placeholder='¿Qué curso quieres buscar?'
+                        placeholder="{{ __('What course do you want to search for?') }}"
                         autocomplete="off"
                         wire:keydown="clear"
                         wire:model.debounce.500ms="search"
                         x-on:keydown.window.prevent.slash="$refs.searchField.focus()"
                         x-on:keyup.escape="isTyped = false; $refs.searchField.blur()">
-                <a class="btn btn-primary ml-2" href="{{ route('instructor.courses.new', app()->getLocale() ) }}">Nuevo Curso</a>
+                <a class="btn btn-primary ml-2" href="{{ route('instructor.courses.new', app()->getLocale() ) }}">{{ __('New course') }}</a>
             </div>
         </div>
 
@@ -32,19 +37,19 @@
                 <thead class="bg-gray-50">
                     <tr>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Nombre
+                        {{ __('Course') }}
                     </th>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Matriculados
+                        {{ __('Audience') }}
                     </th>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Calificación
+                        {{ __('Rating') }}
                     </th>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Estatus
+                        {{ __('Status') }}
                     </th>
                     <th scope="col" class="relative px-6 py-3">
-                        <span class="sr-only">Edit</span>
+                        <span class="sr-only">{{ __('Edit') }}</span>
                     </th>
                     </tr>
                 </thead>
@@ -58,33 +63,37 @@
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0 h-32 w-32">
                                     @isset( $course->image )
-                                        <img class="h-32 w-32 object-cover" src="{{ Storage::url($course->image->url)}}" alt="">
+                                        <img class="relative inline-block h-32 w-32 object-cover" src="{{ Storage::url($course->image->url)}}" alt="">
                                     @else
                                         <img id="picture" class="h-32 w-32 object-cover" src="{{ asset('images/courses/default.jpg') }}" alt="" >
                                     @endisset
                                     </div>
-                                    <div class="ml-4">
-                                        <div class="text-md font-bold text-gray-900">
-                                            {{ $course->title }}
+                                    <div class="ml-6">
+                                        <div>
+                                            @if ( $course->moderator_id !== null || $course->contributor_id !== null)                                    
+                                                @if( $course->moderator_id !== null)
+                                                    <span class="inline-block bg-red-700 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2">{{ __('Auditing') }}</span>
+                                                @endif
+                                                @if( $course->contributor_id !== null)
+                                                    <span class="inline-block bg-blue-700 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2">{{ __('Collaborating') }}</span>
+                                                @endif                                    
+                                            @endif
+                                            <span class="text-lg font-bold text-gray-900">
+                                                {{ $course->title }}
+                                            </span>
+                                            <p class="text-gray-600">{{ \Illuminate\Support\Str::limit($course->summary, 100, $end='...') }}</p>
                                         </div>
-                                        <div class="text-sm text-gray-500">
-                                            Categoría: <strong>{{ $course->category->name }}</strong>
-                                        </div>
-                                        <div class="text-sm text-gray-500">
-                                            Tipo: <strong>{{ $course->type->name }}</strong>
-                                        </div>
-                                        <div class="text-sm text-gray-500">
-                                            Nivel: <strong>{{ $course->level->name }}</strong>
-                                        </div>
-                                        <div class="text-sm text-gray-500">
-                                            Modalidad: <strong>{{ $course->modality->name }}</strong>
-                                        </div>
+                                            <div class="pt-4 pb-2">
+                                                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#{{ __($course->category->name) }}</span>
+                                                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#{{ __($course->type->name) }}</span>
+                                                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#{{ __($course->level->name) }}</span>
+                                                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#{{ __($course->modality->name) }}</span>
+                                            </div>
                                     </div>
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="text-md text-gray-900 text-center">{{ $course->students->count() }}</div>
-                                <div class="text-sm text-gray-500 text-center">Estudiantes</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="text-md text-gray-900 flex items-center">
@@ -97,43 +106,43 @@
                                         <li class="mr-1"><i class="fas fa-star text-{{ $course->rating >= 1 ? 'yellow' : 'gray' }}-400"></i></li>
                                     </ul>
                                 </div>
-                                <div class="text-sm text-gray-500">Valoración</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
 
                                 @switch ( $course->status )
                                     @case(1)
                                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
-                                            Borrador
+                                            {{ __('Draft') }}
                                         </span>
                                         @break;
                                     @case(2)
                                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                                            Revisión
+                                            {{ __('In review') }}
                                         </span>
                                         @break;
                                     @case(3)
                                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                            Publicado
+                                            {{ __('Published') }}
                                         </span>
                                         @break;
                                     @case(4)
                                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                                            Eliminado
+                                            {{ __('Removed') }}
                                         </span>
                                         @break;
                                     @default
                                 @endswitch
 
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                
                                 <span class="flex">
                                     <a href="{{ route('instructor.courses.edit', [app()->getLocale(), $course] ) }}" class="{{ ($course->observation) ? 'border-red-300 text-red-700 hover:bg-red-50' : 'border-gray-300 text-gray-700 hover:bg-gray-50' }} inline-flex items-center px-4 py-2 border rounded-md shadow-sm text-sm font-medium  bg-white focus:outline-none">
                                         <!-- Heroicon name: solid/pencil -->
                                         <svg class="-ml-1 mr-2 h-5 w-5 {{ ($course->observation) ? 'text-red-500' : 'text-gray-500' }} " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                             <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                                         </svg>
-                                        Editar
+                                        {{ __('Edit') }}
                                     </a>
                                     @if( $course->observation )
                                         <!-- Tailwind animate ping -->
@@ -157,8 +166,10 @@
                 {{ $courses->links() }}
             </div>
         @else
-            <div class="alert alert-light px-6 py-3" role="alert">
-                <strong>¡Lo siento!</strong> No encuentro un curso que coincida con tu busqueda :(
+            <div class="px-6 py-3">
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <strong>{{ __('Sorry!') }}</strong> {{ __('I can\'t find a course that matches what you\'re looking for') }}
+                </div>
             </div>
         @endif
 

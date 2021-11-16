@@ -58,8 +58,8 @@
                                 <p class="text-sm">Enlace: <a class="text-blue-600" href="{{ $item->url }}" target="_blank">{{ $item->url }}</a></p>
 
                                 <div class="my-2">
-                                    <button class="btn btn-primary focus:outline-none" wire:click="edit({{$item}})"><i class="far fa-edit mr-2"></i>Editar</button>
-                                    <button class="btn bg-white text-red-500 hover:bg-red-500 hover:text-white border border-red-500 ml-2 focus:outline-none" wire:click="destroy({{$item}})"><i class="far fa-trash-alt mr-2"></i>Eliminar</button>
+                                    <button class="btn btn-primary focus:outline-none" wire:click="edit({{ $item }})"><i class="far fa-edit mr-2"></i>Editar</button>
+                                    <button class="btn bg-white text-red-500 hover:bg-red-500 hover:text-white border border-red-500 ml-2 focus:outline-none" wire:click="deleteConfirm({{ $item->id }})"><i class="far fa-trash-alt mr-2"></i>Eliminar</button>
                                 </div>
 
                                 <!-- Livewire Lesson Description  -->

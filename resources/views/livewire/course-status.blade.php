@@ -86,8 +86,9 @@
                         <img class="h-12 w-12 object-cover rounded-full shadow" src="{{ $course->editor->profile_photo_url }}" alt="Foto de perfil de {{ $course->editor->name }}"/>
                     </figure>
                     <div class="ml-4">
-                        <h3 class="font-bold text-lg text-gray-600">{{ $course->editor->name . ' ' . $course->editor->lastname }}</h3>
-                        <a class="text-blue-400 text-sm font-bold" href="">{{ '@' . Str::slug( $course->editor->name . $course->editor->lastname, '' ) }}</a>
+                        <p class="font-bold text-lg text-gray-600">{{ $course->editor->name . ' ' . $course->editor->lastname }}</p>
+                        <a class="text-gray-400 hover:text-gray-600 text-sm font-bold" href="mailto:{{ $course->editor->email }}" target="_blank"><i class="far fa-envelope fa-lg"></i></a>
+                        {{-- <a class="text-blue-400 text-sm font-bold" href="">{{ '@' . Str::slug( $course->editor->name . $course->editor->lastname, '' ) }}</a> --}}
                     </div>
                 </div>
 

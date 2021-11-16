@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMessagesTable extends Migration
+class CreateContactsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateMessagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('contacts', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('room_id');
-            $table->bigInteger('user_id');
-            $table->text('message');
+            $table->string('name');
+            $table->string('email');
+            $table->string('phone')->nullable();
+            $table->longText('message');
+            $table->tinyInteger('status')->default('1'); // 0= disable/eliminated 1=  unread  2= read
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CreateMessagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('contacts');
     }
 }

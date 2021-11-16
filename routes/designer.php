@@ -14,6 +14,7 @@ Route::group(['prefix' => '{locale}',
     /**
      * Route for list all courses
      */
-    Route::get('designer/courses', [CourseController::class, 'index'])->name('courses.index');
+    // TODO: create designer course controller
+    // Route::get('designer/courses', [CourseController::class, 'index'])->name('courses.index');
 
 });

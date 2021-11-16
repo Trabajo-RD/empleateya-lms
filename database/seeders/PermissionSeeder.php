@@ -43,6 +43,34 @@ class PermissionSeeder extends Seeder
         ]);
 
         /**
+         * Categorias, subcategorias y etiquetas
+         */
+        Permission::create([
+            'name' => 'LMS Crear categoria'
+        ]);
+        Permission::create([
+            'name' => 'LMS Editar categoria'
+        ]);
+        Permission::create([
+            'name' => 'LMS Eliminar categoria'
+        ]);
+        Permission::create([
+            'name' => 'LMS Asignar categoria'
+        ]);
+        Permission::create([
+            'name' => 'LMS Editar subcategoria'
+        ]);
+        Permission::create([
+            'name' => 'LMS Asignar subcategoria'
+        ]);
+        Permission::create([
+            'name' => 'LMS Editar etiquetas'
+        ]);
+        Permission::create([
+            'name' => 'LMS Asignar etiquetas'
+        ]);
+
+        /**
          * Usuarios
          */
         Permission::create([
@@ -99,13 +127,14 @@ class PermissionSeeder extends Seeder
          * Calificaciones
          */
         Permission::create([
-            'name' => 'LMS Calificar sección',
+            'name' => 'LMS Calificar seccion',
         ]);
-
         Permission::create([
             'name' => 'LMS Calificar item',
         ]);
-
+        Permission::create([
+            'name' => 'LMS Editar calificacion'
+        ]);
 
     }
 }

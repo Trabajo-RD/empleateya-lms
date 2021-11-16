@@ -58,6 +58,27 @@ class RoleSeeder extends Seeder
         ]);
 
         /**
+         * Moderator
+         */
+        $moderator = Role::create([
+            'name' => 'Moderator'
+        ]);
+
+        $moderator->syncPermissions([
+            'LMS Editar categoria',
+            'LMS Asignar categoria',
+            'LMS Editar subcategoria',
+            'LMS Asignar subcategoria',
+            'LMS Editar etiquetas',
+            'LMS Asignar etiquetas',
+            'LMS Supervisar cursos',
+            'LMS Actualizar cursos',
+            'LMS Calificar seccion',
+            'LMS Calificar item',
+            'LMS Editar calificacion'
+        ]);
+
+        /**
          * Creator
          */
         $creator = Role::create([
@@ -85,7 +106,7 @@ class RoleSeeder extends Seeder
             'LMS Crear cursos',
             'LMS Leer cursos',
             'LMS Actualizar cursos',
-            'LMS Calificar sección',
+            'LMS Calificar seccion',
             'LMS Calificar item',
         ]);
 

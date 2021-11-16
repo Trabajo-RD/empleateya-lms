@@ -3,10 +3,12 @@
     {!! Form::hidden('user_id', auth()->user()->id ) !!}
 </div>
 
+<input type="hidden" name="_token" value="{{ csrf_token() }}" id="token"/>
+
 <!-- course-title -->
 <div class="mb-4">
     <div class="flex">
-        <div class="flex-1"
+        <div class="flex-1">
             {!! Form::label( 'title', Lang::get('Course title') ) !!}
             {!! Form::text('title', null, ['class' => 'form-input block w-full mt-1' . ($errors->has('title') ? ' border-red-600' : '') ]) !!}
 
@@ -62,13 +64,17 @@
     <!-- course categories select -->
     <div>
         {!! Form::label('category_id', Lang::get('Category')) !!}
-        {!! Form::select('category_id', $categories, null, ['class' => 'form-input block w-full mt-1']) !!}
+        {!! Form::select('category_id', $categories, null, ['class' => 'category-select form-input block w-full mt-1']) !!}
     </div>
     <!-- course topic select -->
-    {{-- <div>
+    <div>
         {!! Form::label('topic_id', 'Tema:') !!}
         {!! Form::select('topic_id', $topics, null, ['class' => 'form-input block w-full mt-1']) !!}
-    </div> --}}
+
+        {{-- <select id="topic_id" name="topic_id">
+            <option value='0'>-- Seleccionar tema --</option>
+        </select> --}}
+    </div>
     <!-- course types select -->
     <div>
         {!! Form::label('type_id', Lang::get('Type')) !!}

@@ -1,6 +1,10 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-# empleateya-lms
+# Capacítate
+
+**Versión 1.0.0** - [Registro de cambios](CHANGELOG.md)
+
+
 # Configuración (Dev)
 
 ## Instalar XAMPP:
@@ -92,3 +96,14 @@ npm install
 * Mostrar listado de tareas: php artisan schedule:list
 * Ejecutar tareas programadas: php artisan schedule:run
 
+# Production
+
+## Colocar la aplicación en mantenimiento
+
+* Ejecutar el comando php artisan down
+* Esto creará el archivo maintenance.php en la ruta storage/framework/
+* Si este archivo existe se cargará al momento de ejecutar la aplicación
+
+## Reanudar la aplicación luego de un mantenimiento
+
+* Ejecutar el comando php artisan up

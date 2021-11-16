@@ -37,7 +37,7 @@
                 <!-- This is the tags container -->
                 <div class='mt-12 flex flex-wrap justify-center -m-1'>
                     @foreach ($topics as $topic)
-                        <a class="cursor-pointer mb-8 text-normal text-gray-700">
+                        <a href="{{ route('courses.topic', [app()->getLocale(), $category, $topic]) }}" class="cursor-pointer mb-8 text-normal text-gray-700">
                             <span class="m-1 bg-gray-200 hover:bg-gray-300 rounded-full py-4 px-6 font-bold text-sm leading-loose cursor-pointer" >
                                 {{ __($topic->name) }}
                             </span>
@@ -88,14 +88,14 @@
                     <!-- Options right -->
                     <div class="flex flex-1 justify-between items-center">
                         <span class="ml-4">{{ count($courses) }} {{ count($courses) > 1 ? __('courses') : 'course' }}</span>
-                        <div class="flex">
-                            <button class="h-12 px-4 border text-xl font-semibold mr-4 focus:outline-none {{ $layout == 'course-card' ? 'text-blue-500' : 'text-gray-500'}}" wire:click="$set('layout', 'course-card' )" x-on:click="open = true">
+                        {{-- <div class="flex">
+                            <button class="h-12 px-4 border text-xl font-semibold mr-4 focus:outline-none {{ $layout == 'course-card' ? 'text-blue-500' : 'text-gray-500'}}" wire:click="setLayout('course-card')" x-on:click="open = true">
                                 <i class="fas fa-th"></i>
                             </button>
-                            <button class="h-12 px-4 border text-xl text-gray-500 font-semibold mr-4 focus:outline-none {{ $layout == 'course-list' ? 'text-blue-500' : 'text-gray-500'}}" wire:click="$set('layout', 'course-list' )" x-on:click="open = true">
+                            <button class="h-12 px-4 border text-xl text-gray-500 font-semibold mr-4 focus:outline-none {{ $layout == 'course-list' ? 'text-blue-500' : 'text-gray-500'}}" wire:click="setLayout('course-list')" x-on:click="open = true">
                                 <i class="fas fa-th-list"></i>
                             </button>
-                        </div>
+                        </div> --}}
                     </div>
 
                 </div>
@@ -159,8 +159,8 @@
                     </div>
 
 
+                    {{-- @if($layout == 'course-card' ) --}}
                     <div class="col-span-4">
-                        @if($layout == 'course-card' )
                         <!-- courses -->
                         <div class="sm:px-6 lg:px-8 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-8">
                             @forelse ( $courses as $course )
@@ -176,9 +176,11 @@
                                 </div>
                             @endforelse
                         </div>
+                    </div>
+                    {{-- @endif --}}
 
-                        @else
-
+                    {{-- @if($layout == 'course-list' )
+                    <div class="col-span-4">
                         <!-- courses -->
                         <div class="px-4 sm:px-6 lg:px-8 grid sm:grid-cols-1 gap-x-6 gap-y-8">
                             @forelse ( $courses as $course )
@@ -194,13 +196,12 @@
                                 </div>
                             @endforelse
                         </div>
+                    </div>
+                    @endif --}}
 
-                        @endif
-
-                        <!-- Pagination -->
-                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-8">
-                            {{ $courses->links() }}
-                        </div>
+                    <!-- Pagination -->
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-8">
+                        {{ $courses->links() }}
                     </div>
                 </div>
             </div>

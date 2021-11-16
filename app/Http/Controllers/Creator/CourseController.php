@@ -38,6 +38,23 @@ class CourseController extends Controller
         return view('creator.courses.index');
     }
 
+    public function getTopicData( Request $request ){
+
+        return $request;
+
+            //$category_id = $request->input('category_id');
+
+            $topics['data'] = Topic::orderBy('name', 'asc')
+                            ->select('id', 'name')
+                            ->where('category_id', $request)
+                            ->get();
+
+            // Spicified the data format to use
+            return response()->json($topics);
+
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -122,12 +139,13 @@ class CourseController extends Controller
         $this->authorize('dictated', $course);
 
         $categories = Category::pluck('name', 'id');
+        $topics = Topic::pluck('name', 'id');
         $types = Type::pluck('name', 'id');
         $levels = Level::pluck('name', 'id');
         $prices = Price::pluck('name', 'id');
         $modalities = Modality::pluck('name', 'id');
 
-        return view('creator.courses.edit', compact('course', 'categories', 'types', 'levels', 'prices', 'modalities'));
+        return view('creator.courses.edit', compact('course', 'categories', 'topics', 'types', 'levels', 'prices', 'modalities'));
     }
 
     /**

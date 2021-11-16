@@ -45,6 +45,7 @@
             <div class="mt-4">
                 <x-jet-label for="email" value="{{ __('Email') }}" />
                 <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+                <p class="text-xs text-gray-500">{{ __('In order to contact you and receive notifications about courses, workshops and other offers, it will be necessary to register your email') }}</p>
             </div>
 
             <div class="mt-4">

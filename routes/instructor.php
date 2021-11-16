@@ -6,6 +6,7 @@ use App\Http\Controllers\Instructor\MicrosoftController;
 use App\Http\Controllers\Instructor\LinkedinController;
 use App\Http\Livewire\Instructor\CoursesCurriculum;
 use App\Http\Livewire\Instructor\CoursesStudents;
+use App\Http\Controllers\Instructor\TestController;
 use App\Http\Controllers\HomeController;
 
 //use App\Http\Livewire\InstructorCourses;
@@ -25,11 +26,12 @@ use App\Http\Controllers\HomeController;
 // Route::redirect('', 'instructor/courses');
 
 
-Route::group(['prefix' => '{locale}',
+Route::group([
+    'prefix' => '{locale}',
     'as' => 'instructor.',
     'where' => ['locale', '[a-zA-Z]{2}'],
     'middleware' => ['setlocale', 'language', 'verified']
-], function(){
+], function () {
 
     // Route::get('courses', CourseController::class);
 
@@ -42,7 +44,7 @@ Route::group(['prefix' => '{locale}',
     /**
      * Route to display the diferent platform options to create a course
      */
-     Route::get('instructor/new/courses', [CourseController::class, 'new'])->name('courses.new');
+    Route::get('instructor/new/courses', [CourseController::class, 'new'])->name('courses.new');
 
     /**
      * Route to manage another platform courses [Microsoft, Linkedin]
@@ -78,12 +80,16 @@ Route::group(['prefix' => '{locale}',
      */
     Route::get('instructor/courses/{course}/preview', [CourseController::class, 'preview'])->name('courses.preview');
 
+    Route::get('test', [TestController::class, 'index'])->name('test');
+    Route::post('test', [TestController::class, 'store'])->name('test.store');
+    // Route::get('instructor/courses/{course}/{section}/test', [TestController::class, 'index'])->name('test');
+    // Route::post('instructor/courses/{course}/{section}/test', [TestController::class, 'store'])->name('test.store');
 });
 
 
 /**
  * Route to request Microsoft Learn and LinkedIn Learning API
  */
- Route::post('instructor/courses/microsoft/request', [MicrosoftController::class, 'requestCourseData'])->name('instructor.courses.microsoft.request');
+Route::post('instructor/courses/microsoft/request', [MicrosoftController::class, 'requestCourseData'])->name('instructor.courses.microsoft.request');
 
- Route::post('instructor/courses/linkedin/request', [LinkedinController::class, 'requestCourseData'])->name('instructor.courses.linkedin.request');
+Route::post('instructor/courses/linkedin/request', [LinkedinController::class, 'requestCourseData'])->name('instructor.courses.linkedin.request');

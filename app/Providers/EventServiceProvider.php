@@ -23,6 +23,21 @@ class EventServiceProvider extends ServiceProvider
         LoginHistory::class => [
             StoreUserLoginHistory::class,
         ],
+        \App\Events\UserRegisteringEvent::class => [
+            \App\Listeners\UserRegisteringListener::class
+        ],
+        \App\Events\UserRegisteredEvent::class => [
+            \App\Listeners\UserRegisteredListener::class
+        ],
+        \App\Events\UserConnectingEvent::class => [
+            \App\Listeners\UserConnectingListener::class
+        ],
+        \App\Events\UserConnectedEvent::class => [
+            \App\Listeners\UserConnectedListener::class
+        ],
+        \App\Events\UserEnrolledEvent::class => [
+            \App\Listeners\UserEnrolledListener::class
+        ],
     ];
 
     /**

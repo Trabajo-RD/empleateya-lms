@@ -38,6 +38,14 @@ return [
             'options' => [
                 'cluster' => env('PUSHER_APP_CLUSTER'),
                 'useTLS' => true,
+                'encrypted' => true,
+                'host' => 'http://empleateya-lms.test',
+                'port' => 6001,
+                'scheme' => 'http',
+                // 'curl_options' => [
+                //     CURLOPT_SSL_VERIFYHOST => 0,
+                //     CURLOPT_SSL_VERIFYPEER => 0,
+                // ],
             ],
         ],
 

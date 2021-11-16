@@ -18,8 +18,9 @@ class CreateModalitiesTable extends Migration
         Schema::create('modalities', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            // $table->enum('name', [Modality::E_LEARNING, Modality::B_LEARNING, Modality::M_LEARNING, Modality::PRESENCIAL]);
-            $table->text('description');
+            $table->string('slug');
+            $table->string('icon')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

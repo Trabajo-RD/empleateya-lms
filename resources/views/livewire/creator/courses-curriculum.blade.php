@@ -30,7 +30,7 @@
                         <div>
                             {{-- <i class="fas fa-edit text-gray-500 cursor-pointer" wire:click="edit({{$item}})"></i> --}}
                             <i class="fas fa-edit text-gray-500 cursor-pointer" wire:click="editConfirm({{ $item }})"></i>
-                            <i class="far fa-trash-alt text-red-500 cursor-pointer ml-2" wire:click="deleteConfirm({{ $item->id }})"></i>
+                            <i class="far fa-trash-alt text-red-500 cursor-pointer ml-2" wire:click="deleteModuleConfirm({{ $item->id }})"></i>
                         </div>
                     </header>
                     <!-- Show creator lessons -->

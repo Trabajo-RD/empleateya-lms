@@ -1,11 +1,28 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale() ) }}">
     <head>
-        <meta charset="utf-8">
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Capacitate') }}</title>
+        <!-- PWA Meta tags -->
+
+        <!-- Theme -->
+        <meta name="theme-color" content="#003876">
+        <!-- Optimized to screen width -->
+        <meta name="MobileOptimized" content="width">
+        <!-- Touch friendly -->
+        <meta name="HandheldFriendly" content="true">
+        <!-- IOs configuration -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <!-- IOs theme: default, black, black-translucent -->
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+        <!-- Icons -->
+        <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}">
+
+        <title>{{ str_replace('i', 'í', config('app.name', 'Capacítate')) }}</title>
+        <!-- <title><?= config('app.name') ?></title> -->
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
@@ -34,11 +51,14 @@
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
+
     </head>
     <body class="font-sans antialiased">
         <x-jet-banner />
 
         <div class="flex flex-col min-h-screen justify-between bg-gray-100">
+
+            <!-- menu -->
             @livewire('navigation-menu')
 
             <!-- Page Heading -->
@@ -49,6 +69,8 @@
                     </div>
                 </header>
             @endif
+
+            @include('sweet::alert')
 
             <!-- Page Content -->
             <main>
@@ -76,6 +98,10 @@
 
         {{-- <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script> --}}
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
         <script type="text/javascript" src="{{ asset('js/jquery-migrate-3.0.1.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/jquery-ui.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/popper.min.js') }}"></script>

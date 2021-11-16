@@ -8,7 +8,7 @@
     @isset( $course->image )
         <img src="{{ Storage::url( $course->image->url ) }}" alt="" class="h-auto w-40 object-cover" />
     @else
-        <img id="picture" class="h-auto w-40 object-cover" src="{{ asset('images/courses/default.jpg') }}" alt="" >
+        <img id="picture-list" class="h-auto w-40 object-cover" src="{{ asset('images/courses/default.jpg') }}" alt="" >
     @endisset
 
     <!-- card body -->

@@ -6,6 +6,7 @@ use App\Http\Controllers\Creator\MicrosoftController;
 use App\Http\Controllers\Creator\LinkedinController;
 use App\Http\Livewire\Creator\CoursesCurriculum;
 use App\Http\Livewire\Creator\CoursesStudents;
+use App\Http\Controllers\Creator\TestController;
 use App\Http\Controllers\HomeController;
 
 /*
@@ -24,11 +25,12 @@ use App\Http\Controllers\HomeController;
  */
 // Route::redirect('', 'creator/courses');
 
-Route::group(['prefix' => '{locale}',
+Route::group([
+    'prefix' => '{locale}',
     'as' => 'creator.',
     'where' => ['locale', '[a-zA-Z]{2}'],
     'middleware' => ['setlocale', 'language', 'verified']
-], function(){
+], function () {
 
 
 
@@ -92,7 +94,7 @@ Route::group(['prefix' => '{locale}',
 
     /**
      * Route to request change course status
-    */
+     */
     Route::post('creator/courses/{course}/status', [CourseController::class, 'status'])->name('courses.status');
 
     /**
@@ -107,6 +109,8 @@ Route::group(['prefix' => '{locale}',
      */
     Route::get('creator/courses/{course}/preview', [CourseController::class, 'preview'])->name('courses.preview');
 
+    Route::get('creator/courses/{course}/{section}/test', [TestController::class, 'index'])->name('test');
+    Route::post('creator/courses/{course}/{section}/test', [TestController::class, 'store'])->name('test.store');
 });
 
 
@@ -116,3 +120,5 @@ Route::group(['prefix' => '{locale}',
 Route::post('creator/courses/microsoft/request', [MicrosoftController::class, 'requestCourseData'])->name('creator.courses.microsoft.request');
 
 Route::post('creator/courses/linkedin/request', [LinkedinController::class, 'requestCourseData'])->name('creator.courses.linkedin.request');
+
+Route::get('creator/getTopics/{id}', [CourseController::class, 'getTopicData'])->name('creator.courses.topics.request');

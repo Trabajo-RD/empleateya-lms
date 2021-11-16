@@ -50,32 +50,90 @@
 
                 <x-jet-input-error for="photo" class="mt-2" />
             </div>
-        @endif
+        @endif        
+
+        <!-- Document ID or Passport -->
+        <div class="col-span-6 sm:col-span-3">
+            <x-jet-label for="document_id" value="{{ __('Document ID') }}" />
+            <x-jet-input id="document_id" type="text" class="mt-1 block w-full bg-gray-100 text-gray-400 disabled" readonly wire:model.defer="state.document_id" autocomplete="document_id" />
+            <x-jet-input-error for="document_id" class="mt-2" />
+        </div>
+
+        <!-- Document Type -->
+        <div class="col-span-6 sm:col-span-2">
+            <x-jet-label for="document_type" value="{{ __('Document type') }}" />
+            <x-jet-input id="document_type" type="text" class="mt-1 block w-full bg-gray-100 text-gray-400 disabled" readonly wire:model.defer="state.document_type" autocomplete="document_type" />
+            <x-jet-input-error for="document_type" class="mt-2" />
+        </div>
+
+        <!-- Gender -->
+        <div class="col-span-6 sm:col-span-1">
+            <x-jet-label for="gender" value="{{ __('Gender') }}" />
+            <x-jet-input id="gender" type="text" class="mt-1 block w-full bg-gray-100 text-gray-400 disabled" readonly wire:model.defer="state.gender" autocomplete="gender" />
+            <x-jet-input-error for="gender" class="mt-2" />
+        </div>
 
         <!-- Name -->
-        <div class="col-span-6 sm:col-span-4">
+        <div class="col-span-6 sm:col-span-3">
             <x-jet-label for="name" value="{{ __('First Name') }}" />
             <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="state.name" autocomplete="name" />
             <x-jet-input-error for="name" class="mt-2" />
         </div>
 
         <!-- Lastname -->
-        <div class="col-span-6 sm:col-span-4">
+        <div class="col-span-6 sm:col-span-3">
             <x-jet-label for="lastname" value="{{ __('Last Name') }}" />
             <x-jet-input id="lastname" type="text" class="mt-1 block w-full" wire:model.defer="state.lastname" autocomplete="lastname" />
             <x-jet-input-error for="lastname" class="mt-2" />
         </div>
 
         <!-- Email -->
-        <div class="col-span-6 sm:col-span-4">
+        <div class="col-span-6 sm:col-span-6">
             <x-jet-label for="email" value="{{ __('Email') }}" />
             <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="state.email" />
             <x-jet-input-error for="email" class="mt-2" />
         </div>
+
+        <!-- Name -->
+        <div class="col-span-6 sm:col-span-3">
+            <x-jet-label for="phone" value="{{ __('Phone') }}" />
+            <x-jet-input id="phone" type="text" class="mt-1 block w-full" wire:model.defer="state.phone" autocomplete="phone" />
+            <x-jet-input-error for="phone" class="mt-2" />
+        </div>
+
+        <!-- Lastname -->
+        <div class="col-span-6 sm:col-span-3">
+            <x-jet-label for="mobile" value="{{ __('Mobile') }}" />
+            <x-jet-input id="mobile" type="text" class="mt-1 block w-full" wire:model.defer="state.mobile" autocomplete="mobile" />
+            <x-jet-input-error for="mobile" class="mt-2" />
+        </div>
+
+        <!-- Profile visibility -->
+        {{-- <div class="col-span-6 sm:col-span-3">
+            <x-jet-label for="profile_visibility" value="{{ __('Show my profile to other users') }}" />
+            <x-jet-input id="profile_visibility" type="text" class="mt-1 block w-full" wire:model.defer="state.profile_visibility" autocomplete="profile_visibility" />
+            <x-jet-input-error for="profile_visibility" class="mt-2" />
+        </div> --}}
+
+        <!-- Profile visibility -->
+        {{-- <div class="col-span-6 sm:col-span-3">
+            <x-jet-label for="profile_visibility" value="{{ __('Show my profile to other users') }}" />
+            <select id="profile_visibility"  class="block mt-1 w-full" name="profile_visibility" wire:model.defer="profile_visibility">
+
+                <option value="S" {{ $this->user->profile_visibility== 'S' ? 'selected' : '' }} >
+                    SI
+                </option>
+                <option value="N" {{ $this->user->profile_visibility== 'N' ? 'selected' : '' }}>
+                    NO
+                </option>
+
+            </select>
+        </div> --}}
+
     </x-slot>
 
     <x-slot name="actions">
-        <x-jet-action-message class="mr-3" on="saved">
+        <x-jet-action-message class="mr-3 text-green-500" on="saved">
             {{ __('Saved.') }}
         </x-jet-action-message>
 

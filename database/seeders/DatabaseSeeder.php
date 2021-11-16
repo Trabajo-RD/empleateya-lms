@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Http\Controllers\Api\MicrosoftLearnController;
 use Illuminate\Database\Seeder;
+use App\Models\Tag;
 
 use Illuminate\Support\Facades\Storage;
 
@@ -63,16 +64,19 @@ class DatabaseSeeder extends Seeder
         // $this->call(SlideSeeder::class);
         // $this->command->info('Slides table seeded!');
 
-        $this->call(MicrosoftLearnCourseSeeder::class);
-        $this->command->info('Microsoft Learn Courses seeded!');
+        // $this->call(MicrosoftLearnCourseSeeder::class);
+        // $this->command->info('Microsoft Learn Courses seeded!');
 
-        $this->call(MicrosoftLearnModulesSeeder::class);
-        $this->command->info('Microsoft Learn Modules seeded!');
+        // $this->call(MicrosoftLearnModulesSeeder::class);
+        // $this->command->info('Microsoft Learn Modules seeded!');
 
         $this->call(LinkSeeder::class);
         $this->command->info('Link table seeded!');
 
+        // Tag::factory(8)->create();
+
         // TODO: uncomment to create test courses
-        // $this->call(CourseSeeder::class);
+        $this->call(CourseSeeder::class);
+
     }
 }

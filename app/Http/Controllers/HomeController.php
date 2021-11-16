@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Config;
 use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
 
+
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -102,6 +103,8 @@ class HomeController extends Controller
         // $app = Config::get('app');
 
         // $locale = $app['available_locales'];
+
+        // $agent = new Agent();
 
         return view('welcome', compact('latest_courses', 'publish_slides', 'carousel_items', 'featured_courses', 'featured_modalities', 'user_courses', 'partners')); // Add collection to welcome view
     }

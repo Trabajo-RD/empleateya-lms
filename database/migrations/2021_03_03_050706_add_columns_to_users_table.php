@@ -24,7 +24,11 @@ class AddColumnsToUsersTable extends Migration
                 $table->string('lastname')->nullable()->after('name');
                 // $table->enum('gender', ['M', 'F', 'O', 'NS'])->nullable()->after('lastname');
                 $table->string('gender')->nullable()->after('lastname');
+                $table->string('phone')->nullable()->after('email');
+                $table->string('mobile')->nullable()->after('phone');
                 $table->text('options')->nullable();
+                $table->string('profile_visibility')->default('S')->after('options');
+                // $table->boolean('profile_visibility')->default('1')->after('options');
                 $table->string('email')->nullable()->change(); // Set email nullable to use login with Document ID
             });
         }
@@ -42,7 +46,10 @@ class AddColumnsToUsersTable extends Migration
             $table->dropColumn('document_type');
             $table->dropColumn('lastname');
             $table->dropColumn('gender');
+            $table->dropColumn('phone');
+            $table->dropColumn('mobile');
             $table->dropColumn('options');
+            $table->dropColumn('profile_visibility');
         });
     }
 }

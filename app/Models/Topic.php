@@ -11,24 +11,37 @@ class Topic extends Model
 
     protected $guarded = ['id'];
 
-    protected $fillable = ['name'];
+    protected $fillable = [
+        'name',
+        'slug',
+        'icon',
+        'category_id'
+    ];
+
+    // Return the slug, not id
+    public function getRouteKeyName()
+    {
+        return "slug";
+    }
 
     /**
      * Relation 1:N
      */
-    public function tags(){
+    public function tags()
+    {
         return $this->hasMany('App\Models\Tag');
     }
 
-    public function courses(){
+    public function courses()
+    {
         return $this->hasMany('App\Models\Course');
     }
 
     /**
      * Relation 1:N reverse
      */
-    public function category(){
-        return $this->belongsTo('App\Models\Category');
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
-
 }

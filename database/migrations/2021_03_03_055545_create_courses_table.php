@@ -26,6 +26,8 @@ class CreateCoursesTable extends Migration
             $table->text('slug');
 
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('moderator_id')->nullable();
+            $table->unsignedBigInteger('contributor_id')->nullable();
             $table->unsignedBigInteger('level_id')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('price_id')->nullable();
@@ -33,6 +35,8 @@ class CreateCoursesTable extends Migration
             $table->unsignedBigInteger('modality_id')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('moderator_id')->references('id')->on('users');
+            $table->foreign('contributor_id')->references('id')->on('users');
             $table->foreign('level_id')->references('id')->on('levels')->onDelete('set null');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
             $table->foreign('price_id')->references('id')->on('prices')->onDelete('set null');

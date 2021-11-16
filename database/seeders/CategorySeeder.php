@@ -20,6 +20,7 @@ class CategorySeeder extends Seeder
             [
                 'name' => 'Creatividad',
                 'icon' => 'fas fa-pen-nib',
+                'description' => null,
                 'topics' => [
                     [
                         'name' => 'Diseño Gráfico e Ilustración',
@@ -90,6 +91,7 @@ class CategorySeeder extends Seeder
             [
                 'name' => 'Marketing',
                 'icon' => 'fas fa-briefcase',
+                'description' => null,
                 'topics' => [
                     [
                         'name' => 'Marketing Digital',
@@ -130,6 +132,7 @@ class CategorySeeder extends Seeder
             [
                 'name' => 'Tecnología',
                 'icon' => 'fas fa-laptop',
+                'description' => null,
                 'topics' => [
                     [
                         'name' => 'Desarrollo Web',
@@ -231,15 +234,15 @@ class CategorySeeder extends Seeder
                         'tags' => [
                             [
                                 'name' => 'Linux',
-                                'icon' => 'fas fa-microship',
+                                'icon' => 'fas fa-microchip',
                             ],
                             [
                                 'name' => 'Windows Server',
-                                'icon' => 'fas fa-microship',
+                                'icon' => 'fas fa-microchip',
                             ],
                             [
                                 'name' => 'Active Directory',
-                                'icon' => 'fas fa-microship',
+                                'icon' => 'fas fa-microchip',
                             ],
                         ],
                     ],
@@ -253,6 +256,7 @@ class CategorySeeder extends Seeder
                 'name' => $category['name'],
                 'slug' => Str::slug($category['name']),
                 'icon' => $category['icon'],
+                'description' => $category['description']
             ];
 
             // Category::create([
@@ -265,6 +269,7 @@ class CategorySeeder extends Seeder
                 'name' => $data['name'],
                 'slug' => $data['slug'],
                 'icon' => $data['icon'],
+                'description' => $data['description']
             ]);
 
             foreach($category['topics'] as $topic){

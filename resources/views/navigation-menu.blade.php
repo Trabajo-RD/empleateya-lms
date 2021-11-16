@@ -6,11 +6,11 @@
             'route' => route('home', app()->getLocale()), // routes/web.php dashboard route
             'active' => request()->routeIs('home') // bool: verify is active route dashboard
         ],
-        // [
-        //     'name' => 'Courses',
-        //     'route' => route('courses.index', app()->getLocale()), // routes/web.php dashboard route
-        //     'active' => request()->routeIs('courses.*'), // bool: verify is active route dashboard
-        // ],
+        [
+            'name' => 'Courses',
+            'route' => route('courses.index', app()->getLocale()), // routes/web.php dashboard route
+            'active' => request()->routeIs('courses.*'), // bool: verify is active route dashboard
+        ],
         // [
         //     'name' => 'Categories',
         //     'route' => route('courses.category', [app()->getLocale(), $category]), // routes/web.php dashboard route
@@ -23,7 +23,7 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100 shadow">
     <!-- Primary Navigation Menu -->
     <div class="container">
-        <div class="flex justify-between h-16">
+        <div class="flex justify-between h-24">
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
@@ -202,7 +202,8 @@
                                 @else
                                     <span class="inline-flex rounded-md">
                                         <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                                            {{ Auth::user()->name }}
+                                            {{ Auth::user()->name }} 
+                                            {{-- TODO: Fix show user role {{ Auth::user()->roles()->name }} --}}
 
                                             <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -213,14 +214,21 @@
                             </x-slot>
 
                             <x-slot name="content">
-                                <!-- Account Management -->
-                                <div class="block px-4 py-2 text-xs text-gray-400">
-                                    {{ __('Manage account') }}
+                                <!-- Account -->
+                                <div class="block px-4 py-2 text-md font-bold text-gray-900">
+                                    {{ __('Account') }}
                                 </div>
 
                                 <x-jet-dropdown-link href="{{ route('profile.show', app()->getLocale() ) }}">
                                     {{ __('Profile') }}
                                 </x-jet-dropdown-link>
+
+                                <div class="border-t border-gray-100"></div>
+
+                                <!-- Management -->
+                                <div class="block px-4 py-2 text-md font-bold text-gray-900">
+                                    {{ __('Manage') }}
+                                </div>
 
                                 @can ('LMS Ver Dashboard')
                                     <x-jet-dropdown-link href="{{ route('admin.cpanel', app()->getLocale() ) }}">
@@ -231,7 +239,7 @@
                                 <!-- TODO: Create permission LMS Crear contenido -->
                                 @can ('LMS Crear contenido')
                                     <x-jet-dropdown-link href="{{ route('creator.courses.index', app()->getLocale() ) }}">
-                                        {{ __('Manage Courses') }}
+                                        {{ __('Courses') }}
                                     </x-jet-dropdown-link>
                                 @endcan
 
@@ -244,7 +252,7 @@
 
                                 @can ('LMS Calificar item')
                                     <x-jet-dropdown-link href="{{ route('instructor.courses.index', app()->getLocale() ) }}">
-                                        {{ __('Instructor') }}
+                                        {{ __('Courses') }}
                                     </x-jet-dropdown-link>
                                 @endcan
 
@@ -294,7 +302,7 @@
         <div class="pt-2 pb-3 space-y-1">
             @foreach ($nav_links as $nav_link)
                 <x-jet-responsive-nav-link href="{{ $nav_link['route'] }}" :active="$nav_link['active']">
-                    {{ $nav_link['name'] }}
+                    {{ __($nav_link['name']) }}
                 </x-jet-responsive-nav-link>
             @endforeach
         </div>
@@ -347,7 +355,7 @@
         <!-- Responsive Settings Options -->
         @auth
             <div class="pt-4 pb-1 border-t border-gray-200">
-                <div class="flex items-center px-4">
+                <div class="flex items-center px-4 pb-4">
                     @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                         <div class="flex-shrink-0 mr-3">
                             <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
@@ -360,11 +368,25 @@
                     </div>
                 </div>
 
+                <div class="border-t border-gray-100"></div>
+
                 <div class="mt-3 space-y-1">
-                    <!-- Account Management -->
+
+                    <!-- Account -->
+                    <div class="block px-4 py-2 text-md font-bold text-gray-900">
+                        {{ __('Account') }}
+                    </div> 
+
                     <x-jet-responsive-nav-link href="{{ route('profile.show', app()->getLocale() ) }}" :active="request()->routeIs('profile.show')">
-                        {{ __('Perfil') }}
+                        {{ __('Profile') }}
                     </x-jet-responsive-nav-link>
+
+                    <div class="border-t border-gray-100"></div>
+
+                    <!-- Management -->
+                    <div class="block px-4 py-2 text-md font-bold text-gray-900">
+                        {{ __('Manage') }}
+                    </div>
 
                     @can('LMS Ver Dashboard')
                         <x-jet-responsive-nav-link href="{{ route('admin.cpanel', app()->getLocale() ) }}" :active="request()->routeIs('admin.cpanel', app()->getLocale() )">
@@ -375,13 +397,13 @@
                     <!-- TODO: Create permission LMS Crear contenido -->
                     @can('LMS Crear contenido')
                         <x-jet-responsive-nav-link href="{{ route('creator.courses.index', app()->getLocale()) }}" :active="request()->routeIs('creator.courses.index', app()->getLocale())">
-                            {{ __('Administrar cursos') }}
+                            {{ __('Courses') }}
                         </x-jet-responsive-nav-link>
                     @endcan
 
                     @can('LMS Calificar item')
                         <x-jet-responsive-nav-link href="{{ route('instructor.courses.index', app()->getLocale() ) }}" :active="request()->routeIs('instructor.courses.index', app()->getLocale())">
-                            {{ __('Instructor') }}
+                            {{ __('Courses') }}
                         </x-jet-responsive-nav-link>
                     @endcan
 

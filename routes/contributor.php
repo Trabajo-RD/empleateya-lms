@@ -14,6 +14,7 @@ Route::group(['prefix' => '{locale}',
     /**
      * Route for list all courses
      */
-    Route::get('contributor/courses', [CourseController::class, 'index'])->name('courses.index');
+    // TODO: Create Contributor Course Controller
+    // Route::get('contributor/courses', [CourseController::class, 'index'])->name('courses.index');
 
 });

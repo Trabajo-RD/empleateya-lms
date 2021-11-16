@@ -17,8 +17,10 @@
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
     <body>
-        <div class="font-sans text-gray-900 antialiased">
-            {{ $slot }}
+        <div class="py-12" style="background-color: #f3f4f6;">
+            <div class="font-sans text-gray-900 antialiased">
+                {{ $slot }}
+            </div>
         </div>
 
         <!-- Page Footer -->

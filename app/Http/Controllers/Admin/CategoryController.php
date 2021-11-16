@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Topic;
+use App\Models\Course;
 
 // TODO: Implement model translations with astrotomic/laravel-translatable
 
@@ -17,7 +19,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::orderBy('name')->get();
 
         return view('admin.categories.index', compact('categories'));
     }
@@ -29,7 +31,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.create');
+        $topics = Topic::orderBy('name')->get();
+
+        return view('admin.categories.create', compact('topics'));
     }
 
     /**
@@ -38,24 +42,31 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $locale)
+    public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:categories'
-        ]);
-
-        $data = $request->all();
+            'name' => 'required',
+            'slug' => 'required|unique:categories'
+        ]);        
 
         $category = Category::create([
-            'name' => $data['name'],
-            'slug' => $data['slug'],
-            'icon' => $data['icon'],
-            'modality_id' => $data['modality_id']
+            'name' => $request->name,
+            'slug' => $request->slug,
+            'icon' => $request->icon,
+            'modality_id' => $request->modality_id
         ]);
 
-        // $category = Category::create( $data );
+        // Register all category topics
+        // $category_topics = Category::findOrFail($request->id);
+        // $newCategory = $category_topics->replicate();
 
-        return redirect()->route('admin.categories.edit', compact('locale', 'category') )->with('info', __('Category created successfully'));
+        // $newCategory->push();
+
+        // foreach ($category_topics->topics as $topic) {
+        //     $newCategory->topics()->attach($topic);
+        // }        
+
+        return redirect()->route('admin.categories.edit', compact('category'))->with('info', __('Category created successfully'));
     }
 
     /**
@@ -77,7 +88,11 @@ class CategoryController extends Controller
      */
     public function edit($locale, Category $category)
     {
-        return view('admin.categories.edit', compact('locale', 'category'));
+        $topics = Topic::orderBy('name')->get();
+        $courses = Course::all();
+        $category_courses = $courses->where('status', 3)->where('category_id', $category->id);       
+
+        return view('admin.categories.edit', compact('locale', 'category', 'topics', 'category_courses'));
     }
 
     /**
@@ -90,23 +105,30 @@ class CategoryController extends Controller
     public function update(Request $request, $locale, Category $category)
     {
         $request->validate([
-            'name' => 'required|unique:categories,name,' . $category->id
+            'name' => 'required',
+            'slug' => 'required|unique:categories,slug,' . $category->id
         ]);
 
-        $data = $request->all();
+        // $data = $request->all();
 
         $category->update([
-            'name' => $data['name'],
-            'slug' => $data['slug'],
-            'icon' => $data['icon'],
-            'modality_id' => $data['modality_id']
+            'name' => $request->name,
+            'slug' => $request->slug,
+            'icon' => $request->icon,
+            'modality_id' => $request->modality_id
         ]);
 
-        // $category->update([
-        //     'name' => $data['name']
-        // ]);
+        // Register all category topics
+        // $category = Category::findOrFail($request->id);
+        // $newCategory = $category->replicate();
 
-        return redirect()->route('admin.categories.edit', compact('locale', 'category') )->with('info', __('The category has been updated'));
+        // $newCategory->push();
+
+        // foreach ($category->topics as $topic) {
+        //     $newCategory->topics()->attach($topic);
+        // }
+
+        return redirect()->route('admin.categories.edit', compact('locale', 'category'))->with('info', __('The category has been updated'));
     }
 
     /**

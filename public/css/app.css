@@ -20005,7 +20005,6 @@ select {
 }
 
 .sticky {
-  position: -webkit-sticky;
   position: sticky;
 }
 
@@ -32945,6 +32944,8 @@ ul li p{
   --tw-text-opacity: 1;
   color: rgba(255, 255, 255, var(--tw-text-opacity));
 }
+
+/* @import './vendor/adminlte/dist/css/adminlte.css'; */
 
 @media (min-width: 640px) {
   .sm\:container {
@@ -52204,7 +52205,6 @@ ul li p{
   }
 
   .sm\:sticky {
-    position: -webkit-sticky;
     position: sticky;
   }
 
@@ -84097,7 +84097,6 @@ ul li p{
   }
 
   .md\:sticky {
-    position: -webkit-sticky;
     position: sticky;
   }
 
@@ -115990,7 +115989,6 @@ ul li p{
   }
 
   .lg\:sticky {
-    position: -webkit-sticky;
     position: sticky;
   }
 
@@ -147883,7 +147881,6 @@ ul li p{
   }
 
   .xl\:sticky {
-    position: -webkit-sticky;
     position: sticky;
   }
 
@@ -179776,7 +179773,6 @@ ul li p{
   }
 
   .\32xl\:sticky {
-    position: -webkit-sticky;
     position: sticky;
   }
 
@@ -192410,4 +192406,3 @@ ul li p{
             animation: bounce 1s infinite;
   }
 }
-

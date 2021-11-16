@@ -3,8 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\CourseController;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ResultController;
+
+use App\Http\Controllers\Pages\ContactController;
 
 use App\Http\Livewire\CourseStatus;
 
@@ -65,14 +71,24 @@ Route::group([
     Route::get('courses/category/{category}', [CourseController::class, 'category'])->name('courses.category');
 
     /**
+     * Route to display the course topics
+     */
+    Route::get('courses/{category}/{topic}', [CourseController::class, 'topic'])->name('courses.topic');
+
+    /**
+     * Route to display the courses tags
+     */
+    Route::get('tag/{tag}', [CourseController::class, 'tag'])->name('courses.tag');
+
+    /**
      * Route to display the courses categories
      */
-    Route::get('courses/modality/{modality}', [CourseController::class, 'modality'])->name('courses.modality');
+    Route::get('modalities/{modality}', [CourseController::class, 'modality'])->name('courses.modality');
 
     /**
      * Route to display single course information
      */
-    Route::get('cursos/{course}', [CourseController::class, 'show'])->name('courses.show');
+    Route::get('courses/{course}', [CourseController::class, 'show'])->name('courses.show');
 
     /**
      * Route to enroll users
@@ -84,6 +100,16 @@ Route::group([
      */
     Route::get('course-status/{course}', CourseStatus::class)->name('courses.status')->middleware(['auth', 'verified']);
 
+    /**
+     *  PAGES
+     */
+    Route::get('/contact-us', [ContactController::class, 'contact'])->name('contact-us');
+    Route::post('/contact/sent-email', [ContactController::class, 'sendEmail'])->name('contact.send');
+
+    Route::get('/about', [PageController::class, 'about'])->name('pages.about');
+
+    Route::get('/glosary', [PageController::class, 'glosary'])->name('pages.glosary');
+
     // Auth::routes(['verify' => true]);
 
     /**
@@ -93,9 +119,35 @@ Route::group([
     //     return "Aqui va la modalidad";
     // })->name('courses.modality');
 
+    Route::get('results/{result_id}', [ResultController::class, 'show'])->name('results.show');
+    Route::get('send/{result_id}', [ResultController::class, 'send'])->name('results.send');
 });
 
 Route::redirect('/home', '/');
+
+Route::get('auth/user', function () {
+
+    if (auth()->check()) {
+
+        return response()->json([
+            'authUser' => auth()->user()
+        ]);
+
+        return null;
+    }
+});
+
+Route::get('chat/{chat}', [ChatController::class, 'show'])->name('chat.show');
+
+Route::get('chat/with/{user}', [ChatController::class, 'chat_with'])->name('chat.with');
+
+Route::get('chat/{chat}/get_users', [ChatController::class, 'get_users'])->name('chat.get_users');
+
+Route::get('chat/{chat}/get_messages', [ChatController::class, 'get_messages'])->name('chat.get_messages');
+
+Route::post('message/sent', [MessageController::class, 'sent'])->name('message.sent');
+
+
 
 // Route::group(['middleware' => ['setlocale']], function(){
 

@@ -38,6 +38,7 @@
                 </thead>
                 <tbody>
                     @forelse ( $roles as $role )
+                        @if(  $role->id != 1 )
                         <tr>
                             <td width="10px">{{ $role->id }}</td>
                             <td>{{ $role->name }}</td>
@@ -52,6 +53,7 @@
                                 </form>
                             </td>
                         </tr>
+                        @endif
                     @empty
                         <tr>
                             <td colspan="4" class="text-gray">

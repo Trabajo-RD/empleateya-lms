@@ -12,6 +12,7 @@ use App\Models\Category;
 use App\Models\Price;
 use App\Models\Type;
 use App\Models\Modality;
+use App\Models\Topic;
 
 class CourseFactory extends Factory
 {
@@ -29,7 +30,7 @@ class CourseFactory extends Factory
      */
     public function definition()
     {
-        $title = $this->faker->sentence();
+        $title = $this->faker->unique()->sentence();
 
         return [
             'title' => $title,
@@ -37,15 +38,16 @@ class CourseFactory extends Factory
             'summary' => $this->faker->paragraph(),
             'url' => 'https://docs.microsoft.com/es-mx/learn/paths/az-900-describe-cloud-concepts/',
             'duration_in_minutes' => 60,
-            'status' => $this->faker->randomElement([Course::DRAFT, Course::PENDING, Course::PUBLISH, Course::TRASH]),
+            'status' => $this->faker->randomElement([1, 2, 3, 4]),
             'slug' => Str::slug($title),
-            'user_id' => $this->faker->randomElement([1, 2, 3, 4, 5]),
+            'user_id' => $this->faker->randomElement([6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]),
             //'user_id' => User::all()->random()->id,
             'level_id' => Level::all()->random()->id,
             'category_id' => Category::all()->random()->id,
             'price_id' => Price::all()->random()->id,
             'type_id' => Type::all()->random()->id,
             'modality_id' => Modality::all()->random()->id,
+            'topic_id' => Topic::all()->random()->id,
         ];
     }
 }

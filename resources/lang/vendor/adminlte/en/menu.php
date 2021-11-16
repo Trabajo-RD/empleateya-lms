@@ -18,4 +18,6 @@ return [
     'information'                   => 'Information',
 
     'categories_trans_key'          => 'Categorías',
+    'topics_trans_key'              => 'Subcategorías o Temas',
+    'tags_trans_key'                => 'Etiquetas'
 ];

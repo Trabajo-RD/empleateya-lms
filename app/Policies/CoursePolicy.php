@@ -45,7 +45,7 @@ class CoursePolicy
      */
     public function dictated( User $user, Course $course){
 
-        if($course->user_id == $user->id ){
+        if($course->user_id == $user->id || $course->moderator_id == $user->id || $course->contributor_id == $user->id ){
             return true;
         } else {
             return false;

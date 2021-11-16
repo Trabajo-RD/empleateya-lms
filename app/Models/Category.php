@@ -15,7 +15,8 @@ class Category extends Model
     protected $fillable = [
         'name',
         'slug',
-        'icon'
+        'icon',
+        'description'
     ];
 
     // Return the slug, not id
@@ -27,17 +28,26 @@ class Category extends Model
      * Relation 1:N
      */
     public function courses(){
-        return $this->hasMany('App\Models\Course');
+        // return $this->hasMany('App\Models\Course');
+        return $this->hasMany(Course::class);
     }
 
     // Category topics
     public function topics(){
-        return $this->hasMany('App\Models\Topic');
+        // return $this->hasMany('App\Models\Topic');
+        return $this->hasMany(Topic::class);
     }
 
     // Relation Category : Tags
     public function tags(){
         return $this->hasManyThrough('App\Models\Tag', 'App\Models\Topic');
+    }
+
+    /**
+     * Relation 1:1 Polymorphic
+     */
+    public function image(){
+        return $this->morphOne(Image::class, 'imageable');
     }
 
 }

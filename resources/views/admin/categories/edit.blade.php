@@ -8,6 +8,9 @@
 
 @section('content')
 
+<div class="row">
+    <div class="col col-md-12">
+
     @if (session('info'))
         <div class="alert alert-success">{{ session('info') }}</div>
     @endif
@@ -15,42 +18,18 @@
     <div class="card">
         <div class="card-body">
             {!! Form::model($category, ['route' => ['admin.categories.update', $category ], 'method' => 'put' ]) !!}
-                <div class="form-group">
-                    {!! Form::label('name', 'Nombre') !!}
-                    {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el nombre de la categoría']) !!}
-                </div>
 
-                @error('name')
-                    <span class="text-danger">{{ $message }}</span>
-                @enderror
+                @include('admin.categories.partials.form')
 
-                <!-- course-slug -->
-                <div class="form-group">
-                    {!! Form::label( 'slug', Lang::get('Slug') ) !!}
-                    {!! Form::text('slug', null, ['readonly' => 'readonly', 'class' => 'form-control' ]) !!}
-                </div>
-                @error('slug')
-                    <span class="text-danger">{{ $message }}</span>
-                @enderror
+                <a href="{{ url()->previous() }}" class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="Omitir los cambios y volver a la vista anterior"><i class="fas fa-arrow-circle-left mr-2"></i>Volver atrás</a>                           
 
-                 <!-- icon -->
-                 <div class="form-group">
-                    {!! Form::label( 'icon', Lang::get('Icono') ) !!}
-                    {!! Form::text('icon', null, ['class' => 'form-control', 'placeholder' => 'Ingrese la clase del icono desde FontAwesome' ]) !!}
-                </div>
-                @error('icon')
-                    <span class="text-danger">{{ $message }}</span>
-                @enderror
+                {!! Form::submit(trans('Guardar cambios'), ['class' => 'btn btn-primary float-right', 'data-toggle' => 'tooltip', 'data-placement' => 'left', 'title' => 'Guardar los cambios realizados en esta categoría']) !!}
 
-                <!-- course-slug -->
-                <div class="form-group">
-                    {!! Form::hidden('modality_id', null, ['class' => 'form-control' ]) !!}
-                </div>
-
-                {!! Form::submit('Actualizar categoría', ['class' => 'btn btn-primary float-right']) !!}
             {!! Form::close() !!}
         </div>
     </div>
+</div>
+</div>
 @stop
 
 @section('css')
@@ -58,26 +37,7 @@
 @stop
 
 @section('js')
-    <script>
-        // AUTOMATIC SLUG
+    <script src="{{ asset('vendor/jQuery-Plugin-stringToSlug-1.3/jquery.stringToSlug.min.js') }}"></script>
 
-        // title listener
-        document.getElementById("name").addEventListener('keyup', slugChange);
-
-        // event change
-        function slugChange(){
-            title = document.getElementById("name").value;
-            document.getElementById("slug").value = slug(title);
-        }
-
-        // formating slug
-        function slug(str){
-            var $slug = '';
-            var trimmed = str.trim(str);
-            $slug = trimmed.replace(/[^a-z0-9-]/gi, '-').
-            replace(/-+/g, '-').
-            replace(/^-|-$/g, '');
-            return $slug.toLowerCase();
-        }
-    </script>
+    <script src="{{ asset('js/admin/categories/form.js') }}"></script>
 @stop

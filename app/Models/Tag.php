@@ -11,30 +11,52 @@ class Tag extends Model
 
     protected $guarded = ['id'];
 
-    protected $fillable = ['name'];
+    protected $fillable = [
+        'name',
+        'slug',
+        'icon',
+        'topic_id'
+    ];
 
-    protected $withCount = ['courses', 'faqs', 'terms'];
+    // protected $withCount = ['courses'];
 
     /**
      * Relation 1:N reverse
      */
-    public function tag(){
-        return $this->belongsTo('App\Models\Topic');
+    // public function tag(){
+    //     return $this->belongsTo('App\Models\Topic');
+    // }
+
+    // Return the slug, not id
+    public function getRouteKeyName()
+    {
+        return "slug";
     }
 
     /**
      * Relation N:M : Users enrolled in courses
      */
-    public function courses(){
-        return $this->belongsToMany('App\Models\Course');
+    public function courses()
+    {
+        // return $this->belongsToMany('App\Models\Course');
+        return $this->belongsToMany(Course::class);
     }
 
-    public function faqs(){
+    public function faqs()
+    {
         return $this->belongsToMany('App\Models\Faq');
     }
 
-    public function terms(){
+    public function terms()
+    {
         return $this->belongsToMany('App\Models\Term');
     }
 
+    /**
+     * Relation 1:N reverse
+     */
+    public function topic()
+    {
+        return $this->belongsTo(Topic::class);
+    }
 }

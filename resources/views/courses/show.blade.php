@@ -17,6 +17,7 @@
                 <h1 class="text-white font-extrabold text-2xl sm:text-3xl md:text-4xl">{{ $course->title }}</h1>
                 <h2 class="text-white mt-3 sm:mt-5 sm:text-lg md:mt-5 md:text-xl lg:mx-0 mb-4">{{ $course->subtitle }}</h2>
                 <p class="text-white sm:text-md md:text-lg lg:mx-0 mb-2"><span class="text-gray-400"><i class="fas fa-tags text-sm mr-2"></i>{{ __('Category') }}:&nbsp;</span>{{ __($course->category->name) }}</p>
+                <p class="text-white sm:text-md md:text-lg lg:mx-0 mb-2"><span class="text-gray-400"><i class="fas fa-tags text-sm mr-2"></i>{{ __('Topic') }}:&nbsp;</span>{{ __($course->topic->name) }}</p>
                 <p class="text-white sm:text-md md:text-lg lg:mx-0 mb-2"><span class="text-gray-400"><i class="fas fa-layer-group text-sm mr-2"></i>{{ __('Level') }}:&nbsp;</span>{{ __($course->level->name) }}</p>
 
                 <div class="flex mb-4">
@@ -34,7 +35,7 @@
                     </ul>
                     <!-- users enrolled -->
                     <p class="text-white sm:text-md md:text-lg lg:mx-0">
-                        <i class="fas fa-users text-sm mr-2"></i>{{ $course->students_count }} {{ $course->students_count > 1 ? __('Users') : __('User') }}
+                        <i class="fas fa-users text-sm mr-2"></i>{{ $course->students_count }} {{ $course->students_count > 1 || $course->students_count == 0 ? __('Users') : __('User') }}
                     </p>
                 </div>
             </div>
@@ -61,13 +62,15 @@
 
                 <ul class="list-disc list-inside mt-4">
 
-                    @foreach ($course->requirements as $requirement )
-
+                    @forelse ($course->requirements as $requirement )
                         <li class="text-gray-600 text-base">
                             {{ $requirement->name }}
                         </li>
-
-                    @endforeach
+                    @empty
+                        <p class="text-gray-600 text-base">
+                            No tiene requisitos previos
+                        </p>
+                    @endforelse
 
                 </ul>
             </section>
@@ -76,11 +79,14 @@
             <section class="mb-12">
 
                 <h2 class="font-bold text-2xl mb-2 text-gray-600">{{ __('What you will learn') }}</h2>
-                <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 mt-4">
 
                     @foreach ( $course->goals as $goal )
 
-                        <li class="text-gray-600 text-base"><i class="fas fa-check text-sm text-gray-500 mr-2"></i>{{ $goal->name }}</li>
+                        <li class="text-gray-600 text-base flex justify-start">
+                            <i class="fas fa-check text-sm text-gray-500 mr-3 pt-1 clear-left"></i>
+                            {{ $goal->name }}
+                        </li>
 
                     @endforeach
 
@@ -96,10 +102,10 @@
 
                     <article class="mt-4 shadow" @if( $loop->first) x-data="{ open: true}"  @else x-data="{ open: false}" @endif>
                         <header class="border border-gray-200 px-4 pt-2 cursor-pointer bg-gray-100 bg-opacity-25 transition duration-700 ease-in-out" x-on:click=" open = !open ">
-                            <h3 class="font-bold text-xl mb-2 text-gray-600">
-                                <i class="fas fa-chevron-down mr-2" x-show=" open "></i>
-                                <i class="fas fa-chevron-right mr-2" x-show=" !open "></i>
+                            <h3 class="font-bold text-xl mb-2 text-gray-600 flex justify-between items-center">
                                 {{ $section->name }}
+                                <i class="fas fa-chevron-down ml-2 text-gray-400" x-show=" !open "></i>
+                                <i class="fas fa-chevron-right ml-2 text-gray-400" x-show=" open "></i>
                             </h3>
                         </header>
                         <div class="bg-white py-2 px-4" x-show=" open ">
@@ -117,6 +123,8 @@
                 @endforeach
 
             </section>
+
+            @livewire('courses-tags', ['course' => $course])
 
             @livewire('courses-reviews', ['course' => $course])
 
@@ -145,7 +153,9 @@
                     </div>
 
 
-                    @if( auth()->check() && !(Auth::user()->hasRole(['Administrator', 'Manager', 'Creator', 'Instructor']) ))
+
+                    {{-- @if( auth()->check() && !(Auth::user()->hasRole(['Administrator', 'Manager', 'Creator', 'Instructor']) )) --}}
+                    @cannot('LMS Crear cursos')
 
                         @can( 'enrolled', $course )
 
@@ -163,10 +173,13 @@
                                 <a href="{{ route('courses.status', $course ) }}" class="btn-cta btn-success btn-block mt-4 hover:shadow">Continuar con el curso</a>
 
                             @endif --}}
+                            @if($course->completed && !is_null($course->completed))
+                                <a href="" class="btn-cta btn-success btn-block mt-4 hover:shadow">{{ __('Ver certificado') }}</a>
+                            @else
 
-                            <!-- CTA button : user enrolled -->
-                            <a href="{{ route('courses.status', [app()->getLocale(), $course] ) }}" class="btn-cta btn-success btn-block mt-4 hover:shadow">{{ __('Continue with the course') }}</a>
-
+                                <!-- CTA button : user enrolled -->
+                                <a href="{{ route('courses.status', [app()->getLocale(), $course] ) }}" class="btn-cta btn-success btn-block mt-4 hover:shadow">{{ __('Continue with the course') }}</a>
+                            @endif
                         @else
 
                             {{-- @if( $course->url != '' )
@@ -185,21 +198,27 @@
                                 </form>
                             @endif --}}
 
-                            @if( $course->price->value == 0 )
-                                <p class="text-2xl font-bold text-gray-500 mt-3 mb-2">{{ __('Free') }}</p>
-                                <form action="{{ route('courses.enrolled', [app()->getLocale(), $course] ) }}" method="post">
-                                    @csrf
-                                    <button type="submit" class="btn-cta btn-accent btn-block mt-4 hover:shadow">{{ __('Start this course') }}</button>
-                                </form>
-                            @else
-                                <p class="text-2xl font-bold text-gray-500 mt-3 mb-2">US$ {{ $course->price->value }}</p>
-                                <a href="{{ route('payment.checkout', $course ) }}" class="btn-cta btn-accent btn-block hover:shadow">{{ __('Buy this course') }}</a>
-                            @endif
-
+                            {{-- @if( $course->students_count < $course->audiences->name  ) --}}
+                                @if( $course->price->value == 0 )
+                                    <p class="text-2xl font-bold text-gray-500 mt-3 mb-2">{{ __('Free') }}</p>
+                                    <form action="{{ route('courses.enrolled', [app()->getLocale(), $course] ) }}" method="post">
+                                        @csrf
+                                        <button type="submit" class="btn-cta btn-accent btn-block mt-4 hover:shadow">{{ __('Start this course') }}</button>
+                                    </form>
+                                @else
+                                    <p class="text-2xl font-bold text-gray-500 mt-3 mb-2">US$ {{ $course->price->value }}</p>
+                                    <a href="{{ route('payment.checkout', $course ) }}" class="btn-cta btn-accent btn-block hover:shadow">{{ __('Buy this course') }}</a>
+                                @endif
+                            {{-- @else
+                                <div class="flex items-center bg-blue-500 text-white text-sm font-bold px-4 py-3" role="alert">
+                                    <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z"/></svg>
+                                    <p>Por el momento no tenemos cupo disponible para este curso.</p>
+                                </div>
+                            @endif --}}
 
 
                         @endcan
-                    @endif
+                    @endcannot
 
                 </div>
             </section>
@@ -221,7 +240,7 @@
 
                             <div class="ml-3 md:col-span-1 lg:col-span-2">
                                 <h3>
-                                    <a class="font-bold text-gray-600 mb-3" href="{{ route('courses.show', [app()->getLocale(), $related_course] ) }}">{{ Str::limit( $related_course->title, 40 ) }}</a>
+                                    <a class="font-bold text-gray-600 mb-3" title="{{ $related_course->title }}" href="{{ route('courses.show', [app()->getLocale(), $related_course] ) }}">{{ Str::limit( $related_course->title, 40 ) }}</a>
                                 </h3>
                                 <div class="flex items-center mb-4">
                                     <img class="h-8 w-8 object-cover rounded-full shadow-lg" src="{{ $related_course->editor->profile_photo_url }}" alt="" />
@@ -245,7 +264,13 @@
                         </article>
 
                     @endforeach
+
                 @endif
+
+                <div class="w-full pt-4">
+                    <a class="text-blue-500" href="{{ route('courses.category', [app()->getLocale(), $course->category]) }}">{{ __('More courses in') }} {{ $course->category->name }}</a>
+                </div>
+
                 {{-- TODO: Encuesta de satisfaccion --}}
                 {{-- <h2 class="font-bold text-2xl text-gray-600 my-12">Encuesta de Satisfacción</h2>
                 <article>

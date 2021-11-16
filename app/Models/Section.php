@@ -15,14 +15,21 @@ class Section extends Model
     /**
      * Relation 1:N
      */
-    public function lessons(){
-        return $this->hasMany('App\Models\Lesson');
+    public function lessons()
+    {
+        return $this->hasMany(Lesson::class);
+    }
+
+    public function tests()
+    {
+        return $this->hasMany(Test::class, 'section_id', 'id');
     }
 
     /**
      * Relation 1:N reverse
      */
-    public function course(){
-        return $this->belongsTo('App\Models\Course');
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
     }
 }

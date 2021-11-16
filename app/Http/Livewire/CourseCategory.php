@@ -4,13 +4,12 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Course;
-use App\Models\Category;
 use App\Models\Topic;
 use App\Models\Level;
 use App\Models\Type;
-use App\Models\Review;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+
 
 use Livewire\WithPagination;
 
@@ -29,6 +28,9 @@ class CourseCategory extends Component
     public $layout = 'course-card';
 
     public $sortBy = '';
+
+    protected $listeners = ['setLayout'];
+
 
     public function mount(){
         $this->category = request()->category;
@@ -146,6 +148,10 @@ class CourseCategory extends Component
         }
 
         return $this->sortBy = $field;
+    }
+
+    public function setLayout($layout){
+        $this->layout = $layout;
     }
 
 }

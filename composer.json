@@ -9,11 +9,14 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "barryvdh/laravel-cors": "^2.0",
+        "beyondcode/laravel-websockets": "^1.12",
         "components/font-awesome": "^5.15",
         "doctrine/dbal": "^3.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
+        "jenssegers/agent": "^2.6",
         "jeroennoten/laravel-adminlte": "^3.5",
         "laravel/framework": "^8.12",
         "laravel/jetstream": "^2.2",
@@ -26,8 +29,10 @@
         "maatwebsite/excel": "^3.1",
         "paypal/paypal-checkout-sdk": "1.0.1",
         "paypal/rest-api-sdk-php": "^1.14",
+        "pusher/pusher-php-server": "~4.0",
         "realrashid/sweet-alert": "^3.2",
-        "spatie/laravel-permission": "^4.0"
+        "spatie/laravel-permission": "^4.0",
+        "uxweb/sweet-alert": "^2.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",

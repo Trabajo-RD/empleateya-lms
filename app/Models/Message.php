@@ -10,8 +10,16 @@ class Message extends Model
     use HasFactory;
 
     protected $fillable = [
-        'room_id',
-        'user_id',
-        'message',
+        'content',
+        'chat_id'
     ];
+
+    // Relation 1:1
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function chat(){
+        return $this->belongsTo(Chat::class);
+    }
 }

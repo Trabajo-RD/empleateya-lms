@@ -34,7 +34,12 @@ class CourseSeeder extends Seeder
 
             Image::factory(1)->create([
                 'imageable_id' => $course->id,
-                'imageable_type' => 'App\Models\Course'
+                'imageable_type' => Course::class
+            ]);
+
+            $course->tags()->attach([
+                rand(1, 10),
+                rand(11, 20),
             ]);
 
             Requirement::factory()->create([

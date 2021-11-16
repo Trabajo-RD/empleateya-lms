@@ -9,8 +9,8 @@ use App\Models\Platform;
 
 class CoursesLesson extends Component
 {
-    public $section, $lesson, $platforms, $name, $platform_id = 1, $url;   
-    
+    public $section, $lesson, $platforms, $name, $platform_id = 1, $url;
+
 
     protected $rules = [
         'lesson.name' => 'required',
@@ -18,13 +18,16 @@ class CoursesLesson extends Component
         'lesson.url' => ['required', 'regex:%^ (?:https?://)? (?:www\.)? (?: youtu\.be/ | youtube\.com (?: /embed/ | /v/ | /watch\?v= ) ) ([\w-]{10,12}) $%x'],
     ];
 
+    // Listeners to add SweetAlert event,
+    protected $listeners = ['destroy', 'editConfirm', 'edit'];
+
     public function mount(Section $section){
         $this->section = $section;
 
         // Show all platforms
         $this->platforms = Platform::all();
 
-        $this->lesson = new Lesson();               
+        $this->lesson = new Lesson();
     }
 
     public function render()
@@ -59,27 +62,41 @@ class CoursesLesson extends Component
             'section_id' => $this->section->id
         ]);
 
+        // SweetAlert
+        $this->dispatchBrowserEvent('swal:modal', [
+            'type' => 'success',
+            'title' => 'Unidad añadida con éxito',
+            'text' => '',
+        ]);
+
         $this->reset(['name', 'platform_id', 'url']);
 
         // Section update
         $this->section = Section::find( $this->section->id );
 
-
     }
 
 
 
+    /**
+     * SweetAlert to confirm edit
+     */
+    // public function editConfirm(Lesson $lesson){
+    //     $this->dispatchBrowserEvent('swal:editlesson', [
+    //         'type' => 'warning',
+    //         'title' => 'Seguro que quieres editar esta unidad?',
+    //         'text' => '',
+    //         'lesson' => $lesson,
+    //     ]);
+    // }
+
     public function edit( Lesson $lesson ){
-
         $this->resetValidation();
-
         $this->lesson = $lesson;
     }
 
-
-
     // Update instructor lesson info
-    public function update(){        
+    public function update(){
 
         // TODO: LinkedIn Learning url validation
         // if( $this->lesson->platform_id == 2 ){
@@ -101,7 +118,7 @@ class CoursesLesson extends Component
         // Linkedin Learning validation
         if( $this->lesson->platform_id == 2 ){
             $this->rules['lesson.url'] = ['required', false];
-        }        
+        }
 
         // Vimeo url validation
         if( $this->lesson->platform_id == 4 ){
@@ -111,6 +128,13 @@ class CoursesLesson extends Component
 
         $this->lesson->save();
 
+        // SweetAlert
+        $this->dispatchBrowserEvent('swal:modal', [
+            'type' => 'success',
+            'title' => 'Unidad actualizada!',
+            'text' => '',
+        ]);
+
         // Clear lesson property
         $this->lesson = new Lesson();
 
@@ -119,10 +143,24 @@ class CoursesLesson extends Component
 
     }
 
-    public function destroy( Lesson $lesson ){
 
-        $lesson->delete();
-        
+    /**
+     * Return delete confirm
+     */
+    public function deleteConfirm($id){
+        $this->dispatchBrowserEvent('swal:confirm', [
+            'type' => 'warning',
+            'title' => 'Seguro que quires eliminar esta unidad?',
+            'text' => '',
+            'id' => $id,
+        ]);
+    }
+
+    public function destroy( $id ){
+
+        Lesson::where('id', $id)->delete();
+        //$lesson->delete();
+
         // Section update
         $this->section = Section::find( $this->section->id );
 
@@ -131,5 +169,5 @@ class CoursesLesson extends Component
     // Cancel edit lesson form
     public function cancel(){
         $this->lesson = new Lesson();
-    }    
+    }
 }

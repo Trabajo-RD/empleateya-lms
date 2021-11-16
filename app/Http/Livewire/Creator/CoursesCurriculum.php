@@ -90,6 +90,14 @@ class CoursesCurriculum extends Component
          // to evaluate property $rules
         $this->validate();
         $this->section->save();
+
+        // SweetAlert
+        $this->dispatchBrowserEvent('swal:modal', [
+            'type' => 'success',
+            'title' => 'Módulo actualizado!',
+            'text' => '',
+        ]);
+
         $this->section = new Section();
 
         $this->course = Course::find($this->course->id);
@@ -98,8 +106,8 @@ class CoursesCurriculum extends Component
     /**
      * Return delete confirm
      */
-    public function deleteConfirm($id){
-        $this->dispatchBrowserEvent('swal:confirm', [
+    public function deleteModuleConfirm($id){
+        $this->dispatchBrowserEvent('swal:deletemoduleconfirm', [
             'type' => 'warning',
             'title' => 'Estas seguro de eliminar este módulo?',
             'text' => '',
