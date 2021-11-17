@@ -2,9 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Course;
+use App\Policies\CoursePolicy;
 use App\Models\Team;
 use App\Policies\TeamPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -14,6 +17,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
+        Course::class => CoursePolicy::class,
         Team::class => TeamPolicy::class,
     ];
 
@@ -27,5 +31,12 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         //
+
+        /**
+         *  Register a custom policy discovery callback
+         */
+        // Gate::guessPolicyNamesUsing(function ($modelClass) {
+        //     // Return the name of the policy class for the given model...
+        // });
     }
 }

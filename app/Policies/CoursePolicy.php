@@ -23,9 +23,24 @@ class CoursePolicy
     }
 
     /**
-     * Policy to verify enrolled users in a course
+     * Determine if the given course can be updated by the user.
+     * 
+     * @param \App\Models\User      $user
+     * @param \App\Models\Course    $course
      */
-    public function enrolled( User $user, Course $course ){
+    public function update( User $user, Course $course )
+    {
+        return $user->id === $course->user_id || $user->id === $course->collaborator_id;
+    }
+
+    /**
+     * Check if the given user is enrolled in the course
+     * 
+     * @param \App\Models\User      $user
+     * @param \App\Models\Course    $course
+     */
+    public function enrolled( User $user, Course $course )
+    {
         return $course->students->contains( $user->id );
     }
 
