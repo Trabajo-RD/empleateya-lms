@@ -175,6 +175,7 @@ return [
         Jenssegers\Agent\AgentServiceProvider::class,
         FruitCake\Cors\CorsServiceProvider::class,
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
 
         // RealRashid\SweetAlert\SweetAlertServiceProvider::class,
 

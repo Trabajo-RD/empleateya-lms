@@ -13,10 +13,10 @@ class RoleController extends Controller
     public function __construct()
     {
         // Add middleware to Resource Routes
-        $this->middleware('can:LMS Editar roles')->only('index');
-        $this->middleware('can:LMS Crear roles')->only('create', 'store');
-        $this->middleware('can:LMS Editar roles')->only('edit', 'update');
-        $this->middleware('can:LMS Eliminar roles')->only('destroy');
+        $this->middleware('can:update-role')->only('index');
+        $this->middleware('can:create-role')->only('create', 'store');
+        $this->middleware('can:update-role')->only('edit', 'update');
+        $this->middleware('can:delete-role')->only('destroy');
     }
 
     /**

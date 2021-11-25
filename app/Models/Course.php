@@ -31,6 +31,10 @@ class Course extends Model
         'type_id',
         'modality_id',
         'topic_id',
+        'audience',
+        'start_date',
+        'end_date',
+        'language_id',
     ];
 
     protected $withCount = ['students', 'reviews']; // add attr students_count to Course Model
@@ -220,6 +224,12 @@ class Course extends Model
         }
     }
 
+    public function scopeLanguage($query, $language_id){
+        if($language_id){
+            return $query->where('language_id', $language_id);
+        }
+    }
+
     // Return the slug, not id
     public function getRouteKeyName()
     {
@@ -271,6 +281,9 @@ class Course extends Model
     /**
      * Relation 1:N reverse
      */
+    public function language(){
+        return $this->belongsTo(Language::class);
+    }
     public function editor()
     {
         return $this->belongsTo('App\Models\User', 'user_id');

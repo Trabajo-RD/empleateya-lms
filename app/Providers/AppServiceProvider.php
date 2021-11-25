@@ -84,7 +84,7 @@ class AppServiceProvider extends ServiceProvider
                 'text'  => 'Dashboard',
                 'url' => route('admin.cpanel'),
                 'icon'  => 'fas fa-fw fa-tachometer-alt',
-                'can'   => 'LMS Ver Dashboard',
+                'can'   => 'view-dashboard',
             ]);
 
 
@@ -104,7 +104,7 @@ class AppServiceProvider extends ServiceProvider
                 'text'          => 'Cursos',
                 // 'url'           => route('admin.courses.index' ), // url/route
                 'icon'          => 'fas fa-laptop mr-1',
-                'can'           => 'LMS Ver Dashboard',
+                'can'           => 'view-dashboard',
                 'submenu'       => [
                     [
                         'key'   => 'admin_all_courses',
@@ -142,7 +142,7 @@ class AppServiceProvider extends ServiceProvider
             //     'text'  => 'Dashboard',
             //     'url' => route( 'designer.cpanel' ),
             //     'icon'  => 'fas fa-fw fa-tachometer-alt',
-            //     'can'   => 'LMS Administrar diseno',
+            //     'can'   => 'view-dashboard',
             // ]);
 
             // List all courses for Designer users
@@ -152,7 +152,7 @@ class AppServiceProvider extends ServiceProvider
             //     'url'           => route('contributor.courses.index' ), // url/route
             //     'icon'          => 'fas fa-laptop mr-1',
             //     'active'        => ['contributor/courses*'],
-            //     'can'           => 'LMS Monitorear cursos',
+            //     'can'           => 'view-dashboard',
             // ]);
 
             // Manage roles
@@ -162,7 +162,7 @@ class AppServiceProvider extends ServiceProvider
                 'url'         => route('admin.roles.index'),
                 'icon'        => 'fas fa-fw fa-users-cog',
                 'active'      => ['admin/roles/*'],
-                'can'         => 'LMS Editar roles',
+                'can'         => 'update-role',
             ]);
 
             // Manage users
@@ -172,7 +172,7 @@ class AppServiceProvider extends ServiceProvider
                 'url'           => route('admin.users.index'), // url/route
                 'icon'        => 'fas fa-fw fa-users',
                 'active'      => ['admin/users/*'],
-                'can'         => 'LMS Leer usuarios',
+                'can'         => 'list-user',
             ]);
 
             // List all contact messages
@@ -181,7 +181,7 @@ class AppServiceProvider extends ServiceProvider
                 'text'          => 'Mensajes',
                 // 'url'           => route('admin.courses.index' ), // url/route
                 'icon'          => 'fas fa-envelope mr-1',
-                'can'           => 'LMS Ver Dashboard',
+                'can'           => 'view-dashboard',
                 'submenu'       => [
                     [
                         'key'   => 'admin_contacts_inbox',
@@ -205,7 +205,7 @@ class AppServiceProvider extends ServiceProvider
                 'url'           => route('admin.slides.index'), // url/route
                 'icon'        => 'far fa-fw fa-images',
                 'active'      => ['admin/slides/*'],
-                'can'         => 'LMS Ver Dashboard',
+                'can'         => 'view-dashboard',
             ]);
 
             // ADD HEADER

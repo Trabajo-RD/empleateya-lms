@@ -25,9 +25,11 @@ class DatabaseSeeder extends Seeder
         Storage::deleteDirectory('partners');
         Storage::makeDirectory('partners');
 
+        // Seed all permissions
         $this->call(PermissionSeeder::class);
         $this->command->info('Permission table seeded!');
 
+        // Seed all roles
         $this->call(RoleSeeder::class);
         $this->command->info('Role table seeded!');
 
@@ -73,10 +75,15 @@ class DatabaseSeeder extends Seeder
         $this->call(LinkSeeder::class);
         $this->command->info('Link table seeded!');
 
+        $this->call(LanguagesSeeder::class);
+        $this->command->info('Language table seeded!');
+
         // Tag::factory(8)->create();
 
         // TODO: uncomment to create test courses
         $this->call(CourseSeeder::class);
+
+        
 
     }
 }

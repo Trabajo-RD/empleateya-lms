@@ -1,5 +1,7 @@
 @php
-
+    /**
+     * Navigation links
+     */    
     $nav_links = [
         [
             'name' => 'Home',
@@ -10,6 +12,17 @@
             'name' => 'Courses',
             'route' => route('courses.index', app()->getLocale()), // routes/web.php dashboard route
             'active' => request()->routeIs('courses.*'), // bool: verify is active route dashboard
+        ],
+        [
+            'name' => 'Modalities',
+            'route' => '#', // routes/web.php dashboard route
+            'active' => request()->routeIs('modalities.*'), // bool: verify is active route dashboard
+            'childs' => [
+                [
+                    'name' => 'Virtual',
+
+                ]
+            ]
         ],
         // [
         //     'name' => 'Categories',
@@ -230,27 +243,27 @@
                                     {{ __('Manage') }}
                                 </div>
 
-                                @can ('LMS Ver Dashboard')
+                                @can ('view-dashboard')
                                     <x-jet-dropdown-link href="{{ route('admin.cpanel', app()->getLocale() ) }}">
                                         {{ __('Control Panel') }}
                                     </x-jet-dropdown-link>
                                 @endcan
 
                                 <!-- TODO: Create permission LMS Crear contenido -->
-                                @can ('LMS Crear contenido')
+                                @can ('create-post')
                                     <x-jet-dropdown-link href="{{ route('creator.courses.index', app()->getLocale() ) }}">
                                         {{ __('Courses') }}
                                     </x-jet-dropdown-link>
                                 @endcan
 
                                 <!-- TODO: Create permission LMS Crear contenido -->
-                                {{-- @can ('LMS Administrar ajustes')
+                                {{-- @can ('view-dashboard')
                                     <x-jet-dropdown-link href="{{ route('creator.dashboard', app()->getLocale()) }}">
                                         {{ __('Settings') }}
                                     </x-jet-dropdown-link>
                                 @endcan --}}
 
-                                @can ('LMS Calificar item')
+                                @can ('create-course')
                                     <x-jet-dropdown-link href="{{ route('instructor.courses.index', app()->getLocale() ) }}">
                                         {{ __('Courses') }}
                                     </x-jet-dropdown-link>
@@ -277,7 +290,10 @@
                             </x-slot>
                         </x-jet-dropdown>
                     @else
+                        <!-- Login button -->
                         <a href="{{ route('login', app()->getLocale() ) }}" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-gray-400 hover:border-gray-600 rounded-md shadow-sm text-base font-medium text-gray-400 hover:text-gray-600 bg-white-100 hover:bg-gray-100">{{ __('Sign In') }}</a>
+
+                        <!-- Register button -->
                         @if (Route::has('register'))
                             <a href="{{ route('register', app()->getLocale() ) }}" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700">{{ __('Register') }}</a>
                         @endif
@@ -300,11 +316,20 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            @foreach ($nav_links as $nav_link)
+            {{-- @foreach ($nav_links as $nav_link)
                 <x-jet-responsive-nav-link href="{{ $nav_link['route'] }}" :active="$nav_link['active']">
                     {{ __($nav_link['name']) }}
                 </x-jet-responsive-nav-link>
-            @endforeach
+            @endforeach --}}
+
+            <x-jet-responsive-nav-link href="{{ route('home', [app()->getLocale()] ) }}" :active="request()->routeIs('home')" class="hidden md:inline-block">
+                <i class="fas fa-home mr-2"></i>{{ __('Home') }}
+            </x-jet-responsive-nav-link>
+
+            <x-jet-responsive-nav-link href="{{ route('courses.index', [app()->getLocale()] ) }}" :active="request()->routeIs('home')" class="hidden md:inline-block">
+                <i class="fas fa-laptop mr-2"></i>{{ __('Courses') }}
+            </x-jet-responsive-nav-link>
+
         </div>
 
         <div class="pt-2 pb-3 space-y-1">
@@ -388,20 +413,20 @@
                         {{ __('Manage') }}
                     </div>
 
-                    @can('LMS Ver Dashboard')
+                    @can('view-dashboard')
                         <x-jet-responsive-nav-link href="{{ route('admin.cpanel', app()->getLocale() ) }}" :active="request()->routeIs('admin.cpanel', app()->getLocale() )">
                             {{ __('Control Panel') }}
                         </x-jet-responsive-nav-link>
                     @endcan
 
                     <!-- TODO: Create permission LMS Crear contenido -->
-                    @can('LMS Crear contenido')
+                    @can('create-post')
                         <x-jet-responsive-nav-link href="{{ route('creator.courses.index', app()->getLocale()) }}" :active="request()->routeIs('creator.courses.index', app()->getLocale())">
                             {{ __('Courses') }}
                         </x-jet-responsive-nav-link>
                     @endcan
 
-                    @can('LMS Calificar item')
+                    @can('create-course')
                         <x-jet-responsive-nav-link href="{{ route('instructor.courses.index', app()->getLocale() ) }}" :active="request()->routeIs('instructor.courses.index', app()->getLocale())">
                             {{ __('Courses') }}
                         </x-jet-responsive-nav-link>
@@ -459,11 +484,11 @@
         @else
             <div class="py-1 border-t border-gray-200">
                 <x-jet-responsive-nav-link href="{{ route('login', app()->getLocale() ) }}" :active="request()->routeIs('login')">
-                    Login
+                    {{ __('Login') }}
                 </x-jet-responsive-nav-link>
 
                 <x-jet-responsive-nav-link href="{{ route('register', app()->getLocale() ) }}" :active="request()->routeIs('register')">
-                    Register
+                    {{ __('Register') }}
                 </x-jet-responsive-nav-link>
             </div>
         @endauth

@@ -30,7 +30,7 @@
                                 <th>ID</th>
                                 <th>Title</th>
                                 <th>Category</th>
-                                @can('LMS Editar usuarios')
+                                @can('update-user')
                                     <th>User</th>
                                 @endcan
                                 <th>Status</th>
@@ -44,7 +44,7 @@
                                         <td>{{ $course->id }}</td>
                                         <td>{{ $course->title }}</td>
                                         <td>{{ $course->category->name }}</td>
-                                        @can('LMS Editar usuarios')
+                                        @can('update-user')
                                             <td>{{ $course->editor->name }} {{ $course->editor->lastname }}</td>
                                         @endcan
                                         <td>

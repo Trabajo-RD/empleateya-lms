@@ -31,7 +31,7 @@ return [
             ],
             'current_team_id'   => env('MONITOR1_TEAM_ID', 1),
             'password'          => env('MONITOR1_PASSWORD'),
-            'role'              => 'Creator',
+            'role'              => 'coursecreator',
         ],
 
         [
@@ -45,7 +45,7 @@ return [
             ],
             'current_team_id'   => env('MONITOR2_TEAM_ID', 1),
             'password'          => env('MONITOR2_PASSWORD'),
-            'role'              => 'Creator',
+            'role'              => 'coursecreator',
         ],
 
         [
@@ -59,7 +59,7 @@ return [
             ],
             'current_team_id'   => env('MONITOR3_TEAM_ID', 1),
             'password'          => env('MONITOR3_PASSWORD'),
-            'role'              => 'Creator',
+            'role'              => 'coursecreator',
         ],
 
         [
@@ -73,7 +73,7 @@ return [
             ],
             'current_team_id'   => env('MONITOR4_TEAM_ID', 1),
             'password'          => env('MONITOR4_PASSWORD'),
-            'role'              => 'Creator',
+            'role'              => 'coursecreator',
         ],
 
         [
@@ -87,7 +87,7 @@ return [
             ],
             'current_team_id'   => env('MONITOR5_TEAM_ID', 1),
             'password'          => env('MONITOR5_PASSWORD'),
-            'role'              => 'Creator',
+            'role'              => 'coursecreator',
         ],
 
         [
@@ -101,7 +101,7 @@ return [
             ],
             'current_team_id'   => env('MONITOR6_TEAM_ID', 1),
             'password'          => env('MONITOR6_PASSWORD'),
-            'role'              => 'Creator',
+            'role'              => 'coursecreator',
         ],
 
         [
@@ -115,7 +115,7 @@ return [
             ],
             'current_team_id'   => env('MONITOR7_TEAM_ID', 1),
             'password'          => env('MONITOR7_PASSWORD'),
-            'role'              => 'Creator',
+            'role'              => 'coursecreator',
         ],
 
         [
@@ -129,7 +129,7 @@ return [
             ],
             'current_team_id'   => env('MONITOR8_TEAM_ID', 1),
             'password'          => env('MONITOR8_PASSWORD'),
-            'role'              => 'Creator',
+            'role'              => 'coursecreator',
         ],
 
         [
@@ -143,7 +143,7 @@ return [
             ],
             'current_team_id'   => env('MONITOR9_TEAM_ID', 1),
             'password'          => env('MONITOR9_PASSWORD'),
-            'role'              => 'Creator',
+            'role'              => 'coursecreator',
         ],
 
         [
@@ -157,7 +157,7 @@ return [
             ],
             'current_team_id'   => env('MONITOR10_TEAM_ID', 1),
             'password'          => env('MONITOR10_PASSWORD'),
-            'role'              => 'Creator',
+            'role'              => 'coursecreator',
         ],
 
         [
@@ -171,7 +171,7 @@ return [
             ],
             'current_team_id'   => env('MONITOR11_TEAM_ID', 1),
             'password'          => env('MONITOR11_PASSWORD'),
-            'role'              => 'Creator',
+            'role'              => 'coursecreator',
         ],
 
         [
@@ -185,7 +185,7 @@ return [
             ],
             'current_team_id'   => env('MONITOR12_TEAM_ID', 1),
             'password'          => env('MONITOR12_PASSWORD'),
-            'role'              => 'Creator',
+            'role'              => 'coursecreator',
         ],
 
         [
@@ -199,7 +199,7 @@ return [
             ],
             'current_team_id'   => env('MONITOR13_TEAM_ID', 1),
             'password'          => env('MONITOR13_PASSWORD'),
-            'role'              => 'Creator',
+            'role'              => 'coursecreator',
         ],
 
 ];

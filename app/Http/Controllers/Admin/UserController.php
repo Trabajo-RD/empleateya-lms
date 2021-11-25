@@ -16,8 +16,8 @@ class UserController extends Controller
     public function __construct()
     {
         // Add middleware to Resource Routes
-        $this->middleware('can:LMS Leer usuarios')->only('index');
-        $this->middleware('can:LMS Editar usuarios')->only('edit', 'update');
+        $this->middleware('can:list-user')->only('index');
+        $this->middleware('can:update-user')->only('edit', 'update');
     }
 
     /**

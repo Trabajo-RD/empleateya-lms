@@ -83,14 +83,14 @@ Route::group([
     // });
 
 
-    Route::get('creator/courses/{course}/curriculum', CoursesCurriculum::class)->middleware('can:LMS Actualizar cursos')->name('courses.curriculum');
+    Route::get('creator/courses/{course}/curriculum', CoursesCurriculum::class)->middleware('can:update-post')->name('courses.curriculum');
 
     Route::get('creator/courses/{course}/goals', [CourseController::class, 'goals'])->name('courses.goals');
 
     /**
      * Route for manage the course students
      */
-    Route::get('creator/courses/{course}/students', CoursesStudents::class)->middleware('can:LMS Actualizar cursos')->name('courses.students');
+    Route::get('creator/courses/{course}/students', CoursesStudents::class)->middleware('can:update-post')->name('courses.students');
 
     /**
      * Route to request change course status

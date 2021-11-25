@@ -246,5 +246,13 @@
     "Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.": "Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.",
     "Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.": "Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.",
     "Email Password Reset Link": "Email Password Reset Link",
-    "Whoops! Something went wrong.": "Whoops! Something went wrong."
+    "Whoops! Something went wrong.": "Whoops! Something went wrong.",
+    "Restrictions": "Restrictions",
+    "Start Date": "Start Date",
+    "End Date": "End Date",
+    "Audience Limit": "Audience Limit",
+    "Language": "Language",
+    "English": "English",
+    "Spanish (Spain)": "Spanish (Spain)"
+
 }

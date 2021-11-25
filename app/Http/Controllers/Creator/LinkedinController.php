@@ -21,10 +21,10 @@ class LinkedinController extends Controller
     public function __construct()
     {
         // Add middleware to Resource Routes
-        $this->middleware('can:LMS Leer cursos')->only('index');
-        $this->middleware('can:LMS Crear cursos')->only('create', 'store');
-        $this->middleware('can:LMS Actualizar cursos')->only('edit', 'update', 'goals');
-        $this->middleware('can:LMS Eliminar cursos')->only('destroy');
+        $this->middleware('can:list-course')->only('index');
+        $this->middleware('can:create-course')->only('create', 'store');
+        $this->middleware('can:update-course')->only('edit', 'update', 'goals');
+        $this->middleware('can:delete-course')->only('destroy');
     }
 
     /**

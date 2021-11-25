@@ -242,7 +242,7 @@ return [
         //     'text'        => 'Dashboard',
         //     'route'       => 'admin.home',
         //     'icon'        => 'fas fa-fw fa-tachometer-alt',
-        //     'can'         => 'LMS Ver Dashboard',
+        //     'can'         => 'view-dashboard',
         // ],
         // [
         //     'text'        => 'Menú',
@@ -256,14 +256,14 @@ return [
         //     'route'       => 'admin.roles.index',
         //     'icon'        => 'fas fa-fw fa-users-cog',
         //     'active'      => ['admin/roles*'],
-        //     'can'         => 'LMS Editar roles',
+        //     'can'         => 'update-role',
         // ],
         // [
         //     'text'        => 'Usuarios',
         //     'route'       => 'admin.users.index',
         //     'icon'        => 'fas fa-fw fa-users',
         //     'active'      => ['admin/users*'],
-        //     'can'         => 'LMS Leer usuarios',
+        //     'can'         => 'list-user',
         // ],
         // [
         //     'text'        => 'pages',

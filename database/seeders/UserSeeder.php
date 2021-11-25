@@ -21,11 +21,17 @@ class UserSeeder extends Seeder
 
         $usersConfig = Config::get('users');
         $role = [
-            'Administrator',
-            'Manager',
-            'Creator',
-            'Instructor',
-            'Contributor'
+            'administrator',
+            'manager',
+            'coursemoderator',
+            'coursecreator',
+            'contentmoderator',
+            'contentcreator',
+            'internalinstructor',
+            'externalinstructor',
+            'helper',
+            'student',
+            'guest'
         ];
 
         foreach( $usersConfig as $key => $user ){

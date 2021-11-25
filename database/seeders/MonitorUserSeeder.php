@@ -34,8 +34,7 @@ class MonitorUserSeeder extends Seeder
 
             ]);
 
-
-            $user->assignRole('Creator');
+            $user->assignRole('coursecreator');
 
         }
     }

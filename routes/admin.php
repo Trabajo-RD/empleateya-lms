@@ -39,7 +39,7 @@ Route::group([
     'middleware' => ['setlocale', 'language', 'default.language', 'verified']
 ], function () {
 
-    Route::get('/admin', [HomeController::class, 'index'])->middleware('can:LMS Ver Dashboard')->name('cpanel');
+    Route::get('/admin', [HomeController::class, 'index'])->middleware('can:view-dashboard')->name('cpanel');
 
     Route::get('/admin/contact-us', [ContactController::class, 'index'])->name('contacts');
     Route::get('/admin/contacts-us/deleted', [ContactController::class, 'deleted_messages'])->name('contacts.deleted');

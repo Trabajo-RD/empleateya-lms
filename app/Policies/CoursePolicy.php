@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Course;
 use App\Models\Review;
 
+use Illuminate\Auth\Access\Response;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CoursePolicy
@@ -23,14 +24,30 @@ class CoursePolicy
     }
 
     /**
+     * Determine if the given user can create course
+     * 
+     * @param   \App\Models\User      $user
+     * @return  bool
+     */
+    // TODO: Create policy tu Course Create method
+    public function create( User $user )
+    {
+        // return $user->role == 'Creator'; 
+        return $user->can('create-course');
+    }
+
+    /**
      * Determine if the given course can be updated by the user.
      * 
      * @param \App\Models\User      $user
      * @param \App\Models\Course    $course
+     * @return \Illuminate\Auth\Access\Response
      */
     public function update( User $user, Course $course )
     {
-        return $user->id === $course->user_id || $user->id === $course->collaborator_id;
+        return $user->id === $course->user_id || $user->id === $course->contributor_id
+                    ? Response::allow()
+                    : Response::deny('No puedes actualizar la información de este curso.');
     }
 
     /**
@@ -38,10 +55,13 @@ class CoursePolicy
      * 
      * @param \App\Models\User      $user
      * @param \App\Models\Course    $course
+     * @return \Illuminate\Auth\Access\Response
      */
     public function enrolled( User $user, Course $course )
     {
-        return $course->students->contains( $user->id );
+        return $course->students->contains( $user->id )
+                ? Response::allow()
+                : Response::deny('No estas inscrito en este curso.');
     }
 
     /**

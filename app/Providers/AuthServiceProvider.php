@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Course;
+use App\Models\User;
 use App\Policies\CoursePolicy;
 use App\Models\Team;
 use App\Policies\TeamPolicy;
@@ -37,6 +38,13 @@ class AuthServiceProvider extends ServiceProvider
          */
         // Gate::guessPolicyNamesUsing(function ($modelClass) {
         //     // Return the name of the policy class for the given model...
+        // });
+
+        /**
+         * Determine if the given user can create course
+         */
+        // Gate::define('create-course', function (User $user, Course $course){
+        //     return $user->id === $course->user_id;
         // });
     }
 }

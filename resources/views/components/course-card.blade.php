@@ -66,7 +66,7 @@
         </div>
         <div class="flex mb-2">
             <a href="{{ route('courses.category', [app()->getLocale(), $course->category]) }}" data-toggle="tooltip" data-placement="top" class="mr-2 bg-gray-300 text-gray text-sm p-1 rounded  leading-none flex items-center focus:outline-none" title="{{ __('Category') . ': ' . __($course->category->name) }}">
-                {{ ($course->category->name == "Desarrollo de Competencias Básicas (DCB)") ? 'DCB' : __($course->category->name) }}
+                {{ __($course->category->name) }}
             </a>
             <button type="button" data-toggle="tooltip" data-placement="top" class="mr-2 bg-gray-300 text-gray text-sm p-1 rounded  leading-none flex items-center focus:outline-none" title="Nivel">
                 {{ __($course->level->name) }}

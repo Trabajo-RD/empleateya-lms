@@ -1,4 +1,4 @@
-# Control de versiones
+# Registro de cambios
 
 ## v1.0.1 - Dic. 01, 2021
 

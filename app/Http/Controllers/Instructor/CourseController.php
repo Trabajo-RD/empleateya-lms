@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Instructor;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Models\User;
 use App\Models\Course;
 use App\Models\Category;
 use App\Models\Topic;
@@ -12,18 +13,21 @@ use App\Models\Type;
 use App\Models\Level;
 use App\Models\Price;
 use App\Models\Modality;
+use App\Models\Observation;
+use App\Models\Language;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Gate;
 
 class CourseController extends Controller
 {
     public function __construct()
     {
         // Add middleware to Resource Routes
-        $this->middleware('can:LMS Leer cursos')->only('index');
-        $this->middleware('can:LMS Crear cursos')->only('create', 'store', 'new');
-        $this->middleware('can:LMS Actualizar cursos')->only('edit', 'update', 'goals');
-        $this->middleware('can:LMS Eliminar cursos')->only('destroy');
+        $this->middleware('can:list-course')->only('index');
+        $this->middleware('can:create-course')->only('create', 'store', 'new');
+        $this->middleware('can:update-course')->only('edit', 'update', 'goals');
+        $this->middleware('can:delete-course')->only('destroy');
     }
 
     /**
@@ -43,14 +47,17 @@ class CourseController extends Controller
      */
     public function create()
     {
+        $this->authorize('create');       
+        
         $categories = Category::pluck('name', 'id');
         $topics = Topic::pluck('name', 'id');
         $types = Type::pluck('name', 'id');
         $levels = Level::pluck('name', 'id');
         $prices = Price::pluck('name', 'id');
         $modalities = Modality::pluck('name', 'id');
+        $languages = Language::pluck('name', 'id');
 
-        return view('instructor.courses.create', compact('categories', 'topics', 'types', 'levels', 'prices', 'modalities' ));
+        return view('instructor.courses.create', compact('categories', 'topics', 'types', 'levels', 'prices', 'modalities', 'languages' ));              
     }
 
     /**
@@ -119,73 +126,88 @@ class CourseController extends Controller
      */
     public function edit($locale, Course $course)
     {
-        // Policy to check if an instructor is modifying a course created by another instructor
-        $this->authorize('dictated', $course);
+        // Determine if the given user own this course and can update course   
+        // $this->authorize('dictated', $course);
+        $response = Gate::inspect('update', $course);
 
-        $categories = Category::pluck('name', 'id');
-        $topics = Topic::pluck('name', 'id');
-        $types = Type::pluck('name', 'id');
-        $levels = Level::pluck('name', 'id');
-        $prices = Price::pluck('name', 'id');
-        $modalities = Modality::pluck('name', 'id');        
+        if($response->allowed()){
+            $categories = Category::pluck('name', 'id');
+            $topics = Topic::pluck('name', 'id');
+            $types = Type::pluck('name', 'id');
+            $levels = Level::pluck('name', 'id');
+            $prices = Price::pluck('name', 'id');
+            $modalities = Modality::pluck('name', 'id');    
+            $languages = Language::pluck('name', 'id');    
+    
+            return view('instructor.courses.edit', compact('course', 'categories', 'topics', 'types', 'levels', 'prices', 'modalities', 'languages'));
+        } else {
+            echo $response->message();
+        }
 
-        return view('instructor.courses.edit', compact('course', 'categories', 'topics', 'types', 'levels', 'prices', 'modalities'));
+        
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Course  $course
+     * @param  \Illuminate\Http\Request     $request
+     * @param  \App\Models\Course           $course
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $locale, Course $course)
     {
-        // Policy to check if an instructor is modifying a course created by another instructor
-        $this->authorize('dictated', $course);
+        // Determine if a given user can update course
+        // $this->authorize('dictated', $course);
+        $response = Gate::inspect('update', $course);
 
-        $request->validate([
-            'title' => 'required',
-            'slug' => 'required|unique:courses,slug,' . $course->id,
-            'duration_in_minutes' => 'required',
-            'summary' => 'required',
-            'category_id' => 'required',
-            'type_id' => 'required',
-            'level_id' => 'required',
-            'price_id' => 'required',
-            'file' => 'image',
-        ]);
-
-        // $course->update([
-        //     'title' => $request->title,
-        //     'slug' => $request->slug,
-        //     'duration_in_minutes' => $request->duration_in_minutes,
-        //     'summary' => $request->summary,
-        //     'category_id' => $request->category_id,
-        //     'type_id' => $request->type_id,
-        //     'level_id' => $request->level_id,
-        //     'price_id' => $request->price_id,
-        // ]);
-
-        $course->update($request->all());
-
-        if( $request->file('file') ){
-            $url = Storage::put('courses', $request->file('file') );
-
-            if( $course->image ){
-                Storage::delete($course->image->url);
-
-                $course->image->update([
-                    'url' => $url
-                ]);
-            } else {
-                $course->image()->create([
-                    'url' => $url
-                ]);
+        if($response->allowed()){
+            $request->validate([
+                'title' => 'required',
+                'slug' => 'required|unique:courses,slug,' . $course->id,
+                'duration_in_minutes' => 'required',
+                'summary' => 'required',
+                'category_id' => 'required',
+                'type_id' => 'required',
+                'level_id' => 'required',
+                'price_id' => 'required',
+                'file' => 'image',
+            ]);
+    
+            // $course->update([
+            //     'title' => $request->title,
+            //     'slug' => $request->slug,
+            //     'duration_in_minutes' => $request->duration_in_minutes,
+            //     'summary' => $request->summary,
+            //     'category_id' => $request->category_id,
+            //     'type_id' => $request->type_id,
+            //     'level_id' => $request->level_id,
+            //     'price_id' => $request->price_id,
+            // ]);
+    
+            $course->update($request->all());
+    
+            if( $request->file('file') ){
+                $url = Storage::put('courses', $request->file('file') );
+    
+                if( $course->image ){
+                    Storage::delete($course->image->url);
+    
+                    $course->image->update([
+                        'url' => $url
+                    ]);
+                } else {
+                    $course->image()->create([
+                        'url' => $url
+                    ]);
+                }
             }
+    
+            return redirect()->route('instructor.courses.edit', [$locale, $course]);
+        } else {
+            echo $response->message();
         }
 
-        return redirect()->route('instructor.courses.edit', [$locale, $course]);
+        
     }
 
     /**
@@ -206,12 +228,15 @@ class CourseController extends Controller
      * @return      view
      */
     public function goals( $locale, Course $course ){
-
         // Policy to check if an instructor is modifying a course created by another instructor
-        $this->authorize('dictated', $course);
+        // $this->authorize('dictated', $course);
+        $response = Gate::inspect('update', $course);
 
-        return view('instructor.courses.goals', compact('course'));
-
+        if($response->allowed()){
+            return view('instructor.courses.goals', compact('course'));
+        } else {
+            echo $response->message();
+        }       
     }
 
     /**
@@ -246,6 +271,9 @@ class CourseController extends Controller
 
     }
 
+    /**
+     * Show create new course options
+     */
     public function new( Request $request, $locale ){
         return view('instructor.courses.new');
     }

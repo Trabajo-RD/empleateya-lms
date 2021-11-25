@@ -249,5 +249,12 @@
     "Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.": "¿Estás seguro de que deseas eliminar tu cuenta? Una vez que se elimine su cuenta, todos sus recursos y datos se eliminarán permanentemente. Ingrese su contraseña para confirmar que desea eliminar permanentemente su cuenta.",
     "Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.": "¿Olvidaste tu contraseña? No hay problema. Simplemente díganos su dirección de correo electrónico y le enviaremos un enlace para restablecer la contraseña que le permitirá elegir una nueva.",
     "Email Password Reset Link": "Enviar Enlace",
-    "Whoops! Something went wrong.": "¡Ups! Algo salió mal."
+    "Whoops! Something went wrong.": "¡Ups! Algo salió mal.",
+    "Restrictions": "Restricciones",
+    "Start Date": "Fecha de Inicio",
+    "End Date": "Fecha de Término",
+    "Audience Limit": "Audiencia Limite",
+    "Language": "Idioma",
+    "English": "Inglés",
+    "Spanish (Spain)": "Español (España)"
 }

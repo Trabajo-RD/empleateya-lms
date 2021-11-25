@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout><!-- Component app/view/components/applayout -->
 
     <section class="bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

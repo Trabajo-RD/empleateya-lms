@@ -15,6 +15,11 @@ class AddColumnsToCoursesTable extends Migration
     {
         Schema::table('courses', function (Blueprint $table) {
             $table->unsignedBigInteger('topic_id')->nullable();
+            $table->integer('audience')->nullable();
+            $table->dateTimeTz('start_date')->nullable();
+            $table->dateTimeTz('end_date')->nullable();
+
+            // Foreign
             $table->foreign('topic_id')->references('id')->on('topics')->onDelete('cascade');
         });
     }
@@ -28,6 +33,9 @@ class AddColumnsToCoursesTable extends Migration
     {
         Schema::table('courses', function (Blueprint $table) {
             $table->dropForeign('courses_topic_id_foreign');
+            $table->dropColumn('audience');
+            $table->dropColumn('start_date');
+            $table->dropColumn('end_date');
         });
     }
 }

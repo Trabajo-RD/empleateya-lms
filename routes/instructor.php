@@ -37,7 +37,7 @@ Route::group([
 
     // Route::get('courses', CourseController::class)->name('instructor.courses.index');
 
-    // Route::get('courses', CourseController::class)->middleware('can:LMS Leer cursos')->name('instructor.courses.index');
+    // Route::get('courses', CourseController::class)->middleware('can:create-course')->name('instructor.courses.index');
 
     Route::resource('instructor/courses', CourseController::class)->names('courses');
 
@@ -56,14 +56,14 @@ Route::group([
     /**
      * Route for manage the course sections, lessons and lesson resources
      */
-    Route::get('instructor/courses/{course}/curriculum', CoursesCurriculum::class)->middleware('can:LMS Actualizar cursos')->name('courses.curriculum');
+    Route::get('instructor/courses/{course}/curriculum', CoursesCurriculum::class)->middleware('can:update-course')->name('courses.curriculum');
 
     Route::get('instructor/courses/{course}/goals', [CourseController::class, 'goals'])->name('courses.goals');
 
     /**
      * Route for manage the course students
      */
-    Route::get('instructor/courses/{course}/students', CoursesStudents::class)->middleware('can:LMS Actualizar cursos')->name('courses.students');
+    Route::get('instructor/courses/{course}/students', CoursesStudents::class)->middleware('can:update-course')->name('courses.students');
 
     /**
      * Route to request change course status

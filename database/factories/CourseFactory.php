@@ -13,6 +13,7 @@ use App\Models\Price;
 use App\Models\Type;
 use App\Models\Modality;
 use App\Models\Topic;
+use App\Models\Language;
 
 class CourseFactory extends Factory
 {
@@ -40,7 +41,9 @@ class CourseFactory extends Factory
             'duration_in_minutes' => 60,
             'status' => $this->faker->randomElement([1, 2, 3, 4]),
             'slug' => Str::slug($title),
-            'user_id' => $this->faker->randomElement([6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]),
+            'user_id' => $this->faker->randomElement([6, 7, 8, 9, 10, 11, 12]),            
+            'moderator_id' => null,
+            'contributor_id' => null,
             //'user_id' => User::all()->random()->id,
             'level_id' => Level::all()->random()->id,
             'category_id' => Category::all()->random()->id,
@@ -48,6 +51,10 @@ class CourseFactory extends Factory
             'type_id' => Type::all()->random()->id,
             'modality_id' => Modality::all()->random()->id,
             'topic_id' => Topic::all()->random()->id,
+            'audience' => $this->faker->randomElement([5, 10, 15, 20]),
+            'start_date' => null,
+            'end_date' => null,
+            'language_id' => 1
         ];
     }
 }

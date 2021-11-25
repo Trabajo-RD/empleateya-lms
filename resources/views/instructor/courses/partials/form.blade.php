@@ -77,16 +77,13 @@
         {!! Form::label('level_id', Lang::get('Level')) !!}
         {!! Form::select('level_id', $levels, null, ['class' => 'form-input block w-full mt-1']) !!}
     </div>
-    <!-- course prices select -->
-    <div>
-        {!! Form::label('price_id', Lang::get('Price')) !!}
-        {!! Form::select('price_id', $prices, null, ['class' => 'form-input block w-full mt-1']) !!}
-    </div>
+
     <!-- course modality -->
     <div>
         {!! Form::label('modality_id', Lang::get('Modality')) !!}
         {!! Form::select('modality_id', $modalities, null, ['class' => 'form-input block w-full mt-1']) !!}
     </div>
+
     <!-- course duration -->
     <div>
         {!! Form::label('duration_in_minutes', Lang::get('Duration in minutes')) !!}
@@ -97,6 +94,50 @@
             <strong class="text-xs text-red-700">{{ $message }}</strong>
         </span>
     @enderror
+
+    <!-- course prices select -->
+    <div>
+        {!! Form::label('price_id', Lang::get('Price')) !!}
+        {!! Form::select('price_id', $prices, null, ['class' => 'form-input block w-full mt-1']) !!}
+    </div>    
+
+    <!-- course language select -->
+    <div>
+        {!! Form::label('language_id', Lang::get('Language')) !!}
+        {!! Form::select('language_id', $languages, null, ['class' => 'language-select form-input block w-full mt-1']) !!}
+    </div>
+
+</div>
+
+<hr class="mt-2 mb-6">
+
+<h2 class="font-bold text-lg">{{ __('Restrictions')}}</h2>
+
+<!-- Limits -->
+<div class="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <!-- audience -->
+    <div>
+        {!! Form::label('audience', Lang::get('Audience Limit')) !!}
+        {!! Form::text('audience', null, ['class' => 'form-input block w-full mt-1' . ($errors->has('audience') ? 'border-red-600' : '') ]) !!}
+    </div>
+    @error('audience')
+        <span class="invalid-feedback">
+            <strong class="text-xs text-red-700">{{ $audience }}</strong>
+        </span>
+    @enderror
+
+    <!-- start date -->
+    <div>
+        {!! Form::label('start_date', Lang::get('Start Date')) !!}
+        {!! Form::date('start_date', null, ['class' => 'form-input block w-full mt-1' . ($errors->has('start_date') ? 'border-red-600' : '') ]) !!}
+    </div>
+
+        <!-- end date -->
+    <div>
+        {!! Form::label('end_date', Lang::get('End Date')) !!}
+        {!! Form::date('end_date', null, ['class' => 'form-input block w-full mt-1' . ($errors->has('end_date') ? 'border-red-600' : '') ]) !!}
+    </div>
+    
 </div>
 
 <hr class="mt-2 mb-6">

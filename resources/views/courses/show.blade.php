@@ -155,7 +155,7 @@
 
 
                     {{-- @if( auth()->check() && !(Auth::user()->hasRole(['Administrator', 'Manager', 'Creator', 'Instructor']) )) --}}
-                    @cannot('LMS Crear cursos')
+                    @cannot('create-course')
 
                         @can( 'enrolled', $course )
 
