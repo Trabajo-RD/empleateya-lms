@@ -1,7 +1,7 @@
 @php
     /**
      * Navigation links
-     */    
+     */
     $nav_links = [
         [
             'name' => 'Home',
@@ -13,17 +13,17 @@
             'route' => route('courses.index', app()->getLocale()), // routes/web.php dashboard route
             'active' => request()->routeIs('courses.*'), // bool: verify is active route dashboard
         ],
-        [
-            'name' => 'Modalities',
-            'route' => '#', // routes/web.php dashboard route
-            'active' => request()->routeIs('modalities.*'), // bool: verify is active route dashboard
-            'childs' => [
-                [
-                    'name' => 'Virtual',
+        // [
+        //     'name' => 'Modalities',
+        //     'route' => '#', // routes/web.php dashboard route
+        //     'active' => request()->routeIs('modalities.*'), // bool: verify is active route dashboard
+        //     'childs' => [
+        //         [
+        //             'name' => 'Virtual',
 
-                ]
-            ]
-        ],
+        //         ]
+        //     ]
+        // ],
         // [
         //     'name' => 'Categories',
         //     'route' => route('courses.category', [app()->getLocale(), $category]), // routes/web.php dashboard route
@@ -33,9 +33,9 @@
 
 @endphp
 
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 shadow">
+<nav x-data="{ open: false }" class="w-full mx-auto grid grid-cols-12 gap-6 px-10 md:px-16 bg-white border-b border-gray-100 z-50 shadow">
     <!-- Primary Navigation Menu -->
-    <div class="container">
+    <div class="w-full col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-12 xl:col-span-12 2xl:col-span-12 mx-auto">
         <div class="flex justify-between h-24">
             <div class="flex">
                 <!-- Logo -->
@@ -56,18 +56,18 @@
                         </x-jet-nav-link>
                     @endforeach --}}
 
-                    <x-jet-nav-link href="{{ route('home', [app()->getLocale()] ) }}" :active="request()->routeIs('home')" class="hidden md:inline-block">
-                        <i class="fas fa-home mr-2"></i>{{ __('Home') }}
+                    <x-jet-nav-link href="{{ route('home', [app()->getLocale()] ) }}" :active="request()->routeIs('home')" class="hidden sm:hidden md:inline-block">
+                        <i class="fas fa-home mr-2"></i><span class="hidden sm:hidden lg:inline-block">{{ __('Home') }}</span>
                     </x-jet-nav-link>
 
-                    <x-jet-nav-link href="{{ route('courses.index', [app()->getLocale()] ) }}" :active="request()->routeIs('home')" class="hidden md:inline-block">
-                        <i class="fas fa-laptop mr-2"></i>{{ __('Courses') }}
+                    <x-jet-nav-link href="{{ route('courses.index', [app()->getLocale()] ) }}" :active="request()->routeIs('home')" class="hidden sm:hidden md:inline-block">
+                        <i class="fas fa-laptop mr-2"></i><span class="hidden sm:hidden lg:inline-block">{{ __('Courses') }}</span>
                     </x-jet-nav-link>
 
                     <x-jet-dropdown align="left" width="60" :active="request()->routeIs('courses.modality.*')">
                         <x-slot name="trigger">
-                            <a class="nav-link text-gray-500" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-laptop-house  mr-2"></i>{{ __('Modalities') }}
+                            <a class="nav-link text-gray-500 hidden sm:hidden md:inline-block" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-laptop-house  mr-2"></i><span class="hidden sm:hidden lg:inline-block">{{ __('Modalities') }}</span>
                             </a>
                         </x-slot>
                         <x-slot name="content">
@@ -85,8 +85,8 @@
 
                     <x-jet-dropdown align="left" width="60" :active="request()->routeIs('courses.category.*')">
                         <x-slot name="trigger">
-                            <a class="nav-link text-gray-500" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-tags mr-2"></i>{{ __('Categories') }}
+                            <a class="nav-link text-gray-500 hidden sm:hidden md:inline-block" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-tags mr-2"></i><span class="hidden sm:hidden lg:inline-block">{{ __('Categories') }}</span>
                             </a>
                         </x-slot>
                         <x-slot name="content">
@@ -133,8 +133,8 @@
                 @if(count(config('app.languages')) > 1)
                     <x-jet-dropdown width="60 text-gray-500">
                                 <x-slot name="trigger">
-                                    <a class="nav-link text-gray-500 hidden md:inline-block" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-globe mr-2"></i>{{ strtoupper(app()->getLocale()) }}
+                                    <a class="nav-link text-gray-500 hidden sm:hidden lg:inline-block" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-globe mr-2"></i><span class="hidden sm:hidden lg:inline-block">{{ strtoupper(app()->getLocale()) }}</span>
                                     </a>
                                 </x-slot>
                                 <x-slot name="content">
@@ -215,7 +215,7 @@
                                 @else
                                     <span class="inline-flex rounded-md">
                                         <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                                            {{ Auth::user()->name }} 
+                                            {{ Auth::user()->name }}
                                             {{-- TODO: Fix show user role {{ Auth::user()->roles()->name }} --}}
 
                                             <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -244,7 +244,7 @@
                                 </div>
 
                                 @can ('view-dashboard')
-                                    <x-jet-dropdown-link href="{{ route('admin.cpanel', app()->getLocale() ) }}">
+                                    <x-jet-dropdown-link href="{{ route('admin.cpanel', App::getLocale() ) }}">
                                         {{ __('Control Panel') }}
                                     </x-jet-dropdown-link>
                                 @endcan
@@ -264,8 +264,8 @@
                                 @endcan --}}
 
                                 @can ('create-course')
-                                    <x-jet-dropdown-link href="{{ route('instructor.courses.index', app()->getLocale() ) }}">
-                                        {{ __('Courses') }}
+                                    <x-jet-dropdown-link href="{{ route('dashboard.index', app()->getLocale() ) }}">
+                                        {{ __('Dashboard') }}
                                     </x-jet-dropdown-link>
                                 @endcan
 
@@ -274,6 +274,15 @@
                                         {{ __('API Tokens') }}
                                     </x-jet-dropdown-link>
                                 @endif
+
+                                <div class="border-t border-gray-100"></div>
+
+                                <!-- Help -->
+
+                                <x-jet-dropdown-link href="{{ route('pages.docs.overview', app()->getLocale() ) }}">
+                                    {{ __('Help Center') }}
+                                </x-jet-dropdown-link>
+
 
                                 <div class="border-t border-gray-100"></div>
 
@@ -290,13 +299,16 @@
                             </x-slot>
                         </x-jet-dropdown>
                     @else
-                        <!-- Login button -->
-                        <a href="{{ route('login', app()->getLocale() ) }}" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-gray-400 hover:border-gray-600 rounded-md shadow-sm text-base font-medium text-gray-400 hover:text-gray-600 bg-white-100 hover:bg-gray-100">{{ __('Sign In') }}</a>
 
-                        <!-- Register button -->
+                    <!-- Register button -->
                         @if (Route::has('register'))
-                            <a href="{{ route('register', app()->getLocale() ) }}" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700">{{ __('Register') }}</a>
+                            <a href="{{ route('register', app()->getLocale() ) }}" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent bg-gray-100 rounded-md shadow-sm text-sm max-w-prose font-medium text-blue-900 hover:bg-gray-200  hover:shadow" >{{ __('Register') }}</a>
                         @endif
+
+                        <!-- Login button -->
+                        <a href="{{ route('login', app()->getLocale() ) }}" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm max-w-prose font-medium text-white hover:shadow" style="background-color: #003876;">{{ __('Sign In') }}</a>
+
+
                     @endauth
                 </div>
             </div>
@@ -316,19 +328,19 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            {{-- @foreach ($nav_links as $nav_link)
+            @foreach ($nav_links as $nav_link)
                 <x-jet-responsive-nav-link href="{{ $nav_link['route'] }}" :active="$nav_link['active']">
                     {{ __($nav_link['name']) }}
                 </x-jet-responsive-nav-link>
-            @endforeach --}}
+            @endforeach
 
-            <x-jet-responsive-nav-link href="{{ route('home', [app()->getLocale()] ) }}" :active="request()->routeIs('home')" class="hidden md:inline-block">
+            {{-- <x-jet-responsive-nav-link href="{{ route('home', [app()->getLocale()] ) }}" :active="request()->routeIs('home')" class="hidden md:inline-block">
                 <i class="fas fa-home mr-2"></i>{{ __('Home') }}
             </x-jet-responsive-nav-link>
 
             <x-jet-responsive-nav-link href="{{ route('courses.index', [app()->getLocale()] ) }}" :active="request()->routeIs('home')" class="hidden md:inline-block">
                 <i class="fas fa-laptop mr-2"></i>{{ __('Courses') }}
-            </x-jet-responsive-nav-link>
+            </x-jet-responsive-nav-link> --}}
 
         </div>
 
@@ -400,7 +412,7 @@
                     <!-- Account -->
                     <div class="block px-4 py-2 text-md font-bold text-gray-900">
                         {{ __('Account') }}
-                    </div> 
+                    </div>
 
                     <x-jet-responsive-nav-link href="{{ route('profile.show', app()->getLocale() ) }}" :active="request()->routeIs('profile.show')">
                         {{ __('Profile') }}
@@ -414,7 +426,7 @@
                     </div>
 
                     @can('view-dashboard')
-                        <x-jet-responsive-nav-link href="{{ route('admin.cpanel', app()->getLocale() ) }}" :active="request()->routeIs('admin.cpanel', app()->getLocale() )">
+                        <x-jet-responsive-nav-link href="{{ route('admin.cpanel', App::getLocale() ) }}" :active="request()->routeIs('admin.cpanel', App::getLocale() )">
                             {{ __('Control Panel') }}
                         </x-jet-responsive-nav-link>
                     @endcan
@@ -427,8 +439,8 @@
                     @endcan
 
                     @can('create-course')
-                        <x-jet-responsive-nav-link href="{{ route('instructor.courses.index', app()->getLocale() ) }}" :active="request()->routeIs('instructor.courses.index', app()->getLocale())">
-                            {{ __('Courses') }}
+                        <x-jet-responsive-nav-link href="{{ route('dashboard.index', app()->getLocale() ) }}" :active="request()->routeIs('dashboard.index', app()->getLocale())">
+                            {{ __('Dashboard') }}
                         </x-jet-responsive-nav-link>
                     @endcan
 
@@ -437,6 +449,12 @@
                             {{ __('API Tokens') }}
                         </x-jet-responsive-nav-link>
                     @endif
+
+
+                    <x-jet-responsive-nav-link href="{{ route('pages.docs.overview', app()->getLocale() ) }}" :active="request()->routeIs('pages.docs.overview', app()->getLocale())">
+                        {{ __('Help Center') }}
+                    </x-jet-responsive-nav-link>
+
 
                     <!-- Authentication -->
                     <form method="POST" action="{{ route('logout', app()->getLocale() ) }}">

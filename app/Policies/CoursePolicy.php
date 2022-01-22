@@ -80,12 +80,34 @@ class CoursePolicy
      */
     public function dictated( User $user, Course $course){
 
-        if($course->user_id == $user->id || $course->moderator_id == $user->id || $course->contributor_id == $user->id ){
+        if( $course->user_id == $user->id ){
             return true;
         } else {
             return false;
         }
 
+    }
+
+    /**
+     * Prevent a moderator from being authorized to moderate a course
+     */
+    public function moderated( User $user, Course $course){
+        if($course->moderator_id == $user->id){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Prevent a instructor from being authorized to modify a course
+     */
+    public function modified( User $user, Course $course){
+        if($course->contributor_id == $user->id){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

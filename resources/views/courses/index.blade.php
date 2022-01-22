@@ -2,7 +2,7 @@
 
     <!-- hero -->
     <section class="bg-cover" style="background-image:linear-gradient(rgba(0, 56, 118, 0.7), rgba(35, 73, 116, 0.6)), url({{ asset( 'images/courses/hero9.jpg' ) }})">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-36">
+        <div class="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-36">
             <div class="w-full md:w-3/4 lg:w-1/2">
                 <!-- titulo -->
                 <h1 class="text-white font-extrabold text-3xl sm:text-4xl md:text-5xl">{{ __('Welcome to the era of digital transformation') }}</h1>

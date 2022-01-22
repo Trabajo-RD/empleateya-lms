@@ -334,7 +334,7 @@
                   </div>
                   <!-- /.card-body -->
                   <div class="card-footer text-center">
-                    <a href="{{ route('admin.users.index') }}">Ver todos los Usuarios</a>
+                    <a href="{{ route('admin.users.index', App::getLocale() ) }}">Ver todos los Usuarios</a>
                   </div>
                   <!-- /.card-footer -->
                 </div>
@@ -407,7 +407,7 @@
               <!-- /.card-body -->
               <div class="card-footer clearfix">
                 {{-- <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a> --}}
-                <a href="{{ route('admin.courses.index') }}" class="btn btn-sm btn-secondary float-right">Ver todos los cursos</a>
+                <a href="{{ route('admin.courses.index', App::getLocale() ) }}" class="btn btn-sm btn-secondary float-right">Ver todos los cursos</a>
               </div>
               <!-- /.card-footer -->
             </div>
@@ -563,7 +563,7 @@
               </div>
               <!-- /.card-body -->
               <div class="card-footer text-center">
-                <a href="{{ route('admin.courses.revision') }}" class="uppercase">Ver todos los cursos en revisión</a>
+                <a href="{{ route('admin.courses.revision', App::getLocale() ) }}" class="uppercase">Ver todos los cursos en revisión</a>
               </div>
               <!-- /.card-footer -->
             </div>

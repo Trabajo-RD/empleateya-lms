@@ -15,6 +15,9 @@
         <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css')}}">
         <link  href="http://fonts.googleapis.com/css?family=Reenie+Beanie:regular" rel="stylesheet" type="text/css">
 
+        <!-- Flowbite CDN CSS for Tailwind interactive elements -->
+        <link rel="stylesheet" href="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.min.css" />
+
         @livewireStyles
 
         <!-- Scripts -->
@@ -27,17 +30,18 @@
             @livewire('navigation-menu')
 
             <!-- Page Heading -->
-            {{-- @if (isset($header))
+            @if (isset($header))
                 <header class="bg-white shadow">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
                 </header>
-            @endif --}}
+            @endif
 
             <!-- Page Content -->
             <div class="container py-8 grid grid-cols-5 gap-6">
 
+                <!-- aside menu -->
                 <aside class="col-span-5 md:col-span-1 mb-8">
 
                     <h2 class="font-bold text-lg">Editar curso</h2>
@@ -123,6 +127,7 @@
 
                 </aside>
 
+                <!-- main content -->
                 <main class="col-span-5 md:col-span-4 card">
 
                     <div class="card-body text-gray-600">
@@ -154,6 +159,10 @@
         @livewireScripts
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+        <!-- Flowbite CDN JavaScript for Tailwind interactive elements -->
+        <script src="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.bundle.js"></script>
+
         {{-- @include('sweetalert::alert') --}}
         {{-- @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"]) --}}
         <script>

@@ -6,7 +6,7 @@
 
 * [Control de versiones](CHANGELOG.md)
 
-* [Documentación](DOCS.md)
+* [Documentación](/public/docs/overview.md)
 
 
 # Configuración (Dev)

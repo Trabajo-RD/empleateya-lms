@@ -45,6 +45,9 @@
 
         <link rel="stylesheet" href="{{ asset('css/aos.css') }}" />
 
+        <!-- Flowbite CDN CSS for Tailwind interactive elements -->
+        <link rel="stylesheet" href="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.min.css" />
+
         {{-- <link rel="stylesheet" href="{{ asset('css/style.css') }}"> --}}
 
         @livewireStyles
@@ -64,7 +67,7 @@
             <!-- Page Heading -->
             @if (isset($header) && request()->routeIs('creator.dashboard'))
                 <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    <div class="w-full mx-auto py-6 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16">
                         {{ $header }}
                     </div>
                 </header>
@@ -116,6 +119,8 @@
 
         <script type="text/javascript" src="{{ asset('js/main-front.js') }}"></script>
 
+        <!-- Flowbite CDN JavaScript for Tailwind interactive elements -->
+        <script src="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.bundle.js"></script>
 
         @livewireScripts
 

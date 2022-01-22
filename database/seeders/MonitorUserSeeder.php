@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Config;
+use Carbon\Carbon;
+
 use App\Models\User;
 
 class MonitorUserSeeder extends Seeder
@@ -15,6 +17,8 @@ class MonitorUserSeeder extends Seeder
      */
     public function run()
     {
+        $current = Carbon::now();
+        
         $monitorUsersConfig = Config::get('monitors');
 
         foreach( $monitorUsersConfig as $key => $user ){
@@ -25,7 +29,11 @@ class MonitorUserSeeder extends Seeder
                 'document_type'     => $user['document_type'],
                 'name'              => $user['name'],
                 'lastname'          => $user['lastname'],
+                'gender'            => $user['gender'],
                 'email'             => $user['email'],
+                'phone'             => null,
+                'mobile'            => null,
+                'email_verified_at' => $current,
                 'options'           => [
                     'language'      => $user['options']['language'],
                 ],

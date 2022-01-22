@@ -11,6 +11,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ResultController;
 
 use App\Http\Controllers\Pages\ContactController;
+use App\Http\Controllers\DocsController;
 
 use App\Http\Livewire\CourseStatus;
 
@@ -110,6 +111,16 @@ Route::group([
 
     Route::get('/glosary', [PageController::class, 'glosary'])->name('pages.glosary');
 
+    /***
+     * Documentation routes
+     */
+    Route::get('/docs', [DocsController::class, 'overview'])->name('pages.docs.overview');
+    Route::get('/docs/roles', [DocsController::class, 'roles'])->name('pages.docs.roles');
+    Route::get('/docs/permissions', [DocsController::class, 'permissions'])->name('pages.docs.permissions');
+    Route::get('/docs/news/instructor', [DocsController::class, 'instructorNews'])->name('pages.docs.news.instructor');
+    Route::get('/docs/news/student', [DocsController::class, 'studentNews'])->name('pages.docs.news.student');
+
+
     // Auth::routes(['verify' => true]);
 
     /**
@@ -146,6 +157,7 @@ Route::get('chat/{chat}/get_users', [ChatController::class, 'get_users'])->name(
 Route::get('chat/{chat}/get_messages', [ChatController::class, 'get_messages'])->name('chat.get_messages');
 
 Route::post('message/sent', [MessageController::class, 'sent'])->name('message.sent');
+
 
 
 

@@ -39,52 +39,63 @@ class RouteServiceProvider extends ServiceProvider
         $this->configureRateLimiting();
 
         $this->routes(function () {
+
+            $api = ['api'];
+            $web = ['web'];
+            $auth = ['auth'];
+
             Route::prefix('api')
-                ->middleware('api')
+                ->middleware($api)
                 ->namespace($this->namespace)
                 ->group(base_path('routes/api.php'));
 
-            Route::middleware('web')
+            Route::middleware($web)
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
 
-            Route::middleware('web', 'auth')
+            Route::middleware($web, $auth)
                 //->name('admin.')
                 //->prefix('admin')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/admin.php'));
 
-            Route::middleware('web', 'auth')
+            Route::middleware($web, $auth)
+                //->name('admin.')
+                //->prefix('admin')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/dashboard.php'));
+
+            Route::middleware($web, $auth)
                 //->name('admin.')
                 //->prefix('admin')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/designer.php'));
 
-            Route::middleware('web', 'auth')
+            Route::middleware($web, $auth)
                 //->name('admin.')
                 //->prefix('admin')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/moderator.php'));
 
-            Route::middleware('web', 'auth')
+            Route::middleware($web, $auth)
                 //->name('admin.')
                 //->prefix('admin')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/contributor.php'));
 
-            Route::middleware('web', 'auth')
+            Route::middleware($web, $auth)
                 // ->name('instructor.')
                 // ->prefix('instructor')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/instructor.php'));
 
-            Route::middleware('web', 'auth')
+            Route::middleware($web, $auth)
                 // ->name('creator.')
                 // ->prefix('creator')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/creator.php'));
 
-            Route::middleware('web', 'auth')
+            Route::middleware($web, $auth)
                 ->name('payment.')
                 ->prefix('payment')
                 ->namespace($this->namespace)

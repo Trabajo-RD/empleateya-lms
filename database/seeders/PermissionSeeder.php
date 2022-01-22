@@ -13,8 +13,7 @@ class PermissionSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-
+    {       
         $models = [
             'role',
             'permission',

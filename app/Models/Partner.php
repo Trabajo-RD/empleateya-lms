@@ -26,4 +26,12 @@ class Partner extends Model
      public function image(){
         return $this->morphOne('App\Models\Image', 'imageable');
     }
+
+    /**
+     * Relation 1:N
+     */
+    public function programs(){
+        // return $this->hasMany('App\Models\Program');
+        return $this->hasMany(Program::class);
+    }
 }

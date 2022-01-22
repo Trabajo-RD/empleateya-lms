@@ -23,6 +23,7 @@ return [
             'document_type'     => env('ADMINISTRATOR_DOCUMENT_TYPE', 'CED'),
             'name'              => env('ADMINISTRATOR_NAME'),
             'lastname'          => env('ADMINISTRATOR_LASTNAME'),
+            'gender'            => env('ADMINISTRATOR_GENDER'),
             'email'             => env('ADMINISTRATOR_EMAIL'),
             'options'           => [
                 'language'      => env('ADMINISTRATOR_LANGUAGE', 'es'),
@@ -47,6 +48,7 @@ return [
             'document_type'     => env('MANAGER_DOCUMENT_TYPE', 'CED'),
             'name'              => env('MANAGER_NAME'),
             'lastname'          => env('MANAGER_LASTNAME'),
+            'gender'            => env('MANAGER_GENDER'),
             'email'             => env('MANAGER_EMAIL'),
             'options'           => [
                 'language'      => env('MANAGER_LANGUAGE', 'es'),
@@ -71,6 +73,7 @@ return [
             'document_type'     => env('COURSEMODERATOR_DOCUMENT_TYPE', 'CED'),
             'name'              => env('COURSEMODERATOR_NAME'),
             'lastname'          => env('COURSEMODERATOR_LASTNAME'),
+            'gender'            => env('COURSEMODERATOR_GENDER'),
             'email'             => env('COURSEMODERATOR_EMAIL'),
             'options'           => [
                 'language'      => env('COURSEMODERATOR_LANGUAGE', 'es'),
@@ -95,6 +98,7 @@ return [
             'document_type'     => env('COURSECREATOR_DOCUMENT_TYPE', 'CED'),
             'name'              => env('COURSECREATOR_NAME'),
             'lastname'          => env('COURSECREATOR_LASTNAME'),
+            'gender'            => env('COURSECREATOR_GENDER'),
             'email'             => env('COURSECREATOR_EMAIL'),
             'options'           => [
                 'language'      => env('COURSECREATOR_LANGUAGE', 'es'),
@@ -119,6 +123,7 @@ return [
             'document_type'     => env('CONTENTMODERATOR_DOCUMENT_TYPE', 'CED'),
             'name'              => env('CONTENTMODERATOR_NAME'),
             'lastname'          => env('CONTENTMODERATOR_LASTNAME'),
+            'gender'            => env('CONTENTMODERATOR_GENDER'),
             'email'             => env('CONTENTMODERATOR_EMAIL'),
             'options'           => [
                 'language'      => env('CONTENTMODERATOR_LANGUAGE', 'es'),
@@ -143,6 +148,7 @@ return [
             'document_type'     => env('CONTENTCREATOR_DOCUMENT_TYPE', 'CED'),
             'name'              => env('CONTENTCREATOR_NAME'),
             'lastname'          => env('CONTENTCREATOR_LASTNAME'),
+            'gender'            => env('CONTENTCREATOR_GENDER'),
             'email'             => env('CONTENTCREATOR_EMAIL'),
             'options'           => [
                 'language'      => env('CONTENTCREATOR_LANGUAGE', 'es'),
@@ -167,6 +173,7 @@ return [
             'document_type'     => env('INTERNALINSTRUCTOR_DOCUMENT_TYPE', 'CED'),
             'name'              => env('INTERNALINSTRUCTOR_NAME'),
             'lastname'          => env('INTERNALINSTRUCTOR_LASTNAME'),
+            'gender'            => env('INTERNALINSTRUCTOR_GENDER'),
             'email'             => env('INTERNALINSTRUCTOR_EMAIL'),
             'options'           => [
                 'language'      => env('INTERNALINSTRUCTOR_LANGUAGE', 'es'),
@@ -191,6 +198,7 @@ return [
             'document_type'     => env('EXTERNALINSTRUCTOR_DOCUMENT_TYPE', 'CED'),
             'name'              => env('EXTERNALINSTRUCTOR_NAME'),
             'lastname'          => env('EXTERNALINSTRUCTOR_LASTNAME'),
+            'gender'            => env('EXTERNALINSTRUCTOR_GENDER'),
             'email'             => env('EXTERNALINSTRUCTOR_EMAIL'),
             'options'           => [
                 'language'      => env('EXTERNALINSTRUCTOR_LANGUAGE', 'es'),
@@ -216,6 +224,7 @@ return [
             'document_type'     => env('HELPER_DOCUMENT_TYPE', 'CED'),
             'name'              => env('HELPER_NAME'),
             'lastname'          => env('HELPER_LASTNAME'),
+            'gender'            => env('HELPER_GENDER'),
             'email'             => env('HELPER_EMAIL'),
             'options'           => [
                 'language'      => env('HELPER_LANGUAGE', 'es'),
@@ -241,6 +250,7 @@ return [
             'document_type'     => env('STUDENT_DOCUMENT_TYPE', 'CED'),
             'name'              => env('STUDENT_NAME'),
             'lastname'          => env('STUDENT_LASTNAME'),
+            'gender'            => env('STUDENT_GENDER'),
             'email'             => env('STUDENT_EMAIL'),
             'options'           => [
                 'language'      => env('STUDENT_LANGUAGE', 'es'),
@@ -266,6 +276,7 @@ return [
             'document_type'     => env('GUEST_DOCUMENT_TYPE', 'CED'),
             'name'              => env('GUEST_NAME'),
             'lastname'          => env('GUEST_LASTNAME'),
+            'gender'            => env('GUEST_GENDER'),
             'email'             => env('GUEST_EMAIL'),
             'options'           => [
                 'language'      => env('GUEST_LANGUAGE', 'es'),

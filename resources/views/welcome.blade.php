@@ -1,7 +1,7 @@
 <x-app-layout><!-- Component app/view/components/applayout -->
 
     <section class="bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-10 sm:px-6 lg:px-8">
             <!-- Buscador -->
             @livewire('search')
         </div>
@@ -14,7 +14,7 @@
             @foreach( $publish_slides as $item)
 
                 <div class="site-blocks-cover" style="background-image: url('{{ Storage::url( $item->image->url ) }}'); background-repeat: no-repeat; background-size: 100vw;" data-aos="fade" data-stellar-background-ratio="0.5">
-                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-32 md:h-96 flex items-center py-32 ">
+                    <div class="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 h-32 md:h-96 flex items-center py-32 ">
                         <div class="w-full md:w-3/4 lg:w-1/2 px-8 py-8 {{ ($item->background_color != '' && $item->background_color != 'bg-white' ) ? $item->background_color . '-' . $item->background_color_saturation : 'bg-white'}} {{ ($item->background_color_opacity != '') ? $item->background_color_opacity : 'bg-opacity-25'}} ">
 
                             <!-- titulo -->
@@ -43,7 +43,7 @@
     @else
         <!-- hero -->
         <section class="bg-cover" style="background-image:linear-gradient(rgba(0, 56, 118, 0.7), rgba(35, 73, 116, 0.6)), url({{ asset( 'images/home/slider/hero2.jpg' ) }})">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-36">
+            <div class="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-10 sm:px-6 lg:px-8 py-36">
                 <div class="w-full md:w-3/4 lg:w-1/2">
                     <!-- titulo -->
                     <h1 class="text-white font-extrabold text-4xl sm:text-5xl md:text-6xl">{{ __('Free courses') }}</h1>
@@ -65,12 +65,14 @@
 
     <!-- CTA -->
     <section class="bg-blue-900 py-12">
-        <h2 class="text-center text-white text-5xl sm:text-4xl md:text-3xl">{{ __('Not sure what to choose?') }}</h2>
-        <p class="text-center text-white">{{ __('Visit our course catalog where you will find the right course for you') }}</p>
-        <div class="flex justify-center mt-6">
-            <a href="{{ route( 'courses.index', app()->getLocale() ) }}" class="btn-cta btn-accent font-bold py-2 px-4 rounded">
-                {{ __('See course catalog') }}
-            </a>
+        <div class="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-10 sm:px-6 lg:px-8">
+            <h2 class="text-center text-white text-5xl sm:text-4xl md:text-3xl">{{ __('Not sure what to choose?') }}</h2>
+            <p class="text-center text-white">{{ __('Visit our course catalog where you will find the right course for you') }}</p>
+            <div class="flex justify-center mt-6">
+                <a href="{{ route( 'courses.index', app()->getLocale() ) }}" class="btn-cta btn-accent font-bold py-2 px-4 rounded">
+                    {{ __('See course catalog') }}
+                </a>
+            </div>
         </div>
     </section>
 
@@ -79,7 +81,7 @@
         @if (Auth::check())
             @if(count($user_courses))
                 <!-- Student courses in this category -->
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-12">
+                <div class="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto sm:px-6 lg:px-8 py-12">
                     <h2 class="text-center font-display font-semibold text-gray-600 text-xl sm:text-2xl md:text-3xl mb-6"><span class="font-bold">{{ auth()->user()->name }}</span>, {{  __('these are your latest courses') }}</h2>
                     <!-- courses -->
                     <div class="px-4 sm:px-6 lg:px-8 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-8 mt-12">
@@ -97,7 +99,7 @@
                 <h2 class="text-center font-display font-semibold text-gray-600 text-xl sm:text-2xl md:text-3xl mb-6">{{ __('Latest courses') }}</h2>
                     <p class="text-center text-gray-500 text-sm mb-6">{{ __('These are the last courses that we have published for you') }}</p>
                     <!-- courses -->
-                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8">
+                    <div class="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-20 sm:px-6 md:px-6 lg:px-8 grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-x-6 gap-y-8">
                         @foreach ( $latest_courses as $course )
                             <x-course-card :course="$course" />
                         @endforeach
@@ -107,11 +109,10 @@
 
         <!-- partnerships -->
         @if( count( $partners) >= 1 )
-            <section class="pt-12">
-                <h2 class="text-center font-display font-semibold text-gray-600 text-2xl sm:text-3xl md:text-4xl mb-6">{{ __('Agreements with recognized institutions and companies') }}</h2>
-                <p class="text-center text-gray-500 text-md mb-6">{{ __('In order to offer you optimal training, and that you can join the labor market') }}</p>
-                <!-- courses -->
+            <section class="pt-12">              
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap justify-center gap-x-6 gap-y-8 ">
+                    <h2 class="text-center font-display font-semibold text-gray-600 text-2xl sm:text-3xl md:text-4xl mb-6">{{ __('Agreements with recognized institutions and companies') }}</h2>
+                    <p class="text-center text-gray-500 text-md mb-6">{{ __('In order to offer you optimal training, and that you can join the labor market') }}</p>
                     @foreach ( $partners as $partner )
                         <figure>
                             @isset( $partner->image )

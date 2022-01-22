@@ -25,6 +25,7 @@ return [
             'document_type'     => env('MONITOR1_DOCUMENT_TYPE', 'CED'),
             'name'              => env('MONITOR1_NAME'),
             'lastname'          => env('MONITOR1_LASTNAME'),
+            'gender'            => env('MONITOR1_GENDER'),
             'email'             => env('MONITOR1_EMAIL'),
             'options'           => [
                 'language'      => env('MONITOR1_LANGUAGE', 'es'),
@@ -39,6 +40,7 @@ return [
             'document_type'     => env('MONITOR2_DOCUMENT_TYPE', 'CED'),
             'name'              => env('MONITOR2_NAME'),
             'lastname'          => env('MONITOR2_LASTNAME'),
+            'gender'            => env('MONITOR2_GENDER'),
             'email'             => env('MONITOR2_EMAIL'),
             'options'           => [
                 'language'      => env('MONITOR2_LANGUAGE', 'es'),
@@ -53,6 +55,7 @@ return [
             'document_type'     => env('MONITOR3_DOCUMENT_TYPE', 'CED'),
             'name'              => env('MONITOR3_NAME'),
             'lastname'          => env('MONITOR3_LASTNAME'),
+            'gender'            => env('MONITOR3_GENDER'),
             'email'             => env('MONITOR3_EMAIL'),
             'options'           => [
                 'language'      => env('MONITOR3_LANGUAGE', 'es'),
@@ -67,6 +70,7 @@ return [
             'document_type'     => env('MONITOR4_DOCUMENT_TYPE', 'CED'),
             'name'              => env('MONITOR4_NAME'),
             'lastname'          => env('MONITOR4_LASTNAME'),
+            'gender'            => env('MONITOR4_GENDER'),
             'email'             => env('MONITOR4_EMAIL'),
             'options'           => [
                 'language'      => env('MONITOR4_LANGUAGE', 'es'),
@@ -81,6 +85,7 @@ return [
             'document_type'     => env('MONITOR5_DOCUMENT_TYPE', 'CED'),
             'name'              => env('MONITOR5_NAME'),
             'lastname'          => env('MONITOR5_LASTNAME'),
+            'gender'            => env('MONITOR5_GENDER'),
             'email'             => env('MONITOR5_EMAIL'),
             'options'           => [
                 'language'      => env('MONITOR5_LANGUAGE', 'es'),
@@ -95,6 +100,7 @@ return [
             'document_type'     => env('MONITOR6_DOCUMENT_TYPE', 'CED'),
             'name'              => env('MONITOR6_NAME'),
             'lastname'          => env('MONITOR6_LASTNAME'),
+            'gender'            => env('MONITOR6_GENDER'),
             'email'             => env('MONITOR6_EMAIL'),
             'options'           => [
                 'language'      => env('MONITOR6_LANGUAGE', 'es'),
@@ -109,6 +115,7 @@ return [
             'document_type'     => env('MONITOR7_DOCUMENT_TYPE', 'CED'),
             'name'              => env('MONITOR7_NAME'),
             'lastname'          => env('MONITOR7_LASTNAME'),
+            'gender'            => env('MONITOR7_GENDER'),
             'email'             => env('MONITOR7_EMAIL'),
             'options'           => [
                 'language'      => env('MONITOR7_LANGUAGE', 'es'),
@@ -123,6 +130,7 @@ return [
             'document_type'     => env('MONITOR8_DOCUMENT_TYPE', 'CED'),
             'name'              => env('MONITOR8_NAME'),
             'lastname'          => env('MONITOR8_LASTNAME'),
+            'gender'            => env('MONITOR8_GENDER'),
             'email'             => env('MONITOR8_EMAIL'),
             'options'           => [
                 'language'      => env('MONITOR8_LANGUAGE', 'es'),
@@ -137,6 +145,7 @@ return [
             'document_type'     => env('MONITOR9_DOCUMENT_TYPE', 'CED'),
             'name'              => env('MONITOR9_NAME'),
             'lastname'          => env('MONITOR9_LASTNAME'),
+            'gender'            => env('MONITOR9_GENDER'),
             'email'             => env('MONITOR9_EMAIL'),
             'options'           => [
                 'language'      => env('MONITOR9_LANGUAGE', 'es'),
@@ -151,6 +160,7 @@ return [
             'document_type'     => env('MONITOR10_DOCUMENT_TYPE', 'CED'),
             'name'              => env('MONITOR10_NAME'),
             'lastname'          => env('MONITOR10_LASTNAME'),
+            'gender'            => env('MONITOR10_GENDER'),
             'email'             => env('MONITOR10_EMAIL'),
             'options'           => [
                 'language'      => env('MONITOR10_LANGUAGE', 'es'),
@@ -165,6 +175,7 @@ return [
             'document_type'     => env('MONITOR11_DOCUMENT_TYPE', 'CED'),
             'name'              => env('MONITOR11_NAME'),
             'lastname'          => env('MONITOR11_LASTNAME'),
+            'gender'            => env('MONITOR11_GENDER'),
             'email'             => env('MONITOR11_EMAIL'),
             'options'           => [
                 'language'      => env('MONITOR11_LANGUAGE', 'es'),
@@ -179,6 +190,7 @@ return [
             'document_type'     => env('MONITOR12_DOCUMENT_TYPE', 'CED'),
             'name'              => env('MONITOR12_NAME'),
             'lastname'          => env('MONITOR12_LASTNAME'),
+            'gender'            => env('MONITOR12_GENDER'),
             'email'             => env('MONITOR12_EMAIL'),
             'options'           => [
                 'language'      => env('MONITOR12_LANGUAGE', 'es'),
@@ -193,6 +205,7 @@ return [
             'document_type'     => env('MONITOR13_DOCUMENT_TYPE', 'CED'),
             'name'              => env('MONITOR13_NAME'),
             'lastname'          => env('MONITOR13_LASTNAME'),
+            'gender'            => env('MONITOR13_GENDER'),
             'email'             => env('MONITOR13_EMAIL'),
             'options'           => [
                 'language'      => env('MONITOR13_LANGUAGE', 'es'),

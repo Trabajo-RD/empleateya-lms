@@ -1,13 +1,13 @@
 <x-app-layout>
 
     <section class="bg-blue-900 py-12">
-        <div class="container grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+        <div class="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
             <figure>
             <!-- card image -->
                 @isset( $course->image )
-                    <img src="{{ Storage::url( $course->image->url ) }}" alt="" class="h-80 w-full object-cover shadow" />
+                    <img src="{{ Storage::url( $course->image->url ) }}" alt="" class="h-96 w-11/12 object-cover shadow" />
                 @else
-                    <img id="picture" class="h-80 w-full object-cover shadow" src="{{ asset('images/courses/default.jpg') }}" alt="" >
+                    <img id="picture" class="h-96 w-11/12 object-cover shadow" src="{{ asset('images/courses/default.jpg') }}" alt="" >
                 @endisset
             </figure>
             <div>
@@ -44,7 +44,7 @@
     </section>
 
 
-    <div class="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-12">
+    <div class="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-16 py-12">
 
         <div class="order-2 md:col-span-1 lg:col-span-2 md:order-1 lg:order-1">
 
@@ -155,7 +155,8 @@
 
 
                     {{-- @if( auth()->check() && !(Auth::user()->hasRole(['Administrator', 'Manager', 'Creator', 'Instructor']) )) --}}
-                    @cannot('create-course')
+                    
+                    {{-- @can('view-course') --}}
 
                         @can( 'enrolled', $course )
 
@@ -218,7 +219,7 @@
 
 
                         @endcan
-                    @endcannot
+                    {{-- @endcannot --}}
 
                 </div>
             </section>

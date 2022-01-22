@@ -24,8 +24,8 @@ class CourseController extends Controller
     public function __construct()
     {
         // Add middleware to Resource Routes
-        $this->middleware('can:list-course')->only('index');
-        $this->middleware('can:create-course')->only('create', 'store', 'new');
+        // $this->middleware('can:list-course')->only('index');
+        $this->middleware('can:create-course')->only('index', 'create', 'store', 'new');
         $this->middleware('can:update-course')->only('edit', 'update', 'goals');
         $this->middleware('can:delete-course')->only('destroy');
     }

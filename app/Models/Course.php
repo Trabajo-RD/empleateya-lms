@@ -35,6 +35,7 @@ class Course extends Model
         'start_date',
         'end_date',
         'language_id',
+        'program_id',
     ];
 
     protected $withCount = ['students', 'reviews']; // add attr students_count to Course Model
@@ -323,6 +324,12 @@ class Course extends Model
     {
         // return $this->belongsTo('App\Models\Price');
         return $this->belongsTo(Price::class);
+    }
+
+    public function program()
+    {
+        // return $this->belongsTo('App\Models\Category');
+        return $this->belongsTo(Program::class);
     }
 
     /**

@@ -64,8 +64,8 @@ Route::group([
     //     return view('dashboard');
     // })->name('dashboard');
 
-    Route::get('/dashboard', [HomeController::class, 'dashboard'])
-        ->name('dashboard');
+    // Route::get('/dashboard', [HomeController::class, 'dashboard'])
+    //     ->name('dashboard');
 
 
     // Route::get('{lang}/dashboard', [HomeController::class, 'dashboard'])

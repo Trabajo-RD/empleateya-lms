@@ -1,9 +1,23 @@
-<x-app-layout>
-    <x-slot name="header">
+<x-admin-layout>
+    {{-- <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
         </h2>
-    </x-slot>
+    </x-slot> --}}
+
+    <!-- hero -->
+        <section class="bg-cover rounded-lg" style="background-image:linear-gradient(rgba(0, 56, 118, 0.7), rgba(35, 73, 116, 0.6)), url({{ asset( 'images/home/slider/hero2.jpg' ) }})">
+            <div class="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-10 sm:px-6 lg:px-8 py-12">
+                <div class="w-full md:w-3/4 lg:w-1/2">
+                    <!-- titulo -->
+                    <h1 class="text-white font-extrabold text-4xl sm:text-5xl md:text-6xl">{{ __('Capacítate') }}</h1>
+                    <!-- parrafo -->
+                    <p class="text-white mt-3 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0 mb-4">{{ __('In our Learning Management System you will find courses and articles from different areas that will help you in your professional development')}}</p>
+                    <!-- Buscador -->
+                    {{-- @livewire('search') --}}
+                </div>
+            </div>
+        </section>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -26,4 +40,4 @@
             &copy;Ministerio de Trabajo 2021
         </div>
     </x-slot>
-</x-app-layout>
+</x-admin-layout>

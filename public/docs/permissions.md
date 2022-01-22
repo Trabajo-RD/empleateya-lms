@@ -1,6 +1,4 @@
-# Documentación
-
-## Roles y Permisos
+# Permisos
 
 |                    | Administrador | Manager | Moderador de Contenidos | Creador de Contenidos | Moderador de Cursos | Creador de Cursos | Instructor Interno | Instructor Externo | Auxiliar | Alumno | Usuario Registrado | Invitado |
 |--------------------|---------------|---------|-------------------------|-----------------------|---------------------|-------------------|--------------------|--------------------|----------|--------|--------------------|----------|
@@ -69,14 +67,3 @@ Un Invitado puede ver algunas informaciones dentro de la plataforma, pero no pod
 
 ---
 
-## Políticas
-
-### Políticas de Cursos
-
-#### Actualización
-
-La información de un curso solo podrá ser actualizada por el Instructor autor del curso, o por el usuario que este designe como Colaborador.
-
-#### Participación
-
-...

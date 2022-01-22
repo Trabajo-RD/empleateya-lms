@@ -30,6 +30,9 @@
 
         {{-- <link rel="stylesheet" href="{{ asset('css/style.css') }}"> --}}
 
+        <!-- Flowbite CDN CSS for Tailwind interactive elements -->
+        <link rel="stylesheet" href="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.min.css" />
+
         @livewireStyles
 
         <!-- Scripts -->
@@ -84,6 +87,9 @@
         <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
         {{-- <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script> --}}
         <script src="{{ asset('js/aos.js') }}"></script>
+
+        <!-- Flowbite CDN JavaScript for Tailwind interactive elements -->
+        <script src="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.bundle.js"></script>
 
         @livewireScripts
 

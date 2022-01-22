@@ -3,7 +3,7 @@
 @section('title', 'Capacítate RD')
 
 @section('content_header')
-    <h1 class="text-primary"><i class="fas fa-user-edit mr-2"></i>Asignar Roles</h1>
+    <h1 class="text-primary"><i class="fas fa-user-edit mr-2"></i>Editar usuario</h1>
 @stop
 
 @section('content')
@@ -18,7 +18,7 @@
 
         <div class="card mb-4">
             <div class="card-header">
-                <span class="text-primary text-uppercase">Usuario</span>
+                <span class="text-primary text-uppercase">Cuenta</span>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -36,6 +36,12 @@
                         <label class="text-muted">Correo: </label>
                         <p class="form-control">{{ $user->email }}</p>
                     </div>
+                </div>
+
+                <p class="text-muted font-weight-bold">Contraseña:</p>
+                <p class="text-muted">¿Deseas generar una nueva contraseña para esta cuenta?</p>
+                <div class="row">
+                    <a href="#" class="btn btn-secondary btn-md" role="button" aria-pressed="true">Generar contraseña</a>
                 </div>
             </div>
         </div>
@@ -74,5 +80,5 @@
 @stop
 
 @section('js')
-    <script> console.log('LMS funcionando!'); </script>
+    {{-- <script> console.log('LMS funcionando!'); </script> --}}
 @stop

@@ -1,5 +1,5 @@
-<x-app-layout>
+<x-admin-layout>
 
     @livewire('instructor.courses-index')
 
-</x-app-layout>
+</x-admin-layout>

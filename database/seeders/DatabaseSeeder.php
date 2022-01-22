@@ -78,6 +78,9 @@ class DatabaseSeeder extends Seeder
         $this->call(LanguagesSeeder::class);
         $this->command->info('Language table seeded!');
 
+        $this->call(PartnerSeeder::class);
+        $this->command->info('Partner table seeded!');
+
         // Tag::factory(8)->create();
 
         // TODO: uncomment to create test courses

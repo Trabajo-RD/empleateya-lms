@@ -1,0 +1,69 @@
+/**
+ * toggle button
+ */
+.toggle-button {
+    padding: 0;
+    outline: none;
+    cursor: pointer;
+}
+.toggle-button:focus {
+    outline: none;
+}
+.toggle-button::-moz-focus-inner {
+    border: 0;
+}
+.toggle-button.is-text {
+    background-color: transparent;
+    border: 0;
+}
+.toggle-button-inner-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+#admin-navbar-responsive-toggle-button, #admin-navbar-primary-toggle-button {
+    width: 48px;
+    height: 48px;
+    background-color: ##e5e7eb;
+    /* transition: background-color: 2s ease; */
+}
+.icon {
+    line-height: 0;
+}
+.toggle-button-icon, .toggle-button-icon-to-hide {
+    text-align: center;
+    width: 27px;
+}
+.toggle-button-icon::after, .toggle-button-icon::before, .toggle-button-icon-to-hide::before {
+    background-color: #003876;
+    content: "";
+    display: inline-block;
+    height: 3px;
+    width: 27px;
+    margin: 3px 0;
+    transition-duration: 0.5s;
+}
+.toggle-button-icon::before {
+    width: 27px;
+}
+.toggle-button-icon::after {
+    width: 27px;
+}
+.toggle-button-icon-to-hide::before {
+    width: 27px;
+}
+/* animation */
+#admin-navbar-primary-toggle-button.is-opened .toggle-button-icon::before, #admin-navbar-responsive-toggle-button.is-opened .toggle-button-icon::before {
+    transform: rotateZ(135deg) translate(3px, -3px);
+    width: 27px;
+}
+#admin-navbar-primary-toggle-button.is-opened .toggle-button-icon::after, #admin-navbar-responsive-toggle-button.is-opened .toggle-button-icon::after {
+    transform: rotateZ(-135deg) translate(3px, 3px);
+    width: 27px;
+}
+#admin-navbar-primary-toggle-button.is-opened .toggle-button-icon-to-hide, #admin-navbar-responsive-toggle-button.is-opened .toggle-button-icon-to-hide {
+    display: none;
+}

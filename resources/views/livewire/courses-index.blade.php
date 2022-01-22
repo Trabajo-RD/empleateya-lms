@@ -2,7 +2,7 @@
 
     <!-- Filters -->
     <div class="bg-gray-200 py-4 mb-16 z-0">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex">
+        <div class="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 flex">
             <div class="relative mr-4 flex items-center">
                 {{-- <i class="fas fa-sliders-h text-gray-500 text-2xl md:text-sm md:mr-2"></i> --}}
                 <i class="fas fa-filter text-gray-500 text-2xl md:text-sm md:mr-2"></i>
@@ -82,7 +82,7 @@
         <h2 class="text-center font-display font-semibold text-gray-600 text-2xl sm:text-3xl md:text-4xl mb-6">{{ __('Course catalog') }}</h2>
         <p class="text-center text-gray-500 text-sm mb-6">{{ __('These are the last courses that we have published for you') }}</p>
         <!-- courses -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8">
+        <div class="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8">
             @foreach ( $courses as $course )
                 <x-course-card :course="$course" />
             @endforeach
@@ -90,12 +90,12 @@
     </section>
 
     <!-- Pagination -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-8">
+    <div class="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-8">
         {{ $courses->links() }}
     </div>
 
     <!-- Page Footer -->
-    <x-slot name="footer">
+    {{-- <x-slot name="footer">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8">
             @livewire('link.social-media')
             <div>
@@ -126,6 +126,6 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap justify-center gap-x-6 gap-y-8 ">
             &copy;Ministerio de Trabajo 2021
         </div>
-    </x-slot>
+    </x-slot> --}}
 
 </div>

@@ -109,8 +109,8 @@ class HomeController extends Controller
         return view('welcome', compact('latest_courses', 'publish_slides', 'carousel_items', 'featured_courses', 'featured_modalities', 'user_courses', 'partners')); // Add collection to welcome view
     }
 
-    public function dashboard(){
-        return view('dashboard');
-    }
+    // public function dashboard(){
+    //     return view('dashboard');
+    // }
 
 }
