@@ -16,6 +16,7 @@ class CreateLessonsTable extends Migration
         Schema::create('lessons', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer('order')->nullable();
             $table->text('url');
             $table->text('iframe')->nullable();
 

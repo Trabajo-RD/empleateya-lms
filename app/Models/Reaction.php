@@ -15,6 +15,9 @@ class Reaction extends Model
     const LIKE = 1;
     const DISLIKE = 2;
 
+    /**
+     * Polimorfic relation table
+     */
     public function reactionable(){
         return $this->morphTo();
     }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGoalsTable extends Migration
+class CreateCourseModeratorTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,15 @@ class CreateGoalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('goals', function (Blueprint $table) {
+        Schema::create('course_moderator', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('order')->nullable();
+
             $table->unsignedBigInteger('course_id');
+            $table->unsignedBigInteger('user_id');
 
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
@@ -31,6 +33,6 @@ class CreateGoalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('goals');
+        Schema::dropIfExists('course_moderator');
     }
 }

@@ -285,6 +285,10 @@ class Course extends Model
     public function language(){
         return $this->belongsTo(Language::class);
     }
+
+    /**
+     * Return the course dictated user
+     */
     public function editor()
     {
         return $this->belongsTo('App\Models\User', 'user_id');
@@ -341,6 +345,20 @@ class Course extends Model
     {
         // return $this->belongsToMany('App\Models\User');
         return $this->belongsToMany(User::class);
+    }
+
+    /**
+     * Return all course moderators users
+     */
+    public function moderators(){
+        return $this->belongsToMany(User::class, 'user_id');
+    }
+
+    /**
+     * Return all course contributors users
+     */
+    public function contributors(){
+        return $this->belongsToMany(User::class, 'user_id');
     }
 
     public function tags()
