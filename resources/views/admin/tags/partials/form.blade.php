@@ -1,9 +1,12 @@
 <div class="form-group">
-    {!! Form::label('topic_id', 'Subcategoría padre') !!}
-    {!! Form::select('topic_id', $topic_list, null, ['class' => 'form-control']) !!}
-    {{-- @if(Route::is('admin.tags.edit') )
-        <span class="text-muted text-sm">Cursos registrados con esta etiqueta: {{ count($tag_courses) }}</span>
-    @endif --}}
+    <span class="font-weight-bold">Subcategoría padre</span>
+    <div class="input-group mt-1">
+        {!! Form::select('topic_id', $topic_list, null, ['class' => 'custom-select']) !!}
+        <div class="input-group-append">
+            <a class="btn btn-outline-secondary" href="{{ route('admin.topics.create', app()->getLocale() ) }}">Nueva subcategoría</a>
+        </div>
+    </div>
+    <small id="emailHelp" class="form-text text-muted">Selecciona o añade una nueva subcategoría.</small>
 </div>
 
 @error('topic_id')

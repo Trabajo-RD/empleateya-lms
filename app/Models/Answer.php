@@ -27,7 +27,7 @@ class Answer extends Model
     /**
      * Relation N:M
      */
-    public function students()
+    public function participants()
     {
         return $this->belongsToMany(User::class);
     }

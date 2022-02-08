@@ -5,8 +5,8 @@
 @section('plugins.Sweetalert2', true)
 
 @section('content_header')
-    <a href="{{ route('admin.modalities.create' ) }}" class="btn btn-primary float-right"><i class="fas fa-plus mr-1"></i>Nueva modalidad</a>
-    <h1 class="text-dark">Modalidades</h1>
+    <a href="{{ route('admin.modalities.create', app()->getLocale() ) }}" class="btn btn-primary float-right"><i class="fas fa-plus mr-1"></i>Nueva modalidad</a>
+    <h1 class="text-primary">Modalidades</h1>
 @stop
 
 @section('content')
@@ -23,21 +23,23 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        {{-- <th>ID</th> --}}
                         <th>Nombre</th>
+                        <th>Descripción</th>
                         <th colspan="2"></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach( $modalities as $modality )
                         <tr>
-                            <td width="10px">{{ $modality->id }}</td>
-                            <td>{{ $modality->name }}</td>
+                            {{-- <td width="10px">{{ $modality->id }}</td> --}}
+                            <td width="20%">{{ $modality->name }}</td>
+                            <td>{{ $modality->description }}</td>
                             <td width="12%">
-                                <a href="{{ route('admin.modalities.edit', $modality ) }}" class="btn btn-outline-secondary"><i class="far fa-edit mr-1"></i>Editar</a>
+                                <a href="{{ route('admin.modalities.edit', [app()->getLocale(), $modality] ) }}" class="btn btn-outline-secondary"><i class="far fa-edit mr-1"></i>Editar</a>
                             </td>
                             <td width="14%">
-                                <form action="{{ route( 'admin.modalities.destroy', $modality ) }}" method="POST" class="delete-modality">
+                                <form action="{{ route( 'admin.modalities.destroy', [app()->getLocale(), $modality] ) }}" method="POST" class="delete-modality">
                                     @csrf
                                     @method('delete')
                                     <button class="btn btn-outline-danger" type="submit"><i class="far fa-trash-alt mr-1"></i>Eliminar</button>

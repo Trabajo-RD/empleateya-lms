@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Http\Controllers\Api\MicrosoftLearnController;
+use App\Models\LearningPath;
 use Illuminate\Database\Seeder;
 use App\Models\Tag;
 
@@ -19,11 +20,17 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
+        /**
+         * Generate all image directories
+         */
         Storage::deleteDirectory('courses');
         Storage::makeDirectory('courses');
 
         Storage::deleteDirectory('partners');
         Storage::makeDirectory('partners');
+
+        Storage::deleteDirectory('workshops');
+        Storage::makeDirectory('workshops');
 
         // Seed all permissions
         $this->call(PermissionSeeder::class);
@@ -81,12 +88,26 @@ class DatabaseSeeder extends Seeder
         $this->call(PartnerSeeder::class);
         $this->command->info('Partner table seeded!');
 
+        $this->call(OrganizationSeeder::class);
+        $this->command->info('Organization table seeded!');
+
         // Tag::factory(8)->create();
 
         // TODO: uncomment to create test courses
         $this->call(CourseSeeder::class);
+        $this->command->info('Course table seeded!');
 
-        
+        $this->call(WorkshopSeeder::class);
+        $this->command->info('Workshop table seeded!');
+
+        $this->call(CompetencySeeder::class);
+        $this->command->info('Competency table seeded!');
+
+        $this->call(ProfessionSeeder::class);
+        $this->command->info('Profession table seeded!');
+
+        $this->call(LearningPathSeeder::class);
+        $this->command->info('LearningPath table seeded!');
 
     }
 }

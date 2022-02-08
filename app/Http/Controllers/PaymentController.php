@@ -127,7 +127,7 @@ class PaymentController extends Controller
         // ENROLLED USER AFTER PAYMENT
 
         // insert user auth id in course_user table
-        $course->students()->attach( auth()->user()->id );
+        $course->participants()->attach( auth()->user()->id );
 
         // redirect user to enrolled course;
         return redirect()->route('courses.status', $course);

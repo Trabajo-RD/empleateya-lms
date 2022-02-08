@@ -34,7 +34,7 @@
                     </ul>
                     <!-- users enrolled -->
                     <p class="text-white sm:text-md md:text-lg lg:mx-0">
-                        <i class="fas fa-users text-sm mr-2"></i>{{ $course->students_count }} Usuarios
+                        <i class="fas fa-users text-sm mr-2"></i>{{ $course->participants_count }} Usuarios
                     </p>
                 </div>
             </div>

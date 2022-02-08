@@ -20,7 +20,7 @@
     <!-- sidebar menu -->
 
 
-    <a href="{{ route('dashboard.index', App::getLocale() ) }}" class="block py-2.5 px-4 flex items-center space-x-4 rounded-lg transition duration-200 hover:bg-gray-300 hover:bg-opacity-80 @routeIs('dashboard.index', app()->getLocale() ) bg-gray-300 bg-opacity-80 font-extrabold @else bg-transparent @endif">
+    <a href="{{ route('instructor.dashboard.index', App::getLocale() ) }}" class="block py-2.5 px-4 flex items-center space-x-4 rounded-lg transition duration-200 hover:bg-gray-300 hover:bg-opacity-80 @routeIs('instructor.dashboard.index', app()->getLocale() ) bg-gray-300 bg-opacity-80 font-extrabold @else bg-transparent @endif">
         <i class="fas fa-th-large"></i>
         <span class="sidebar-item-text">{{ __('Dashboard') }}</span>
     </a>

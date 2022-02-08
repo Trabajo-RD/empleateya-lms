@@ -27,7 +27,7 @@
         </div>
 
         <!-- Page Footer -->
-        <footer class="main-footer bg-gray-800">
+        {{-- <footer class="main-footer bg-gray-800">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                 @include('partials.footer.footer')
             </div>
@@ -37,7 +37,7 @@
                     @include('partials.footer.copyright')
                 </div>
             </section>
-        </footer>
+        </footer> --}}
 
         <!-- Flowbite CDN JavaScript for Tailwind interactive elements -->
         <script src="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.bundle.js"></script>

@@ -65,7 +65,7 @@
             @livewire('navigation-menu')
 
             <!-- Page Heading -->
-            @if (isset($header) && request()->routeIs('creator.dashboard'))
+            @if (isset($header) && request()->routeIs('dashboard.index'))
                 <header class="bg-white shadow">
                     <div class="w-full mx-auto py-6 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16">
                         {{ $header }}
@@ -97,7 +97,8 @@
 
         @stack('modals')
 
-
+        <!-- blade component floating action button -->
+        <x-floatting-action-button />
 
         {{-- <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script> --}}
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -118,6 +119,9 @@
         <script type="text/javascript" src="{{ asset('js/aos.js') }}"></script>
 
         <script type="text/javascript" src="{{ asset('js/main-front.js') }}"></script>
+
+        <!-- custom floatting action button js -->
+        <script type="text/javascript" src="{{ asset('js/floatting-action-button.js') }}"></script>
 
         <!-- Flowbite CDN JavaScript for Tailwind interactive elements -->
         <script src="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.bundle.js"></script>

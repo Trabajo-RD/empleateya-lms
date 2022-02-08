@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Capacítate RD')
+@section('title', 'Dashboard')
 
 @section('content_header')
 
@@ -15,7 +15,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Dashboard</h1>
+            <h1 class="text-primary m-0">Dashboard</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -551,7 +551,7 @@
                             <img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
                             </div> --}}
                             <div class="product-info">
-                            <a href="" class="product-title">{{ $revision_course->title }}
+                            <a href="{{ route('admin.courses.show', [app()->getLocale(), $revision_course]) }}" class="product-title">{{ $revision_course->title }}
                                 {{-- <span class="badge badge-warning float-right">{{ $revision_course->status }}</span></a> --}}
                             <span class="product-description">
                                 {{ $revision_course->editor->name }} {{ $revision_course->editor->lastname }}
@@ -602,12 +602,12 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome Icons -->
-  {{-- <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css"> --}}
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="{{ asset('vendor/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
+    <!-- Font Awesome Icons -->
+    {{-- <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css"> --}}
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="{{ asset('vendor/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
 @stop
 
 @section('js')

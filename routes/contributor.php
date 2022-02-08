@@ -3,10 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Contributor\HomeController;
 
-Route::group(['prefix' => '{locale}',
-    'as' => 'contributor.',
-    'where' => ['locale', '[a-zA-Z]{2}'],
-    'middleware' => ['setlocale', 'language', 'default.language', 'verified']
+Route::group([
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
 ], function(){
 
     Route::get('contributor/dashboard', [HomeController::class, 'index'])->name('cpanel');

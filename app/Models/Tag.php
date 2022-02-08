@@ -59,4 +59,27 @@ class Tag extends Model
     {
         return $this->belongsTo(Topic::class);
     }
+
+    /****************************
+     * Relation 1:M polymorphic
+     ****************************/
+
+    /**
+     * Get all tag's interests
+     */
+    public function interests(){
+        return $this->morphMany(Interest::class, 'interestable');
+    }
+
+    /****************************
+     * Relation N:M polymorphic
+     ****************************/
+
+    /**
+     * Get all of the interests for the tag
+     */
+    // public function interests(){
+    //     return $this->morphToMany(Interest::class, 'interestable');
+    // }
+
 }

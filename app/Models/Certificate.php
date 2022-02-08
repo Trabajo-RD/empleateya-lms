@@ -11,18 +11,29 @@ class Certificate extends Model
 
     protected $guarded = ['id'];
 
-    protected $fillable = [
-        'name',
-        'description',
-        'certificate_number',
-        'url',
-        'date',
-        'responsible_name',
-        'responsible_position',
-        'user_id',
-        'course_id',
-        'program_id',
-        'partner_id',
-    ];
+    // protected $fillable = [
+    //     'name',
+    //     'description',
+    //     'certificate_number',
+    //     'url',
+    //     'date',
+    //     'responsible_name',
+    //     'responsible_position',
+    //     'user_id',
+    //     'course_id',
+    //     'program_id',
+    //     'partner_id',
+    // ];
+
+    /**
+     * Relation 1:N reverse
+     */
+    // public function course(){
+    //     return $this->belongsTo(Course::class);
+    // }
+
+    public function certificateable(){
+        return $this->morphTo();
+    }
 
 }

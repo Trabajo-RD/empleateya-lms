@@ -17,11 +17,11 @@
 
     <div class="card">
         <div class="card-body">
-            {!! Form::model($topic, ['route' => ['admin.topics.update', $topic ], 'method' => 'put' ]) !!}
+            {!! Form::model($topic, ['route' => ['admin.topics.update', [app()->getLocale(), $topic] ], 'method' => 'put' ]) !!}
 
-                @include('admin.topics.partials.form')   
+                @include('admin.topics.partials.form')
 
-                <a href="{{ url()->previous() }}" class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="Omitir los cambios y volver a la vista anterior"><i class="fas fa-arrow-circle-left mr-2"></i>Volver atrás</a>                           
+                <a href="{{ url()->previous() }}" class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="Omitir los cambios y volver a la vista anterior"><i class="fas fa-arrow-circle-left mr-2"></i>Volver atrás</a>
 
                 {!! Form::submit(trans('Guardar cambios'), ['class' => 'btn btn-primary float-right', 'data-toggle' => 'tooltip', 'data-placement' => 'left', 'title' => 'Guardar los cambios realizados en esta subcategoría']) !!}
 

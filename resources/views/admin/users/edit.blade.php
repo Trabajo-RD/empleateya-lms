@@ -3,7 +3,7 @@
 @section('title', 'Capacítate RD')
 
 @section('content_header')
-    <h1 class="text-primary"><i class="fas fa-user-edit mr-2"></i>Editar usuario</h1>
+    <h1 class="text-primary">Editar usuario</h1>
 @stop
 
 @section('content')
@@ -49,7 +49,7 @@
 
 
         <div class="card">
-            {!! Form::model($user, ['route' => ['admin.users.update', $user ], 'method' => 'put']) !!}
+            {!! Form::model($user, ['route' => ['admin.users.update', [app()->getLocale(), $user] ], 'method' => 'put']) !!}
                 <div class="card-header">
                     <span class="text-primary text-uppercase">Roles</span>
                 </div>
@@ -68,7 +68,9 @@
 
                 </div>
                 <div class="card-footer">
-                    {!! Form::submit('Guardar cambios', ['class' => 'btn btn-primary']) !!}
+                    <a href="{{ url()->previous() }}" class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="Omitir y volver a la vista anterior"><i class="fas fa-arrow-circle-left mr-2"></i>Volver atrás</a>
+
+                    {!! Form::submit('Guardar cambios', ['class' => 'btn btn-primary float-right', 'data-toggle' => 'tooltip', 'data-placement' => 'left', 'title' => 'Guardar los cambios realizados']) !!}
                 </div>
             {!! Form::close() !!}
         </div>

@@ -26,10 +26,8 @@ use App\Http\Controllers\HomeController;
 // Route::redirect('', 'creator/courses');
 
 Route::group([
-    'prefix' => '{locale}',
-    'as' => 'creator.',
-    'where' => ['locale', '[a-zA-Z]{2}'],
-    'middleware' => ['setlocale', 'language', 'verified']
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
 ], function () {
 
 

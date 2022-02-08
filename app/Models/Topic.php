@@ -44,4 +44,15 @@ class Topic extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    /****************************
+     * Relation 1:M polymorphic
+     ****************************/
+
+    /**
+     * Get all topic's interests
+     */
+    public function interests(){
+        return $this->morphMany(Interest::class, 'interestable');
+    }
 }

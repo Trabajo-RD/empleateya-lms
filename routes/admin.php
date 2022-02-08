@@ -33,10 +33,8 @@ use App\Http\Controllers\Admin\ContactController;
 
 
 Route::group([
-    'prefix' => '{locale}',
-    'as' => 'admin.',
-    'where' => ['locale', '[a-zA-Z]{2}'],
-    'middleware' => ['setlocale', 'language', 'default.language', 'verified']
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
 ], function () {
 
     Route::get('/admin', [HomeController::class, 'index'])->middleware('can:view-dashboard')->name('cpanel');
@@ -118,7 +116,7 @@ Route::group([
     /**
      * Route to review the courses in revision status
      */
-    Route::get('courses/{course}/show', [CourseController::class, 'show'])->name('courses.show');
+    Route::get('admin/courses/{course}/show', [CourseController::class, 'show'])->name('courses.show');
 
     // /**
     //  * Route to aprove courses to publish
@@ -128,32 +126,32 @@ Route::group([
     /**
      * Route to aprove courses to publish
      */
-    Route::post('courses/{course}/status', [CourseController::class, 'changeStatus'])->name('courses.status');
+    Route::post('admin/courses/{course}/status', [CourseController::class, 'changeStatus'])->name('courses.status');
 
     /**
      * Route to display the course observation form
      */
-    Route::get('courses/{course}/observation', [CourseController::class, 'observation'])->name('courses.observation');
+    Route::get('admin/courses/{course}/observation', [CourseController::class, 'observation'])->name('courses.observation');
 
     /**
      * Route to process the sending observation
      */
-    Route::post('courses/{course}/reject', [CourseController::class, 'reject'])->name('courses.reject');
+    Route::post('admin/courses/{course}/reject', [CourseController::class, 'reject'])->name('courses.reject');
 });
 
 
 /**
  * Route to aprove courses to publish
  */
-Route::post('courses/{course}/approved', [CourseController::class, 'approved'])->name('admin.courses.approved');
+Route::post('admin/courses/{course}/approved', [CourseController::class, 'approved'])->name('courses.approved');
 
 /**
  * Route to export a ModelExport list to excel
  */
-Route::get('/admin/courses/export/{format}', [CourseController::class, 'exportAllCourses'])->name('admin.all.courses.export');
-Route::get('/admin/published-courses/export/{format}', [CourseController::class, 'exportPublishedCourses'])->name('admin.published.courses.export');
+Route::get('/admin/courses/export/{format}', [CourseController::class, 'exportAllCourses'])->name('all.courses.export');
+Route::get('/admin/published-courses/export/{format}', [CourseController::class, 'exportPublishedCourses'])->name('published.courses.export');
 
 /**
  * Routes to export UserModel
  */
-Route::get('/admin/users/export/{format}', [UserController::class, 'exportAllUsers'])->name('admin.all.users.export');
+Route::get('/admin/users/export/{format}', [UserController::class, 'exportAllUsers'])->name('all.users.export');

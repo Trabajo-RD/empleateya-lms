@@ -1,12 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ContentModerator\HomeController;
 //use App\Http\Livewire\InstructorCourses;
 
 /*
 |--------------------------------------------------------------------------
-| Instructor Routes
+| Content Moderators Routes
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
@@ -17,3 +17,12 @@ use Illuminate\Support\Facades\Route;
 
 // Redirect: if prefix instructor. exists and user access with domain.com/instructor
 // Route::redirect('', 'instructor/courses');
+
+Route::group([
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+], function () {
+
+    Route::get('/content-moderator', [HomeController::class, 'index'])->name('dashboard.index');
+
+});

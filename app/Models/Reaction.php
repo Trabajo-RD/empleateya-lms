@@ -26,6 +26,15 @@ class Reaction extends Model
      * Relation 1:N reverse
      */
     public function user(){
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(User::class);
     }
+
+    public function workshop(){
+        return $this->belongsTo(Workshop::class);
+    }
+
+    public function course(){
+        return $this->belongsTo(Course::class);
+    }
+
 }

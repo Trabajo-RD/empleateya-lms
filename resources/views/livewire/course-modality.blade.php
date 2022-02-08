@@ -21,6 +21,10 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-12">
                 <h2 class="text-center md:text-left font-display font-semibold text-gray-600 text-xl sm:text-2xl md:text-3xl">{{ __('Featured courses in this modality') }}</h2>
 
+                <p>
+                    {{ __('These are the featured courses in this modality.') }}
+                </p>
+
                 <!-- courses -->
                 <div class="px-4 sm:px-6 lg:px-8 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-8 mt-12">
                     @foreach ( $featured_courses as $course )
@@ -30,17 +34,18 @@
             </div>
         @endif
 
-        <!-- Topics in this category -->
+        <!-- Topics in this modality -->
         @if(count($topics))
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-12">
                 <h2 class="text-center md:text-left font-display font-semibold text-gray-600 text-xl sm:text-2xl md:text-3xl" >{{ __('Topics in') }} <span class="font-bold">{{ __($modality->name) }}</span></h2>
+
+                <p>{{ __('These are the themes we have available in this modality.') }}</p>
+
                 <!-- This is the tags container -->
                 <div class='mt-12 flex flex-wrap justify-center -m-1'>
                     @foreach ($topics as $topic)
-                        <a class="cursor-pointer mb-8 text-normal text-gray-700">
-                            <span class="m-1 bg-gray-200 hover:bg-gray-300 rounded-full py-4 px-6 font-bold text-sm leading-loose cursor-pointer" >
-                                {{ __($topic->name) }}
-                            </span>
+                        <a href="{{ route('courses.topic', [$topic->category, $topic]) }}" class="cursor-pointer mb-8 text-normal">
+                            <x-tailwind.tag :id="'topic-'.$topic->id" :text="$topic->name" color="gray" :icon="$topic->icon" />
                         </a>
                     @endforeach
                 </div>

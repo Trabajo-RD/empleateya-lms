@@ -3,7 +3,7 @@
 @section('title', 'Capacítate RD')
 
 @section('content_header')
-    <h1 class="text-primary"><i class="fas fa-user-cog mr-2"></i>Editar Rol</h1>
+    <h1 class="text-primary">Editar Rol</h1>
 @stop
 
 @section('content')
@@ -15,12 +15,14 @@
     @endif
 
     <div class="card">
-        {!! Form::model($role, ['route' => ['admin.roles.update', $role], 'method' => 'put']) !!}
+        {!! Form::model($role, ['route' => ['admin.roles.update', [app()->getLocale(), $role]], 'method' => 'put']) !!}
 
             @include('admin.roles.partials.form')
 
             <div class="card-footer">
-                {!! Form::submit('Guardar cambios', ['class' => 'btn btn-primary']) !!}
+                <a href="{{ url()->previous() }}" class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="Omitir y volver a la vista anterior"><i class="fas fa-arrow-circle-left mr-2"></i>Volver atrás</a>
+
+                {!! Form::submit('Guardar cambios', ['class' => 'btn btn-primary float-right', 'data-toggle' => 'tooltip', 'data-placement' => 'left', 'title' => 'Guardar los cambios realizados']) !!}
             </div>
         {!! Form::close() !!}
     </div>

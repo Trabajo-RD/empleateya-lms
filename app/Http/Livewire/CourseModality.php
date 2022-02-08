@@ -82,7 +82,7 @@ class CourseModality extends Component
         ->get();
 
         $featured_courses = DB::table('courses')
-            ->join('reviews','courses.id', '=', 'reviews.course_id')
+            ->join('reviews','courses.id', '=', 'reviews.reviewable_id')
             ->join('types', 'courses.type_id', '=', 'types.id')
             ->join('users', 'courses.user_id', '=', 'users.id')
             ->join('prices', 'courses.price_id', '=', 'prices.id')

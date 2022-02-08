@@ -3,7 +3,7 @@
 @section('title', 'Capacítate RD')
 
 @section('content_header')
-    <h1 class="text-dark">Cursos en revisión</h1>
+    <h1 class="text-primary">Cursos en revisión</h1>
 @stop
 
 @section('content')

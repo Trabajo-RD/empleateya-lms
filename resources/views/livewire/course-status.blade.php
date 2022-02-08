@@ -2,7 +2,13 @@
 
 <div class="pb-12">
 
-    <x-breadcrumbs />
+    {{-- <x-breadcrumbs /> --}}
+
+    <section name="header" class="bg-transparent">
+        <div class="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto grid grid-cols-1 gap-6 items-center">
+            <x-tailwind.breadcrumb :current="$course" color="gray"/>
+            </div>
+    </section>
 
     <div class="container grid grid-cols-1 lg:grid-cols-3 gap-8 py-12">
 

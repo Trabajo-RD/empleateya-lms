@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        @if( $students->count() )
+        @if( $participants->count() )
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>

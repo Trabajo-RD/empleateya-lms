@@ -12,10 +12,19 @@ class Price extends Model
 
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'value'
+    ];
+
     /**
      * Relation 1:N
      */
     public function course(){
-        return $this->hasMany('App\Models\Course');
+        return $this->hasMany(Course::class);
+    }
+
+    public function workshop(){
+        return $this->hasMany(Workshop::class);
     }
 }

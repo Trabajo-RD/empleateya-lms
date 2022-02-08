@@ -7,7 +7,7 @@ use App\Http\Controllers\Instructor\LinkedinController;
 use App\Http\Livewire\Instructor\CoursesCurriculum;
 use App\Http\Livewire\Instructor\CoursesStudents;
 use App\Http\Controllers\Instructor\TestController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Instructor\HomeController;
 
 //use App\Http\Livewire\InstructorCourses;
 
@@ -27,11 +27,11 @@ use App\Http\Controllers\HomeController;
 
 
 Route::group([
-    'prefix' => '{locale}',
-    'as' => 'instructor.',
-    'where' => ['locale', '[a-zA-Z]{2}'],
-    'middleware' => ['setlocale', 'language', 'verified']
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
 ], function () {
+
+    Route::get('instructor/dashboard', [HomeController::class, 'index'])->name('dashboard.index');
 
     // Route::get('courses', CourseController::class);
 

@@ -15,21 +15,24 @@ class CreateCertificatesTable extends Migration
     {
         Schema::create('certificates', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description');
-            $table->text('certificate_number');
-            $table->text('url');
-            $table->timestamp('date');
-            $table->string('responsible_name');
-            $table->string('responsible_position');
+            $table->string('title');
+            // $table->text('description');
+            // $table->text('certificate_number');
+            $table->string('slug');
+            // $table->timestamp('date');
+            // $table->string('responsible_name');
+            // $table->string('responsible_position');
 
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('course_id');
-            $table->unsignedBigInteger('partner_id')->nullable();
+            // $table->unsignedBigInteger('user_id');
+            // $table->unsignedBigInteger('course_id');
+            // $table->unsignedBigInteger('partner_id')->nullable();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('course_id')->references('id')->on('courses');
-            $table->foreign('partner_id')->references('id')->on('partners')->onDelete('set null');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->foreign('course_id')->references('id')->on('courses');
+            // $table->foreign('partner_id')->references('id')->on('partners')->onDelete('set null');
+
+            $table->unsignedBigInteger('certificateable_id');
+            $table->string('certificateable_type');
 
             $table->timestamps();
         });

@@ -35,4 +35,5 @@ class ImageFactory extends Factory
             'imageable_type' => null
         ];
     }
+
 }

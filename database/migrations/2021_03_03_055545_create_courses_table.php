@@ -22,7 +22,7 @@ class CreateCoursesTable extends Migration
             $table->text('summary');
             $table->text('url')->nullable();
             $table->integer('duration_in_minutes');
-            $table->enum('status', [Course::DRAFT, Course::PENDING, Course::PUBLISH, Course::TRASH])->default(1);
+            $table->enum('status', [Course::DRAFT, Course::PENDING, Course::PUBLISH, Course::TRASH, Course::INITIATED, Course::FINALIZED])->default(1);
             $table->text('slug');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('moderator_id')->nullable();

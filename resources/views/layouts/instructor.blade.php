@@ -69,9 +69,9 @@
                             <a href="{{ route('instructor.courses.goals', [app()->getLocale(), $course]) }}" class="@routeIs('instructor.courses.goals', [app()->getLocale(), $course]) text-blue-900 font-bold @endif">{{ __('Permissions') }}</a>
                         </li>
                         <!-- menu item -->
-                        <li class="leading-7 mb-1 py-2 border-l-4 @routeIs('instructor.courses.students', [app()->getLocale(), $course]) border-blue-900 text-blue-900 bg-white bg-opacity-80 filter hover:drop-shadow-lg @else border-transparent bg-white hover:bg-white bg-opacity-40 hover:bg-opacity-50 filter hover:drop-shadow-lg @endif pl-2">
+                        <li class="leading-7 mb-1 py-2 border-l-4 @routeIs('instructor.courses.students', ['course' => $course]) border-blue-900 text-blue-900 bg-white bg-opacity-80 filter hover:drop-shadow-lg @else border-transparent bg-white hover:bg-white bg-opacity-40 hover:bg-opacity-50 filter hover:drop-shadow-lg @endif pl-2">
                             <i class="fas fa-users mr-2"></i>
-                            <a href="{{ route('instructor.courses.students', [app()->getLocale(), $course]) }}" class="@routeIs('instructor.courses.students', [app()->getLocale(), $course]) text-blue-900 font-bold @endif">{{ __('Students') }}</a>
+                            <a href="{{ route('instructor.courses.students', ['course' => $course]) }}" class="@routeIs('instructor.courses.students', ['course' => $course]) text-blue-900 font-bold @endif">{{ __('Students') }}</a>
                         </li>
 
                         @if( $course->observation )

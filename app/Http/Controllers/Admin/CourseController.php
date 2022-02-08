@@ -47,13 +47,13 @@ class CourseController extends Controller
         // Spicified the data format to use
         // $microsoft_courses = $response->json();
 
-        // $courses = Course::where('status', 2)->paginate();
+        $courses = Course::where('status', 2)->paginate();
 
 
-       return view('admin.courses.revision');
+      //  return view('admin.courses.revision');
 
         // TODO: uncomment to return Microsoft Learning API data
-        // return view('admin.courses.index', compact('courses', 'microsoft_courses'));
+        return view('admin.courses.revision', compact('courses'));
     }
 
     /**
@@ -61,11 +61,12 @@ class CourseController extends Controller
      */
     public function show($locale, Course $course ){
 
-        //return $locale;
+        // return $course;
 
         $this->authorize('revision', $course );
 
-        return view('admin.courses.show', compact('locale', 'course'));
+        // TODO: Corregir error no encuentra el parametro 'course'
+        return view('admin.courses.show', compact('course'));
 
     }
 

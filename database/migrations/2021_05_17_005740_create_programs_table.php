@@ -21,6 +21,10 @@ class CreateProgramsTable extends Migration
             $table->string('responsible_position')->nullable();
             $table->tinyInteger('document_id_required')->default(1);
             $table->tinyInteger('adult_required')->default(1);
+
+            // $table->unsignedBigInteger('partner_id')->nullable();
+            // $table->foreign('partner_id')->references('id')->on('partners')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

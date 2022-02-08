@@ -17,9 +17,15 @@ class Language extends Model
     ];
 
     /**
-     * 1:N Relationship
+     * N:M Relationship
      */
     public function courses(){
-        return $this->hasMany(Course::class);
+        return $this->belongsToMany(Course::class);
     }
+
+    public function workshops(){
+        return $this->belongsToMany(Workshop::class);
+    }
+
+
 }

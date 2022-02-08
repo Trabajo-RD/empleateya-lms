@@ -3,13 +3,13 @@
 @section('title', 'Capacítate RD')
 
 @section('content_header')
-    <h1 class="text-primary"><i class="fas fa-plus mr-1"></i>Crear tipo</h1>
+    <h1 class="text-primary">Crear nuevo tipo de curso</h1>
 @stop
 
 @section('content')
     <div class="card">
         <div class="card-body">
-            {!! Form::open(['route' => 'admin.types.store']) !!}
+            {!! Form::open(['route' => ['admin.types.store', app()->getLocale()], 'autocomplete' => 'off']) !!}
                 <div class="form-group">
                     {!! Form::label('name', 'Nombre') !!}
                     {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el nombre del tipo de curso']) !!}
@@ -18,6 +18,8 @@
                 @error('name')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
+
+                <a href="{{ url()->previous() }}" class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="Omitir y volver a la vista anterior"><i class="fas fa-arrow-circle-left mr-2"></i>Volver atrás</a>
 
                 {!! Form::submit('Crear tipo', ['class' => 'btn btn-primary float-right']) !!}
             {!! Form::close() !!}

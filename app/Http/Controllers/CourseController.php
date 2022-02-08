@@ -24,7 +24,7 @@ class CourseController extends Controller
     /**
      * Controller to manage the courses single page
      */
-    public function show($locale, Course $course)
+    public function show(Course $course)
     {
         // return $course;
         // Show only published courses to autenticated users
@@ -43,60 +43,20 @@ class CourseController extends Controller
 
         $roles = Role::all();
 
-        return view('courses.show', compact('course', 'related_courses', 'roles'));
+        return view('courses.show', compact( 'course', 'related_courses', 'roles'));
     }
 
     /**
      * Controller to enrolled users
      */
-    public function enrolled($locale, Course $course)
+    public function enrolled(Course $course)
     {
 
         // insert user auth id in course_user table
-        $course->students()->attach(auth()->user()->id);
+        $course->participants()->attach(auth()->user()->id);
 
         // redirect user to enrolled course;
-        return redirect()->route('courses.status', [$locale, $course]);
-    }
-
-
-    public function category($locale, Category $category)
-    {
-
-        // return $category;
-        $topics = Topic::where('category_id', $category->id)->get();
-
-        return view('courses.category', compact('locale', 'category', 'topics'));
-    }
-
-    public function topic($locale, Category $category, Topic $topic)
-    {
-
-        // return topic;
-        $tags = Tag::where('topic_id', $topic->id)->get();
-
-        return view('courses.topic', compact('locale', 'category', 'topic', 'tags'));
-    }
-
-    public function tag($locale, Tag $tag)
-    {
-
-        $courses = $tag->courses()
-            ->where('status', 2)
-            ->latest('id')
-            ->paginate(8);
-
-        return view('courses.tag', compact('locale', 'courses', 'tag'));
-    }
-
-
-    public function modality($locale, Modality $modality)
-    {
-
-         // return $modality;
-        $courses = Course::where('modality_id', $modality->id)->get();
-
-        return view('courses.modality', compact('locale', 'modality', 'courses'));
+        return redirect()->route('courses.status', ['course' => $course]);
     }
 
     /**
@@ -106,7 +66,7 @@ class CourseController extends Controller
     // public function enrolled( Course $course ){
 
     //     // insert user auth id in course_user table
-    //     $course->students()->attach( auth()->user()->id );
+    //     $course->participants()->attach( auth()->user()->id );
 
     //     if( $course->url != '' ){
 

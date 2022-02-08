@@ -2,8 +2,8 @@
 
 @if ($menuItemHelper->isSearchBar($item))
 
-    {{-- TODO: uncomment Search form --}}
-    {{-- @include('adminlte::partials.navbar.menu-item-search-form') --}}
+    {{-- Search form --}}
+    @include('adminlte::partials.navbar.menu-item-search-form')
 
 @elseif ($menuItemHelper->isSubmenu($item))
 

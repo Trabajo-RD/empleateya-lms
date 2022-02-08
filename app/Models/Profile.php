@@ -15,7 +15,11 @@ class Profile extends Model
     /**
      * Relation 1:1 reverse
      */
+
+    /**
+     * Inverse Relationship let us access the user that owns the profile
+     */
     public function user(){
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(User::class);
     }
 }

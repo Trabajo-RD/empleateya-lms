@@ -71,16 +71,16 @@
                                     <div class="ml-6">
                                         <div>
                                             @if ( $course->moderator_id !== null || $course->contributor_id !== null)
-                                                
+
                                                     @if( $course->moderator_id !== null)
                                                         <span class="bg-red-700 rounded-full px-3 py-1 text-xs font-semibold text-white mr-2">{{ __('Auditing') }}</span>
                                                     @endif
                                                     @if( $course->contributor_id !== null)
                                                         <span class="bg-blue-700 rounded-full px-3 py-1 text-xs font-semibold text-white mr-2">{{ __('Collaborating') }}</span>
                                                     @endif
-                                             
+
                                             @endif
-                                            <span class="text-lg font-bold text-gray-900">                                              
+                                            <span class="text-lg font-bold text-gray-900">
                                                 {{ $course->title }}
                                             </span>
 
@@ -96,7 +96,7 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-md text-gray-900 text-center">{{ $course->students->count() }}</div>
+                                <div class="text-md text-gray-900 text-center">{{ $course->participants->count() }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="text-md text-gray-900 flex items-center">
@@ -139,7 +139,7 @@
                             </td>
 
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                
+
                                 <span class="flex">
                                     <a href="{{ route('creator.courses.edit', [app()->getLocale(), $course] ) }}" class="{{ ($course->observation) ? 'border-red-300 text-red-700 hover:bg-red-50' : 'border-gray-300 text-gray-700 hover:bg-gray-50' }} inline-flex items-center px-4 py-2 border rounded-md shadow-sm text-sm font-medium  bg-white focus:outline-none">
                                         <!-- Heroicon name: solid/pencil -->

@@ -30,14 +30,14 @@
 
         {{-- Lockscreen user name --}}
         <div class="lockscreen-name">
-            {{ isset(Auth::user()->firstname) ? Auth::user()->firstname : Auth::user()->email }}
+            {{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}
         </div>
 
         {{-- Lockscreen item --}}
         <div class="lockscreen-item">
             @if(config('adminlte.usermenu_image'))
                 <div class="lockscreen-image">
-                    <img src="{{ Auth::user()->adminlte_image() }}" alt="{{ Auth::user()->firstname }}">
+                    <img src="{{ Auth::user()->adminlte_image() }}" alt="{{ Auth::user()->name }}">
                 </div>
             @endif
 

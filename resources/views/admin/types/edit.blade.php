@@ -14,7 +14,7 @@
 
     <div class="card">
         <div class="card-body">
-            {!! Form::model($type, ['route' => ['admin.types.update', $type ], 'method' => 'put' ]) !!}
+            {!! Form::model($type, ['route' => ['admin.types.update', [app()->getLocale(), $type] ], 'method' => 'put' ]) !!}
                 <div class="form-group">
                     {!! Form::label('name', 'Nombre') !!}
                     {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el nombre del tipo de curso']) !!}
@@ -23,6 +23,8 @@
                 @error('name')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
+
+                <a href="{{ url()->previous() }}" class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="Omitir y volver a la vista anterior"><i class="fas fa-arrow-circle-left mr-2"></i>Volver atrás</a>
 
                 {!! Form::submit('Actualizar tipo', ['class' => 'btn btn-primary float-right']) !!}
             {!! Form::close() !!}

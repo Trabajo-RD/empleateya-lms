@@ -12,14 +12,20 @@ class Review extends Model
 
     use HasFactory;
 
+    public function reviewable(){
+        return $this->morphTo();
+    }
+
     /**
      * Relation 1:N reverse
      */
     public function user(){
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(User::class);
     }
 
-    public function course(){
-        return $this->belongsTo('App\Models\Course');
-    }
+    // public function course(){
+    //     return $this->belongsTo(Course::class);
+    // }
+
+
 }

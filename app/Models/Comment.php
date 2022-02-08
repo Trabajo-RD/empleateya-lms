@@ -12,6 +12,11 @@ class Comment extends Model
 
     use HasFactory;
 
+    const HOLD = 1;
+    const APPROVE = 2;
+    const SPAM = 3;
+    const TRASH = 4;
+
     public function commentable(){
         return $this->morphTo();
     }
@@ -20,7 +25,15 @@ class Comment extends Model
      * Relation 1:N reverse
      */
     public function user(){
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(User::class);
+    }
+
+    public function course(){
+        return $this->belongsTo(Course::class);
+    }
+
+    public function workshop(){
+        return $this->belongsTo(Workshop::class);
     }
 
     /**
@@ -28,11 +41,11 @@ class Comment extends Model
      */
     // Comments in comments
     public function comments(){
-        return $this->morphMany('App\Models\Comment', 'commentable');
+        return $this->morphMany(Comment::class, 'commentable');
     }
 
     public function reactions(){
-        return $this->morphMany('App\Models\Comment', 'reactionable');
+        return $this->morphMany(Reaction::class, 'reactionable');
     }
 
 }

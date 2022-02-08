@@ -15,9 +15,8 @@ use App\Http\Controllers\Dashboard\HomeController;
 */
 
 Route::group([
-    'prefix' => '{locale}',    
-    'where' => ['locale', '[a-zA-Z]{2}'],
-    // 'middleware' => ['setlocale', 'language', 'default.language', 'verified']
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
 ], function () {
 
     Route::get('/dashboard', [HomeController::class, 'index'])

@@ -1,13 +1,20 @@
 <x-app-layout>
 
-    <section class="bg-blue-900 py-12">
+    <section name="header" class="bg-blue-900">
+        <div class="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto grid grid-cols-1 gap-6 items-center">
+            <x-tailwind.breadcrumb :current="$course" color="gray"/>
+            </div>
+    </section>
+
+    <section class="bg-blue-900 pb-12">
         <div class="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+
             <figure>
             <!-- card image -->
                 @isset( $course->image )
-                    <img src="{{ Storage::url( $course->image->url ) }}" alt="" class="h-96 w-11/12 object-cover shadow" />
+                    <img src="{{ Storage::url( $course->image->url ) }}" alt="" class="h-80 w-11/12 object-cover shadow" />
                 @else
-                    <img id="picture" class="h-96 w-11/12 object-cover shadow" src="{{ asset('images/courses/default.jpg') }}" alt="" >
+                    <img id="picture" class="h-80 w-11/12 object-cover shadow" src="{{ asset('images/courses/default.jpg') }}" alt="" >
                 @endisset
             </figure>
             <div>
@@ -16,26 +23,34 @@
                 </button>
                 <h1 class="text-white font-extrabold text-2xl sm:text-3xl md:text-4xl">{{ $course->title }}</h1>
                 <h2 class="text-white mt-3 sm:mt-5 sm:text-lg md:mt-5 md:text-xl lg:mx-0 mb-4">{{ $course->subtitle }}</h2>
-                <p class="text-white sm:text-md md:text-lg lg:mx-0 mb-2"><span class="text-gray-400"><i class="fas fa-tags text-sm mr-2"></i>{{ __('Category') }}:&nbsp;</span>{{ __($course->category->name) }}</p>
-                <p class="text-white sm:text-md md:text-lg lg:mx-0 mb-2"><span class="text-gray-400"><i class="fas fa-tags text-sm mr-2"></i>{{ __('Topic') }}:&nbsp;</span>{{ __($course->topic->name) }}</p>
+
+                <!-- category -->
+                <a href="{{ route('courses.category', ['category' => $course->category]) }}" data-tooltip-target="{{ $course->id }}-category-tooltip" data-tooltip-placement="top" class="mr-2 ">
+                    <!-- tag -->
+                    <x-tailwind.tag :id="'course-category-'.$course->category->id" text="{{ __($course->category->name) }}" color="gray" :icon="$course->category->icon" />
+                </a>
+                <!-- tooltip -->
+                <x-tooltip :id="$course->id . '-category'" text="{{ __('Category') }}"/>
+
+                <!-- topic -->
+                <a href="{{ route('courses.topic', ['category' => $course->category, 'topic' => $course->topic]) }}" data-tooltip-target="{{ $course->id }}-topic-tooltip" data-tooltip-placement="top" class="mr-2 ">
+                    <!-- tag -->
+                    <x-tailwind.tag :id="'course-topic-'.$course->topic->id" text="{{ __($course->topic->name) }}" color="gray" :icon="$course->topic->icon" />
+                </a>
+                <!-- tooltip -->
+                <x-tooltip :id="$course->id . '-topic'" text="{{ __('Topic') }}"/>
+
+
+
                 <p class="text-white sm:text-md md:text-lg lg:mx-0 mb-2"><span class="text-gray-400"><i class="fas fa-layer-group text-sm mr-2"></i>{{ __('Level') }}:&nbsp;</span>{{ __($course->level->name) }}</p>
 
+                <!-- rating star component -->
+                <x-tailwind.rating-star :rating="$course->rating" icon="star" color="yellow" />
+
                 <div class="flex mb-4">
-                    <!-- rating -->
-                    <p class="text-{{ $course->rating > 4 ? 'yellow' : 'white' }}-400 font-extrabold sm:text-lg sm:max-w-xl md:text-xl lg:mx-0">
-                        {{ $course->rating }}
-                    </p>
-                    <!-- rating stars -->
-                    <ul class="flex text-sm">
-                        <li class="ml-2 mr-1 pt-1"><i class="fas fa-star text-{{ $course->rating >= 1 ? 'yellow' : 'gray' }}-300"></i></li>
-                        <li class="mr-1 pt-1"><i class="fas fa-star text-{{ $course->rating >= 2 ? 'yellow' : 'gray' }}-300"></i></li>
-                        <li class="mr-1 pt-1"><i class="fas fa-star text-{{ $course->rating >= 3 ? 'yellow' : 'gray' }}-300"></i></li>
-                        <li class="mr-1 pt-1"><i class="fas fa-star text-{{ $course->rating >= 4 ? 'yellow' : 'gray' }}-300"></i></li>
-                        <li class="mr-6 pt-1"><i class="fas fa-star text-{{ $course->rating == 5 ? 'yellow' : 'gray' }}-300"></i></li>
-                    </ul>
                     <!-- users enrolled -->
                     <p class="text-white sm:text-md md:text-lg lg:mx-0">
-                        <i class="fas fa-users text-sm mr-2"></i>{{ $course->students_count }} {{ $course->students_count > 1 || $course->students_count == 0 ? __('Users') : __('User') }}
+                        <i class="fas fa-users text-sm mr-2"></i>{{ $course->participants_count }} {{ $course->participants_count > 1 || $course->participants_count == 0 ? __('Users') : __('User') }}
                     </p>
                 </div>
             </div>
@@ -101,19 +116,19 @@
                 @foreach ( $course->sections as $section )
 
                     <article class="mt-4 shadow" @if( $loop->first) x-data="{ open: true}"  @else x-data="{ open: false}" @endif>
-                        <header class="border border-gray-200 px-4 pt-2 cursor-pointer bg-gray-100 bg-opacity-25 transition duration-700 ease-in-out" x-on:click=" open = !open ">
-                            <h3 class="font-bold text-xl mb-2 text-gray-600 flex justify-between items-center">
-                                {{ $section->name }}
-                                <i class="fas fa-chevron-down ml-2 text-gray-400" x-show=" !open "></i>
-                                <i class="fas fa-chevron-right ml-2 text-gray-400" x-show=" open "></i>
+                        <header class="border border-gray-200 px-4 pt-2 cursor-pointer bg-gray-100 bg-opacity-25 flex justify-between items-center" x-on:click=" open = !open ">
+                            <h3 class="text-xl mb-2 text-gray-600">
+                                <span class="font-bold">{{ __('Section') }} {{ ($loop->index + 1) }} :</span> <span class="font-semibold text-left">{{ $section->name }}</span>
                             </h3>
+                            <i class="fas fa-chevron-down ml-2 text-gray-400" x-show=" !open "></i>
+                            <i class="fas fa-chevron-right ml-2 text-gray-400" x-show=" open "></i>
                         </header>
-                        <div class="bg-white py-2 px-4" x-show=" open ">
-                            <ul class="grid grid-cols-1 gap-x-3 gap-y-4">
+                        <div class="bg-white py-2 px-4" x-show=" open " x-transition:enter="transition ease-in-out duration-500" x-transition.delay.0.5s>
+                            <ul class="grid grid-cols-1 gap-x-3 divide-y">
 
                                 @foreach ($section->lessons as $lesson )
 
-                                    <li class="text-gray-600 text-base"><i class="far fa-play-circle text-sm text-gray-500 mr-4"></i>{{ $lesson->name }}</li>
+                                    <li class="text-gray-600 text-base"><i class="far fa-play-circle text-lg text-gray-500 mr-4 py-2"></i>{{ $lesson->name }}</li>
 
                                 @endforeach
                             </ul>
@@ -124,7 +139,14 @@
 
             </section>
 
-            @livewire('courses-tags', ['course' => $course])
+            <!-- tag component -->
+            <div class="w-full pb-12 flex">
+                @foreach ($course->tags as $tag)
+                    <a href="{{ route('courses.tag', $tag) }}" class="cursor-pointer mb-8 text-normal">
+                        <x-tailwind.tag :id="'tag-'.$tag->id" :text="$tag->name" color="gray" :icon="$tag->icon" />
+                    </a>
+                @endforeach
+            </div>
 
             @livewire('courses-reviews', ['course' => $course])
 
@@ -155,7 +177,7 @@
 
 
                     {{-- @if( auth()->check() && !(Auth::user()->hasRole(['Administrator', 'Manager', 'Creator', 'Instructor']) )) --}}
-                    
+
                     {{-- @can('view-course') --}}
 
                         @can( 'enrolled', $course )
@@ -179,7 +201,7 @@
                             @else
 
                                 <!-- CTA button : user enrolled -->
-                                <a href="{{ route('courses.status', [app()->getLocale(), $course] ) }}" class="btn-cta btn-success btn-block mt-4 hover:shadow">{{ __('Continue with the course') }}</a>
+                                <a href="{{ route('courses.status', ['course' => $course] ) }}" class="btn-cta btn-success btn-block mt-4 hover:shadow">{{ __('Continue with the course') }}</a>
                             @endif
                         @else
 
@@ -199,10 +221,10 @@
                                 </form>
                             @endif --}}
 
-                            {{-- @if( $course->students_count < $course->audiences->name  ) --}}
+                            {{-- @if( $course->participants_count < $course->audiences->name  ) --}}
                                 @if( $course->price->value == 0 )
                                     <p class="text-2xl font-bold text-gray-500 mt-3 mb-2">{{ __('Free') }}</p>
-                                    <form action="{{ route('courses.enrolled', [app()->getLocale(), $course] ) }}" method="post">
+                                    <form action="{{ route('courses.enrolled', ['course' => $course] ) }}" method="post">
                                         @csrf
                                         <button type="submit" class="btn-cta btn-accent btn-block mt-4 hover:shadow">{{ __('Start this course') }}</button>
                                     </form>
@@ -229,36 +251,36 @@
                 @if(count($related_courses))
                     <h2 class="font-bold text-2xl text-gray-600 mb-12">{{ __('Related courses') }}</h2>
 
-                    @foreach ( $related_courses as $related_course )
+                    @foreach ( $related_courses as $course )
 
                         <article class="py-3 grid md:grid-cols-1 lg:grid-cols-3 items-center">
                             <!-- related course image -->
-                            @isset( $related_course->image )
-                                <img src="{{ Storage::url( $related_course->image->url ) }}" alt="{{ $related_course->name }}" class="h-28 md:w-full lg:w-32 object-cover md:col-span-1 lg:col-span-1" />
+                            @isset( $course->image )
+                                <img src="{{ Storage::url( $course->image->url ) }}" alt="{{ $course->name }}" class="h-28 md:w-full lg:w-32 object-cover md:col-span-1 lg:col-span-1" />
                             @else
-                                <img id="picture" class="h-28 md:w-full lg:w-32 object-cover md:col-span-1 lg:col-span-1" src="{{ asset('images/courses/default.jpg') }}" alt="{{ $related_course->name }}" >
+                                <img id="picture" class="h-28 md:w-full lg:w-32 object-cover md:col-span-1 lg:col-span-1" src="{{ asset('images/courses/default.jpg') }}" alt="{{ $course->name }}" >
                             @endisset
 
                             <div class="ml-3 md:col-span-1 lg:col-span-2">
                                 <h3>
-                                    <a class="font-bold text-gray-600 mb-3" title="{{ $related_course->title }}" href="{{ route('courses.show', [app()->getLocale(), $related_course] ) }}">{{ Str::limit( $related_course->title, 40 ) }}</a>
+                                    <a class="font-bold text-gray-600 mb-3" title="{{ $course->title }}" href="{{ route('course.show', [app()->getLocale(), $course] ) }}">{{ Str::limit( $course->title, 40 ) }}</a>
                                 </h3>
                                 <div class="flex items-center mb-4">
-                                    <img class="h-8 w-8 object-cover rounded-full shadow-lg" src="{{ $related_course->editor->profile_photo_url }}" alt="" />
-                                    <p class="font-bold text-sm text-gray-500 ml-2"> {{ $related_course->editor->name . ' ' . $related_course->editor->lastname }} </p>
+                                    <img class="h-8 w-8 object-cover rounded-full shadow-lg" src="{{ $course->editor->profile_photo_url }}" alt="" />
+                                    <p class="font-bold text-sm text-gray-500 ml-2"> {{ $course->editor->name . ' ' . $course->editor->lastname }} </p>
                                 </div>
                                 <div class="flex items-center">
                                     <!-- rating -->
                                     <p class="text-yellow-400 font-extrabold text-md mr-4">
-                                        {{ $related_course->rating }}<i class="fas fa-star text-yellow-300 ml-2"></i>
+                                        {{ $course->rating }}<i class="fas fa-star text-yellow-300 ml-2"></i>
                                     </p>
                                     <!-- users enrolled -->
                                     <p class="text-gray-600 text-sm">
-                                        <i class="fas fa-users text-sm mr-2"></i>{{ $related_course->students_count }}
+                                        <i class="fas fa-users text-sm mr-2"></i>{{ $course->participants_count }}
                                     </p>
                                     <!-- course price -->
                                     <p class="text-md text-gray-700 font-bold ml-auto">
-                                        {{ $related_course->price->value > 0 ? $related_course->price->value : __('Free') }}
+                                        {{ $course->price->value > 0 ? $course->price->value : __('Free') }}
                                     </p>
                                 </div>
                             </div>

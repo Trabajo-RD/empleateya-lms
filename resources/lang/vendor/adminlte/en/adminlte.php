@@ -12,7 +12,7 @@ return [
     'i_forgot_my_password'        => 'I forgot my password',
     'i_already_have_a_membership' => 'I already have a membership',
     'sign_in'                     => 'Sign In',
-    'log_out'                     => 'Cerrar sesión', //'Log Out',
+    'log_out'                     => 'Log Out',
     'toggle_navigation'           => 'Toggle navigation',
     'login_message'               => 'Sign in to start your session',
     'register_message'            => 'Register a new membership',
@@ -25,6 +25,4 @@ return [
     'verify_if_not_recieved'      => 'If you did not receive the email',
     'verify_request_another'      => 'click here to request another',
     'confirm_password_message'    => 'Please, confirm your password to continue.',
-
-    'Save changes'                  => 'Guardar cambios',
 ];

@@ -47,21 +47,25 @@ class Lesson extends Model
         return $this->belongsToMany('App\Models\Subject');
     }
 
+    public function skills(){
+        return $this->belongsToMany(Skill::class);
+    }
+
     /**
      * Relation 1:1 Polymorphic
      */
     public function resource(){
-        return $this->morphOne('App\Models\Resource', 'resourceable');
+        return $this->morphOne(Resource::class, 'resourceable');
     }
 
     /**
      * Relation 1:N Polymorphic
      */
     public function comments(){
-        return $this->morphMany('App\Models\Comment', 'commentable');
+        return $this->morphMany(Comment::class, 'commentable');
     }
 
     public function reactions(){
-        return $this->morphMany('App\Models\Reaction', 'reactionable');
+        return $this->morphMany(Reaction::class, 'reactionable');
     }
 }

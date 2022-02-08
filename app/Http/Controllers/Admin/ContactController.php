@@ -8,7 +8,7 @@ use App\Models\Contact;
 
 class ContactController extends Controller
 {
-    public function index()
+    public function index($locale)
     {
         return view('admin.contacts.index');
     }

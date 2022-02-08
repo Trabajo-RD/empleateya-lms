@@ -134,9 +134,9 @@
                         </li>
 
                         <!-- student news -->
-                        <li class="leading-7 mb-1 py-2 @routeIs('pages.docs.news.student', [app()->getLocale()]) text-blue-900 @else border-transparent @endif pl-4">
+                        <li class="leading-7 mb-1 py-2 @routeIs('pages.docs.news.student') text-blue-900 @else border-transparent @endif pl-4">
                             {{-- </i><i class="fas fa-user-graduate mr-2"></i> --}}
-                            <a href="{{ route('pages.docs.news.student', [app()->getLocale()] )}}" class="@routeIs('pages.docs.news.student', [app()->getLocale()]) text-blue-900 font-bold @endif">{{ __('News for Students') }}</a>
+                            <a href="{{ route('pages.docs.news.student' )}}" class="@routeIs('pages.docs.news.student') text-blue-900 font-bold @endif">{{ __('News for Students') }}</a>
                         </li>
 
                         {{-- <!-- menu item -->
@@ -237,12 +237,8 @@
 
         @stack('modals')
 
-        <!-- floating action button -->
-        <span id="floattingActionButton" class="bottom-12 right-16 flex h-12 w-12">
-            <span class="absolute animate-ping flex items-center justify-center  bg-red-500 rounded-full h-12 w-12 opacity-75">
-            </span>
-            <button id="backToTop" class="relative inline-flex bg-red-500 text-white focus:outline-none cursor-pointer rounded-full h-12 w-12 transition duration-700 ease-in-out flex items-center justify-center hover:bg-red-800"><i class="fas fa-arrow-up"></i></button>
-        </span>
+        <!-- blade component floating action button -->
+        <x-floatting-action-button />
 
 
         {{-- <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script> --}}
@@ -265,6 +261,7 @@
 
         <script type="text/javascript" src="{{ asset('js/main-front.js') }}"></script>
 
+        <!-- custom floatting action button js -->
         <script type="text/javascript" src="{{ asset('js/floatting-action-button.js') }}"></script>
 
         <!-- Flowbite CDN JavaScript for Tailwind interactive elements -->

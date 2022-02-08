@@ -11,11 +11,11 @@
     <div class="col col-md-12">
         <div class="card">
             <div class="card-body">
-                {!! Form::open(['route' => 'admin.categories.store', 'autocomplete' => 'off' ]) !!}
+                {!! Form::open(['route' => ['admin.categories.store', app()->getLocale()], 'autocomplete' => 'off' ]) !!}
 
                     @include('admin.categories.partials.form')
 
-                    <a href="{{ url()->previous() }}" class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="Omitir y volver a la vista anterior"><i class="fas fa-arrow-circle-left mr-2"></i>Volver atrás</a> 
+                    <a href="{{ url()->previous() }}" class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="Omitir y volver a la vista anterior"><i class="fas fa-arrow-circle-left mr-2"></i>Volver atrás</a>
 
                     {!! Form::submit('Añadir categoría', ['class' => 'btn btn-primary float-right', 'data-toggle' => 'tooltip', 'data-placement' => 'left', 'title' => 'Añadir esta  categoría']) !!}
                 {!! Form::close() !!}

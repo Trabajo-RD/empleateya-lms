@@ -3,17 +3,19 @@
 @section('title', 'Capacítate RD')
 
 @section('content_header')
-    <h1 class="text-primary"><i class="fas fa-plus mr-1"></i>Crear slide</h1>
+    <h1 class="text-primary">Crear slide</h1>
 @stop
 
 @section('content')
     <div class="card">
         <div class="card-body">
-            {!! Form::open(['route' => 'admin.slides.store', 'files' => true]) !!}
+            {!! Form::open(['route' => ['admin.slides.store', app()->getLocale()], 'files' => true]) !!}
 
                 @include('admin.slides.partials.form')
 
-                {!! Form::submit('Crear slide', ['class' => 'btn btn-primary float-right']) !!}
+                <a href="{{ url()->previous() }}" class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="Omitir y volver a la vista anterior"><i class="fas fa-arrow-circle-left mr-2"></i>Volver atrás</a>
+
+                {!! Form::submit('Crear slide', ['class' => 'btn btn-primary float-right', 'data-toggle' => 'tooltip', 'data-placement' => 'left', 'title' => 'Guardar']) !!}
             {!! Form::close() !!}
         </div>
     </div>

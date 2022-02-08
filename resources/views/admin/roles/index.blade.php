@@ -43,10 +43,10 @@
                             <td width="10px">{{ $role->id }}</td>
                             <td>{{ $role->name }}</td>
                             <td width="10px">
-                                <a class="btn btn-outline-secondary" href="{{ route('admin.roles.edit', $role ) }}">Editar</a>
+                                <a class="btn btn-outline-secondary" href="{{ route('admin.roles.edit', [app()->getLocale(), $role] ) }}">Editar</a>
                             </td>
                             <td width="10px">
-                                <form action="{{ route('admin.roles.destroy', $role ) }}" method="POST" class="delete-role">
+                                <form action="{{ route('admin.roles.destroy', [app()->getLocale(), $role] ) }}" method="POST" class="delete-role">
                                     @method('delete')
                                     @csrf
                                     <button class="btn btn-outline-danger" type="submit">Eliminar</button>

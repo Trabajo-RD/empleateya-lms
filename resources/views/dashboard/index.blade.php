@@ -1,3 +1,12 @@
+@extends('adminlte::page')
+
+@section('title', 'Dashboard - Capacítate')
+
+@section('content_header')
+    <h1 class="text-primary">Dashboard</h1>
+@stop
+
+@section('content')
 <x-admin-layout>
     {{-- <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -41,3 +50,12 @@
         </div>
     </x-slot>
 </x-admin-layout>
+@stop
+
+@section('css')
+    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+@stop
+
+@section('js')
+    {{-- <script>console.log('Dashboard Js')</script> --}}
+@stop

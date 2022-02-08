@@ -47,8 +47,8 @@ class CourseController extends Controller
      */
     public function create()
     {
-        $this->authorize('create');       
-        
+        $this->authorize('create');
+
         $categories = Category::pluck('name', 'id');
         $topics = Topic::pluck('name', 'id');
         $types = Type::pluck('name', 'id');
@@ -57,7 +57,7 @@ class CourseController extends Controller
         $modalities = Modality::pluck('name', 'id');
         $languages = Language::pluck('name', 'id');
 
-        return view('instructor.courses.create', compact('categories', 'topics', 'types', 'levels', 'prices', 'modalities', 'languages' ));              
+        return view('instructor.courses.create', compact('categories', 'topics', 'types', 'levels', 'prices', 'modalities', 'languages' ));
     }
 
     /**
@@ -126,7 +126,7 @@ class CourseController extends Controller
      */
     public function edit($locale, Course $course)
     {
-        // Determine if the given user own this course and can update course   
+        // Determine if the given user own this course and can update course
         // $this->authorize('dictated', $course);
         $response = Gate::inspect('update', $course);
 
@@ -136,15 +136,15 @@ class CourseController extends Controller
             $types = Type::pluck('name', 'id');
             $levels = Level::pluck('name', 'id');
             $prices = Price::pluck('name', 'id');
-            $modalities = Modality::pluck('name', 'id');    
-            $languages = Language::pluck('name', 'id');    
-    
-            return view('instructor.courses.edit', compact('course', 'categories', 'topics', 'types', 'levels', 'prices', 'modalities', 'languages'));
+            $modalities = Modality::pluck('name', 'id');
+            $languages = Language::pluck('name', 'id');
+
+            return view('instructor.courses.edit', compact('locale', 'course', 'categories', 'topics', 'types', 'levels', 'prices', 'modalities', 'languages'));
         } else {
             echo $response->message();
         }
 
-        
+
     }
 
     /**
@@ -172,7 +172,7 @@ class CourseController extends Controller
                 'price_id' => 'required',
                 'file' => 'image',
             ]);
-    
+
             // $course->update([
             //     'title' => $request->title,
             //     'slug' => $request->slug,
@@ -183,15 +183,15 @@ class CourseController extends Controller
             //     'level_id' => $request->level_id,
             //     'price_id' => $request->price_id,
             // ]);
-    
+
             $course->update($request->all());
-    
+
             if( $request->file('file') ){
                 $url = Storage::put('courses', $request->file('file') );
-    
+
                 if( $course->image ){
                     Storage::delete($course->image->url);
-    
+
                     $course->image->update([
                         'url' => $url
                     ]);
@@ -201,13 +201,13 @@ class CourseController extends Controller
                     ]);
                 }
             }
-    
+
             return redirect()->route('instructor.courses.edit', [$locale, $course]);
         } else {
             echo $response->message();
         }
 
-        
+
     }
 
     /**
@@ -236,7 +236,7 @@ class CourseController extends Controller
             return view('instructor.courses.goals', compact('course'));
         } else {
             echo $response->message();
-        }       
+        }
     }
 
     /**

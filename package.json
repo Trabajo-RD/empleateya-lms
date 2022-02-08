@@ -23,6 +23,7 @@
         "tailwindcss": "^2.0.1"
     },
     "dependencies": {
+        "flag-icons": "^6.0.3",
         "laravel-echo": "^1.10.0",
         "pusher-js": "^7.0.3"
     }

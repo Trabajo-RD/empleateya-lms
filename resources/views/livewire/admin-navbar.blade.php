@@ -196,7 +196,7 @@
                                             @endcan --}}
 
                                             @can ('create-course')
-                                                <x-jet-dropdown-link href="{{ route('dashboard.index', app()->getLocale() ) }}">
+                                                <x-jet-dropdown-link href="{{ route('instructor.dashboard.index', app()->getLocale() ) }}">
                                                     {{ __('Dashboard') }}
                                                 </x-jet-dropdown-link>
                                             @endcan

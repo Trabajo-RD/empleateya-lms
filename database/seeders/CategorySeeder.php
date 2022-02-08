@@ -202,7 +202,7 @@ class CategorySeeder extends Seeder
                     ],
                     [
                         'name' => 'Redes y Seguridad',
-                        'icon' => 'fas fa-laptop',
+                        'icon' => 'fas fa-network-wired',
                         'tags' => [
                             [
                                 'name' => 'Ética Hacker',
@@ -216,7 +216,7 @@ class CategorySeeder extends Seeder
                     ],
                     [
                         'name' => 'Desarrollo Mobile',
-                        'icon' => 'fas fa-laptop',
+                        'icon' => 'fas fa-mobile-alt',
                         'tags' => [
                             [
                                 'name' => 'Android',

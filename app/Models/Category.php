@@ -40,7 +40,7 @@ class Category extends Model
 
     // Relation Category : Tags
     public function tags(){
-        return $this->hasManyThrough('App\Models\Tag', 'App\Models\Topic');
+        return $this->hasManyThrough(Tag::class, Topic::class);
     }
 
     /**
@@ -48,6 +48,17 @@ class Category extends Model
      */
     public function image(){
         return $this->morphOne(Image::class, 'imageable');
+    }
+
+    /****************************
+     * Relation 1:M polymorphic
+     ****************************/
+
+    /**
+     * Get all category's interests
+     */
+    public function interests(){
+        return $this->morphMany(Interest::class, 'interestable');
     }
 
 }

@@ -38,12 +38,14 @@ class Course extends Model
         'program_id',
     ];
 
-    protected $withCount = ['students', 'reviews']; // add attr students_count to Course Model
+    protected $withCount = ['participants', 'reviews']; // add attr students_count to Course Model
 
     const DRAFT = 1;
     const PENDING = 2;
     const PUBLISH = 3;
     const TRASH = 4;
+    const INITIATED = 5;
+    const FINALIZED = 6;
 
     public static function getCourses()
     {
@@ -242,36 +244,40 @@ class Course extends Model
      */
     public function observation()
     {
-        return $this->hasOne('App\Models\Observation');
+        return $this->hasOne(Observation::class);
         //return $this->hasMany('App\Models\Observation');
     }
 
     /**
      * Relation 1:N
      */
-    public function reviews()
-    {
-        return $this->hasMany('App\Models\Review');
-    }
+    // public function reviews()
+    // {
+    //     return $this->hasMany('App\Models\Review');
+    // }
 
     public function audiences()
     {
-        return $this->hasMany('App\Models\Audience');
+        return $this->hasMany(Audience::class);
     }
 
     public function goals()
     {
-        return $this->hasMany('App\Models\Goal');
+        return $this->hasMany(Goal::class);
     }
 
     public function requirements()
     {
-        return $this->hasMany('App\Models\Requirement');
+        return $this->hasMany(Requirement::class);
     }
 
     public function sections()
     {
-        return $this->hasMany('App\Models\Section');
+        return $this->hasMany(Section::class);
+    }
+
+    public function workshops(){
+        return $this->hasMany(Workshop::class);
     }
 
     public function tests()
@@ -279,19 +285,23 @@ class Course extends Model
         return $this->hasMany(Test::class);
     }
 
+    public function certificates(){
+        return $this->hasMany(Certificate::class);
+    }
+
     /**
      * Relation 1:N reverse
      */
-    public function language(){
-        return $this->belongsTo(Language::class);
-    }
+    // public function language(){
+    //     return $this->belongsTo(Language::class);
+    // }
 
     /**
      * Return the course dictated user
      */
     public function editor()
     {
-        return $this->belongsTo('App\Models\User', 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function type()
@@ -314,7 +324,6 @@ class Course extends Model
 
     public function modality()
     {
-        // return $this->belongsTo('App\Models\Modality');
         return $this->belongsTo(Modality::class);
     }
 
@@ -326,13 +335,11 @@ class Course extends Model
 
     public function price()
     {
-        // return $this->belongsTo('App\Models\Price');
         return $this->belongsTo(Price::class);
     }
 
     public function program()
     {
-        // return $this->belongsTo('App\Models\Category');
         return $this->belongsTo(Program::class);
     }
 
@@ -341,17 +348,13 @@ class Course extends Model
      *
      * return all enrolled students in any course
      */
-    public function students()
+    public function participants()
     {
-        // return $this->belongsToMany('App\Models\User');
         return $this->belongsToMany(User::class);
     }
 
-    /**
-     * Return all course moderators users
-     */
-    public function moderators(){
-        return $this->belongsToMany(User::class, 'user_id');
+    public function languages(){
+        return $this->belongsToMany(Language::class);
     }
 
     /**
@@ -363,7 +366,6 @@ class Course extends Model
 
     public function tags()
     {
-        // return $this->belongsToMany('App\Models\Tag');
         return $this->belongsToMany(Tag::class);
     }
 
@@ -379,5 +381,20 @@ class Course extends Model
     public function lessons()
     {
         return $this->hasManyThrough(Lesson::class, Section::class);
+    }
+
+    /**
+     * Relation 1:N Polymorphic
+     */
+    public function reviews(){
+        return $this->morphMany(Review::class, 'reviewable');
+    }
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
+
+    public function reactions(){
+        return $this->hasMany(Reaction::class);
     }
 }

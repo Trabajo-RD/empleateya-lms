@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        @if( $students->count() )
+        @if( $participants->count() )
 
             <x-table>
                 <x-slot name="heading">

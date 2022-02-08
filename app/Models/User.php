@@ -150,26 +150,32 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function courses_dictated()
     {
-        // return $this->hasMany('App\Models\Course');
         return $this->hasMany(Course::class);
+    }
+
+    public function workshops_dictated()
+    {
+        return $this->hasMany(Workshop::class);
+    }
+
+    public function organizations_owned()
+    {
+        return $this->hasMany(Organization::class);
     }
 
     public function tests_dictated()
     {
-        // return $this->hasMany('App\Models\Course');
         return $this->hasMany(Test::class);
     }
 
     public function reviews()
     {
-        // return $this->hasMany('App\Models\Review');
         return $this->hasMany(Review::class);
     }
 
     // Relation User : Comments
     public function comments()
     {
-        // return $this->hasMany('App\Models\Comment');
         return $this->hasMany(Comment::class);
     }
 
@@ -202,8 +208,32 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function courses_enrolled()
     {
-        // return $this->belongsToMany('App\Models\Course');
         return $this->belongsToMany(Course::class);
+    }
+
+    public function workshops_enrolled()
+    {
+        return $this->belongsToMany(Workshop::class);
+    }
+
+    public function completed_activities(){
+        return $this->belongsToMany(Activity::class);
+    }
+
+    public function completed_tasks(){
+        return $this->belongsToMany(Task::class);
+    }
+
+    public function organizations(){
+        return $this->belongsToMany(Organization::class);
+    }
+
+    public function competencies(){
+        return $this->belongsToMany(Competency::class);
+    }
+
+    public function skills(){
+        return $this->belongsToMany(Skill::class);
     }
 
     /**
@@ -211,6 +241,10 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function courses_moderated(){
         return $this->belongsToMany(Course::class);
+    }
+
+    public function workshops_moderated(){
+        return $this->belongsToMany(Workshop::class);
     }
 
     /**

@@ -13,6 +13,7 @@ use App\Models\Section;
 use App\Models\Lesson;
 use App\Models\Description;
 use App\Models\Review;
+use App\Models\Comment;
 
 class CourseSeeder extends Seeder
 {
@@ -24,12 +25,18 @@ class CourseSeeder extends Seeder
     public function run()
     {
 
-        $courses = Course::factory(100)->create();
+        $courses = Course::factory(50)->create();
 
         foreach($courses as $course){
 
             Review::factory(5)->create([
-                'course_id' => $course->id
+                'reviewable_id' => $course->id,
+                'reviewable_type' => Course::class
+            ]);
+
+            Comment::factory(5)->create([
+                'commentable_id' => $course->id,
+                'commentable_type' => Course::class
             ]);
 
             Image::factory(1)->create([

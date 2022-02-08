@@ -5,7 +5,7 @@
 @section('plugins.Sweetalert2', true)
 
 @section('content_header')
-    <a href="{{ route( 'admin.types.create' ) }}" class="btn btn-primary float-right"><i class="fas fa-plus mr-1"></i>Nuevo tipo</a>
+    <a href="{{ route( 'admin.types.create', app()->getLocale() ) }}" class="btn btn-primary float-right"><i class="fas fa-plus mr-1"></i>Nuevo tipo</a>
     <h1 class="text-dark">Tipos de curso</h1>
 @stop
 
@@ -34,10 +34,10 @@
                             <td width="10px">{{ $type->id }}</td>
                             <td>{{ $type->name }}</td>
                             <td width="12%">
-                                <a href="{{ route('admin.types.edit', $type ) }}" class="btn btn-outline-secondary"><i class="far fa-edit mr-1"></i>Editar</a>
+                                <a href="{{ route('admin.types.edit', [app()->getLocale(), $type] ) }}" class="btn btn-outline-secondary"><i class="far fa-edit mr-1"></i>Editar</a>
                             </td>
                             <td width="14%">
-                                <form action="{{ route( 'admin.types.destroy', $type ) }}" method="POST" class="delete-type">
+                                <form action="{{ route( 'admin.types.destroy', [app()->getLocale(), $type] ) }}" method="POST" class="delete-type">
                                     @csrf
                                     @method('delete')
                                     <button class="btn btn-outline-danger" type="submit"><i class="far fa-trash-alt mr-1"></i>Eliminar</button>

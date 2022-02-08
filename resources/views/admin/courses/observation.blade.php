@@ -10,7 +10,7 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            {!! Form::open(['route' => [ 'admin.courses.reject', $course] ]) !!}
+            {!! Form::open(['route' => [ 'admin.courses.reject', [app()->getLocale(), $course]] ]) !!}
 
                 <div class="form-group">
                     {!! Form::label('body', 'Observaciones') !!}
@@ -20,7 +20,10 @@
                     @enderror
                 </div>
 
-                {!! Form::submit('Enviar observación', ['class' => 'btn btn-primary']) !!}
+                <a href="{{ url()->previous() }}" class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="Omitir y volver a la vista anterior"><i class="fas fa-arrow-circle-left mr-2"></i>Volver atrás</a>
+
+                {!! Form::submit('Enviar', ['class' => 'btn btn-primary float-right', 'data-toggle' => 'tooltip', 'data-placement' => 'left', 'title' => 'Enviar observación']) !!}
+
             {!! Form::close() !!}
         </div>
     </div>

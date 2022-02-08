@@ -31,7 +31,7 @@
         <ul class="absolute z-50 left-0 w-full bg-white mt-1 rounded-lg overflow-hidden shadow-lg border-gray-300">
             @forelse( $this->results as $result )
                 <li class="leading-10 px-5 text-md cursor-pointer hover:bg-gray-200">
-                    <a href="{{ route('courses.show', [app()->getLocale(), $result] ) }}">
+                    <a href="{{ route('course.show', $result ) }}">
                         {{ $result->title }}
                     </a>
                 </li>

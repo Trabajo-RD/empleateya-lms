@@ -33,7 +33,7 @@
             <!-- users enrolled -->
             <p class="text-sm text-gray-500">
                 <i class="fas fa-users"></i>
-                ({{ $course->students_count }})
+                ({{ $course->participants_count }})
             </p>
 
         </div>

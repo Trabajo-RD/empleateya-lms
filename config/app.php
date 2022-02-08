@@ -253,7 +253,7 @@ return [
 
     'languages' => [
         'en' => 'English',
-        'es' => 'Español',
+        'es' => 'Spanish',
     ],
 
 ];

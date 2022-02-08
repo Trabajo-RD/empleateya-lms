@@ -25,20 +25,20 @@ class CoursePolicy
 
     /**
      * Determine if the given user can create course
-     * 
+     *
      * @param   \App\Models\User      $user
      * @return  bool
      */
     // TODO: Create policy tu Course Create method
     public function create( User $user )
     {
-        // return $user->role == 'Creator'; 
+        // return $user->role == 'Creator';
         return $user->can('create-course');
     }
 
     /**
      * Determine if the given course can be updated by the user.
-     * 
+     *
      * @param \App\Models\User      $user
      * @param \App\Models\Course    $course
      * @return \Illuminate\Auth\Access\Response
@@ -52,14 +52,14 @@ class CoursePolicy
 
     /**
      * Check if the given user is enrolled in the course
-     * 
+     *
      * @param \App\Models\User      $user
      * @param \App\Models\Course    $course
      * @return \Illuminate\Auth\Access\Response
      */
     public function enrolled( User $user, Course $course )
     {
-        return $course->students->contains( $user->id )
+        return $course->participants->contains( $user->id )
                 ? Response::allow()
                 : Response::deny('No estas inscrito en este curso.');
     }

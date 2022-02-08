@@ -24,7 +24,7 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($locale)
     {
         $roles = Role::all();
 
@@ -38,7 +38,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $permissions = Permission::all();
+        $permissions = Permission::orderBy('name')->get();
 
         return view('admin.roles.create', compact('permissions'));
     }
@@ -86,7 +86,7 @@ class RoleController extends Controller
      */
     public function edit($locale, Role $role)
     {
-        $permissions = Permission::all();
+        $permissions = Permission::orderBy('name')->get();
 
         return view('admin.roles.edit', compact('locale', 'role', 'permissions'));
     }
@@ -100,6 +100,8 @@ class RoleController extends Controller
      */
     public function update(Request $request, $locale, Role $role)
     {
+        // return $role;
+
         $request->validate([
             'name' => 'required',
             'permissions' => 'required'
@@ -112,7 +114,7 @@ class RoleController extends Controller
         // sync() delete all permissions and regenerate again
         $role->permissions()->sync($request->permissions);
 
-        return redirect()->route('admin.roles.edit', $role)->with('rol_updated', 'Se han guardado los cambios correctamente');
+        return redirect()->route('admin.roles.edit', compact('locale', 'role'))->with('rol_updated', 'Se han guardado los cambios correctamente');
     }
 
     /**

@@ -3,7 +3,7 @@
 @section('title', 'Capacítate RD')
 
 @section('content_header')
-    <h1 class="text-primary"><i class="fas fa-plus mr-1"></i>Añadir etiqueta</h1>
+    <h1 class="text-primary">Añadir etiqueta</h1>
 @stop
 
 @section('content')
@@ -11,11 +11,11 @@
     <div class="col col-md-12">
         <div class="card">
             <div class="card-body">
-                {!! Form::open(['route' => 'admin.tags.store', 'autocomplete' => 'off' ]) !!}
+                {!! Form::open(['route' => ['admin.tags.store', app()->getLocale()], 'autocomplete' => 'off' ]) !!}
 
                     @include('admin.tags.partials.form')
 
-                    <a href="{{ url()->previous() }}" class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="Omitir y volver a la vista anterior"><i class="fas fa-arrow-circle-left mr-2"></i>Volver atrás</a> 
+                    <a href="{{ url()->previous() }}" class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="Omitir y volver a la vista anterior"><i class="fas fa-arrow-circle-left mr-2"></i>Volver atrás</a>
 
                     {!! Form::submit('Añadir etiqueta', ['class' => 'btn btn-primary float-right', 'data-toggle' => 'tooltip', 'data-placement' => 'left', 'title' => 'Añadir esta  etiqueta']) !!}
                 {!! Form::close() !!}

@@ -11,6 +11,8 @@ use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
 
 
+
+
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -20,7 +22,6 @@ class HomeController extends Controller
 
     public function __invoke()
     {
-
         $courses = Course::all();
         $slides = Slide::all();
 

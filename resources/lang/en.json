@@ -209,6 +209,7 @@
     "I can't find a course that matches what you're looking for": "I can't find a course that matches what you're looking for",
     "Account": "Account",
     "Manage": "Manage",
+    "Management": "Management",
     "Auditing": "Auditing",
     "Collaborating": "Collaborating",
     "Save": "Save",
@@ -253,7 +254,7 @@
     "Audience Limit": "Audience Limit",
     "Language": "Language",
     "English": "English",
-    "Spanish (Spain)": "Spanish (Spain)",
+    "Spanish": "Spanish",
     "Help Center": "Help Center",
     "Documentation": "Documentation",
     "Prologue": "Prologue",
@@ -269,5 +270,9 @@
     "See more": "See more",
     "Last connection": "Last connection",
     "Send reminder": "Send reminder",
-    "View student profile": "View student profile"
+    "View student profile": "View student profile",
+    "Learning": "Learning",
+    "These are the themes we have available in this category.": "These are the themes we have available in this category.",
+    "These are the featured courses in this category.": "These are the featured courses in this category.",
+    "Featured courses": "Featured courses"
 }

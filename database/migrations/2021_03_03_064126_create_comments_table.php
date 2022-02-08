@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use App\Models\Comment;
 
 class CreateCommentsTable extends Migration
 {
@@ -16,7 +17,8 @@ class CreateCommentsTable extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->text('comment');
+            $table->enum('status', [Comment::HOLD, Comment::APPROVE, Comment::SPAM, Comment::TRASH])->default(1);
 
             $table->unsignedBigInteger('user_id');
 
