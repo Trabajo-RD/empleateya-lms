@@ -34,22 +34,26 @@ class Tag extends Model
     }
 
     /**
-     * Relation N:M : Users enrolled in courses
+     * Relation N:M : filter courses by tag
      */
     public function courses()
     {
-        // return $this->belongsToMany('App\Models\Course');
         return $this->belongsToMany(Course::class);
+    }
+
+    public function learning_paths()
+    {
+        return $this->belongsToMany(LearningPath::class);
     }
 
     public function faqs()
     {
-        return $this->belongsToMany('App\Models\Faq');
+        return $this->belongsToMany(Faq::class);
     }
 
     public function terms()
     {
-        return $this->belongsToMany('App\Models\Term');
+        return $this->belongsToMany(Term::class);
     }
 
     /**

@@ -23,7 +23,17 @@ class Type extends Model
     /**
      * Relation 1:N
      */
-    public function course(){
-        return $this->hasMany('App\Models\Course');
+
+     
+    // filter courses by type
+    public function course()
+    {
+        return $this->hasMany(Course::class);
+    }
+
+    // filter learning paths by type
+    public function learning_paths()
+    {
+        return $this->hasMany(LearningPath::class);
     }
 }

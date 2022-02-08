@@ -15,7 +15,18 @@ class Level extends Model
     /**
      * Relation 1:N
      */
+
+    // returns courses associated with a level
     public function course(){
-        return $this->hasMany('App\Models\Course');
+        return $this->hasMany(Course::class);
+    }
+
+    /**
+     * N:M
+     */
+    // returns the records of the learning paths of a level
+    public function learning_paths()
+    {
+        return $this->belongsToMany(LearningPath::class);
     }
 }

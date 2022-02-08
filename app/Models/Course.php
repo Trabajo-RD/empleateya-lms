@@ -304,6 +304,18 @@ class Course extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    // organization to which a course belongs
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class);
+    }
+
+    // learning path to which a course belongs
+    public function learning_path()
+    {
+        return $this->belongsTo(LearningPath::class);
+    }
+
     public function type()
     {
         // return $this->belongsTo('App\Models\Type');

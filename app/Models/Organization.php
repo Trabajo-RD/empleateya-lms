@@ -19,6 +19,26 @@ class Organization extends Model
     }
 
     /**
+     * 1:N
+     */
+    
+    // organization courses
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
+    }
+
+    public function learning_paths()
+    {
+        return $this->hasMany(LearningPath::class);
+    }
+
+    public function workshops()
+    {
+        return $this->hasMany(Workshop::class);
+    }
+
+    /**
      * N:M
      */
     public function users(){

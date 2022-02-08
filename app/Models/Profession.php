@@ -10,4 +10,14 @@ class Profession extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    /**
+     * N:M
+     */
+
+    // recovers the learning paths associated with a profession
+    public function learning_paths()
+    {
+        return $this->belongsToMany(LearningPath::class);
+    }
 }

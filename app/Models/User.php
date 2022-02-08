@@ -153,6 +153,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Course::class);
     }
 
+    public function learning_paths_dictated()
+    {
+        return $this->hasMany(LearningPath::class);
+    }
+
     public function workshops_dictated()
     {
         return $this->hasMany(Workshop::class);
@@ -209,6 +214,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function courses_enrolled()
     {
         return $this->belongsToMany(Course::class);
+    }
+
+    public function learning_paths_enrolled(){
+        return $this->belongsToMany(LearningPath::class);
     }
 
     public function workshops_enrolled()

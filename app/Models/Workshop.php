@@ -63,6 +63,16 @@ class Workshop extends Model
         return $this->belongsTo(Course::class);
     }
 
+    public function learning_path()
+    {
+        return $this->belongsTo(LearningPath::class);
+    }
+
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class);
+    }
+
     /**
      * N:M
      */
