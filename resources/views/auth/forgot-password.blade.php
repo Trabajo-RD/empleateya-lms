@@ -16,7 +16,7 @@
 
         <x-jet-validation-errors class="mb-4" />
 
-        <form method="POST" action="{{ route('password.email', app()->getLocale() ) }}">
+        <form method="POST" action="{{ route('password.email') }}">
             @csrf
 
             <div class="block">

@@ -14,7 +14,7 @@
 
     <div class="card">
         <div class="card-body">
-            {!! Form::model($platform, ['route' => ['admin.platforms.update', [app()->getLocale(), $platform] ], 'method' => 'put' ]) !!}
+            {!! Form::model($platform, ['route' => ['admin.platforms.update', $platform ], 'method' => 'put' ]) !!}
                 <div class="form-group">
                     {!! Form::label('name', 'Nombre') !!}
                     {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el nombre de la plataforma']) !!}

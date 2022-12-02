@@ -14,7 +14,7 @@ class Ability extends Model
     /**
      * N:M
      */
-    public function workshops(){
-        return $this->belongsToMany(Workshop::class);
+    public function workshop(){
+        return $this->belongsTo(Workshop::class);
     }
 }

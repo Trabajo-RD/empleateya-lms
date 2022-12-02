@@ -1,7 +1,7 @@
 <div>
 
     <div class="mb-12 z-0 divide-y divide-gray-300">
-        @if (Auth::check())
+        @auth
             @if(count($user_courses))
                 <!-- Student courses in this category -->
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-12">
@@ -14,7 +14,7 @@
                     </div>
                 </div>
             @endif
-        @endif
+        @endauth
 
         <!-- Featured course in this category -->
         @if(count($featured_courses))
@@ -29,6 +29,7 @@
                 <div class="px-4 sm:px-6 lg:px-8 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-8 mt-12">
                     @foreach ( $featured_courses as $course )
                         <x-featured-course :course="$course" />
+                        {{-- <x-course-card :course="$course" /> --}}
                     @endforeach
                 </div>
             </div>
@@ -40,11 +41,11 @@
                 <h2 class="text-center md:text-left font-display font-semibold text-gray-600 text-xl sm:text-2xl md:text-3xl" >{{ __('Topics in') }} <span class="font-bold">{{ __($category->name) }}</span></h2>
 
                 <p>{{ __('These are the themes we have available in this category.') }}</p>
-                
+
                 <!-- This is the tags container -->
                 <div class='mt-12 flex flex-wrap justify-center -m-1'>
                     @foreach ($topics as $topic)
-                        <a href="{{ route('courses.topic', [$category, $topic]) }}" class="cursor-pointer mb-8 text-normal">
+                        <a href="{{ route('topic.show', [$category, $topic]) }}" class="cursor-pointer mb-8 text-normal">
                             <x-tailwind.tag :id="'topic-'.$topic->id" :text="$topic->name" color="gray" :icon="$topic->icon" />
                         </a>
                     @endforeach
@@ -110,6 +111,22 @@
 
                     <div class="col-span-4 sm:col-span-4 md:col-span-4 lg:col-span-1">
                         {{-- {{ __('Ratings') }} --}}
+
+
+                        <!-- dropdown program -->
+                        <div class="relative mt-4 sm:col-span-2" x-data="{ open: false }">
+                            <button class="bg-white shadow w-full h-12 px-4 rounded text-gray-700 overflow-hidden focus:outline-none flex justify-between items-center" x-on:click="open = true">
+                                <span><i class="fas fa-tags text-2xl md:text-sm md:mr-2"></i><span class="">{{ __('Program') }}</span></span><i class="fas fa-caret-down text-sm ml-2"></i>
+                            </button>
+                            <!-- dropdown body -->
+                            <div class="absolute left-0 w-full mt-2 py-2 bg-white rounded shadow z-50" x-show="open" x-on:click.away="open = false">
+                                @foreach ($programs as $program)
+                                    <a class="cursor-pointer transition-colors duration-200 block px-4 py-2 text-normal text-gray-700 hover:bg-blue-600 hover:text-white" wire:click="$set('program_id', {{$program->id}} )" x-on:click="open = false">
+                                        {{ __($program->name) }}
+                                    </a>
+                                @endforeach
+                            </div>
+                        </div>
 
                         <!-- dropdown type -->
                         <div class="relative mt-4 sm:col-span-2" x-data="{ open: false }">

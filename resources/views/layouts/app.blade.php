@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale() ) }}">
+<html lang="{{ LaravelLocalization::getCurrentLocale() }}">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,24 +29,23 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        {{-- <link rel="stylesheet" href="{{ mix('css/app.css') }}"> --}}
         <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css')}}">
 
         {{-- <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"> --}}
         <link rel="stylesheet" href="{{ asset('css/magnific-popup.css') }}">
         <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}">
-        {{-- <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}"> --}}
-        <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}" />
-        <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}">
-        {{-- <link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker.css') }}"> --}}
         <link rel="stylesheet" href="{{ asset('css/mediaelementplayer.css') }}">
         <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
-        {{-- <link rel="stylesheet" href="{{ asset('fonts/flaticon/font/flaticon.css') }}"> --}}
         <link rel="stylesheet" href="{{ asset('css/fl-bigmug-line.css') }}">
 
-        <link rel="stylesheet" href="{{ asset('css/aos.css') }}" />
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
         <!-- Flowbite CDN CSS for Tailwind interactive elements -->
         <link rel="stylesheet" href="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.min.css" />
+
+        <!-- Custom Tailwind CSS -->
+        {{-- <link rel="stylesheet" href="{{ asset('css/tailwind.css') }}" /> --}}
 
         {{-- <link rel="stylesheet" href="{{ asset('css/style.css') }}"> --}}
 
@@ -57,9 +56,17 @@
 
     </head>
     <body class="font-sans antialiased">
-        <x-jet-banner />
 
-        <div class="flex flex-col min-h-screen justify-between bg-gray-100">
+        <!-- session message banner -->
+        @if(session('success'))
+            <x-jet-banner style="success" message="{{ session('success') }}"/>
+        @endif
+
+        @if(session('danger'))
+            <x-jet-banner style="danger" message="{{ session('danger') }}"/>
+        @endif
+
+        <div class="flex flex-col min-h-screen justify-between " style="background-color: #eff7fd;">
 
             <!-- menu -->
             @livewire('navigation-menu')
@@ -81,13 +88,13 @@
             </main>
 
             <!-- Page Footer -->
-            <footer class="main-footer bg-gray-800">
+            <footer class="main-footer bg-primary text-blue-50">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     @include('partials.footer.footer')
                 </div>
                 <!-- Footer Copyright -->
-                <section class="bg-gray-900">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-white">
+                <section class="bg-gray-800 bg-opacity-25">
+                    <div class="max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8 text-white">
                         @include('partials.footer.copyright')
                     </div>
                 </section>
@@ -100,31 +107,134 @@
         <!-- blade component floating action button -->
         <x-floatting-action-button />
 
-        {{-- <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script> --}}
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+
+
+
+        {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> --}}
+
+        {{-- <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script> --}}
+
+        <!-- Sweet Alert -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-
-        <script type="text/javascript" src="{{ asset('js/jquery-migrate-3.0.1.min.js') }}"></script>
+        {{-- <script type="text/javascript" src="{{ asset('js/jquery-migrate-3.0.1.min.js') }}"></script> --}}
+        {{-- <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script> --}}
         <script type="text/javascript" src="{{ asset('js/jquery-ui.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/popper.min.js') }}"></script>
-        {{-- <script src="{{ asset('js/bootstrap.min.js') }}"></script> --}}
-        <script type="text/javascript" src="{{ asset('js/owl.carousel.min.js') }}"></script>
+
         <script type="text/javascript" src="{{ asset('js/mediaelement-and-player.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/jquery.stellar.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/jquery.countdown.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
-        {{-- <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script> --}}
-        <script type="text/javascript" src="{{ asset('js/aos.js') }}"></script>
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-        <script type="text/javascript" src="{{ asset('js/main-front.js') }}"></script>
 
         <!-- custom floatting action button js -->
         <script type="text/javascript" src="{{ asset('js/floatting-action-button.js') }}"></script>
 
         <!-- Flowbite CDN JavaScript for Tailwind interactive elements -->
         <script src="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.bundle.js"></script>
+
+        {{-- <style>
+            .owl-carousel .item {
+              height: 10rem;
+              background: #4DC7A0;
+              padding: 1rem;
+            }
+            .owl-carousel .item h4 {
+              color: #FFF;
+              font-weight: 400;
+              margin-top: 0rem;
+             }
+            </style> --}}
+            <style>
+                .categories-owl-carousel .owl-item img{
+                    width: 7rem !important;
+                }
+            </style>
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.green.min.css"/>
+
+            <!-- Alpine Core -->
+            <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+            <script type="text/javascript" src="{{ asset('js/main-front.js') }}"></script>
+
+            <script>
+            $(document).ready(function($){
+
+                // top rated course owl carousel
+                $('.top-rated-course-owl-carousel').owlCarousel({
+                    loop:true,
+                    margin:10,
+                    nav:false,
+                    dots:true,
+                    autoplay:true,
+                    autoplayTimeout:5000,
+                    autoplayHoverPause:true,
+                    responsive:{
+                    0:{
+                        items:1
+                    },
+                    600:{
+                        items:2
+                    },
+                    1000:{
+                        items:4
+                    }
+                    }
+                });
+
+                // home categories owl carousel
+                $('.categories-owl-carousel').owlCarousel({
+                    rtl:true,
+                    loop:true,
+                    margin:10,
+                    nav:false,
+                    dots:true,
+                    autoplay:true,
+                    autoplayTimeout:5000,
+                    autoplayHoverPause:true,
+                    responsive:{
+                    0:{
+                        items:2
+                    },
+                    600:{
+                        items:4
+                    },
+                    1000:{
+                        items:6
+                    }
+                    }
+                });
+
+                // home categories owl carousel
+                $('.specific-learning-paths-owl-carowsel').owlCarousel({
+                    loop:true,
+                    margin:10,
+                    nav:false,
+                    dots:true,
+                    responsive:{
+                    0:{
+                        items:1
+                    },
+                    600:{
+                        items:2
+                    },
+                    1000:{
+                        items:3
+                    }
+                    }
+                });
+
+            });
+
+    </script>
 
         @livewireScripts
 

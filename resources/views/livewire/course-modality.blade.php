@@ -44,7 +44,7 @@
                 <!-- This is the tags container -->
                 <div class='mt-12 flex flex-wrap justify-center -m-1'>
                     @foreach ($topics as $topic)
-                        <a href="{{ route('courses.topic', [$topic->category, $topic]) }}" class="cursor-pointer mb-8 text-normal">
+                        <a href="{{ route('topic.show', [$topic->category, $topic]) }}" class="cursor-pointer mb-8 text-normal">
                             <x-tailwind.tag :id="'topic-'.$topic->id" :text="$topic->name" color="gray" :icon="$topic->icon" />
                         </a>
                     @endforeach

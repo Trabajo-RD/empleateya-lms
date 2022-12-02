@@ -59,7 +59,7 @@ class CourseController extends Controller
     /**
      * Return the course in revision status
      */
-    public function show($locale, Course $course ){
+    public function show(Course $course ){
 
         // return $course;
 
@@ -89,7 +89,7 @@ class CourseController extends Controller
         //     return back()->with('info', __('You cannot publish a course that is not properly completed'));
         // }
 
-        $locale = app()->getLocale();
+        // $locale = app()->getLocale();
 
         $course->status = 3;
 
@@ -106,21 +106,21 @@ class CourseController extends Controller
 
 
 
-        return redirect()->route('admin.courses.revision', compact('locale'))->with('success', __('The course has been successfully approved'));
+        return redirect()->route('admin.courses.revision')->with('success', __('The course has been successfully approved'));
 
     }
 
     /**
      * Return observation course form
      */
-    public function observation( $locale, Course $course ){
+    public function observation( Course $course ){
         return view('admin.courses.observation', compact('course'));
     }
 
     /**
      * Process the course feedback form
      */
-    public function reject( Request $request, $locale, Course $course ){
+    public function reject( Request $request, Course $course ){
 
         $request->validate([
             'body' => 'required'

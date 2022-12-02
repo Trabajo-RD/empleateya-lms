@@ -17,7 +17,7 @@
     <div class="card">
 
         <div class="card-header">
-            <a href="{{ route('admin.tags.create', app()->getLocale() ) }}" class="btn btn-primary float-left" data-toggle="tooltip" data-placement="bottom" title="Añade una nueva etiqueta">
+            <a href="{{ route('admin.tags.create') }}" class="btn btn-primary float-left" data-toggle="tooltip" data-placement="bottom" title="Añade una nueva etiqueta">
             <i class="fas fa-plus mr-1"></i>Añadir etiqueta</a>
         </div>
 
@@ -42,10 +42,10 @@
                             <td>{{ $tag->name }}</td>
                             <td class="text-center">{{ $tag->topic->name }}</td>
                             <td width="12%">
-                                <a href="{{ route('admin.tags.edit', [app()->getLocale(), $tag] ) }}" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="left" title="Editar {{$tag->name}}"><i class="far fa-edit mr-1"></i>Editar</a>
+                                <a href="{{ route('admin.tags.edit', $tag ) }}" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="left" title="Editar {{$tag->name}}"><i class="far fa-edit mr-1"></i>Editar</a>
                             </td>
                             <td width="14%">
-                                <form action="{{ route( 'admin.tags.destroy', [app()->getLocale(), $tag] ) }}" method="POST" class="delete-tag">
+                                <form action="{{ route( 'admin.tags.destroy', $tag ) }}" method="POST" class="delete-tag">
                                     @csrf
                                     @method('delete')
                                     <button class="btn btn-outline-danger" type="submit" data-toggle="tooltip" data-placement="left" title="Eliminar {{$tag->name}}"><i class="far fa-trash-alt mr-1"></i>Eliminar</button>

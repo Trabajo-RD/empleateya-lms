@@ -37,7 +37,7 @@ class TypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $locale)
+    public function store(Request $request)
     {
         // return $request->name;
 
@@ -55,7 +55,7 @@ class TypeController extends Controller
 
         // return $type;
 
-        return redirect()->route('admin.types.edit', compact('locale', 'type'))->with('info', 'Se ha creado un nuevo tipo de curso.');
+        return redirect()->route('admin.types.edit', compact('type'))->with('info', 'Se ha creado un nuevo tipo de curso.');
     }
 
     /**
@@ -75,11 +75,11 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($locale, Type $type)
+    public function edit(Type $type)
     {
         //return $type;
         //$type = Type::find($type->id);
-        return view('admin.types.edit', compact('locale', 'type'));
+        return view('admin.types.edit', compact('type'));
     }
 
     /**
@@ -89,7 +89,7 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $locale, Type $type)
+    public function update(Request $request, Type $type)
     {
         // return $type;
 
@@ -107,7 +107,7 @@ class TypeController extends Controller
         //     'name' => $request->name
         // ]);
 
-        return redirect()->route('admin.types.edit', compact('locale', 'type'))->with('info', 'Se ha actualizado el tipo de curso.');
+        return redirect()->route('admin.types.edit', compact('type'))->with('info', 'Se ha actualizado el tipo de curso.');
     }
 
     /**
@@ -116,7 +116,7 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($locale, Type $type)
+    public function destroy(Type $type)
     {
         $type->delete();
 

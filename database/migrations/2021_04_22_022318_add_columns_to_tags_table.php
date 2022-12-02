@@ -28,6 +28,7 @@ class AddColumnsToTagsTable extends Migration
     {
         Schema::table('tags', function (Blueprint $table) {
             $table->dropForeign('tags_topic_id_foreign');
+            $table->dropColumn('topic_id');
         });
     }
 }

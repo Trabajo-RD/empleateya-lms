@@ -6,14 +6,16 @@ use Illuminate\View\Component;
 
 class PathLayout extends Component
 {
+    public $path;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($path)
     {
-        //
+        $this->path = $path;
     }
 
     /**
@@ -23,6 +25,6 @@ class PathLayout extends Component
      */
     public function render()
     {
-        return view('components.path-layout');
+        return view('layouts.path');
     }
 }

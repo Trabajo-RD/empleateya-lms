@@ -1,11 +1,11 @@
 @extends('adminlte::page')
 
-@section('title', 'Capacítate RD')
+@section('title', 'Capacítate RD - Roles')
 
 @section('plugins.Sweetalert2', true)
 
 @section('content_header')
-    <a href="{{ route('admin.roles.create', app()->getLocale() ) }}" class="btn btn-primary float-right"><i class="fas fa-plus mr-1"></i>Nuevo rol</a>
+    <a href="{{ route('admin.roles.create') }}" class="btn btn-primary float-right"><i class="fas fa-plus mr-1"></i>Nuevo rol</a>
     <h1 class="text-dark">Roles</h1>
 @stop
 
@@ -38,15 +38,15 @@
                 </thead>
                 <tbody>
                     @forelse ( $roles as $role )
-                        @if(  $role->id != 1 )
+                        @if(  $role )
                         <tr>
                             <td width="10px">{{ $role->id }}</td>
                             <td>{{ $role->name }}</td>
                             <td width="10px">
-                                <a class="btn btn-outline-secondary" href="{{ route('admin.roles.edit', [app()->getLocale(), $role] ) }}">Editar</a>
+                                <a class="btn btn-outline-secondary" href="{{ route('admin.roles.edit', $role ) }}">Editar</a>
                             </td>
                             <td width="10px">
-                                <form action="{{ route('admin.roles.destroy', [app()->getLocale(), $role] ) }}" method="POST" class="delete-role">
+                                <form action="{{ route('admin.roles.destroy', $role ) }}" method="POST" class="delete-role">
                                     @method('delete')
                                     @csrf
                                     <button class="btn btn-outline-danger" type="submit">Eliminar</button>

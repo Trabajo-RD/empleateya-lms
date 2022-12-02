@@ -9,7 +9,7 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            {!! Form::open(['route' => ['admin.prices.store', app()->getLocale()]]) !!}
+            {!! Form::open(['route' => 'admin.prices.store']) !!}
 
                 <div class="form-group">
                     {!! Form::label('name', 'Alias') !!}

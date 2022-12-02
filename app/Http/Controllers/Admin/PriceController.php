@@ -65,7 +65,7 @@ class PriceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($locale, Price $price)
+    public function edit(Price $price)
     {
         return view('admin.prices.edit', compact('price'));
     }
@@ -77,7 +77,7 @@ class PriceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $locale, Price $price)
+    public function update(Request $request, Price $price)
     {
         $request->validate([
             'name' => 'required|unique:prices,name,' . $price->id,
@@ -95,7 +95,7 @@ class PriceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($locale, Price $price)
+    public function destroy(Price $price)
     {
         $price->delete();
 

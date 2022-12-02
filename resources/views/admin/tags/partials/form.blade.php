@@ -3,7 +3,7 @@
     <div class="input-group mt-1">
         {!! Form::select('topic_id', $topic_list, null, ['class' => 'custom-select']) !!}
         <div class="input-group-append">
-            <a class="btn btn-outline-secondary" href="{{ route('admin.topics.create', app()->getLocale() ) }}">Nueva subcategoría</a>
+            <a class="btn btn-outline-secondary" href="{{ route('admin.topics.create') }}">Nueva subcategoría</a>
         </div>
     </div>
     <small id="emailHelp" class="form-text text-muted">Selecciona o añade una nueva subcategoría.</small>

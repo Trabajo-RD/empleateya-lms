@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class SetLanguage
 {

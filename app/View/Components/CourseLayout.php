@@ -6,14 +6,16 @@ use Illuminate\View\Component;
 
 class CourseLayout extends Component
 {
+    public $course;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($course)
     {
-        //
+        $this->course = $course;
     }
 
     /**
@@ -23,6 +25,6 @@ class CourseLayout extends Component
      */
     public function render()
     {
-        return view('components.course-layout');
+        return view('layouts.course');
     }
 }

@@ -1,57 +1,86 @@
 <x-app-layout>
 
-    <section name="header" class="bg-blue-900">
-        <div class="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto grid grid-cols-1 gap-6 items-center">
-            <x-tailwind.breadcrumb :current="$course" color="gray"/>
+    <section name="header">
+        <div class="bg-primary sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto grid grid-cols-1 gap-6 items-center px-6">
+            <div class="text-sm flex items-center text-blue-50 py-4">
+                <!-- topic -->
+                @if($course->topic)
+                    <a href="" data-tooltip-target="{{ $course->id }}-category-tooltip" data-tooltip-placement="top">
+                        <!-- tag -->
+                        {{ __($course->topic->category->name) }}
+                    </a>
+                    <svg class="w-6 h-6 text-blue-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                    <a href="{{ route('topic.show', $course->topic) }}" data-tooltip-target="{{ $course->id }}-topic-tooltip" data-tooltip-placement="top" class="mr-2 ">
+                        <!-- tag -->
+                        {{ __($course->topic->name) }}
+                    </a>
+                    <!-- tooltip -->
+                    <x-tooltip :id="$course->id . '-topic'" text="{{ __('Topic') }}"/>
+                @endif
             </div>
+        </div>
     </section>
 
-    <section class="bg-blue-900 pb-12">
-        <div class="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+    <section class="pb-6 ">
+        <div class="bg-primary p-6 sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
 
-            <figure>
+            <div class="relative flex items-center overflow-hidden h-80">
             <!-- card image -->
                 @isset( $course->image )
                     <img src="{{ Storage::url( $course->image->url ) }}" alt="" class="h-80 w-11/12 object-cover shadow" />
                 @else
-                    <img id="picture" class="h-80 w-11/12 object-cover shadow" src="{{ asset('images/courses/default.jpg') }}" alt="" >
+                    <!-- badge icon -->
+                    <img :key="{{ 'badge-' . $course->id }}" class="h-44 absolute inset-x-0 m-auto z-10 transition duration-300 transform hover:scale-125" src="{{ asset('images/badges/courses.svg') }}" alt="{{ __('Courses') }}" >
+                    <img id="picture" class="w-auto object-cover shadow" src="{{ asset('images/courses/default.jpg') }}" alt="" >
                 @endisset
-            </figure>
+            </div>
             <div>
-                <button type="button" class="bg-opacity-25 mr-2 bg-gray-300 text-gray-300 text-sm py-2 px-4 leading-none flex items-center mb-4 focus:outline-none">
-                    {{ __($course->type->name) }}
-                </button>
-                <h1 class="text-white font-extrabold text-2xl sm:text-3xl md:text-4xl">{{ $course->title }}</h1>
-                <h2 class="text-white mt-3 sm:mt-5 sm:text-lg md:mt-5 md:text-xl lg:mx-0 mb-4">{{ $course->subtitle }}</h2>
+                <div class="flex items-center">
+                    <button type="button" class="bg-opacity-25 hover:bg-opacity-50 mr-2 bg-gray-300 text-gray-300 text-sm py-2 px-4 leading-none flex items-center mb-4 focus:outline-none uppercase">
+                        {{ __($course->type->name) }}
+                    </button>
+                    <div class="flex whitespace-nowrap items-center">
+                        @if($course->program)
+                        <button type="button" class="bg-opacity-25 hover:bg-opacity-50 mr-2 bg-gray-300 text-gray-300 text-sm py-2 px-4 leading-none flex items-center mb-4 focus:outline-none uppercase">
+                            {{ $course->program->name }}
+                        </button>
+                        @endif
+                    </div>
+                </div>
 
-                <!-- category -->
-                <a href="{{ route('courses.category', ['category' => $course->category]) }}" data-tooltip-target="{{ $course->id }}-category-tooltip" data-tooltip-placement="top" class="mr-2 ">
-                    <!-- tag -->
-                    <x-tailwind.tag :id="'course-category-'.$course->category->id" text="{{ __($course->category->name) }}" color="gray" :icon="$course->category->icon" />
-                </a>
-                <!-- tooltip -->
-                <x-tooltip :id="$course->id . '-category'" text="{{ __('Category') }}"/>
+                <!-- course title -->
+                <x-tailwind.headings.h3 color="white">
+                    {{ $course->title }}
+                </x-tailwind.headings.h3>
 
-                <!-- topic -->
-                <a href="{{ route('courses.topic', ['category' => $course->category, 'topic' => $course->topic]) }}" data-tooltip-target="{{ $course->id }}-topic-tooltip" data-tooltip-placement="top" class="mr-2 ">
-                    <!-- tag -->
-                    <x-tailwind.tag :id="'course-topic-'.$course->topic->id" text="{{ __($course->topic->name) }}" color="gray" :icon="$course->topic->icon" />
-                </a>
-                <!-- tooltip -->
-                <x-tooltip :id="$course->id . '-topic'" text="{{ __('Topic') }}"/>
+                <!-- course subtitle -->
+                <x-tailwind.text.paragraph color="white">
+                    {{ $course->subtitle }}
+                </x-tailwind.text.paragraph>
 
 
+                <div class="flex items-center">
+                    <!-- rating star component -->
+                    <div class="flex items-center mb-4">
+                        <x-tailwind.rating-star :rating="$course->rating" icon="star" color="yellow" />
+                        <span class="text-md text-white ml-6"><i class="fas fa-comments mr-2"></i>{{ $course->reviews_count }} {{ Str::plural( __('review'), $course->reviews_count) }}</span>
+                        <span class="text-md text-white ml-6"><i class="fas fa-eye mr-2"></i>{{ $course->views }} {{ Str::plural( __('view'), $course->views ) }}</span>
+                    </div>
+                </div>
 
-                <p class="text-white sm:text-md md:text-lg lg:mx-0 mb-2"><span class="text-gray-400"><i class="fas fa-layer-group text-sm mr-2"></i>{{ __('Level') }}:&nbsp;</span>{{ __($course->level->name) }}</p>
+                <div class="flex items-center">
+                    <!-- Author info -->
+                    <div class="flex items-center">
+                        <figure>
+                            <img class="h-12 w-12 object-cover rounded-full shadow" src="{{ $course->editor->profile_photo_url }}" alt="Foto de perfil de {{ $course->editor->name }}"/>
+                        </figure>
+                        <div class="ml-4">
+                            <span class="font-semibold text-lg text-white">{{ $course->editor->name . ' ' . $course->editor->lastname }}</span>
+                            <br>
+                            <a class="text-sm" href="mailto:{{ $course->editor->email }}" target="_blank"><span class="lowercase text-white">{{ $course->editor->email }}</span></a>
+                        </div>
 
-                <!-- rating star component -->
-                <x-tailwind.rating-star :rating="$course->rating" icon="star" color="yellow" />
-
-                <div class="flex mb-4">
-                    <!-- users enrolled -->
-                    <p class="text-white sm:text-md md:text-lg lg:mx-0">
-                        <i class="fas fa-users text-sm mr-2"></i>{{ $course->participants_count }} {{ $course->participants_count > 1 || $course->participants_count == 0 ? __('Users') : __('User') }}
-                    </p>
+                    </div>
                 </div>
             </div>
 
@@ -59,21 +88,26 @@
     </section>
 
 
-    <div class="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-16 py-12">
+    <div class="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-16">
 
-        <div class="order-2 md:col-span-1 lg:col-span-2 md:order-1 lg:order-1">
+        <!-- content -->
+        <div class="order-2 md:col-span-1 lg:col-span-2 md:order-1 lg:order-1 mb-12">
 
             <!-- section description -->
             <section class="mb-12">
-                <h2 class="font-bold text-2xl text-gray-600">{{ __('Description') }}</h2>
-                <div class="text-gray-600 text-base mt-4">
+                <x-tailwind.text.title color="black">
+                    {{ __('Description') }}
+                </x-tailwind.text.title>
+                <x-tailwind.text.paragraph>
                     {!! $course->summary !!}
-                </div>
+                </x-tailwind.text.paragraph>
             </section>
 
             <!-- section requirements  -->
             <section class="mb-12">
-                <h2 class="font-bold text-2xl text-gray-600">{{ __('Requirements') }}</h2>
+                <x-tailwind.text.title color="black">
+                    {{ __('Requirements') }}
+                </x-tailwind.text.title>
 
                 <ul class="list-disc list-inside mt-4">
 
@@ -92,8 +126,10 @@
 
             <!-- section goals -->
             <section class="mb-12">
+                <x-tailwind.text.title color="black">
+                    {{ __('What you will learn') }}
+                </x-tailwind.text.title>
 
-                <h2 class="font-bold text-2xl mb-2 text-gray-600">{{ __('What you will learn') }}</h2>
                 <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 mt-4">
 
                     @foreach ( $course->goals as $goal )
@@ -111,141 +147,173 @@
 
             <!-- section subjects -->
             <section class="mb-12">
-                <h2 class="font-bold text-2xl text-gray-600">{{ __('Course content') }}</h2>
+                <x-tailwind.text.title color="black">
+                    {{ __('Course content') }}
+                </x-tailwind.text.title>
 
-                @foreach ( $course->sections as $section )
+                <!-- sections count statics -->
+                @if($course->sections_count >= 1)
+                    <span class="text-md text-gray-600 text-center">
+                        {{ __('This course contains') }}
+                        {{ $course->sections_count }} {{ ($course->sections_count > 1 ) ? __('sections') : __('section') }}
+                    </span>
+                @endif
 
-                    <article class="mt-4 shadow" @if( $loop->first) x-data="{ open: true}"  @else x-data="{ open: false}" @endif>
-                        <header class="border border-gray-200 px-4 pt-2 cursor-pointer bg-gray-100 bg-opacity-25 flex justify-between items-center" x-on:click=" open = !open ">
-                            <h3 class="text-xl mb-2 text-gray-600">
-                                <span class="font-bold">{{ __('Section') }} {{ ($loop->index + 1) }} :</span> <span class="font-semibold text-left">{{ $section->name }}</span>
-                            </h3>
-                            <i class="fas fa-chevron-down ml-2 text-gray-400" x-show=" !open "></i>
-                            <i class="fas fa-chevron-right ml-2 text-gray-400" x-show=" open "></i>
-                        </header>
-                        <div class="bg-white py-2 px-4" x-show=" open " x-transition:enter="transition ease-in-out duration-500" x-transition.delay.0.5s>
-                            <ul class="grid grid-cols-1 gap-x-3 divide-y">
 
-                                @foreach ($section->lessons as $lesson )
 
-                                    <li class="text-gray-600 text-base"><i class="far fa-play-circle text-lg text-gray-500 mr-4 py-2"></i>{{ $lesson->name }}</li>
+                @foreach($course->sections as $section)
+                <div id="accordion-open" @if( $loop->first) x-data="{ open: true}"  @else x-data="{ open: false}" @endif class="mt-4">
+                    <h2 id="accordion-open-heading-1" class="text-lg">
+                        <button type="button" class="flex justify-between items-center p-5 w-full text-left text-gray-900 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 font-semibold" x-on:click=" open = !open ">
+                            <span class="flex items-center">
+                              <span class="uppercase mr-1">{{ __('Section') }}</span> {{ $loop->iteration }} : {{ $section->title }}
+                            </span>
+                            <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                            </button>
+                      </h2>
 
-                                @endforeach
-                            </ul>
-                        </div>
-                    </article>
+                      <div class="w-full text-gray-500 bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:text-white" x-show=" open " x-transition:enter="transition ease-in-out duration-500" x-transition.delay.0.5s>
+                         @if(count($section->scorms) > 0)
+                            @foreach($section->scorms as $scorm)
+                                <button wire:click="$emit('change-lesson', {{ $scorm }} )" type="button" class="relative inline-flex items-center w-full px-4 py-2 text-sm font-medium border-b border-gray-200  focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white cursor-auto">
 
-                @endforeach
+                                    <x-icons.video classes="mr-2" key="icon-{{ $scorm->id }}" color="#BDBDBD"></x-icons.video>
+
+                                    @php
+                                        $scormTitle = trim($scorm->title)
+                                    @endphp
+
+                                    <p class="text-left ...">{{ $scormTitle }}</p>
+                                </button>
+                            @endforeach
+                         @else
+                            @foreach($section->lessons as $lesson)
+                                <button wire:click="$emit('change-lesson', {{ $lesson }} )" type="button" class="relative inline-flex items-center w-full px-4 py-2 text-sm font-medium border-b border-gray-200  focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white cursor-auto">
+
+                                    <x-icons.video classes="mr-2" key="icon-{{ $lesson->id }}" color="#BDBDBD"></x-icons.video>
+
+                                    @php
+                                        $lessonTitle = trim($lesson->title)
+                                    @endphp
+
+                                    <p class="text-left ...">{{ $lessonTitle }}</p>
+                                </button>
+                            @endforeach
+
+                         @endif
+
+                      </div>
+                    </div>
+                    @endforeach
 
             </section>
 
             <!-- tag component -->
-            <div class="w-full pb-12 flex">
-                @foreach ($course->tags as $tag)
-                    <a href="{{ route('courses.tag', $tag) }}" class="cursor-pointer mb-8 text-normal">
-                        <x-tailwind.tag :id="'tag-'.$tag->id" :text="$tag->name" color="gray" :icon="$tag->icon" />
-                    </a>
-                @endforeach
+            @isset($course->tags)
+                <div class="w-full pb-12 flex">
+                    @foreach ($course->tags as $tag)
+                        <a href="{{ route('tags.show', $tag) }}" class="cursor-pointer mb-8 mr-2 text-normal">
+                            <x-tailwind.tag :id="'tag-'.$tag->id" :text="$tag->name" color="gray" :icon="$tag->icon" />
+                        </a>
+                    @endforeach
+                </div>
+            @endisset
+
+            <!-- rating star component -->
+            <div class="flex justify-center">
+                <x-tailwind.cards.reviews-card :model="$course"></x-tailwind.cards.reviews-card>
             </div>
 
-            @livewire('courses-reviews', ['course' => $course])
+            {{-- @livewire('courses-reviews', $course) --}}
 
         </div>
 
-        <div class="order-1  md:order-2 lg:order-2">
-            <section class="card mb-12">
-                <div class="card-body">
-                    <!-- Author info -->
-                    <div class="flex items-center">
-                        <figure>
-                            <img class="h-12 w-12 object-cover rounded-full shadow" src="{{ $course->editor->profile_photo_url }}" alt="Foto de perfil de {{ $course->editor->name }}"/>
-                        </figure>
-                        <div class="ml-4">
-                            <p class="font-bold text-lg text-gray-600">{{ $course->editor->name . ' ' . $course->editor->lastname }}</p>
-                                @foreach($course->editor->roles as $role)
-                                    @if($role->name == 'Creator')
-                                        <p class="text-md text-gray-600 mr-2">Analista de Empleo</p>
-                                    @endif
-                                    @if($role->name == 'Instructor')
-                                        <p class="text-md text-gray-600 mr-2">Instructor</p>
-                                    @endif
-                                @endforeach
-                            <a class="text-gray-400 hover:text-gray-600 text-sm font-bold" href="mailto:{{ $course->editor->email }}" target="_blank"><i class="far fa-envelope fa-lg"></i></a>
-                        </div>
-                    </div>
+        <!-- aside -->
+        <div class="order-1  md:order-2 lg:order-2 px-4 md:px-0">
 
+            <!-- enrollment card -->
+            <section class="card my-8">
+                <div class="card-body p-8 bg-primary shadow-md">
 
+                    @can( 'enrolled', $course )
 
-                    {{-- @if( auth()->check() && !(Auth::user()->hasRole(['Administrator', 'Manager', 'Creator', 'Instructor']) )) --}}
-
-                    {{-- @can('view-course') --}}
-
-                        @can( 'enrolled', $course )
-
-                        <!-- TODO: Condition if course last lesson platform is Microsoft or Linkedin -->
-                        {{-- {{$course->url}}               --}}
-
-                            {{-- @if( $course->url != '' )
-
-                                <!-- CTA button : user enrolled -->
-                                <a href="{{ $course->url }}" class="btn-cta btn-success btn-block mt-4 hover:shadow">Continuar con el curso</a>
-
-                            @else
-
-                                <!-- CTA button : user enrolled -->
-                                <a href="{{ route('courses.status', $course ) }}" class="btn-cta btn-success btn-block mt-4 hover:shadow">Continuar con el curso</a>
-
-                            @endif --}}
-                            @if($course->completed && !is_null($course->completed))
-                                <a href="" class="btn-cta btn-success btn-block mt-4 hover:shadow">{{ __('Ver certificado') }}</a>
-                            @else
-
-                                <!-- CTA button : user enrolled -->
-                                <a href="{{ route('courses.status', ['course' => $course] ) }}" class="btn-cta btn-success btn-block mt-4 hover:shadow">{{ __('Continue with the course') }}</a>
-                            @endif
+                        @can('completeCourse', $course)
+                            <a href="" class="btn-cta btn-success btn-block mt-4 hover:shadow">{{ __('Ver certificado') }}</a>
                         @else
-
-                            {{-- @if( $course->url != '' )
-
-                                <!-- CTA button : user enrolled -->
-                                <a href="{{ $course->url }}" class="btn-cta btn-accent btn-block mt-4 hover:shadow">Iniciar este curso</a>
-
-                                <!-- TODO: Register user clicks -->
-
-                            @else
-
-                                <!-- CTA button -->
-                                <form action="{{ route('courses.enrolled', $course ) }}" method="post">
-                                    @csrf
-                                    <button type="submit" class="btn-cta btn-accent btn-block mt-4 hover:shadow">Iniciar este curso</button>
-                                </form>
-                            @endif --}}
-
-                            {{-- @if( $course->participants_count < $course->audiences->name  ) --}}
-                                @if( $course->price->value == 0 )
-                                    <p class="text-2xl font-bold text-gray-500 mt-3 mb-2">{{ __('Free') }}</p>
-                                    <form action="{{ route('courses.enrolled', ['course' => $course] ) }}" method="post">
-                                        @csrf
-                                        <button type="submit" class="btn-cta btn-accent btn-block mt-4 hover:shadow">{{ __('Start this course') }}</button>
-                                    </form>
-                                @else
-                                    <p class="text-2xl font-bold text-gray-500 mt-3 mb-2">US$ {{ $course->price->value }}</p>
-                                    <a href="{{ route('payment.checkout', $course ) }}" class="btn-cta btn-accent btn-block hover:shadow">{{ __('Buy this course') }}</a>
-                                @endif
-                            {{-- @else
-                                <div class="flex items-center bg-blue-500 text-white text-sm font-bold px-4 py-3" role="alert">
-                                    <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z"/></svg>
-                                    <p>Por el momento no tenemos cupo disponible para este curso.</p>
-                                </div>
-                            @endif --}}
-
-
+                            <i class="fas fa-info-circle mr-2 text-blue-50"></i><span class="text-blue-50 font-semibold">{{ __('You are already enrolled in this course.') }}</span>
+                            <x-tailwind.buttons.cta-button class="block uppercase hover:bg-red-500 hover:text-white mt-4" bgColor="white" color="blue" :link="route('courses.status', $course)" >
+                                {{ __('Continue course') }}
+                            </x-tailwind.buttons.cta-button>
                         @endcan
-                    {{-- @endcannot --}}
+                    @else
+                        @if( $course->price->value == 0 )
+                            @empty($course->start_date)
+                                <span class="text-blue-50 font-semibold">{{ __('Start whenever you want') }}</span>
+                            @else
+                                <span class="text-blue-50 font-semibold">{{ __('This course starts on') }} {{ $course->getCourseStartDateAttribute() }}</span>
+                            @endempty
+                            <p class="text-3xl font-bold text-blue-50 mt-3 mb-2">{{ __('Free') }}</p>
+                            <div class="mt-4">
+                                <!-- users enrolled -->
+                                <p class="text-blue-50 sm:text-sm md:text-md lg:mx-0">
+                                    {{ __('Start learning today! We offer you the flexibility to learn at your own pace, but remember, the more skill points you accumulate, the more opportunities you will have.') }}
+                                </p>
+                            </div>
+                            <!-- CTA button  -->
+                            <div class="mt-6">
+                                <x-tailwind.buttons.cta-button class="block uppercase hover:bg-red-500 hover:text-white" bgColor="white" color="blue" :link="route('courses.enrollment', $course)" >
+                                    {{ __('Make enrollement') }}
+                                </x-tailwind.buttons.cta-button>
+                            </div>
+                        @else
+                            <p class="text-3xl font-bold text-blue-50 mt-3 mb-2">
+                                US$ {{ $course->price->value }}
+                            </p>
+                            <!-- CTA button  -->
+                            <div class="mt-6">
+                                <x-tailwind.buttons.cta-button class="block uppercase hover:bg-red-500 hover:text-white" bgColor="white" color="blue" :link="route('payment.checkout', $course )" >
+                                    {{ __('Buy this course') }}
+                                </x-tailwind.buttons.cta-button>
+                            </div>
+                        @endif
+                    @endcan
+                    <!-- /enrollment card -->
 
                 </div>
             </section>
 
+            <!-- course info -->
+            <section class="mb-12">
+                <div class="grid grid-cols-6">
+                    <div class="col-span-2 px-2">
+                        <div class="flex flex-col text-center">
+                            {{-- <span class="text-gray-500 text-xs">{{ __('Level') }}</span> --}}
+                            <img class="h-20 w-auto" src={{ asset($course->getLevelBadge()) }}>
+                            <span class="text-gray-800 font-semibold text-xs">{{ $course->level->name }}</span>
+                        </div>
+                    </div>
+                    <div class="col-span-2 border-l-2 px-2">
+                        <div class="flex flex-col justify-between">
+                            <span class="text-gray-500 text-xs">{{ __('Duration') }}</span>
+                            <div class="flex flex-1 flex-col mt-4">
+                                <span class="text-2xl font-semibold">{{ $course->hours }}</span>
+                                <span class="text-gray-800 font-semibold text-xs">{{ __('You can spend') }} {{ $course->getLearningTimePerWeek() }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-2 border-l-2 px-2">
+                        <div class="flex flex-col justify-between">
+                            <span class="text-gray-500 text-xs">{{ __('Students') }}</span>
+                            <div class="flex flex-1 flex-col mt-4">
+                                <span class="text-2xl font-semibold">{{ $course->users_count }}</span>
+                                <span class="text-gray-800 font-semibold text-xs">{{ __('Enrolled in this course') }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- related course -->
             <aside class="hidden md:block divide-y divide-gray-300">
 
                 @if(count($related_courses))
@@ -263,7 +331,7 @@
 
                             <div class="ml-3 md:col-span-1 lg:col-span-2">
                                 <h3>
-                                    <a class="font-bold text-gray-600 mb-3" title="{{ $course->title }}" href="{{ route('course.show', [app()->getLocale(), $course] ) }}">{{ Str::limit( $course->title, 40 ) }}</a>
+                                    <a class="font-bold text-gray-600 mb-3" title="{{ $course->title }}" href="{{ route('courses.show', $course ) }}">{{ Str::limit( $course->title, 40 ) }}</a>
                                 </h3>
                                 <div class="flex items-center mb-4">
                                     <img class="h-8 w-8 object-cover rounded-full shadow-lg" src="{{ $course->editor->profile_photo_url }}" alt="" />
@@ -276,7 +344,7 @@
                                     </p>
                                     <!-- users enrolled -->
                                     <p class="text-gray-600 text-sm">
-                                        <i class="fas fa-users text-sm mr-2"></i>{{ $course->participants_count }}
+                                        <i class="fas fa-users text-sm mr-2"></i>{{ $course->users_count }}
                                     </p>
                                     <!-- course price -->
                                     <p class="text-md text-gray-700 font-bold ml-auto">
@@ -290,9 +358,11 @@
 
                 @endif
 
+                @if($course->topic)
                 <div class="w-full pt-4">
-                    <a class="text-blue-500" href="{{ route('courses.category', [app()->getLocale(), $course->category]) }}">{{ __('More courses in') }} {{ $course->category->name }}</a>
+                    <a class="text-blue-500" href="{{ route('topic.show', $course->topic) }}">{{ __('More courses in') }} {{ $course->topic->name }}</a>
                 </div>
+                @endif
 
                 {{-- TODO: Encuesta de satisfaccion --}}
                 {{-- <h2 class="font-bold text-2xl text-gray-600 my-12">Encuesta de Satisfacción</h2>

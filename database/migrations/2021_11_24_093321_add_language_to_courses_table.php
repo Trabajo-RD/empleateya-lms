@@ -28,6 +28,7 @@ class AddLanguageToCoursesTable extends Migration
     {
         Schema::table('courses', function (Blueprint $table) {
             $table->dropForeign('courses_language_id_foreign');
+            $table->dropColumn('language_id');
         });
     }
 }

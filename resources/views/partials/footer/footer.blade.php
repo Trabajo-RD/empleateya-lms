@@ -25,9 +25,12 @@
                 <li class="mt-1">
                     <a target="_top" href="{{ route('courses.index') }}" class="text-sm hover:text-gray-100">{{ __('Courses') }}</a>
                 </li>
-                {{-- <li class="mt-1">
-                    <a target="_top" href="" class="text-sm hover:text-gray-100">{{ __('Another') }}</a>
-                </li> --}}
+                <li class="mt-1">
+                    <a target="_top" href="{{ route('workshops.index') }}" class="text-sm hover:text-gray-100">{{ __('Workshops') }}</a>
+                </li>
+                <li class="mt-1">
+                    <a target="_top" href="{{ route('learning-paths.index') }}" class="text-sm hover:text-gray-100">{{ __('Learning Paths') }}</a>
+                </li>
             </ul>
         </div>
 
@@ -42,7 +45,7 @@
                     <a target="_top" href="{{route('contact-us') }}" class="text-sm hover:text-gray-100">{{ __('Contact us') }}</a>
                 </li>
                 <li class="mt-1">
-                    <a target="_top" href="{{ route('pages.glosary') }}" class="text-sm hover:text-gray-100">{{ __('Glossary of terms') }}</a>
+                    <a target="_top" href="{{ route('glosary.index') }}" class="text-sm hover:text-gray-100">{{ __('Glossary of terms') }}</a>
                 </li>
                 <li class="mt-1">
                     <a target="_top" href="{{ route('terms.show') }}" class="text-sm hover:text-gray-100">{{ __('Terms of Service') }}</a>

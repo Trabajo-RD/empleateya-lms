@@ -6,7 +6,7 @@
                 <h1 class="text-2xl font-bold">{{ __('New_course') }}</h1>
                 <hr class="mt-2 mb-6">
 
-                {!! Form::open(['route' => ['instructor.courses.store', app()->getLocale()], 'files' => true, 'autocomplete' => 'off', 'class' => 'create_form' ]) !!}
+                {!! Form::open(['route' => 'instructor.courses.store', 'files' => true, 'autocomplete' => 'off', 'class' => 'create_form' ]) !!}
 
                     @include('instructor.courses.partials.microsoft-form')
 

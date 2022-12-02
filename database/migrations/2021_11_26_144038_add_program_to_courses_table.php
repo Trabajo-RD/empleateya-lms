@@ -28,6 +28,7 @@ class AddProgramToCoursesTable extends Migration
     {
         Schema::table('courses', function (Blueprint $table) {
             $table->dropForeign('courses_program_id_foreign');
+            $table->dropColumn('program_id');
         });
     }
 }

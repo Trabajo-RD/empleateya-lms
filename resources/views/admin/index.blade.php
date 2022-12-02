@@ -184,7 +184,7 @@
                           <span class="direct-chat-timestamp float-right">{{ $review->created_at }}</span>
                         </div>
                         <!-- /.direct-chat-infos -->
-                        <img class="direct-chat-img" src="" alt="message user image">
+                        <img src="{{ $review->user->profile_photo_url }}" class="rounded-circle" alt="User Image">
                         <!-- /.direct-chat-img -->
                         <div class="direct-chat-text">
                             {{ $review->comment }}
@@ -334,7 +334,7 @@
                   </div>
                   <!-- /.card-body -->
                   <div class="card-footer text-center">
-                    <a href="{{ route('admin.users.index', App::getLocale() ) }}">Ver todos los Usuarios</a>
+                    <a href="{{ route('admin.users.index') }}">Ver todos los Usuarios</a>
                   </div>
                   <!-- /.card-footer -->
                 </div>
@@ -407,7 +407,7 @@
               <!-- /.card-body -->
               <div class="card-footer clearfix">
                 {{-- <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a> --}}
-                <a href="{{ route('admin.courses.index', App::getLocale() ) }}" class="btn btn-sm btn-secondary float-right">Ver todos los cursos</a>
+                <a href="{{ route('admin.courses.index' ) }}" class="btn btn-sm btn-secondary float-right">Ver todos los cursos</a>
               </div>
               <!-- /.card-footer -->
             </div>
@@ -551,7 +551,7 @@
                             <img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
                             </div> --}}
                             <div class="product-info">
-                            <a href="{{ route('admin.courses.show', [app()->getLocale(), $revision_course]) }}" class="product-title">{{ $revision_course->title }}
+                            <a href="{{ route('admin.courses.show', $revision_course) }}" class="product-title">{{ $revision_course->title }}
                                 {{-- <span class="badge badge-warning float-right">{{ $revision_course->status }}</span></a> --}}
                             <span class="product-description">
                                 {{ $revision_course->editor->name }} {{ $revision_course->editor->lastname }}
@@ -563,7 +563,7 @@
               </div>
               <!-- /.card-body -->
               <div class="card-footer text-center">
-                <a href="{{ route('admin.courses.revision', App::getLocale() ) }}" class="uppercase">Ver todos los cursos en revisión</a>
+                <a href="{{ route('admin.courses.revision') }}" class="uppercase">Ver todos los cursos en revisión</a>
               </div>
               <!-- /.card-footer -->
             </div>

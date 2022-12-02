@@ -1,0 +1,167 @@
+<div>
+    <x-tailwind.layouts.container>
+        <div class="mx-auto grid grid-cols-4 gap-x-6 pb-12">
+
+            <!-- Sidebar -->
+            <aside class="col-span-1 divide-y">
+                <div class="mb-6 flex items-center">
+                    <i class="fas fa-sliders-h text-gray-400 fa-2x mr-2"></i>
+                    <x-tailwind.text.caption class="text-2xl">{{ __('Filter') }}</x-tailwind.text.caption>
+                </div>
+
+
+            <!-- modalities filter -->
+            <div class="mb-6 block items-center justify-between" x-data="{ open: false }">
+                <button class=" mb-2 w-full flex justify-between px-6 py-2.5 font-medium text-md leading-normal uppercase rounded shadow-md" x-on:click="open = true">
+                    {{ __('Modality') }}
+                    <i class="fas fa-angle-down text-sm ml-2"></i>
+                </button>
+                <div class="relative w-full mt-2 bg-white z-40 border rounded shadow-xl" x-show.transition.duration.500ms.scale.0="open" x-on:click.away="open = false">
+                    @foreach($modalities as $modality)
+                        <a class="uppercase cursor-pointer transition-colors duration-200 block px-4 py-4 text-normal hover:bg-gray-200" wire:click="$set('modality_id', {{ $modality->id }})" x-on:click="open = false">
+                            {{ __($modality->name) }}
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+
+            <!-- program filter -->
+            <div class="mb-6 block items-center justify-between" x-data="{ open: false }">
+                <button class=" mb-2 w-full flex justify-between px-6 py-2.5 font-medium text-md leading-normal uppercase rounded shadow-md" x-on:click="open = true">
+                    {{ __('Program or Platform') }}
+                    <i class="fas fa-angle-down text-sm ml-2"></i>
+                </button>
+                <div class="relative w-full mt-2 bg-white z-40 border rounded shadow-xl" x-show.transition.duration.500ms.scale.0="open" x-on:click.away="open = false">
+                    @foreach($programs as $program)
+                        <a class="uppercase cursor-pointer transition-colors duration-200 block px-4 py-4 text-normal hover:bg-gray-200" wire:click="$set('program_id', {{ $program->id }})" x-on:click="open = false">
+                            {{ $program->name }}
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+
+               <!-- levels filter -->
+               <div class="mb-6 block items-center justify-between" x-data="{ open: false }">
+                    <button class=" mb-2 w-full flex justify-between px-6 py-2.5 font-medium text-md leading-normal uppercase rounded shadow-md" x-on:click="open = true">
+                        {{ __('Levels') }}
+                        <i class="fas fa-angle-down text-sm ml-2"></i>
+                    </button>
+                    <div class="relative w-full mt-2 bg-white z-40 border rounded shadow-xl" x-show.transition.duration.500ms.scale.0="open" x-on:click.away="open = false">
+                        @foreach($levels as $level)
+                            <a class="uppercase cursor-pointer transition-colors duration-200 block px-4 py-4 text-normal hover:bg-gray-200" wire:click="$set('level_id', {{ $level->id }})" x-on:click="open = false">
+                                {{ __($level->name) }}
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+
+                <!-- languages filter -->
+                <div class="mb-6 block items-center justify-between" x-data="{ open: false }">
+                    <button class=" mb-2 w-full flex justify-between px-6 py-2.5 font-medium text-md leading-normal uppercase rounded shadow-md" x-on:click="open = true">
+                        {{ __('Language') }}
+                        <i class="fas fa-angle-down text-sm ml-2"></i>
+                    </button>
+                    <div class="relative w-full mt-2 bg-white z-40 border rounded shadow-xl" x-show.transition.duration.500ms.scale.0="open" x-on:click.away="open = false">
+                        @foreach($languages as $language)
+                            <a class="uppercase cursor-pointer transition-colors duration-200 block px-4 py-4 text-normal hover:bg-gray-200" wire:click="$set('language_id', {{ $language->id }})" x-on:click="open = false">
+                                {{ __($language->name) }}
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+
+
+                <!-- prices filter -->
+                <div class="mb-6 block items-center justify-between" x-data="{ open: false }">
+                    <button class=" mb-2 w-full flex justify-between px-6 py-2.5 font-medium text-md leading-normal uppercase rounded shadow-md" x-on:click="open = true">
+                        {{ __('Price') }}
+                        <i class="fas fa-angle-down text-sm ml-2"></i>
+                    </button>
+                    <div class="relative w-full mt-2 bg-white z-40 border rounded shadow-xl" x-show.transition.duration.500ms.scale.0="open" x-on:click.away="open = false">
+                        @foreach($prices as $price)
+                            <a class="uppercase cursor-pointer transition-colors duration-200 block px-4 py-4 text-normal hover:bg-gray-200" wire:click="$set('price_id', {{ $price->id }})" x-on:click="open = false">
+                                {{ __($price->name) }}
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+{{--
+                Price: {{ $price_id }} --}}
+
+
+                <!-- word filter -->
+               {{-- <div class="mb-6">
+                    <x-tailwind.text.caption>{{ __('Word') }}</x-tailwind.text.caption>
+                </div>
+                <div class="h-max">
+                        <x-tailwind.inputs.base-input id="word-filter" placeholder="Busca una palabra" wire:change="$set('text', s)" />
+                </div> --}}
+
+                <!-- rating filter -->
+               {{-- <div class="mb-6">
+                    <x-tailwind.text.caption>{{ __('Rating') }}</x-tailwind.text.caption>
+                </div>
+                <x-tailwind.layouts.scrollbar>
+                    <div class="h-max">
+                        @foreach($ratings as $rating)
+                        <div class="flex items-center mb-4">
+                            <input wire:model.prevent type="radio" class="mr-2" id="rating-{{ $rating }}" value="{{ $rating }},5" autocomplete="off" wire:model="rating_id">
+                            <label for="rating-{{ $rating }}" class="cursor-pointer">
+                                @for($i=0; $i<$rating; $i++)
+                                    <i class="fas fa-star fa-sm text-yellow-400"></i>
+                                @endfor
+                                @for($i=5; $i>$rating; $i--)
+                                    <i class="fas fa-star fa-sm text-gray-400"></i>
+                                    @endfor
+                            </label>
+                        </div>
+                        @endforeach
+                    </div>
+                </x-tailwind.layouts.scrollbar> --}}
+
+                <!-- filter buttons -->
+                <div class="flex items-center justify-end py-8 gap-x-4">
+                    <a class="btn bg-gray-200 text-gray-800 cursor-pointer uppercase" wire:click="resetFilters">
+                        {{ __('Reset') }}
+                    </a>
+                    {{-- <a class="btn bg-blue-900 text-blue-50">{{ __('Filter') }}</a> --}}
+                </div>
+
+            </aside>
+            <!-- /Sidebar -->
+
+            <!-- Content -->
+            <main class="col-span-3">
+
+                @livewire('search.course-search')
+
+                @if( count( $courses ) >= 1 )
+                        <!-- text with read more -->
+                        {{-- <x-tailwind.layouts.text-wrapper>
+                            <div class="block md:flex items-center md:justify-between">
+                                <x-tailwind.text.paragraph>
+                                    {{ count($totalCourses) }} {{ count($totalCourses) != 1 ? __('Published courses') : __('Published course') }}
+                                </x-tailwind.text.paragraph>
+                            </div>
+                        </x-tailwind.layouts.text-wrapper> --}}
+
+                        <!-- courses -->
+                        <x-tailwind.layouts.grid-cols-3>
+                            @foreach ( $courses as $course )
+                            <div class="col-span-1">
+                                <x-course-card :course="$course" />
+                            </div>
+                            @endforeach
+                        </x-tailwind.layouts.grid-cols-3>
+                @endif
+            </main>
+            <!-- /Content -->
+
+            <footer class="col-span-4 mt-4">
+                <!-- navigation links -->
+                {{ $courses->links() }}
+            </footer>
+
+        </div>
+    </x-tailwind.layouts.container>
+</div>

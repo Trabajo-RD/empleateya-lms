@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ LaravelLocalization::getCurrentLocale() }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,7 +31,7 @@
 
         <!-- admin responsive left sidebar -->
             {{-- @livewire('navigation-menu') --}}
-            @livewire('admin-navbar')
+            {{-- @livewire('admin-navbar') --}}
 
             <!-- Page Heading -->
             @if (isset($header))
@@ -46,7 +46,7 @@
             <div class="wrapper relative min-h-screen md:flex">
 
 
-                @livewire('admin-sidebar')
+                {{-- @livewire('admin-sidebar') --}}
 
                 <!-- main content -->
                 <main id="layout-admin-content" class="flex-1">

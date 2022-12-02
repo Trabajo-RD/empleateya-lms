@@ -9,20 +9,21 @@ class Term extends Model
 {
     use HasFactory;
 
+    const HIDDEN = 1;
+    const VISIBLE = 2;
+
     protected $guarded = ['id'];
-    protected $withCount = ['tags'];
+    // protected $withCount = ['tags'];
 
     protected $fillable = [
         'name',
         'description'
     ];
 
-    /**
-     * Relation N:M
-     *
-     * return all FAQ tags
-     */
-    public function tags(){
-        return $this->belongsToMany('App\Models\Tag');
+    // N:M polymorphic
+
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
     }
 }

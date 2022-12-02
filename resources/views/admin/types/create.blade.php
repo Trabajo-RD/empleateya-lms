@@ -9,7 +9,7 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            {!! Form::open(['route' => ['admin.types.store', app()->getLocale()], 'autocomplete' => 'off']) !!}
+            {!! Form::open(['route' => 'admin.types.store', 'autocomplete' => 'off']) !!}
                 <div class="form-group">
                     {!! Form::label('name', 'Nombre') !!}
                     {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el nombre del tipo de curso']) !!}

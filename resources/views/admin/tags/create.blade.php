@@ -11,7 +11,7 @@
     <div class="col col-md-12">
         <div class="card">
             <div class="card-body">
-                {!! Form::open(['route' => ['admin.tags.store', app()->getLocale()], 'autocomplete' => 'off' ]) !!}
+                {!! Form::open(['route' => 'admin.tags.store', 'autocomplete' => 'off' ]) !!}
 
                     @include('admin.tags.partials.form')
 

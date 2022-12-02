@@ -129,6 +129,11 @@ return [
          * Passphrase for your local_cert file.
          */
         'passphrase' => env('LARAVEL_WEBSOCKETS_SSL_PASSPHRASE', null),
+
+        /**
+         * https://laracasts.com/discuss/channels/code-review/laravel-websockets-connection-failed
+         */
+        'verify_peer' => false,
     ],
 
     /*

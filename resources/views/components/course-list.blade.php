@@ -16,7 +16,7 @@
         <!-- resource type -->
         <p class="text-sm text-gray-500 mb-2">{{ __($course->type->name) }}</p>
         <!-- course title -->
-        <a href="{{ route( 'courses.show', [app()->getLocale(), $course] ) }}">
+        <a href="{{ route( 'courses.show', $course ) }}">
             <h2 class="card-title">{{ Str::limit( $course->title, 55 ) }}</h2>
         </a>
         <p class="text-gray-500 text-sm mb-2 mt-auto">{{ $course->editor->name}}</p>
@@ -33,13 +33,13 @@
             <!-- users enrolled -->
             <p class="text-sm text-gray-500">
                 <i class="fas fa-users"></i>
-                ({{ $course->participants_count }})
+                ({{ $course->users_count }})
             </p>
 
         </div>
         <div class="flex">
-            <a href="{{ route('courses.category', [app()->getLocale(), $course->category]) }}" data-toggle="tooltip" data-placement="top" class="mr-2 bg-gray-300 text-gray text-sm p-1 rounded  leading-none flex items-center focus:outline-none" title="{{ __('Category') }}">
-                {{ __($course->category->name) }}
+            <a href="{{ route('topic.show', ['topic' => $course->topic]) }}" data-toggle="tooltip" data-placement="top" class="mr-2 bg-gray-300 text-gray text-sm p-1 rounded  leading-none flex items-center focus:outline-none" title="{{ __('Topic') }}">
+                {{ __($course->topic->name) }}
             </a>
             <button type="button" data-toggle="tooltip" data-placement="top" class="mr-2 bg-gray-300 text-gray text-sm p-1 rounded  leading-none flex items-center focus:outline-none" title="Nivel">
                 {{ __($course->level->name) }}

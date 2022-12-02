@@ -59,9 +59,8 @@ class CoursePolicy
      */
     public function enrolled( User $user, Course $course )
     {
-        return $course->participants->contains( $user->id )
-                ? Response::allow()
-                : Response::deny('No estas inscrito en este curso.');
+        // Registro de usuarios matriculados en el curso y ver si contiente el id del usuario autenticado
+        return $course->users->contains( $user->id );
     }
 
     /**
@@ -79,13 +78,11 @@ class CoursePolicy
      * Prevent an instructor/creator from being able to modify a course created by another
      */
     public function dictated( User $user, Course $course){
-
         if( $course->user_id == $user->id ){
             return true;
         } else {
             return false;
         }
-
     }
 
     /**
@@ -132,5 +129,10 @@ class CoursePolicy
         } else {
             return true;
         }
+    }
+
+    public function completeCourse(User $user, Course $course)
+    {
+        return false;
     }
 }

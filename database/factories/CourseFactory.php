@@ -34,6 +34,7 @@ class CourseFactory extends Factory
         $title = $this->faker->unique()->sentence();
 
         return [
+            'uid' => 'capacitate.'.Str::slug($title),
             'title' => $title,
             'subtitle' => $this->faker->sentence(),
             'summary' => $this->faker->paragraph(),
@@ -41,20 +42,18 @@ class CourseFactory extends Factory
             'duration_in_minutes' => 60,
             'status' => $this->faker->randomElement([1, 2, 3, 4]),
             'slug' => Str::slug($title),
-            'user_id' => $this->faker->randomElement([6, 7, 8, 9, 10, 11, 12]),            
-            'moderator_id' => null,
-            'contributor_id' => null,
+            'user_id' => $this->faker->randomElement([6, 7, 8, 9, 10, 11, 12]),
             //'user_id' => User::all()->random()->id,
             'level_id' => Level::all()->random()->id,
-            'category_id' => Category::all()->random()->id,
             'price_id' => Price::all()->random()->id,
-            'type_id' => Type::all()->random()->id,
+            'type_id' => 4,
             'modality_id' => Modality::all()->random()->id,
+            'language_id' => Language::all()->random()->id,
             'topic_id' => Topic::all()->random()->id,
             'audience' => $this->faker->randomElement([5, 10, 15, 20]),
             'start_date' => null,
             'end_date' => null,
-            'language_id' => 1
+            'program_id' => 1 // RD-Trabaja
         ];
     }
 }

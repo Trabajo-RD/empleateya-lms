@@ -1,8 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Student\HomeController;
+use App\Http\Controllers\Dashboard\HomeController;
+use App\Http\Controllers\Student\DashboardController;
+use App\Http\Controllers\Student\Dashboard\StudentCourseController;
+
+// use App\Http\Controllers\Student\HomeController;
 use App\Http\Controllers\Student\CourseController;
+
+use App\Http\Livewire\Student\StudentIndex;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,12 +26,18 @@ use App\Http\Controllers\Student\CourseController;
 
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
-    'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    'middleware' => [ 'auth', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
 ], function(){
 
-    Route::get('student/dashboard', [HomeController::class, 'index'])->name('dashboard.index');
+    // Route::get('dashboard', [HomeController::class, 'index']);
+    Route::get('student/dashboard', [DashboardController::class, 'index'])->name('student.dashboard');
+    Route::get('student/dashboard/courses', [StudentCourseController::class, 'index'])->name('student.dashboard.courses.index');
+    Route::get('student/dashboard/courses/{course}/destroy', [StudentCourseController::class, 'destroy'])->name('student.dashboard.courses.destroy');
 
-    Route::get('student/courses', [CourseController::class, 'index'])->name('courses.index');
+    // Listado de cursos del estudiante
+    // Route::get('student/courses', CourseController::class)->name('courses.index');
+
+    Route::get('student/learning', StudentIndex::class)->name('student.courses.index');
 
 });
 

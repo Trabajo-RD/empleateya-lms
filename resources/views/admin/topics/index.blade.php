@@ -17,7 +17,7 @@
     <div class="card">
 
         <div class="card-header">
-            <a href="{{ route('admin.topics.create', app()->getLocale() ) }}" class="btn btn-primary float-left" data-toggle="tooltip" data-placement="bottom" title="Añade una nueva subcategoría">
+            <a href="{{ route('admin.topics.create') }}" class="btn btn-primary float-left" data-toggle="tooltip" data-placement="bottom" title="Añade una nueva subcategoría">
             <i class="fas fa-plus mr-1"></i>Añadir subcategoría</a>
         </div>
 
@@ -43,11 +43,11 @@
                             <td class="text-center">{{ $topic->category->name }}</td>
                             <!-- button -->
                             <td width="12%">
-                                <a href="{{ route('admin.topics.edit', [app()->getLocale(), $topic ]) }}" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="left" title="Editar {{$topic->name}}"><i class="far fa-edit mr-1"></i>Editar</a>
+                                <a href="{{ route('admin.topics.edit', $topic ) }}" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="left" title="Editar {{$topic->name}}"><i class="far fa-edit mr-1"></i>Editar</a>
                             </td>
                             <!-- button -->
                             <td width="14%">
-                                <form action="{{ route( 'admin.topics.destroy', [app()->getLocale(), $topic ]) }}" method="POST" class="delete-topic">
+                                <form action="{{ route( 'admin.topics.destroy', $topic ) }}" method="POST" class="delete-topic">
                                     @csrf
                                     @method('delete')
                                     <button class="btn btn-outline-danger" type="submit" data-toggle="tooltip" data-placement="left" title="Eliminar {{$topic->name}}"><i class="far fa-trash-alt mr-1"></i>Eliminar</button>

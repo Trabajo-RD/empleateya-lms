@@ -10,14 +10,25 @@ function slugChange(){
 }
 
 // formating slug
+// function slug(str){
+//     var $slug = '';
+//     var trimmed = str.trim(str);
+//     $slug = trimmed.normalize("NFD").replace(/[\u0300-\u036f]/g, )
+//     // .replace(' ', '-')
+//     .replace(/-+/g, '-')
+//     .replace(/^-|-$/g, '');
+//     return $slug.toLowerCase();
+// }
+
+
 function slug(str){
     var $slug = '';
     var trimmed = str.trim(str);
-    $slug = trimmed.replace(/[^a-z0-9-]/gi, '-').
-    replace(/-+/g, '-').
-    replace(/^-|-$/g, '');
-    return $slug.toLowerCase();
+    $slug = trimmed.normalize("NFD").replace(/[\u0300-\u036f]/g, '');
+
+    return $slug.replace(/\s+/g, '-').replace(/-+/g, '-').toLowerCase();
 }
+
 
 /* CKEDITOR ALL OPTIONS */
 
@@ -44,24 +55,4 @@ function slug(str){
 //     } );
 
 
-/* CHANGE IMAGE */
-
-document.getElementById("file").addEventListener('change', imageChange);
-
-function imageChange( event ){
-    var file = event.target.files[0];
-
-    var reader = new FileReader();
-    reader.onload = ( event ) => {
-        document.getElementById("picture").setAttribute('src', event.target.result);
-    };
-
-    reader.readAsDataURL( file );
-}
-
-// Copy to clipboard the input value by the ID
-function copyToClipboard(id) {
-    document.getElementById(id).select();
-    document.execCommand('copy');
-}
 

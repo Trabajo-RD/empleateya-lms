@@ -16,7 +16,7 @@
                 </button>
                 <h1 class="text-white font-extrabold text-2xl sm:text-3xl md:text-4xl">{{ $course->title }}</h1>
                 <h2 class="text-white mt-3 sm:mt-5 sm:text-lg md:mt-5 md:text-xl lg:mx-0 mb-4">{{ $course->subtitle }}</h2>
-                <p class="text-white sm:text-md md:text-lg lg:mx-0 mb-2"><span class="text-gray-400"><i class="fas fa-tags text-sm mr-2"></i>Categoría:&nbsp;</span>{{ $course->category->name }}</p>
+                <p class="text-white sm:text-md md:text-lg lg:mx-0 mb-2"><span class="text-gray-400"><i class="fas fa-tags text-sm mr-2"></i>Tema:&nbsp;</span>{{ $course->topic->name }}</p>
                 <p class="text-white sm:text-md md:text-lg lg:mx-0 mb-2"><span class="text-gray-400"><i class="fas fa-layer-group text-sm mr-2"></i>Nivel:&nbsp;</span>{{ $course->level->name }}</p>
 
                 <div class="flex mb-4">
@@ -34,7 +34,7 @@
                     </ul>
                     <!-- users enrolled -->
                     <p class="text-white sm:text-md md:text-lg lg:mx-0">
-                        <i class="fas fa-users text-sm mr-2"></i>{{ $course->participants_count }} Usuarios
+                        <i class="fas fa-users text-sm mr-2"></i>{{ $course->users_count }} Usuarios
                     </p>
                 </div>
             </div>
@@ -117,7 +117,7 @@
                             <h3 class="font-bold text-xl mb-2 text-gray-600">
                                 <i class="fas fa-chevron-down mr-2" x-show=" open "></i>
                                 <i class="fas fa-chevron-right mr-2" x-show=" !open "></i>
-                                {{ $section->name }}
+                                {{ $section->title }}
                             </h3>
                         </header>
                         <div class="bg-white py-2 px-4" x-show=" open ">
@@ -125,7 +125,7 @@
 
                                 @foreach ($section->lessons as $lesson )
 
-                                    <li class="text-gray-600 text-base"><i class="far fa-play-circle text-sm text-gray-500 mr-4"></i>{{ $lesson->name }}</li>
+                                    <li class="text-gray-600 text-base"><i class="far fa-play-circle text-sm text-gray-500 mr-4"></i>{{ $lesson->title }}</li>
 
                                 @endforeach
                             </ul>

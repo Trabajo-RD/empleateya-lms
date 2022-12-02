@@ -33,6 +33,8 @@ class AddColumnsToCoursesTable extends Migration
     {
         Schema::table('courses', function (Blueprint $table) {
             $table->dropForeign('courses_topic_id_foreign');
+            $table->dropColumn('topic_id');
+            // $table->dropForeign('audiences_course_id_foreign');
             $table->dropColumn('audience');
             $table->dropColumn('start_date');
             $table->dropColumn('end_date');

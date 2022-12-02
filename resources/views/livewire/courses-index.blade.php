@@ -10,7 +10,7 @@
             </div>
 
             <!-- dropdown categories -->
-            <div class="relative mr-4" x-data="{ open: false }">
+            {{-- <div class="relative mr-4" x-data="{ open: false }">
                 <button class="block bg-white shadow h-12 px-4 rounded text-gray-700 overflow-hidden focus:outline-none" x-on:click="open = true">
                     <i class="fas fa-tags text-2xl md:text-sm md:mr-2"></i><span class="hidden md:inline">{{ __('Category') }}<i class="fas fa-caret-down text-sm ml-2"></i></span>
                 </button>
@@ -22,7 +22,7 @@
                         </a>
                     @endforeach
                 </div>
-            </div>
+            </div> --}}
 
             <!-- dropdown types -->
             <div class="relative mr-4" x-data="{ open: false }">
@@ -79,14 +79,20 @@
 
     <!-- Latest Courses -->
     <section class="mt-24">
-        <h2 class="text-center font-display font-semibold text-gray-600 text-2xl sm:text-3xl md:text-4xl mb-6">{{ __('Course catalog') }}</h2>
-        <p class="text-center text-gray-500 text-sm mb-6">{{ __('These are the last courses that we have published for you') }}</p>
-        <!-- courses -->
-        <div class="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8">
-            @foreach ( $courses as $course )
-                <x-course-card :course="$course" />
-            @endforeach
-        </div>
+        <x-tailwind.layouts.container>
+            <x-tailwind.headings.h5 color="blue" align="left">
+                {{ __('Course catalog') }}
+            </x-tailwind.headings.h5>
+            <x-tailwind.text.paragraph>
+                {{ __('These are the last courses that we have published for you') }}
+            </x-tailwind.text.paragraph>
+            <!-- courses -->
+            <div class="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8">
+                @foreach ( $courses as $course )
+                    <x-course-card :course="$course" />
+                @endforeach
+            </div>
+        </x-tailwind.layouts.container>
     </section>
 
     <!-- Pagination -->

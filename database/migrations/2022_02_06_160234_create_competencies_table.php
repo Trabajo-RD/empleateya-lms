@@ -28,6 +28,10 @@ class CreateCompetenciesTable extends Migration
 
             $table->timestamps();
         });
+
+        Schema::table('competencies', function (Blueprint $table) {
+            $table->foreign('parent_id')->references('id')->on('competencies');
+        });
     }
 
     /**

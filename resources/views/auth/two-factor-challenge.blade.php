@@ -15,7 +15,7 @@
 
             <x-jet-validation-errors class="mb-4" />
 
-            <form method="POST" action="{{ route('two-factor.login', app()->getLocale() ) }}">
+            <form method="POST" action="{{ route('two-factor.login' ) }}">
                 @csrf
 
                 <div class="mt-4" x-show="! recovery">

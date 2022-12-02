@@ -3,7 +3,7 @@
                     <!-- responsive logo ::: add md:hidden class to hidden in desktop screen -->
 
                     <div class="flex justify-between w-80">
-                        <a href="{{ route('home', app()->getLocale()) }}" class="block p-4">
+                        <a href="{{ route('home') }}" class="block p-4">
                             {{-- <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40px" height="40px" viewBox="0 0 40 40" version="1.1">
                             <defs>
                             <filter id="alpha" filterUnits="objectBoundingBox" x="0%" y="0%" width="100%" height="100%">
@@ -164,7 +164,7 @@
                                                 {{ __('Account') }}
                                             </div>
 
-                                            <x-jet-dropdown-link href="{{ route('profile.show', app()->getLocale() ) }}">
+                                            <x-jet-dropdown-link href="{{ route('profile.show') }}">
                                                 {{ __('Profile') }}
                                             </x-jet-dropdown-link>
 
@@ -176,27 +176,27 @@
                                             </div>
 
                                             @can ('view-dashboard')
-                                                <x-jet-dropdown-link href="{{ route('admin.cpanel', App::getLocale() ) }}">
+                                                <x-jet-dropdown-link href="{{ route('admin.cpanel') }}">
                                                     {{ __('Control Panel') }}
                                                 </x-jet-dropdown-link>
                                             @endcan
 
                                             <!-- TODO: Create permission LMS Crear contenido -->
                                             @can ('create-post')
-                                                <x-jet-dropdown-link href="{{ route('creator.courses.index', app()->getLocale() ) }}">
+                                                <x-jet-dropdown-link href="{{ route('creator.courses.index') }}">
                                                     {{ __('Courses') }}
                                                 </x-jet-dropdown-link>
                                             @endcan
 
                                             <!-- TODO: Create permission LMS Crear contenido -->
                                             {{-- @can ('view-dashboard')
-                                                <x-jet-dropdown-link href="{{ route('creator.dashboard', app()->getLocale()) }}">
+                                                <x-jet-dropdown-link href="{{ route('creator.dashboard') }}">
                                                     {{ __('Settings') }}
                                                 </x-jet-dropdown-link>
                                             @endcan --}}
 
                                             @can ('create-course')
-                                                <x-jet-dropdown-link href="{{ route('instructor.dashboard.index', app()->getLocale() ) }}">
+                                                <x-jet-dropdown-link href="{{ route('instructor.dashboard.index') }}">
                                                     {{ __('Dashboard') }}
                                                 </x-jet-dropdown-link>
                                             @endcan
@@ -211,7 +211,7 @@
 
                                             <!-- Help -->
 
-                                            <x-jet-dropdown-link href="{{ route('pages.docs.overview', app()->getLocale() ) }}">
+                                            <x-jet-dropdown-link href="{{ route('pages.docs.overview' ) }}">
                                                 {{ __('Help Center') }}
                                             </x-jet-dropdown-link>
 
@@ -219,10 +219,10 @@
                                             <div class="border-t border-gray-100"></div>
 
                                             <!-- Authentication -->
-                                            <form method="POST" action="{{ route('logout', app()->getLocale() ) }}">
+                                            <form method="POST" action="{{ route('logout' ) }}">
                                                 @csrf
 
-                                                <x-jet-dropdown-link href="{{ route('logout', app()->getLocale() ) }}"
+                                                <x-jet-dropdown-link href="{{ route('logout' ) }}"
                                                         onclick="event.preventDefault();
                                                                 this.closest('form').submit();">
                                                     {{ __('Logout') }}
@@ -234,11 +234,11 @@
 
                                 <!-- Register button -->
                                     @if (Route::has('register'))
-                                        <a href="{{ route('register', app()->getLocale() ) }}" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent bg-gray-100 rounded-md shadow-sm text-sm max-w-prose font-medium text-blue-900 hover:bg-gray-200  hover:shadow" >{{ __('Register') }}</a>
+                                        <a href="{{ route('register') }}" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent bg-gray-100 rounded-md shadow-sm text-sm max-w-prose font-medium text-blue-900 hover:bg-gray-200  hover:shadow" >{{ __('Register') }}</a>
                                     @endif
 
                                     <!-- Login button -->
-                                    <a href="{{ route('login', app()->getLocale() ) }}" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm max-w-prose font-medium text-white hover:shadow" style="background-color: #003876;">{{ __('Sign In') }}</a>
+                                    <a href="{{ route('login') }}" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm max-w-prose font-medium text-white hover:shadow" style="background-color: #003876;">{{ __('Sign In') }}</a>
 
 
                                 @endauth

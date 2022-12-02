@@ -1,16 +1,16 @@
 @php
     /**
      * Navigation links
-     */    
+     */
     $nav_links = [
         [
             'name' => 'Home',
-            'route' => route('home', app()->getLocale()), // routes/web.php dashboard route
+            'route' => route('home'), // routes/web.php dashboard route
             'active' => request()->routeIs('home') // bool: verify is active route dashboard
         ],
         [
             'name' => 'Courses',
-            'route' => route('courses.index', app()->getLocale()), // routes/web.php dashboard route
+            'route' => route('courses.index'), // routes/web.php dashboard route
             'active' => request()->routeIs('courses.*'), // bool: verify is active route dashboard
         ],
         // [
@@ -26,7 +26,7 @@
         // ],
         // [
         //     'name' => 'Categories',
-        //     'route' => route('courses.category', [app()->getLocale(), $category]), // routes/web.php dashboard route
+        //     'route' => route('courses.category', $category), // routes/web.php dashboard route
         //     'active' => request()->routeIs('courses.*'), // bool: verify is active route dashboard
         // ],
     ];
@@ -40,7 +40,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="{{ route('home', app()->getLocale()) }}">
+                    <a href="{{ route('home') }}">
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
@@ -56,11 +56,11 @@
                         </x-jet-nav-link>
                     @endforeach --}}
 
-                    <x-jet-nav-link href="{{ route('home', [app()->getLocale()] ) }}" :active="request()->routeIs('home')" class="hidden sm:hidden md:inline-block">
+                    <x-jet-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')" class="hidden sm:hidden md:inline-block">
                         <i class="fas fa-home mr-2"></i><span class="hidden sm:hidden lg:inline-block">{{ __('Home') }}</span>
                     </x-jet-nav-link>
 
-                    <x-jet-nav-link href="{{ route('courses.index', [app()->getLocale()] ) }}" :active="request()->routeIs('home')" class="hidden sm:hidden md:inline-block">
+                    <x-jet-nav-link href="{{ route('courses.index') }}" :active="request()->routeIs('home')" class="hidden sm:hidden md:inline-block">
                         <i class="fas fa-laptop mr-2"></i><span class="hidden sm:hidden lg:inline-block">{{ __('Courses') }}</span>
                     </x-jet-nav-link>
 
@@ -74,7 +74,7 @@
                             <div class="w-80">
                                 @if(count($modalities))
                                     @foreach($modalities as $modality)
-                                    <x-jet-dropdown-link href="{{ route('courses.modality', [app()->getLocale(), $modality] ) }}" :active="request()->routeIs('courses.modality.*')">
+                                    <x-jet-dropdown-link href="{{ route('courses.modality',  $modality) }}" :active="request()->routeIs('courses.modality.*')">
                                         {{ __($modality->name) }}
                                     </x-jet-dropdown-link>
                                     @endforeach
@@ -83,7 +83,7 @@
                         </x-slot>
                     </x-jet-dropdown>
 
-                    <x-jet-dropdown align="left" width="60" :active="request()->routeIs('courses.category.*')">
+                    {{-- <x-jet-dropdown align="left" width="60" :active="request()->routeIs('courses.category.*')">
                         <x-slot name="trigger">
                             <a class="nav-link text-gray-500 hidden sm:hidden md:inline-block" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-tags mr-2"></i><span class="hidden sm:hidden lg:inline-block">{{ __('Categories') }}</span>
@@ -100,7 +100,7 @@
                                 @endif
                             </div>
                         </x-slot>
-                    </x-jet-dropdown>
+                    </x-jet-dropdown> --}}
 
                     {{-- TODO: Link Dashboard --}}
                     {{-- <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
@@ -215,7 +215,7 @@
                                 @else
                                     <span class="inline-flex rounded-md">
                                         <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                                            {{ Auth::user()->name }} 
+                                            {{ Auth::user()->name }}
                                             {{-- TODO: Fix show user role {{ Auth::user()->roles()->name }} --}}
 
                                             <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -232,7 +232,7 @@
                                     {{ __('Account') }}
                                 </div>
 
-                                <x-jet-dropdown-link href="{{ route('profile.show', app()->getLocale() ) }}">
+                                <x-jet-dropdown-link href="{{ route('profile.show') }}">
                                     {{ __('Profile') }}
                                 </x-jet-dropdown-link>
 
@@ -244,14 +244,14 @@
                                 </div>
 
                                 @can ('view-dashboard')
-                                    <x-jet-dropdown-link href="{{ route('admin.cpanel', app()->getLocale() ) }}">
+                                    <x-jet-dropdown-link href="{{ route('admin.cpanel') }}">
                                         {{ __('Control Panel') }}
                                     </x-jet-dropdown-link>
                                 @endcan
 
                                 <!-- TODO: Create permission LMS Crear contenido -->
                                 @can ('create-post')
-                                    <x-jet-dropdown-link href="{{ route('creator.courses.index', app()->getLocale() ) }}">
+                                    <x-jet-dropdown-link href="{{ route('creator.courses.index') }}">
                                         {{ __('Courses') }}
                                     </x-jet-dropdown-link>
                                 @endcan
@@ -264,7 +264,7 @@
                                 @endcan --}}
 
                                 @can ('create-course')
-                                    <x-jet-dropdown-link href="{{ route('instructor.courses.index', app()->getLocale() ) }}">
+                                    <x-jet-dropdown-link href="{{ route('instructor.courses.index') }}">
                                         {{ __('Courses') }}
                                     </x-jet-dropdown-link>
                                 @endcan
@@ -277,20 +277,20 @@
 
                                 <div class="border-t border-gray-100"></div>
 
-                                <!-- Help -->                               
-                                
-                                <x-jet-dropdown-link href="{{ route('pages.docs.overview', app()->getLocale() ) }}">
+                                <!-- Help -->
+
+                                <x-jet-dropdown-link href="{{ route('pages.docs.overview') }}">
                                     {{ __('Help Center') }}
                                 </x-jet-dropdown-link>
-                                
+
 
                                 <div class="border-t border-gray-100"></div>
 
                                 <!-- Authentication -->
-                                <form method="POST" action="{{ route('logout', app()->getLocale() ) }}">
+                                <form method="POST" action="{{ route('logout') }}">
                                     @csrf
 
-                                    <x-jet-dropdown-link href="{{ route('logout', app()->getLocale() ) }}"
+                                    <x-jet-dropdown-link href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                     this.closest('form').submit();">
                                         {{ __('Logout') }}
@@ -300,11 +300,11 @@
                         </x-jet-dropdown>
                     @else
                         <!-- Login button -->
-                        <a href="{{ route('login', app()->getLocale() ) }}" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-gray-400 hover:border-gray-600 rounded-md shadow-sm text-sm max-w-prose font-medium text-gray-400 hover:text-gray-600 bg-white-100 hover:bg-gray-100">{{ __('Sign In') }}</a>
+                        <a href="{{ route('login') }}" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-gray-400 hover:border-gray-600 rounded-md shadow-sm text-sm max-w-prose font-medium text-gray-400 hover:text-gray-600 bg-white-100 hover:bg-gray-100">{{ __('Sign In') }}</a>
 
                         <!-- Register button -->
                         @if (Route::has('register'))
-                            <a href="{{ route('register', app()->getLocale() ) }}" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm max-w-prose font-medium text-white bg-blue-600 hover:bg-blue-700">{{ __('Register') }}</a>
+                            <a href="{{ route('register') }}" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm max-w-prose font-medium text-white bg-blue-600 hover:bg-blue-700">{{ __('Register') }}</a>
                         @endif
                     @endauth
                 </div>
@@ -353,7 +353,7 @@
                     <div class="w-64 bg-gray-100">
                         @if(count($modalities))
                             @foreach($modalities as $modality)
-                            <x-jet-dropdown-link href="{{ route('courses.modality', [app()->getLocale(), $modality] ) }}" :active="request()->routeIs('courses.modality.*')">
+                            <x-jet-dropdown-link href="{{ route('courses.modality', $modality ) }}" :active="request()->routeIs('courses.modality.*')">
                                 {{ __($modality->name) }}
                             </x-jet-dropdown-link>
                             @endforeach
@@ -363,7 +363,7 @@
             </x-jet-dropdown>
         </div>
 
-        <div class="pt-2 pb-3 space-y-1">
+        {{-- <div class="pt-2 pb-3 space-y-1">
             <x-jet-dropdown width="60" align="left">
                 <x-slot name="trigger">
                     <a class="nav-link text-gray-500 ml-4 flex justify-left items-center" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -383,7 +383,7 @@
                     </div>
                 </x-slot>
             </x-jet-dropdown>
-        </div>
+        </div> --}}
 
 
         <!-- Responsive Settings Options -->
@@ -409,9 +409,9 @@
                     <!-- Account -->
                     <div class="block px-4 py-2 text-md font-bold text-gray-900">
                         {{ __('Account') }}
-                    </div> 
+                    </div>
 
-                    <x-jet-responsive-nav-link href="{{ route('profile.show', app()->getLocale() ) }}" :active="request()->routeIs('profile.show')">
+                    <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                         {{ __('Profile') }}
                     </x-jet-responsive-nav-link>
 
@@ -423,20 +423,20 @@
                     </div>
 
                     @can('view-dashboard')
-                        <x-jet-responsive-nav-link href="{{ route('admin.cpanel', app()->getLocale() ) }}" :active="request()->routeIs('admin.cpanel', app()->getLocale() )">
+                        <x-jet-responsive-nav-link href="{{ route('admin.cpanel') }}" :active="request()->routeIs('admin.cpanel')">
                             {{ __('Control Panel') }}
                         </x-jet-responsive-nav-link>
                     @endcan
 
                     <!-- TODO: Create permission LMS Crear contenido -->
                     @can('create-post')
-                        <x-jet-responsive-nav-link href="{{ route('creator.courses.index', app()->getLocale()) }}" :active="request()->routeIs('creator.courses.index', app()->getLocale())">
+                        <x-jet-responsive-nav-link href="{{ route('creator.courses.index') }}" :active="request()->routeIs('creator.courses.index')">
                             {{ __('Courses') }}
                         </x-jet-responsive-nav-link>
                     @endcan
 
                     @can('create-course')
-                        <x-jet-responsive-nav-link href="{{ route('instructor.courses.index', app()->getLocale() ) }}" :active="request()->routeIs('instructor.courses.index', app()->getLocale())">
+                        <x-jet-responsive-nav-link href="{{ route('instructor.courses.index') }}" :active="request()->routeIs('instructor.courses.index')">
                             {{ __('Courses') }}
                         </x-jet-responsive-nav-link>
                     @endcan
@@ -447,17 +447,17 @@
                         </x-jet-responsive-nav-link>
                     @endif
 
-                   
-                    <x-jet-responsive-nav-link href="{{ route('pages.docs.overview', app()->getLocale() ) }}" :active="request()->routeIs('pages.docs.overview', app()->getLocale())">
+
+                    <x-jet-responsive-nav-link href="{{ route('pages.docs.overview') }}" :active="request()->routeIs('pages.docs.overview')">
                         {{ __('Help Center') }}
                     </x-jet-responsive-nav-link>
-                    
+
 
                     <!-- Authentication -->
-                    <form method="POST" action="{{ route('logout', app()->getLocale() ) }}">
+                    <form method="POST" action="{{ route('logout') }}">
                         @csrf
 
-                        <x-jet-responsive-nav-link href="{{ route('logout', app()->getLocale() ) }}"
+                        <x-jet-responsive-nav-link href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                         this.closest('form').submit();">
                             {{ __('Cerrar sesión') }}
@@ -498,11 +498,11 @@
             </div>
         @else
             <div class="py-1 border-t border-gray-200">
-                <x-jet-responsive-nav-link href="{{ route('login', app()->getLocale() ) }}" :active="request()->routeIs('login')">
+                <x-jet-responsive-nav-link href="{{ route('login') }}" :active="request()->routeIs('login')">
                     {{ __('Login') }}
                 </x-jet-responsive-nav-link>
 
-                <x-jet-responsive-nav-link href="{{ route('register', app()->getLocale() ) }}" :active="request()->routeIs('register')">
+                <x-jet-responsive-nav-link href="{{ route('register') }}" :active="request()->routeIs('register')">
                     {{ __('Register') }}
                 </x-jet-responsive-nav-link>
             </div>

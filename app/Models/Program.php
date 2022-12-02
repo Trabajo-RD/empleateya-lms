@@ -18,7 +18,7 @@ class Program extends Model
         'responsible_position',
         'document_id_required',
         'adult_required',
-        'partner_id',
+        'organization_id',
         'slug',
     ];
 
@@ -31,16 +31,29 @@ class Program extends Model
      * Relation 1:N
      */
     public function courses(){
-        // return $this->hasMany('App\Models\Course');
         return $this->hasMany(Course::class);
+    }
+
+    public function learning_paths()
+    {
+        return $this->hasMany(LearningPath::class);
+    }
+
+    public function workshops()
+    {
+        return $this->hasMany(Workshop::class);
+    }
+
+    public function platforms()
+    {
+        return $this->hasMany(Platform::class);
     }
 
     /**
      * Relation 1:N Reverse
      */
-    public function partner()
+    public function organization()
     {
-        // return $this->belongsTo('App\Models\Partner');
-        return $this->belongsTo(Partner::class);
+        return $this->belongsTo(Organization::class);
     }
 }

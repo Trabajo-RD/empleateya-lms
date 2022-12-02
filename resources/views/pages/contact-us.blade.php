@@ -32,7 +32,7 @@
                     @endif --}}
 
                     <!-- form -->
-                    <form method="POST" action="{{ route('contact.send', app()->getLocale()) }}" enctype="multipart/form-data" class="form bg-white p-6 my-10 relative">
+                    <form method="POST" action="{{ route('contact.send') }}" enctype="multipart/form-data" class="form bg-white p-6 my-10 relative">
                         @csrf
                             <div class="icon bg-blue-600 text-white w-6 h-6 absolute flex items-center justify-center p-5" style="left:-40px"><i class="fas fa-paper-plane fa-fw text-2xl "></i></div>
                             <h3 class="text-2xl text-gray-900 font-semibold">{{__('Let us contact you')}}!</h3>

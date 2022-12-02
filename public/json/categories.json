@@ -1,0 +1,212 @@
+{
+    "categories": [
+        {
+        "cdg": 42,
+        "name": "Siderurgica"
+        },
+        {
+        "cdg": 43,
+        "name": "Agropecuaria"
+        },
+        {
+        "cdg": 44,
+        "name": "Alimenticia"
+        },
+        {
+        "cdg": 45,
+        "name": "Arquitectura"
+        },
+        {
+        "cdg": 46,
+        "name": "Artesanal"
+        },
+        {
+        "cdg": 47,
+        "name": "Automotriz"
+        },
+        {
+        "cdg": 162,
+        "name": "Banca /  Financiera"
+        },
+        {
+        "cdg": 163,
+        "name": "Biotecnologia"
+        },
+        {
+        "cdg": 164,
+        "name": "Comercio"
+        },
+        {
+        "cdg": 165,
+        "name": "Construccion"
+        },
+        {
+        "cdg": 166,
+        "name": "Consultoria"
+        },
+        {
+        "cdg": 167,
+        "name": "Consumo Masivo"
+        },
+        {
+        "cdg": 168,
+        "name": "Defensa"
+        },
+        {
+        "cdg": 169,
+        "name": "Diseno"
+        },
+        {
+        "cdg": 170,
+        "name": "Educación"
+        },
+        {
+        "cdg": 171,
+        "name": "Energía"
+        },
+        {
+        "cdg": 172,
+        "name": "Entretenimiento"
+        },
+        {
+        "cdg": 173,
+        "name": "Farmaceutica"
+        },
+        {
+        "cdg": 174,
+        "name": "Financiera"
+        },
+        {
+        "cdg": 175,
+        "name": "Forestal"
+        },
+        {
+        "cdg": 176,
+        "name": "Gastronomia"
+        },
+        {
+        "cdg": 177,
+        "name": "Gobierno"
+        },
+        {
+        "cdg": 178,
+        "name": "Holding"
+        },
+        {
+        "cdg": 179,
+        "name": "Hotelería"
+        },
+        {
+        "cdg": 180,
+        "name": "Imprenta"
+        },
+        {
+        "cdg": 181,
+        "name": "Información e Investigación"
+        },
+        {
+        "cdg": 182,
+        "name": "Informática / Tecnología"
+        },
+        {
+        "cdg": 183,
+        "name": "Inmobiliaria"
+        },
+        {
+        "cdg": 184,
+        "name": "Internet"
+        },
+        {
+        "cdg": 185,
+        "name": "Jurídica"
+        },
+        {
+        "cdg": 186,
+        "name": "Manufactura"
+        },
+        {
+        "cdg": 187,
+        "name": "Medios"
+        },
+        {
+        "cdg": 188,
+        "name": "Minería / Petróleo / Gas"
+        },
+        {
+        "cdg": 189,
+        "name": "ONGs"
+        },
+        {
+        "cdg": 190,
+        "name": "Otra"
+        },
+        {
+        "cdg": 191,
+        "name": "Pesca"
+        },
+        {
+        "cdg": 192,
+        "name": "Publicidad / Marketing"
+        },
+        {
+        "cdg": 193,
+        "name": "Química"
+        },
+        {
+        "cdg": 194,
+        "name": "Salud"
+        },
+        {
+        "cdg": 195,
+        "name": "Seguros"
+        },
+        {
+        "cdg": 196,
+        "name": "Servicios"
+        },
+        {
+        "cdg": 197,
+        "name": "Supermercados"
+        },
+        {
+        "cdg": 198,
+        "name": "Telecomunicaciones"
+        },
+        {
+        "cdg": 199,
+        "name": "Textil"
+        },
+        {
+        "cdg": 200,
+        "name": "Transporte"
+        },
+        {
+        "cdg": 201,
+        "name": "Turismo"
+        },
+        {
+        "cdg": 202,
+        "name": "Seguridad"
+        },
+        {
+        "cdg": 203,
+        "name": "Legal"
+        },
+        {
+        "cdg": 430,
+        "name": "Administrativa"
+        },
+        {
+        "cdg": 2163,
+        "name": "Industria"
+        },
+        {
+        "cdg": 2998,
+        "name": "Desarrollo Profesional"
+        },
+        {
+        "cdg": 2999,
+        "name": "Desarrollo de Competencias Basicas"
+        }
+    ]
+}

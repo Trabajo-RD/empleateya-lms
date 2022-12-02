@@ -8,6 +8,8 @@ use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
 use Laravel\Jetstream\Team as JetstreamTeam;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 class Team extends JetstreamTeam
 {
     use HasFactory;
@@ -41,4 +43,9 @@ class Team extends JetstreamTeam
         'updated' => TeamUpdated::class,
         'deleted' => TeamDeleted::class,
     ];
+
+    public function users() : HasMany
+    {
+        return $this->hasMany(User::class);
+    }
 }

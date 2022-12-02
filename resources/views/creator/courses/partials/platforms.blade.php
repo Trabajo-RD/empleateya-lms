@@ -1,4 +1,4 @@
-<a href="{{ route('creator.courses.create', app()->getLocale() ) }}" class="col-span-1">    
+<a href="{{ route('creator.courses.create') }}" class="col-span-1">    
     <figure class="relative cursor-pointer">
         <div class="h-40 w-5/6 mx-auto rounded-lg overflow-hidden">
             <img class="rounded-lg object-cover h-full w-full transition duration-300 transform hover:scale-125" src="{{ asset('images/courses/platforms/capacitate.jpg')}}">
@@ -10,7 +10,7 @@
         </figcatpion>
     </figure>    
 </a>
-<a href="{{ route('creator.courses.microsoft.create', app()->getLocale() ) }}" class="col-span-1">      
+<a href="{{ route('creator.courses.microsoft.create' ) }}" class="col-span-1">      
     <figure class="relative cursor-pointer">
         <div class="h-40 w-5/6 mx-auto rounded-lg overflow-hidden">
             <img class="rounded-lg shadow-xl hover:shadow-2xl object-cover h-full w-full transition duration-300 transform hover:scale-125" src="{{ asset('images/courses/platforms/microsoft-learn.png') }}">
@@ -22,7 +22,7 @@
         </figcatpion>
     </figure>    
 </a>
-<a href="{{ route('creator.courses.linkedin.create', app()->getLocale() ) }}" class="col-span-1">    
+<a href="{{ route('creator.courses.linkedin.create') }}" class="col-span-1">    
     <figure class="relative cursor-pointer">
         <div class="h-40 w-5/6 mx-auto rounded-lg overflow-hidden">
             <img class="rounded-lg shadow-xl hover:shadow-2xl object-cover h-full w-full transition duration-300 transform hover:scale-125" src="{{ asset('images/courses/platforms/linkedin-learning.jpg')}}">

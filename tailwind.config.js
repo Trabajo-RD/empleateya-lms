@@ -8,9 +8,11 @@ module.exports = {
         './resources/views/**/*.blade.php',
     ],
 
-    theme: {
+    theme: {        
         extend: {
             fontFamily: {
+                artifex : "'Artifex CF', serif",
+                gotham : "'Gotham', serif",
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
         },

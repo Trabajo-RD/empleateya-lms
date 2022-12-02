@@ -13,11 +13,11 @@ function slugChange(){
 function slug(str){
     var $slug = '';
     var trimmed = str.trim(str);
-    $slug = trimmed.replace(/[^a-z0-9-]/gi, '-').
-    replace(/-+/g, '-').
-    replace(/^-|-$/g, '');
-    return $slug.toLowerCase();
+    $slug = trimmed.normalize("NFD").replace(/[\u0300-\u036f]/g, '');
+
+    return $slug.replace(/\s+/g, '-').replace(/-+/g, '-').toLowerCase();
 }
+
 
 // ClassicEditor
 //     .create( document.querySelector( '#content' ) )

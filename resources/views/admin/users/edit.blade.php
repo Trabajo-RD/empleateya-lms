@@ -3,12 +3,18 @@
 @section('title', 'Capacítate RD')
 
 @section('content_header')
-    <h1 class="text-primary">Editar usuario</h1>
+    <h1 class="text-primary"><i class="fas fa-user-edit mr-2"></i>Asignar Roles</h1>
 @stop
 
 @section('content')
 
     <div class="container">
+
+        @if( session('success'))
+            <div class="alert alert-success" role="alert">
+                <strong>¡Completado!</strong> {{session('success')}}
+            </div>
+        @endif
 
         @if( session('rol_granted'))
             <div class="alert alert-success" role="alert">
@@ -18,7 +24,7 @@
 
         <div class="card mb-4">
             <div class="card-header">
-                <span class="text-primary text-uppercase">Cuenta</span>
+                <span class="text-primary text-uppercase">Usuario</span>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -37,19 +43,30 @@
                         <p class="form-control">{{ $user->email }}</p>
                     </div>
                 </div>
-
-                <p class="text-muted font-weight-bold">Contraseña:</p>
-                <p class="text-muted">¿Deseas generar una nueva contraseña para esta cuenta?</p>
-                <div class="row">
-                    <a href="#" class="btn btn-secondary btn-md" role="button" aria-pressed="true">Generar contraseña</a>
-                </div>
             </div>
+        </div>
+
+        <div class="card">
+            
+                <div class="card-header">
+                    <span class="text-primary text-uppercase">Password</span>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="password">Resetear la contraseña del usuario</label>
+                        <p>Deseas asignar una nueva contraseña a este usuario?</p>
+                      </div>                 
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-primary" href="{{ route('admin.users.reset.password', $user) }}">Asignar nueva contraseña</a>
+                </div>
+           
         </div>
 
 
 
         <div class="card">
-            {!! Form::model($user, ['route' => ['admin.users.update', [app()->getLocale(), $user] ], 'method' => 'put']) !!}
+            {!! Form::model($user, ['route' => ['admin.users.update', $user ], 'method' => 'put']) !!}
                 <div class="card-header">
                     <span class="text-primary text-uppercase">Roles</span>
                 </div>
@@ -68,9 +85,7 @@
 
                 </div>
                 <div class="card-footer">
-                    <a href="{{ url()->previous() }}" class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="Omitir y volver a la vista anterior"><i class="fas fa-arrow-circle-left mr-2"></i>Volver atrás</a>
-
-                    {!! Form::submit('Guardar cambios', ['class' => 'btn btn-primary float-right', 'data-toggle' => 'tooltip', 'data-placement' => 'left', 'title' => 'Guardar los cambios realizados']) !!}
+                    {!! Form::submit('Guardar cambios', ['class' => 'btn btn-primary']) !!}
                 </div>
             {!! Form::close() !!}
         </div>
@@ -82,5 +97,5 @@
 @stop
 
 @section('js')
-    {{-- <script> console.log('LMS funcionando!'); </script> --}}
+    <script> console.log('LMS funcionando!'); </script>
 @stop

@@ -18,7 +18,7 @@ class Faq extends Model
     ];
 
     // How many tags FAQ has
-    protected $withCount = ['tags'];
+    // protected $withCount = ['tags'];
 
     // Relation 1:N Reverse
     public function category(){
@@ -30,9 +30,9 @@ class Faq extends Model
      *
      * return all FAQ tags
      */
-    public function tags(){
-        return $this->belongsToMany('App\Models\Tag');
-    }
+    // public function tags(){
+    //     return $this->belongsToMany('App\Models\Tag');
+    // }
 
 
 }

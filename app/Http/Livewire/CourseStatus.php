@@ -21,7 +21,7 @@ class CourseStatus extends Component
     public function mount( Course $course ){
 
         // Capture the slug of current course
-        $this->course = $course;
+        $this->course = Course::find( $course->id)->get();
 
         // Return the first incomplete lesson
         foreach( $course->lessons as $lesson ){

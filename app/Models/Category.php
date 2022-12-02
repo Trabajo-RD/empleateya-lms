@@ -4,6 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Category extends Model
 {
@@ -11,13 +15,41 @@ class Category extends Model
 
     // Guarded: do not allow massive income
     protected $guarded = ['id'];
+    protected $withCount = ['courses', 'topics'];
 
     protected $fillable = [
         'name',
         'slug',
         'icon',
+        'cdg',
         'description'
     ];
+
+    /*******************
+     *   ATTRIBUTES
+     *******************/
+
+    /*******************
+     *    HELPERS
+     *******************/
+
+    /**
+     * Return top 10 reviewers courses
+     */
+    // public function topRatedCourses()
+    // {
+    //    return $this->reviews()
+    //    ->selectRaw('avg(rating) as average, reviewable_id')
+    //    ->groupBy('reviewable_id');
+    // }
+
+    /**
+     * Return all categories in random order
+     */
+    public static function randomCategories()
+    {
+        return Category::inRandomOrder()->get();
+    }
 
     // Return the slug, not id
     public function getRouteKeyName(){
@@ -27,20 +59,23 @@ class Category extends Model
     /**
      * Relation 1:N
      */
-    public function courses(){
-        // return $this->hasMany('App\Models\Course');
-        return $this->hasMany(Course::class);
+    public function courses() : HasManyThrough
+    {
+        return $this->hasManyThrough(Course::class, Topic::class);
     }
 
     // Category topics
-    public function topics(){
-        // return $this->hasMany('App\Models\Topic');
-        return $this->hasMany(Topic::class);
+    public function topics() : HasMany
+    {
+        return $this->hasMany(Topic::class)->with('courses');
     }
 
-    // Relation Category : Tags
-    public function tags(){
-        return $this->hasManyThrough(Tag::class, Topic::class);
+    /**
+     * Eloquent relationship to return category topics order by name
+     */
+    public function topicsByName() : HasMany
+    {
+        return $this->hasMany(Topic::class)->orderBy('name');
     }
 
     /**

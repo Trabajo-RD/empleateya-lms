@@ -39,9 +39,9 @@ class TopicController extends Controller
             $category_list = Arr::add($category_list, $category->id, $category->name);
         }
 
-        $tags = Tag::orderBy('name')->get();
+        // $tags = Tag::orderBy('name')->get();
 
-        return view('admin.topics.create', compact('category_list', 'tags'));
+        return view('admin.topics.create', compact('category_list'));
     }
 
     /**
@@ -50,7 +50,7 @@ class TopicController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $locale)
+    public function store(Request $request)
     {
         $request->validate([
             'name' => 'required',
@@ -74,7 +74,7 @@ class TopicController extends Controller
         //     $newTopic->tags()->attach($tag);
         // }
 
-        return redirect()->route('admin.topics.edit', compact('locale', 'topic'))->with('info', __('Topic created successfully'));
+        return redirect()->route('admin.topics.edit', compact('topic'))->with('info', __('Topic created successfully'));
     }
 
     /**
@@ -94,7 +94,7 @@ class TopicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($locale, Topic $topic)
+    public function edit(Topic $topic)
     {
         $categories = Category::orderBy('name')->get();
         $category_list = [];
@@ -103,9 +103,9 @@ class TopicController extends Controller
             $category_list = Arr::add($category_list, $category->id, $category->name);
         }
 
-        $tags = Tag::orderBy('name')->get();
+        // $tags = Tag::orderBy('name')->get();
 
-        return view('admin.topics.edit', compact('locale', 'category_list', 'topic', 'tags'));
+        return view('admin.topics.edit', compact('category_list', 'topic'));
     }
 
     /**
@@ -115,7 +115,7 @@ class TopicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $locale, Topic $topic)
+    public function update(Request $request, Topic $topic)
     {
         $request->validate([
             'name' => 'required',
@@ -130,7 +130,7 @@ class TopicController extends Controller
             'category_id' => $request->category_id
         ]);
 
-        return redirect()->route('admin.topics.edit', compact('locale', 'topic'))->with('info', __('The topic has been updated'));
+        return redirect()->route('admin.topics.edit', compact('topic'))->with('info', __('The topic has been updated'));
     }
 
     /**
@@ -139,7 +139,7 @@ class TopicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($locale, Topic $topic)
+    public function destroy(Topic $topic)
     {
         $topic->delete();
 

@@ -6,7 +6,7 @@
                 <h1 class="text-2xl font-bold">Crear nuevo curso</h1>
                 <hr class="mt-2 mb-6">
 
-                {!! Form::open(['route' => ['instructor.courses.store', app()->getLocale()], 'files' => true, 'autocomplete' => 'off' ]) !!}
+                {!! Form::open(['route' => 'instructor.courses.store', 'files' => true, 'autocomplete' => 'off' ]) !!}
 
                     @include('instructor.courses.partials.form')
 

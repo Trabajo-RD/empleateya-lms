@@ -27,9 +27,13 @@ class AddColumnsToUsersTable extends Migration
                 $table->string('phone')->nullable()->after('email');
                 $table->string('mobile')->nullable()->after('phone');
                 $table->text('options')->nullable();
-                $table->string('profile_visibility')->default('S')->after('options');
+                $table->boolean('profile_visibility')->default(1)->after('options');
                 // $table->boolean('profile_visibility')->default('1')->after('options');
                 $table->string('email')->nullable()->change(); // Set email nullable to use login with Document ID
+                $table->dateTime('birthday')->nullable();
+                $table->boolean('terms_acceptance')->default(false);
+                $table->double('terms_version', 6,2)->default(1.0);
+                $table->timestamp('terms_acceptance_timestamp')->useCurrent();
             });
         }
     }

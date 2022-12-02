@@ -8,7 +8,7 @@
 
 @section('content')
     <div class="card">
-        {!! Form::open(['route' => ['admin.roles.store', app()->getLocale()]]) !!}
+        {!! Form::open(['route' => 'admin.roles.store']) !!}
 
             @include('admin.roles.partials.form')
 

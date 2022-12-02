@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use App\Exports\UsersExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
 
@@ -36,13 +39,13 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit($locale, User $user)
+    public function edit(User $user)
     {
         // return $user;
 
         $roles = Role::all();
 
-        return view('admin.users.edit', compact('user', 'roles', 'locale'));
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -52,11 +55,43 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $locale, User $user)
+    public function update(Request $request, User $user)
     {
         $user->roles()->sync($request->roles);
 
         return redirect()->route('admin.users.edit', compact('user'))->with('rol_granted', 'Se ha actualizado el rol del usuario');
+    }
+
+    /**
+     * Update the specified user password
+     * 
+     * @param   \App\Models\User    $user
+     */
+    public function userPasswordReset( Request $request)
+    {
+        // dd($request->document_id);
+
+        $user = User::where('document_id',  $request->document_id)->first();
+
+        if($user->document_id != $request->document_id){
+            return redirect()->back()->with('danger', 'El documento digitado no existe en nuestra base de datos');
+        };
+
+        //$user->password = bcrypt($request->password);
+        
+        $user->update([
+            'password' => bcrypt($request->password)
+        ]);
+
+        return redirect()->route('admin.users.edit', compact('user'))->with('success', 'La contraseña del usuario, ha sido actualizada. La nueva contraseña es: '. $request->password);
+    }
+
+    /**
+     * Return the password reset form
+     */
+    public function requestPasswordReset(User $user)
+    {
+        return view('admin.users.reset-password', compact('user'));
     }
 
     /**

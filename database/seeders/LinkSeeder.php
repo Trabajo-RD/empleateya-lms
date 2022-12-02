@@ -95,7 +95,7 @@ class LinkSeeder extends Seeder
 
         Link::create([
             'name' => 'YouTube',
-            'url' => 'https://www.youtube.com/channel/UCvQVfiyRPCxmWMrmH5QYqdg',
+            'url' => 'https://www.youtube.com/c/MinisteriodeTrabajoRD',
             'description' => null,
             'target' => '_blank',
             'relationship' => null,

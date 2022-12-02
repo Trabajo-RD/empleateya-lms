@@ -33,6 +33,7 @@ class AddColumnsToCourseUserTable extends Migration
             $table->dropColumn('status');
             $table->dropColumn('end_date');
             $table->dropForeign('course_user_certificate_id_foreign');
+            $table->dropColumn('certificate_id');
         });
     }
 }

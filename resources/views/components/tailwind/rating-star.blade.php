@@ -1,10 +1,10 @@
 @props([
     'rating',
-    'icon',
-    'color'
+    'icon' => 'star',
+    'color' => 'yellow'
 ])
 
-<div class="flex mb-4 items-center">
+<div class="flex items-center">
 
     <!-- rating value -->
     <span class="text-xl font-bold text-{{ $rating > 3 ? $color : 'gray' }}-300">

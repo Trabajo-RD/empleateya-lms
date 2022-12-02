@@ -22,7 +22,8 @@ class CreateAttitudesTable extends Migration
             $table->string('icon')->nullable();
             $table->integer('order')->nullable();
             $table->text('description')->nullable();
-
+            $table->unsignedBigInteger('workshop_id');
+            $table->foreign('workshop_id')->references('id')->on('workshops')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -8,6 +8,11 @@
 
 * [Documentación](/public/docs/overview.md)
 
+# Requisitos
+* Laravel v8
+* PHP v7.4.29
+* Composer v2.2.4
+* Node v16.13.2
 
 # Configuración (Dev)
 
@@ -68,7 +73,13 @@ npm install
 	php artisan storage:link
   
 ## Ejecutar las migraciones:
-* php artisan migrate:fresh --seed 
+* php artisan migrate:fresh 	
+* php artisan db:seed 
+* php artisan db:seed --class=MicrosoftPathSeeder 
+* php artisan db:seed --class=MicrosoftUnitSeeder
+* php artisan db:seed --class=MicrosoftCourseSeeder
+* php artisan db:seed --class=MicrosoftCourseUnitsSeeder
+* php artisan db:seed --class=MicrosoftCourseUnitsToLessonsSeeder
 
 # Producción 
 
@@ -111,3 +122,12 @@ npm install
 ## Reanudar la aplicación luego de un mantenimiento
 
 * Ejecutar el comando php artisan up
+
+## Partners
+* Nombre
+* Descripción
+* URL
+* Logo 200 x 125 pixeles
+* Slide 3300 x 1265 pixeles
+* Imagen del curso 800 x 400 pixeles
+* Banners 330 x 155 pixeles

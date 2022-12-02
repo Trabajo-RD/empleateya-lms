@@ -5,20 +5,37 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
-use App\Models\Lesson;
+use App\Models\Course;
 use App\Models\Section;
+use App\Models\Lesson;
+use App\Models\LearningPath;
+use App\Models\Module;
+use App\Models\Unit;
+use App\Models\Workshop;
+use App\Models\Activity;
+use App\Models\Task;
 use App\Models\MenuItem;
 use App\Models\Category;
+use App\Models\Topic;
+use App\Models\Tag;
 use App\Models\Modality;
 use App\Models\Type;
 use App\Models\User;
+use App\Models\Skill;
+use App\Models\Competency;
+use App\Models\Scorm;
 
 use App\Observers\LessonObserver;
 use App\Observers\SectionObserver;
 
 use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Arr;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use JeroenNoten\LaravelAdminLte\Events\BuildingMenu;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,7 +46,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // Capacitate custom helper functions
+        require_once __DIR__ . '/../Helpers/helpers.php';
     }
 
     /**
@@ -39,6 +57,37 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(Dispatcher $events)
     {
+        Builder::macro('search', function ($field, $string) {
+            return $string
+            ? $this->where($field, 'like', '%'. $string.'%' )
+                ->where('status', 3)
+            : $this;
+        });
+
+        Builder::macro('whereLike', function ($attributes, string $searchTerm) {
+            $this->where(function ( Builder $query) use ($attributes, $searchTerm) {
+                foreach (Arr::wrap($attributes) as $attribute) {
+                    $query->when(
+                        str_contains($attribute, '.'),
+                        function (Builder $query) use ($attribute, $searchTerm) {
+                            [$relationName, $relationAttribute] = explode('.', $attribute);
+
+                            $query->orWhereHas($relationName, function (Builder $query) use ($relationAttribute, $searchTerm) {
+                                $query->where($relationAttribute, 'LIKE', "%{$searchTerm}%");
+                            });
+                        },
+                        function (Builder $query) use ($attribute, $searchTerm) {
+                            $query->orWhere($attribute, 'LIKE', "%{$searchTerm}%");
+                        }
+                    );
+                }
+            });
+
+            return $this;
+        });
+
+        // Carbon::setLocale(config('app.locale'));
+
         // Blade::setEchoFormat('e(utf8_encode(%s))');
 
         Schema::defaultstringLength(191);
@@ -62,16 +111,32 @@ class AppServiceProvider extends ServiceProvider
         // $menuItems = MenuItem::where('status', 2)->get();
         // view()->share('menuItems', $menuItems);
 
+        // Load all categories in navigation menu
         if (Schema::hasTable('categories')) {
-            $categories = Category::all();
-            view()->share('categories', $categories);
+            $categories = Category::orderBy('name')->limit(30)->get();
+            view()->share('categories_list', $categories);
         }
 
-        if (Schema::hasTable('modalities')) {
-            $modalities = Modality::all();
-            view()->share('modalities', $modalities);
-        }
 
+
+        // Decouple your application logic from your stored data using an alias
+        Relation::morphMap([
+            'activity' => Activity::class,
+            'category' => Category::class,
+            'competency' => Competency::class,
+            'course' => Course::class,
+            'lesson' => Lesson::class,
+            'learningPath' => LearningPath::class,
+            'module' => Module::class,
+            'scorm' => Scorm::class,
+            'section' => Section::class,
+            'skill' => Skill::class,
+            'task' => Task::class,
+            'topic' => Topic::class,
+            'unit' => Unit::class,
+            'user' => User::class,
+            'workshop' => Workshop::class,
+        ]);
 
         // // Create dynamic url/route to adminLTE menu
         // $events->listen(BuildingMenu::class, function (BuildingMenu $event) {
@@ -247,7 +312,7 @@ class AppServiceProvider extends ServiceProvider
         //         'key'           => 'tags',
         //         'text'          => 'tags_trans_key',
         //         'url'           => route('admin.tags.index', app()->getLocale()), // url/route
-        //         'icon'          => 'far fa-bookmark mr-1',
+        //         'icon'          => 'far fa-tag mr-1',
         //         'active'        => ['admin/tags', 'admin/tags/*/edit'],
         //     ]);
 

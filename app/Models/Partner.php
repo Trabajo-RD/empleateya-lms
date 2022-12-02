@@ -10,6 +10,7 @@ class Partner extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+    protected $withCount = ['programs', 'platforms'];
 
     protected $fillable = [
         'title',
@@ -19,7 +20,15 @@ class Partner extends Model
         'status',
     ];
 
-   
+    /**
+     * Return the slug in the route
+     */
+    public function getRouteKeyName()
+    {
+        return "slug";
+    }
+
+
     /**
      * Relation 1:1 Polymorphic
      */
@@ -31,7 +40,11 @@ class Partner extends Model
      * Relation 1:N
      */
     public function programs(){
-        // return $this->hasMany('App\Models\Program');
         return $this->hasMany(Program::class);
+    }
+
+    public function platforms()
+    {
+        return $this->hasManyThrough(Platform::class, Program::class);
     }
 }

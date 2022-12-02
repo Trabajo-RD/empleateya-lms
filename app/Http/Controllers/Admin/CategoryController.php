@@ -86,7 +86,7 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($locale, Category $category)
+    public function edit(Category $category)
     {
         $topics = Topic::orderBy('name')->get();
         $courses = Course::all();
@@ -102,7 +102,7 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $locale, Category $category)
+    public function update(Request $request, Category $category)
     {
         $request->validate([
             'name' => 'required',
@@ -128,7 +128,7 @@ class CategoryController extends Controller
         //     $newCategory->topics()->attach($topic);
         // }
 
-        return redirect()->route('admin.categories.edit', compact('locale', 'category'))->with('info', __('The category has been updated'));
+        return redirect()->route('admin.categories.edit', compact('category'))->with('info', __('The category has been updated'));
     }
 
     /**
@@ -137,7 +137,7 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($locale, Category $category)
+    public function destroy(Category $category)
     {
         $category->delete();
 

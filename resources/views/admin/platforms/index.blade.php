@@ -5,7 +5,7 @@
 @section('plugins.Sweetalert2', true)
 
 @section('content_header')
-    <a href="{{ route('admin.platforms.create', app()->getLocale() ) }}" class="btn btn-primary float-right"><i class="fas fa-plus mr-1"></i>Nueva plataforma</a>
+    <a href="{{ route('admin.platforms.create') }}" class="btn btn-primary float-right"><i class="fas fa-plus mr-1"></i>Nueva plataforma</a>
     <h1 class="text-primary">Plataformas</h1>
 @stop
 
@@ -34,10 +34,10 @@
                             <td width="10px">{{ $platform->id }}</td>
                             <td>{{ $platform->name }}</td>
                             <td width="12%">
-                                <a href="{{ route('admin.platforms.edit', [app()->getLocale(), $platform] ) }}" class="btn btn-outline-secondary"><i class="far fa-edit mr-1"></i>Editar</a>
+                                <a href="{{ route('admin.platforms.edit', $platform ) }}" class="btn btn-outline-secondary"><i class="far fa-edit mr-1"></i>Editar</a>
                             </td>
                             <td width="14%">
-                                <form action="{{ route( 'admin.platforms.destroy', [app()->getLocale(), $platform] ) }}" method="POST" class="delete-platform">
+                                <form action="{{ route( 'admin.platforms.destroy', $platform ) }}" method="POST" class="delete-platform">
                                     @csrf
                                     @method('delete')
                                     <button class="btn btn-outline-danger" type="submit"><i class="far fa-trash-alt mr-1"></i>Eliminar</button>

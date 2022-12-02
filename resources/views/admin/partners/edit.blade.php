@@ -15,7 +15,7 @@
 
     <div class="card">
         <div class="card-body">
-            {!! Form::model($partner, ['route' => ['admin.partners.update', [app()->getLocale(), $partner] ], 'method' => 'put' ]) !!}
+            {!! Form::model($partner, ['route' => ['admin.partners.update', $partner ], 'method' => 'put' ]) !!}
 
                 @include('admin.partners.partials.form')
 

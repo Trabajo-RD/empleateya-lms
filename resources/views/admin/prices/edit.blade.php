@@ -3,7 +3,7 @@
 @section('title', 'Capacítate RD')
 
 @section('content_header')
-    {{-- <a href="{{ route( 'admin.prices.create', app()->getLocale() ) }}" class="btn btn-secondary float-right"><i class="fas fa-plus mr-1"></i>Nuevo precio</a> --}}
+    {{-- <a href="{{ route( 'admin.prices.create') }}" class="btn btn-secondary float-right"><i class="fas fa-plus mr-1"></i>Nuevo precio</a> --}}
     <h1 class="text-primary">Editar precio</h1>
 @stop
 
@@ -15,7 +15,7 @@
 
     <div class="card">
         <div class="card-body">
-            {!! Form::model($price, ['route' => ['admin.prices.update', [app()->getLocale(), $price] ], 'method' => 'put' ]) !!}
+            {!! Form::model($price, ['route' => ['admin.prices.update', $price ], 'method' => 'put' ]) !!}
                 <div class="form-group">
                     {!! Form::label('name', 'Alias') !!}
                     {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Ingrese un alias para este precio']) !!}

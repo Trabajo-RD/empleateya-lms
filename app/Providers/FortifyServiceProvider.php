@@ -2,6 +2,13 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Auth;
+
+use App\Actions\Fortify\AttemptToAuthenticate; // locate in this route for admin guard
+use App\Actions\Fortify\RedirectIfTwoFactorAuthenticatable; // locate in this route for admin guard
+use Illuminate\Contracts\Auth\StatefulGuard;
+use App\Http\Controllers\Admin\AdminController;
+
 use App\Actions\Fortify\CreateNewUser;
 use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
@@ -27,6 +34,13 @@ class FortifyServiceProvider extends ServiceProvider
     public function register()
     {
         // Fortify::ignoreRoutes();
+
+        $this->app->when([AdminController::class, AttemptToAuthenticate::class, RedirectIfTwoFactorAuthenticatable::class])
+            ->needs(StatefulGuard::class)
+            ->give(function () {
+                return Auth::guard('admin');
+            }
+        );
     }
 
     /**

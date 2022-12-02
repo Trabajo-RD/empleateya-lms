@@ -24,6 +24,10 @@ class Price extends Model
         return $this->hasMany(Course::class);
     }
 
+    public function learningpaths(){
+        return $this->hasMany(LearningPath::class);
+    }
+
     public function workshop(){
         return $this->hasMany(Workshop::class);
     }

@@ -11,12 +11,7 @@ class Tag extends Model
 
     protected $guarded = ['id'];
 
-    protected $fillable = [
-        'name',
-        'slug',
-        'icon',
-        'topic_id'
-    ];
+    protected $fillable = ['name', 'slug', 'icon'];
 
     // protected $withCount = ['courses'];
 
@@ -33,35 +28,45 @@ class Tag extends Model
         return "slug";
     }
 
+    // Relation N:M polymorph
+
     /**
-     * Relation N:M : filter courses by tag
+     * Get all of the courses that are assigned this tag.
      */
     public function courses()
     {
-        return $this->belongsToMany(Course::class);
+        return $this->morphedByMany(Course::class, 'taggable');
     }
 
+    /**
+     * Get all of the courses that are assigned this tag.
+     */
     public function learning_paths()
     {
-        return $this->belongsToMany(LearningPath::class);
+        return $this->morphedByMany(LearningPath::class, 'taggable');
     }
 
-    public function faqs()
+    public function workshops()
     {
-        return $this->belongsToMany(Faq::class);
+        return $this->morphedByMany(Workshop::class, 'taggable');
     }
+
+    // public function faqs()
+    // {
+    //     return $this->belongsToMany(Faq::class);
+    // }
 
     public function terms()
     {
-        return $this->belongsToMany(Term::class);
+        return $this->morphedByMany(Term::class, 'taggable');
     }
 
     /**
      * Relation 1:N reverse
      */
-    public function topic()
+    public function topics()
     {
-        return $this->belongsTo(Topic::class);
+        return $this->morphedByMany(Topic::class, 'taggable');
     }
 
     /****************************

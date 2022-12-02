@@ -5,7 +5,7 @@
 @section('plugins.Sweetalert2', true)
 
 @section('content_header')
-    <a href="{{ route('admin.partners.create', app()->getLocale() ) }}" class="btn btn-primary float-right"><i class="fas fa-plus mr-1"></i>Nueva sociedad</a>
+    <a href="{{ route('admin.partners.create') }}" class="btn btn-primary float-right"><i class="fas fa-plus mr-1"></i>Nueva sociedad</a>
     <h1 class="text-primary">Sociedades y Convenios</h1>
 @stop
 
@@ -55,10 +55,10 @@
                             @endswitch
                             </td>
                             <td width="12%" class="align-middle">
-                                <a href="{{ route('admin.partners.edit', [app()->getLocale(), $partner] ) }}" class="btn btn-outline-secondary"><i class="far fa-edit mr-1"></i>Editar</a>
+                                <a href="{{ route('admin.partners.edit',  $partner ) }}" class="btn btn-outline-secondary"><i class="far fa-edit mr-1"></i>Editar</a>
                             </td>
                             <td width="14%" class="align-middle">
-                                <form action="{{ route( 'admin.partners.destroy', [app()->getLocale(), $partner] ) }}" method="POST" class="delete-partner">
+                                <form action="{{ route( 'admin.partners.destroy', $partner ) }}" method="POST" class="delete-partner">
                                     @csrf
                                     @method('delete')
                                     <button class="btn btn-outline-danger" type="submit"><i class="far fa-trash-alt mr-1"></i>Eliminar</button>

@@ -19,7 +19,7 @@ Route::group([
     'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
 ], function () {
 
-    Route::get('/dashboard', [HomeController::class, 'index'])
+    Route::get('dashboard', [HomeController::class, 'index'])
     ->name('dashboard.index');
 
 });

@@ -10,6 +10,7 @@ class Topic extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+    protected $withCount = ['courses'];
 
     protected $fillable = [
         'name',
@@ -24,17 +25,19 @@ class Topic extends Model
         return "slug";
     }
 
-    /**
-     * Relation 1:N
-     */
-    public function tags()
-    {
-        return $this->hasMany('App\Models\Tag');
-    }
-
     public function courses()
     {
-        return $this->hasMany('App\Models\Course');
+        return $this->hasMany(Course::class);
+    }
+
+    public function learning_paths()
+    {
+        return $this->hasMany(LearningPath::class);
+    }
+
+    public function workshops()
+    {
+        return $this->hasMany(Workshop::class);
     }
 
     /**
@@ -54,5 +57,12 @@ class Topic extends Model
      */
     public function interests(){
         return $this->morphMany(Interest::class, 'interestable');
+    }
+
+    // N:M polymorphic
+
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
     }
 }

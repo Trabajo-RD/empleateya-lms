@@ -30,16 +30,16 @@ class TagController extends Controller
      */
     public function create()
     {
-        $topics = Topic::orderBy('name')->get();
-        $topic_list = [
-            '0' => '-- Seleccione una subcategoría --',
-        ];
+        // $topics = Topic::orderBy('name')->get();
+        // $topic_list = [
+        //     '0' => '-- Seleccione una subcategoría --',
+        // ];
 
-        foreach ($topics as $topic) {
-            $topic_list = Arr::add($topic_list, $topic->id, $topic->name);
-        }
+        // foreach ($topics as $topic) {
+        //     $topic_list = Arr::add($topic_list, $topic->id, $topic->name);
+        // }
 
-        return view('admin.tags.create', compact('topic_list'));
+        return view('admin.tags.create');
     }
 
     /**
@@ -48,22 +48,20 @@ class TagController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $locale)
+    public function store(Request $request)
     {
         $request->validate([
             'name' => 'required',
-            'slug' => 'required|unique:tags',
-            'topic_id' => 'required'
+            'slug' => 'required|unique:tags'
         ]);
 
         $tag = Tag::create([
             'name' => $request->name,
             'slug' => $request->slug,
-            'icon' => $request->icon,
-            'topic_id' => $request->topic_id
+            'icon' => $request->icon
         ]);
 
-        return redirect()->route('admin.tags.edit', compact('locale', 'tag'))->with('info', __('Tag created successfully'));
+        return redirect()->route('admin.tags.edit', compact('tag'))->with('info', __('Tag created successfully'));
     }
 
     /**
@@ -83,17 +81,17 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($locale, Tag $tag)
+    public function edit(Tag $tag)
     {
-        $topics = Topic::orderBy('name')->get();          
+        // $topics = Topic::orderBy('name')->get();
 
-        $topic_list = [];
+        // $topic_list = [];
 
-        foreach ($topics as $topic) {
-            $topic_list = Arr::add($topic_list, $topic->id, $topic->name);
-        }
+        // foreach ($topics as $topic) {
+        //     $topic_list = Arr::add($topic_list, $topic->id, $topic->name);
+        // }
 
-        return view('admin.tags.edit', compact('tag', 'topic_list'));
+        return view('admin.tags.edit', compact('tag'));
     }
 
     /**
@@ -103,22 +101,20 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $locale, Tag $tag)
+    public function update(Request $request, Tag $tag)
     {
         $request->validate([
             'name' => 'required',
-            'slug' => 'required|unique:tags,slug,' . $tag->id,
-            'topic_id' => 'required'
+            'slug' => 'required|unique:tags,slug,' . $tag->id
         ]);
 
         $tag->update([
             'name' => $request->name,
             'slug' => $request->slug,
-            'icon' => $request->icon,
-            'topic_id' => $request->topic_id
+            'icon' => $request->icon
         ]);
 
-        return redirect()->route('admin.tags.edit', compact('locale', 'tag'))->with('info', __('The tag has been updated'));
+        return redirect()->route('admin.tags.edit', compact('tag'))->with('info', __('The tag has been updated'));
     }
 
     /**
@@ -127,7 +123,7 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($locale, Tag $tag)
+    public function destroy(Tag $tag)
     {
         $tag->delete();
 

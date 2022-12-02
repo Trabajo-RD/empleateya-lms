@@ -10,6 +10,25 @@ class Organization extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+    protected $fillable = ['name', 'slug', 'rnc', 'url', 'content', 'user_id', 'status', 'is_partnership'];
+    protected $withCount = ['programs'];
+
+    /**
+     * The attributes that should be mutated to dates
+     */
+    protected $dates = [
+        'deleted_at'
+    ];
+
+    public function getRouteKeyName()
+    {
+        return "slug";
+    }
+
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
 
     /**
      * 1:N inverse
@@ -21,21 +40,12 @@ class Organization extends Model
     /**
      * 1:N
      */
-    
+
     // organization courses
-    public function courses()
-    {
-        return $this->hasMany(Course::class);
-    }
 
-    public function learning_paths()
+    public function programs()
     {
-        return $this->hasMany(LearningPath::class);
-    }
-
-    public function workshops()
-    {
-        return $this->hasMany(Workshop::class);
+        return $this->hasMany(Program::class);
     }
 
     /**
@@ -43,5 +53,11 @@ class Organization extends Model
      */
     public function users(){
         return $this->belongsToMany(User::class);
+    }
+
+    // Has many through
+    public function platforms()
+    {
+        return $this->hasManyThrough(Platform::class, Program::class);
     }
 }

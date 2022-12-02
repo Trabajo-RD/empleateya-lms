@@ -18,7 +18,7 @@ class MonitorUserSeeder extends Seeder
     public function run()
     {
         $current = Carbon::now();
-        
+
         $monitorUsersConfig = Config::get('monitors');
 
         foreach( $monitorUsersConfig as $key => $user ){
@@ -39,10 +39,12 @@ class MonitorUserSeeder extends Seeder
                 ],
                 'current_team_id'   => $user['current_team_id'],
                 'password'          => bcrypt($user['password']),
+                'terms_acceptance'  => 1,
+                'terms_version'     => 1.0,
 
             ]);
 
-            $user->assignRole('coursecreator');
+            $user->assignRole('creator');
 
         }
     }

@@ -17,7 +17,7 @@ class Level extends Model
      */
 
     // returns courses associated with a level
-    public function course(){
+    public function courses(){
         return $this->hasMany(Course::class);
     }
 

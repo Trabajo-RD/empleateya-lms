@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Course;
 use App\Models\User;
+
 use App\Policies\CoursePolicy;
 use App\Models\Team;
 use App\Policies\TeamPolicy;
@@ -31,7 +32,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        // Implicitly grant "Super Admin" role all permissions
+        // This works in the app by using gate-related functions like auth()->user()->can and @can()
+        Gate::before(function ($user, $ability) {
+            return $user->hasRole('administrator') ? true : null;
+        });
 
         /**
          *  Register a custom policy discovery callback

@@ -5,7 +5,7 @@
 @section('plugins.Sweetalert2', true)
 
 @section('content_header')
-    <a href="{{ route('admin.levels.create', app()->getLocale() ) }}" class="btn btn-primary float-right"><i class="fas fa-plus mr-1"></i>Nuevo nivel</a>
+    <a href="{{ route('admin.levels.create') }}" class="btn btn-primary float-right"><i class="fas fa-plus mr-1"></i>Nuevo nivel</a>
     <h1 class="text-dark">Niveles</h1>
 @stop
 
@@ -34,10 +34,10 @@
                             <td width="10px">{{ $level->id }}</td>
                             <td>{{ $level->name }}</td>
                             <td width="12%">
-                                <a href="{{ route('admin.levels.edit', [app()->getLocale(), $level] ) }}" class="btn btn-outline-secondary"><i class="far fa-edit mr-1"></i>Editar</a>
+                                <a href="{{ route('admin.levels.edit', $level ) }}" class="btn btn-outline-secondary"><i class="far fa-edit mr-1"></i>Editar</a>
                             </td>
                             <td width="14%">
-                                <form action="{{ route( 'admin.levels.destroy', [app()->getLocale(), $level] ) }}" method="POST" class="delete-level">
+                                <form action="{{ route( 'admin.levels.destroy', $level ) }}" method="POST" class="delete-level">
                                     @csrf
                                     @method('delete')
                                     <button class="btn btn-outline-danger" type="submit"><i class="far fa-trash-alt mr-1"></i>Eliminar</button>

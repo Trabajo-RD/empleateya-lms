@@ -55,7 +55,7 @@ class CourseModality extends Component
         $user_courses = DB::table('courses')
             ->join('course_user','courses.id', '=', 'course_user.course_id')
             ->join('users', 'courses.user_id', '=', 'users.id')
-            ->join('categories', 'courses.category_id', '=', 'categories.id')
+            // ->join('categories', 'courses.category_id', '=', 'categories.id')
             ->leftjoin('images', 'images.imageable_id', '=', 'courses.id')
             ->select(
                 'courses.id',
@@ -86,7 +86,7 @@ class CourseModality extends Component
             ->join('types', 'courses.type_id', '=', 'types.id')
             ->join('users', 'courses.user_id', '=', 'users.id')
             ->join('prices', 'courses.price_id', '=', 'prices.id')
-            ->join('categories', 'courses.category_id', '=', 'categories.id')
+            // ->join('categories', 'courses.category_id', '=', 'categories.id')
             ->join('levels', 'courses.level_id', '=', 'levels.id')
             ->join('modalities', 'courses.modality_id', '=', 'modalities.id')
             ->leftjoin('images', 'images.imageable_id', '=', 'courses.id')

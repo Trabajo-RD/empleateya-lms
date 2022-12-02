@@ -28,8 +28,7 @@ class TagFactory extends Factory
         return [
             'name' => $name,
             'slug' => Str::slug($name),
-            'icon' => 'fas fa-tag',
-            'topic_id' => Topic::all()->random()->id,
+            'icon' => 'fas fa-tag'
         ];
     }
 }

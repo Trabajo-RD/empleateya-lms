@@ -51,7 +51,7 @@
                                     </td>
                                     <td class="text-muted text-center">{{ ($user->last_login != null) ? $user->last_login : 'Sin registro' }}</td>
                                     <td>
-                                        <a class="btn btn-outline-secondary" href="{{ route( 'admin.users.edit', [App::getLocale(), $user] ) }}">Editar</a>
+                                        <a class="btn btn-outline-secondary" href="{{ route( 'admin.users.edit', $user ) }}">Editar</a>
                                     </td>
                                 </tr>
                             @endif

@@ -30,6 +30,7 @@
                                 <th>ID</th>
                                 <th>Title</th>
                                 <th>Category</th>
+                                <th>{{ __('Instructor') }}</th>
                                 <th></th>
                                 {{-- <th></th> --}}
                             </tr>
@@ -40,12 +41,13 @@
                                 <tr class="items-center">
                                     <td width="10px">{{ $course->id }}</td>
                                     <td>{{ $course->title }}</td>
-                                    <td>{{ $course->category->name }}</td>
+                                    <td>{{ $course->topic->name }}</td>
+                                    <td>{{ $course->editor->name }}</td>
                                     <td width="12%">
-                                        <a class="btn btn-outline-secondary" href="{{ route('admin.courses.show', [app()->getLocale(), $course] ) }}">Revisar</a>
+                                        <a class="btn btn-outline-secondary" href="{{ route('admin.courses.show', $course ) }}">Revisar</a>
                                     </td>
                                     {{-- <td>
-                                        <a class="btn btn-outline-secondary" href="{{ route('admin.users.edit', [app()->getLocale(), $user] ) }}">Editar</a>
+                                        <a class="btn btn-outline-secondary" href="{{ route('admin.users.edit', ['user' => $user] ) }}">Editar</a>
                                     </td> --}}
                                 </tr>
 

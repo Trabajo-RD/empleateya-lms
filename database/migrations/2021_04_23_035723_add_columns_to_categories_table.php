@@ -28,6 +28,7 @@ class AddColumnsToCategoriesTable extends Migration
     {
         Schema::table('categories', function (Blueprint $table) {
             $table->dropForeign('categories_modality_id_foreign');
+            $table->dropColumn('modality_id');
         });
     }
 }

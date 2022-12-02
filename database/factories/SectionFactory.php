@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Section;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class SectionFactory extends Factory
 {
@@ -21,8 +22,14 @@ class SectionFactory extends Factory
      */
     public function definition()
     {
+        $title = $this->faker->unique()->sentence();
+
         return [
-            'name' => $this->faker->sentence()
+            'title' => $title,
+            'slug' => Str::slug($title),
+            'summary' => $this->faker->paragraph(),
+            'order' => null,
+            'type_id' => null
         ];
     }
 }

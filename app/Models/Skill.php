@@ -11,6 +11,15 @@ class Skill extends Model
 
     protected $guarded = ['id'];
 
+    /*****************
+     *   ATTRIBUTES
+     *****************/
+
+    public function getPointAttribute()
+    {
+        return $this->scores->avg('point');
+    }
+
     /**
      * N:M
      */

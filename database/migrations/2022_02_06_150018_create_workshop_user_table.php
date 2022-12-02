@@ -22,6 +22,8 @@ class CreateWorkshopUserTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('workshop_id')->references('id')->on('workshops');
 
+            $table->tinyInteger('status')->default(0);
+
             $table->boolean('is_moderator')->default(false);
 
             $table->boolean('is_helper')->default(false);
@@ -29,6 +31,7 @@ class CreateWorkshopUserTable extends Migration
             $table->boolean('is_completed')->default(false);
 
             $table->timestamps();
+            $table->timestamp('end_date')->nullable();
         });
     }
 

@@ -15,7 +15,7 @@ class ContactController extends Controller
         return view('pages.contact-us');
     }
 
-    public function sendEmail(Request $request, $locale){
+    public function sendEmail(Request $request){
 
         $request->validate([
             'name' => 'required',

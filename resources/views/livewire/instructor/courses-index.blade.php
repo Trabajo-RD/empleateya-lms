@@ -28,7 +28,7 @@
                         wire:model.debounce.500ms="search"
                         x-on:keydown.window.prevent.slash="$refs.searchField.focus()"
                         x-on:keyup.escape="isTyped = false; $refs.searchField.blur()">
-                <a class="btn btn-primary ml-2" href="{{ route('instructor.courses.new', app()->getLocale() ) }}">{{ __('New course') }}</a>
+                <a class="btn btn-primary ml-2" href="{{ route('instructor.courses.new' ) }}">{{ __('New course') }}</a>
             </div>
         </div>
 
@@ -70,21 +70,21 @@
                                     </div>
                                     <div class="ml-6">
                                         <div>
-                                            @if ( $course->moderator_id !== null || $course->contributor_id !== null)
+                                            {{-- @if ( $course->moderator_id !== null || $course->contributor_id !== null)
                                                 @if( $course->moderator_id !== null)
                                                     <span class="inline-block bg-red-700 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2">{{ __('Auditing') }}</span>
                                                 @endif
                                                 @if( $course->contributor_id !== null)
                                                     <span class="inline-block bg-blue-700 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2">{{ __('Collaborating') }}</span>
                                                 @endif
-                                            @endif
+                                            @endif --}}
                                             <span class="text-lg font-bold text-gray-900">
                                                 {{ $course->title }}
                                             </span>
                                             <p class="text-gray-600">{{ \Illuminate\Support\Str::limit($course->summary, 100, $end='...') }}</p>
                                         </div>
                                             <div class="pt-4 pb-2">
-                                                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#{{ __($course->category->name) }}</span>
+                                                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#{{ __($course->topic->name) }}</span>
                                                 <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#{{ __($course->type->name) }}</span>
                                                 <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#{{ __($course->level->name) }}</span>
                                                 <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#{{ __($course->modality->name) }}</span>
@@ -93,7 +93,7 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-md text-gray-900 text-center">{{ $course->participants->count() }}</div>
+                                <div class="text-md text-gray-900 text-center">{{ $course->users->count() }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="text-md text-gray-900 flex items-center">
@@ -137,7 +137,7 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
 
                                 <span class="flex">
-                                    <a href="{{ route('instructor.courses.edit', [app()->getLocale(), $course] ) }}" class="{{ ($course->observation) ? 'border-red-300 text-red-700 hover:bg-red-50' : 'border-gray-300 text-gray-700 hover:bg-gray-50' }} inline-flex items-center px-4 py-2 border rounded-md shadow-sm text-sm font-medium  bg-white focus:outline-none">
+                                    <a href="{{ route('instructor.courses.edit', ['course' => $course] ) }}" class="{{ ($course->observation) ? 'border-red-300 text-red-700 hover:bg-red-50' : 'border-gray-300 text-gray-700 hover:bg-gray-50' }} inline-flex items-center px-4 py-2 border rounded-md shadow-sm text-sm font-medium  bg-white focus:outline-none">
                                         <!-- Heroicon name: solid/pencil -->
                                         <svg class="-ml-1 mr-2 h-5 w-5 {{ ($course->observation) ? 'text-red-500' : 'text-gray-500' }} " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                             <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />

@@ -28,6 +28,7 @@ class AddColumnsToCertificatesTable extends Migration
     {
         Schema::table('certificates', function (Blueprint $table) {
             $table->dropForeign('certificates_program_id_foreign');
+            $table->dropColumn('program_id');
         });
     }
 }

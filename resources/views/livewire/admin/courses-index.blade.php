@@ -43,7 +43,7 @@
                                     <tr>
                                         <td>{{ $course->id }}</td>
                                         <td>{{ $course->title }}</td>
-                                        <td>{{ $course->category->name }}</td>
+                                        <td>{{ isset($course->topic->name) ? $course->topic->name : 'N/A' }}</td>
                                         @can('update-user')
                                             <td>{{ $course->editor->name }} {{ $course->editor->lastname }}</td>
                                         @endcan
@@ -51,7 +51,7 @@
                                             {{ $course->status == '3' ? 'Publicado' : 'Borrador' }}
                                         </td>
                                         {{-- <td>
-                                            <a class="btn btn-outline-secondary" href="{{ route('admin.users.edit', [app()->getLocale(), $user] ) }}">Editar</a>
+                                            <a class="btn btn-outline-secondary" href="{{ route('admin.users.edit', ['user' => $user] ) }}">Editar</a>
                                         </td> --}}
                                     </tr>
 

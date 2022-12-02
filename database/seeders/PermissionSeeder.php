@@ -13,7 +13,7 @@ class PermissionSeeder extends Seeder
      * @return void
      */
     public function run()
-    {       
+    {
         $models = [
             'role',
             'permission',
@@ -49,7 +49,13 @@ class PermissionSeeder extends Seeder
             'tag',
             'test',
             'topic',
-            'type'
+            'type',
+            'workshop',
+            'activity',
+            'task',
+            'path',
+            'module',
+            'unit'
         ];
 
         $actions = [
@@ -57,27 +63,28 @@ class PermissionSeeder extends Seeder
             'update',
             'view',
             'list',
-            'delete'
+            'delete',
+            'approve',
         ];
 
         // default permissions name
         $permissionNames = [
-            'view-dashboard', 
+            'view-dashboard',
             'approve-request',
-            'enroll', 
+            'enroll',
             'take-test',
             'evaluate-test',
             'generate-certificate',
-            'asign-role',
-            'asign-permission',
-            'asign-course',
+            'assign-role',
+            'assign-permission',
+            'assign-course',
             'moderate-course',
-            'asign-user',
+            'assign-user',
             'manage-attendance',
-            'send-email', 
-            'edit-profile', 
-            'send-message', 
-            'view-log', 
+            'send-email',
+            'edit-profile',
+            'send-message',
+            'view-log',
             'delete-log',
             'moderate-content',
             'moderate-comment',

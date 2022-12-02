@@ -27,13 +27,12 @@ class Interest extends Model
      * Relation N:M polymorphic
      ***************************/
 
-    /**
-     * Get all of the tags that are assigned this interest.
-     */
-    // public function tags()
-    // {
-    //     return $this->morphedByMany(Tag::class, 'interestable');
-    // }
+    // N:M polymorphic
+
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
+    }
 
 
 

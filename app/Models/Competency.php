@@ -11,6 +11,14 @@ class Competency extends Model
 
     protected $guarded = ['id'];
 
+    /*****************
+     *   ATTRIBUTES
+     *****************/
+
+    public function getPointAttribute(){
+        return $this->scores->avg('point');
+    }
+
     public function children()
     {
         return $this->hasMany(Competency::class, 'parent_id');

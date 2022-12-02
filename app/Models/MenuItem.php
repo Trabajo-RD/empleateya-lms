@@ -9,9 +9,12 @@ class MenuItem extends Model
 {
     use HasFactory;
 
+    protected $table = 'app_menu_items';
+
+    protected $guarded = ['id'];
+
     protected $fillable = [
-        'name',
-        'link',
-        'status',
+        'title', 'name', 'slug', 'type', 'target', 'link', 'menu_id', 'status',
     ];
+
 }

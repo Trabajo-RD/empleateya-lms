@@ -30,6 +30,7 @@ class AddRelationshipFieldsToQuestionsTable extends Migration
     {
         Schema::table('questions', function (Blueprint $table) {
             $table->dropForeign('questions_test_id_foreign');
+            $table->dropColumn('test_id');
         });
     }
 }

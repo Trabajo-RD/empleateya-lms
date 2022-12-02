@@ -14,9 +14,9 @@
     <!-- card body -->
     <div class="card-body flex-1 flex flex-col">
         <!-- resource type -->
-        <p class="text-sm text-gray-500 mb-2">{{ __($course->type) }}</p>
+        <p class="text-sm text-gray-500 mb-2 uppercase">{{ __($course->type) }}</p>
         <!-- course title -->
-        <a href="{{ route( 'course.show', ['course' => $course->slug] ) }}">
+        <a href="{{ route( 'courses.show', ['course' => $course->slug] ) }}">
             <h2 class="card-title">{{ Str::limit( $course->title, 55 ) }}</h2>
         </a>
         <p class="text-gray-500 text-sm mb-2 mt-auto">{{ $course->name}}</p>
@@ -34,13 +34,13 @@
             </p>
         </div>
 
-        <div class="flex mb-2">
+        {{-- <div class="flex mb-2">
             <!-- category -->
-            <a href="{{ route('courses.category', ['category' => $course->category]) }}" class="mr-2 ">
+            <a href="{{ route('topic.show', str_replace(' ', '', $course->topic)) }}" class="mr-2 ">
                 <!-- badge -->
-                <x-tailwind.badge id="course-category-{{ $course->category }}" text="{{ __($course->category) }}" color="blue" size="sm" icon="fas fa-tag"/>
+                <x-tailwind.badge id="course-topic-{{ $course->topic }}" text="{{ __($course->topic) }}" color="blue" size="sm" icon="fas fa-tag"/>
             </a>
-        </div>
+        </div> --}}
 
         {{-- <div class="flex justify-end">
             <span class="text-gray-500 text-xs" title="Modalidad">{{ $course->modality }}</span>

@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use App\Models\Term;
+
 class CreateTermsTable extends Migration
 {
     /**
@@ -18,7 +20,7 @@ class CreateTermsTable extends Migration
             $table->string('name');
             $table->string('slug');
             $table->text('description');
-            $table->integer('status');
+            $table->enum('status', [Term::HIDDEN, Term::VISIBLE])->default(1);
             $table->timestamps();
         });
     }

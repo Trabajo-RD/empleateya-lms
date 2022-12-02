@@ -22,9 +22,9 @@
                 </div>
             @endif
 
-            {{-- TODO: Display category name --}}
+            {{-- TODO: Display topic name --}}
             <div class="mr-2 text-blue-500 text-sm p-1 rounded  leading-none flex items-center uppercase">
-                {{ __($course->category->name) }}
+                {{ __($course->topic->name) }}
             </div>
 
             <!-- lesson title -->
@@ -111,7 +111,7 @@
                 <ul>
                     @foreach ( $course->sections as $section )
                         <li class="text-gray-600 mb-4">
-                            <a class="text-base font-bold inline-block mb-3" href="">{{ $section->name }}</a>
+                            <a class="text-base font-bold inline-block mb-3" href="">{{ $section->title }}</a>
                             <ul>
                                 @foreach ( $section->lessons as $lesson )
                                     <li class="flex">
@@ -131,7 +131,7 @@
                                             @endif
                                         </div>
                                         <a class="cursor-pointer" wire:click="changeLesson({{ $lesson }})" >
-                                            {{ $lesson->name }}
+                                            {{ $lesson->title }}
                                         </a>
                                     </li>
                                 @endforeach

@@ -1,24 +1,41 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\WorkshopController;
+use App\Http\Controllers\LearningPathController;
+use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ModalityController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\TermController;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ResultController;
 
+use App\Http\Controllers\Scorm\ScormController;
+
+// livewire components
+
+use App\Http\Livewire\Course\CourseStatus;
+use App\Http\Livewire\Workshop\WorkshopStatus;
+use App\Http\Livewire\LearningPath\LearningPathStatus;
+use App\Http\Livewire\Module\ModuleStatus;
+
 use App\Http\Controllers\Pages\ContactController;
 use App\Http\Controllers\DocsController;
 use App\Http\Controllers\User\UserController;
 
-use App\Http\Livewire\CourseStatus;
+//use App\Http\Livewire\CourseStatus;
+
+use App\Models\Scorm;
 
 
 /*
@@ -32,12 +49,30 @@ use App\Http\Livewire\CourseStatus;
 |
 */
 
-Route::redirect('/', '/es');
+// Route::redirect('/', '/es');
 
 Route::get('setlocale/{locale}', function ($lang) {
     Session::put('locale', $lang);
     return redirect()->back();
 })->name('set.locale');
+
+// Route::middleware('auth:admin')->group(function () {
+//     Route::get('admin/login', [AdminController::class, 'loginForm'])->name('admin.login');
+//     Route::post('admin/login', [AdminController::class, 'store']);
+// });
+
+// Route::middleware(['auth:sanctum,admin', config('jetstream.auth_session'), 'verified'])->group(function () {
+//     Route::get('/admin/dashboard', function () {
+//         return view('dashboard');
+//     })->name('dashboard');
+// });
+
+/*****************************
+ *      PUBLIC SCORM ROUTES
+ *****************************/
+// Route::get('/scorm', function(Scorm $scorm){
+//     return view('scorm.index', ['d' => $scorm->data]);
+// })->name('scorm.player');
 
 
 Route::group([
@@ -57,51 +92,167 @@ Route::group([
      */
     Route::get('home', HomeController::class)->name('home-locale');
 
-
-
-    /**
-     * Route to display the courses catalog section
-     */
-    Route::get('courses', [CourseController::class, 'index'])->name('courses.index');
+    Route::get('/scorm', function(Scorm $scorm){
+        return view('scorm.index', ['d' => $scorm->data]);
+    })->name('scorm.player');
 
 
 
-    /**
-     * Route to display the categories section
-     */
+    /*****************
+     *  CATEGORIES
+     *****************/
+
+     // show single category courses
+    Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
 
     // show single category courses
-    Route::get('/categories/category/{category}', [CategoryController::class, 'show'])->name('courses.category');
+    Route::get('categories/{category}/show', [CategoryController::class, 'show'])->name('categories.show');
+
+    /****************
+     *    TOPICS
+     ****************/
+
+    // Return all topics view
+    Route::get('topics', [TopicController::class, 'index'])->name('topics');
+
+    // Return single topic view
+    Route::get('topics/topic/{topic}/show', [TopicController::class, 'show'])->name('topic.show');
+
+    /********************
+     *    MODALITIES
+     ********************/
+
+    // Return all topics view
+    Route::get('modalities', [ModalityController::class, 'index'])->name('modalities');
+
+    // Route to display single modality
+    Route::get('modalities/modality/{modality}/show', [ModalityController::class, 'show'])->name('modality.show');
+
+    /**********************
+     * GLOSARY OF TERMS
+     **********************/
+
+    // Return all terms
+    Route::get('glosary', [TermController::class, 'index'])->name('glosary.index');
+
+    // Return single term
+    Route::get('glosary/term/{term}/show', [TermController::class, 'show'])->name('glosary.show');
+
+
+    /******************
+     *      TAGS
+     ******************/
 
     /**
-     * Route to display the course topics
+     * Return all tags index view
      */
-    Route::get('/categories/category/{category}/topics/{topic}', [TopicController::class, 'show'])->name('courses.topic');
+    Route::get('tags', [TagController::class, 'index'])->name('tags.index');
 
     /**
      * Route to display the courses tags
      */
-    Route::get('/categories/category/topics/topic/tags/tag/{tag}', [TagController::class, 'show'])->name('courses.tag');
+    Route::get('tags/tag/{tag}/show', [TagController::class, 'show'])->name('tags.show');
 
-    /**
-     * Route to display the courses categories
-     */
-    Route::get('/modality/{modality}', [ModalityController::class, 'show'])->name('courses.modality.show');
 
-    /**
-     * Route to display single course information
-     */
-    Route::get('/course/{course}', [CourseController::class, 'show'])->name('course.show');
 
-    /**
-     * Route to enroll users
-     */
-    Route::post('/course/{course}/enrolled', [CourseController::class, 'enrolled'])->middleware(['auth', 'verified'])->name('courses.enrolled');
 
-    /**
-     * Route to control the user enrolled courses
-     */
-    Route::get('/course/learn/{course}', CourseStatus::class)->name('courses.status')->middleware(['auth', 'verified']);
+    /**********************
+     *      COURSES
+     **********************/
+
+    // Route to display the courses catalog section
+    Route::get('courses/catalog', [CourseController::class, 'index'])->name('courses.index');
+    // Route to display the single course information
+    Route::get('course/{course}/show', [CourseController::class, 'show'])->name('courses.show');
+
+    //------------- Courses Route Group with certain middleware ------------//
+
+    Route::middleware(['auth', 'verified'])->group( function() {
+        // Route to control the user enrolled courses
+        Route::get('course/learn/{course}/status', CourseStatus::class)->name('courses.status');
+        // Route to manage the enrollment
+        Route::get('course/{course}/enrollment', [CourseController::class, 'enrollment'])->name('courses.enrollment');
+        // Route to register the enroll action
+        Route::post('course/{course}/enrolled', [CourseController::class, 'enrolled'])->name('courses.enrolled');
+    });
+
+
+
+    /*************************
+     *      WORKSHOPS        *
+    **************************/
+
+    // Route to display the workshops catalog section
+    Route::get('workshops', [WorkshopController::class, 'index'])->name('workshops.index');
+    // Route to display the single workshop information
+    Route::get('workshops/workshop/{workshop}/show', [WorkshopController::class, 'show'])->name('workshops.show');
+
+    //------------- Workshops Route Group with certain middleware ------------//
+
+    Route::middleware(['auth', 'verified'])->group( function() {
+        // Route to control the user enrolled courses
+        Route::get('workshop/learn/{workshop}/status', WorkshopStatus::class)->name('workshops.status');
+        // Route to manage the enrollment
+        Route::get('workshop/{workshop}/enrollment', [WorkshopController::class, 'enrollment'])->name('workshops.enrollment');
+        // Route to enroll a given user to the workshop
+        Route::post('workshop/{workshop}/enrolled', [WorkshopController::class, 'enrolled'])->name('workshops.enrolled');
+    });
+
+
+
+    /***********************
+     *    LEARNING PATHS
+     ***********************/
+
+    // Return all Learning Paths catalog section
+    Route::get('learning-paths', [LearningPathController::class, 'index'])->name('learning-paths.index');
+    // Return single learning path section
+    Route::get('learning-paths/path/{path}/show', [LearningPathController::class, 'show'])->name('learning-paths.show');
+
+    //------------- Learning Paths Route Group with certain middleware ------------//
+
+    Route::middleware(['auth', 'verified'])->group( function(){
+        // Route to control the user enrolled paths
+        Route::get('learning-paths/learn/{path}/status', LearningPathStatus::class)->name('learning-paths.status');
+        // Route to manage the enrollment
+        Route::get('learning-path/{path}/enrollment', [LearningPathController::class, 'enrollment'])->name('learning-paths.enrollment');
+        // Route to enroll a given user to the path
+        Route::post('learning-path/{path}/enrolled', [LearningPathController::class, 'enrolled'])->name('learning-paths.enrolled');
+    });
+
+
+
+    /****************************
+     *          MODULES
+     ****************************/
+
+    // Route to list all modules
+    Route::get('modules', [ModuleController::class, 'index'])->name('modules.index');
+    // Route to show single module
+    Route::get('modules/{module}/show', [ModuleController::class, 'show'])->name('modules.show');
+
+    //------------- Modules Route Group with certain middleware ------------//
+
+    Route::middleware(['auth', 'verified'])->group( function() {
+        // Route to control the user enrolled module
+        Route::get('modules/learn/{module}/status', ModuleStatus::class)->name('modules.status');
+        // Route to manage the enrollment
+        Route::get('modules/{module}/enrollment', [ModuleController::class, 'enrollment'])->name('modules.enrollment');
+        // Route to enroll a given user to the module
+        Route::post('modules/{module}/enrolled', [ModuleController::class, 'enrolled'])->name('modules.enrolled');
+    });
+
+
+
+
+
+
+
+
+
+    // Route::get('workshop/learn/{workshop}', WorkshopStatus::class)->name('workshops.status')->middleware(['auth', 'verified']);
+
+    // Route::get('learning-path/learn/{path}', LearningPathStatus::class)->name('learning-paths.status')->middleware(['auth', 'verified']);
 
     /**
      *  PAGES
@@ -111,7 +262,7 @@ Route::group([
 
     Route::get('about', [PageController::class, 'about'])->name('pages.about');
 
-    Route::get('glosary', [PageController::class, 'glosary'])->name('pages.glosary');
+    // Route::get('glosary', [PageController::class, 'glosary'])->name('pages.glosary');
 
     /***
      * Documentation routes
@@ -157,15 +308,15 @@ Route::get('auth/user', function () {
     }
 });
 
-Route::get('chat/{chat}', [ChatController::class, 'show'])->name('chat.show');
+// Route::get('chat/{chat}', [ChatController::class, 'show'])->name('chat.show');
 
-Route::get('chat/with/{user}', [ChatController::class, 'chat_with'])->name('chat.with');
+// Route::get('chat/with/{user}', [ChatController::class, 'chat_with'])->name('chat.with');
 
-Route::get('chat/{chat}/get_users', [ChatController::class, 'get_users'])->name('chat.get_users');
+// Route::get('chat/{chat}/get_users', [ChatController::class, 'get_users'])->name('chat.get_users');
 
-Route::get('chat/{chat}/get_messages', [ChatController::class, 'get_messages'])->name('chat.get_messages');
+// Route::get('chat/{chat}/get_messages', [ChatController::class, 'get_messages'])->name('chat.get_messages');
 
-Route::post('message/sent', [MessageController::class, 'sent'])->name('message.sent');
+// Route::post('message/sent', [MessageController::class, 'sent'])->name('message.sent');
 
 
 

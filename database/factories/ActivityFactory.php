@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Activity;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class ActivityFactory extends Factory
 {
@@ -21,9 +22,16 @@ class ActivityFactory extends Factory
      */
     public function definition()
     {
+        $name = $this->faker->unique()->sentence();
+
         return [
-            'name' => $this->faker->sentence(),
-            'order' => null
+            'name' => $name,
+            'slug' => Str::slug($name),
+            'summary' => $this->faker->paragraph(),
+            'duration_in_minutes' => 30,
+            'url' => null,
+            'type_id' => null,
+            'language_id' => 1
         ];
     }
 }

@@ -1,6 +1,10 @@
 <section>
     @if($course->reviews->count() > 0)
-    <h2 class="font-bold text-2xl mb-12 text-gray-600">{{ __('Reviews') }}</h2>
+
+        <x-tailwind.text.title color="black">
+            {{ __('Reviews') }}
+        </x-tailwind.text.title>  
+  
     @endif
 
     @can('enrolled', $course)

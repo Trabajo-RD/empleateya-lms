@@ -6,29 +6,46 @@
         [
             'name' => 'Home',
             'route' => route('home'), // routes/web.php dashboard route
-            'active' => request()->routeIs('home') // bool: verify is active route dashboard
+            'active' => request()->routeIs('home'), // bool: verify is active route dashboard
+            'icon' => 'fas fa-home'
         ],
         [
-            'name' => 'Courses',
+            'name' => 'Categories',
+            'route' => '#!', // routes/web.php dashboard route
+            'active' => request()->routeIs('courses.categories.*'), // bool: verify is active route dashboard
+            'icon' => 'fas fa-tags'
+        ],
+        [
+            'name' => 'Catalog',
             'route' => route('courses.index'), // routes/web.php dashboard route
             'active' => request()->routeIs('courses.*'), // bool: verify is active route dashboard
+            'icon' => 'fas fa-laptop'
+        ],
+        [
+            'name' => 'Workshops',
+            'route' => route('workshops.index'), // routes/web.php dashboard route
+            'active' => request()->routeIs('workshops.*'), // bool: verify is active route dashboard
+            'icon' => 'fas fa-chalkboard-teacher'
+        ],
+        [
+            'name' => 'Paths',
+            'route' => route('learning-paths.index'), // routes/web.php dashboard route
+            'active' => request()->routeIs('learning-paths.*'), // bool: verify is active route dashboard
+            'icon' => 'fas fa-map-marked-alt'
+        ],
+        [
+            'name' => 'My Learning',
+            'route' => route('student.courses.index'), // routes/web.php dashboard route
+            'active' => request()->routeIs('student.courses.*'), // bool: verify is active route dashboard
+            'icon' => 'fas fa-chalkboard'
         ],
         // [
         //     'name' => 'Modalities',
-        //     'route' => '#', // routes/web.php dashboard route
-        //     'active' => request()->routeIs('modalities.*'), // bool: verify is active route dashboard
-        //     'childs' => [
-        //         [
-        //             'name' => 'Virtual',
+        //     'route' => '#!', // routes/web.php dashboard route
+        //     'active' => request()->routeIs('courses.modalities.*'), // bool: verify is active route dashboard
+        //     'icon' => 'fas fa-laptop-house'
+        // ],
 
-        //         ]
-        //     ]
-        // ],
-        // [
-        //     'name' => 'Categories',
-        //     'route' => route('courses.category', [app()->getLocale(), $category]), // routes/web.php dashboard route
-        //     'active' => request()->routeIs('courses.*'), // bool: verify is active route dashboard
-        // ],
     ];
 
 @endphp
@@ -40,14 +57,24 @@
         <div class="flex justify-between h-24">
             <div class="flex">
                 <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center">
+                {{-- <div class="flex-shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
+                        <x-jet-application-mark class="block h-9 w-auto" />
+                    </a>
+                </div> --}}
+
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center divide-x">
+                    <a href="https://mt.gob.do/">
+                        <x-jet-application-logo class="block h-9 w-auto" />
+                    </a>
+                    <a href="{{ route('home') }}" class="pl-2 pt-3">
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex items-center">
+                <div class="hidden space-x-4 sm:-my-px sm:ml-10 sm:flex items-center">
 
                     {{-- @foreach ($nav_links as $nav_link)
                         <x-jet-nav-link href="{{ $nav_link['route'] }}" :active="$nav_link['active']" class="items-center px-1 pt-1 text-md font-medium leading-5 hover:text-gray-700 block py-2 text-gray-500">
@@ -57,18 +84,104 @@
                         </x-jet-nav-link>
                     @endforeach --}}
 
+                    <!-- Home -->
+
                     <x-jet-nav-link href="{{ route('home') }}" :active="request()->routeIs('home') ? 'active' : '' " class="hidden sm:hidden md:inline-block">
-                        <i class="fas fa-home mr-2"></i><span class="hidden sm:hidden lg:inline-block">{{ __('Home') }}</span>
+                        {{-- <i class="fas fa-home mr-2"></i> --}}
+                        <span class="hidden sm:hidden lg:inline-block">{{ __('Home') }}</span>
                     </x-jet-nav-link>
 
-                    <x-jet-nav-link href="{{ route('courses.index' ) }}" :active="request()->routeIs('home')" class="hidden sm:hidden md:inline-block">
-                        <i class="fas fa-laptop mr-2"></i><span class="hidden sm:hidden lg:inline-block">{{ __('Courses') }}</span>
+                    <!-- Categories nav links -->
+
+                    <x-tailwind.navs.mega-menu text="link" align="center" width="max" :active="request()->routeIs('categories.*') ? 'active' : '' ">
+                        <x-slot name="trigger">
+
+                                {{ __('Categories') }}
+
+                                <svg  aria-hidden="true" focusable="false" data-prefix="fas" data-icon="caret-down" class="w-2 ml-2" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                <path fill="currentColor" d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"></path>
+                                </svg>
+
+                        </x-slot>
+
+                        <x-slot name="content">
+                            <div class="px-6 lg:px-8 py-5">
+                                <div class="grid md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-6">
+                                  {{-- <div class="bg-white text-gray-600"> --}}
+
+                                    @if(isset($categories_list))
+                                        @for($i = 0; $i < 30; $i++)
+                                            @if($i % 8 === 0)
+                                                <div class="bg-white text-gray-600">
+                                                    {{-- {{ count($categories) }} --}}
+                                                    @for($j = $i; $j < $i+8; $j++)
+                                                        @if($j >= 30)
+                                                            @break
+                                                        @endif
+                                                        <a href="{{ route('categories.show', $categories_list[$j]) }}" aria-current="{{ request()->routeIs('categories.*') }}" class="flex items-center justify-between px-4 py-2 border-b border-gray-200 w-full hover:bg-gray-50 hover:text-gray-700 transition duration-150 ease-in-out">
+                                                        {{-- <a href="{{ route('courses.category', ['category' => $categories[$j]] ) }}" aria-current="{{ request()->routeIs('courses.category.*') }}" class="flex items-center justify-between px-4 py-2 border-b border-gray-200 w-full hover:bg-gray-50 hover:text-gray-700 transition duration-150 ease-in-out"> --}}
+                                                            {{ __($categories_list[$j]->name) }}
+
+                                                            {{-- @if(count($categories[$j]->publishedCourses) <= 99)
+                                                            <x-tailwind.badges.inline-badge color="gray" class="ml-1">
+                                                                    {{ count($categories[$j]->publishedCourses) }}
+                                                            </x-tailwind.badges.inline-badge>
+                                                            @else
+                                                                <x-tailwind.badges.inline-badge color="gray" class="ml-1">
+                                                                        {{ __('99+') }}
+                                                                </x-tailwind.badges.inline-badge>
+                                                            @endif --}}
+                                                        </a>
+                                                    @endfor
+                                                </div>
+                                            @endif
+                                      @endfor
+                                    @endif
+                                </div>
+                                <div class="flex justify-end">
+                                    <x-tailwind.links.view-all-link link="{{ route('categories.index') }}" text="Show all categories"/>
+                                  </div>
+                              </div>
+                        </x-slot>
+                    </x-tailwind.navs.mega-menu>
+
+
+                    <!-- Courses catalog nav link -->
+
+                    <x-jet-nav-link href="{{ route('courses.index' ) }}" :active="routeIsActive('courses.*')" class="hidden sm:hidden md:inline-block">
+                        {{-- <i class="fas fa-laptop mr-2"></i> --}}
+                        <span class="hidden sm:hidden lg:inline-block">{{ __('Catalog') }}</span>
                     </x-jet-nav-link>
 
-                    <x-jet-dropdown align="left" width="60" :active="request()->routeIs('courses.modality.*')">
+                    <!-- Workshops nav link -->
+
+                    <x-jet-nav-link href="{{ route('workshops.index') }}" :active="routeIsActive('workshops.*')" class="hidden sm:hidden md:inline-block">
+                        {{-- <i class="fas fa-chalkboard-teacher mr-2"></i> --}}
+                        <span class="hidden sm:hidden lg:inline-block">{{ __('Workshops') }}</span>
+                    </x-jet-nav-link>
+
+                    <!-- Learning Paths nav link -->
+
+                    <x-jet-nav-link href="{{ route('learning-paths.index') }}" :active="routeIsActive('learning-paths.*')" class="hidden sm:hidden md:inline-block">
+                        {{-- <i class="fas fa-chalkboard-teacher mr-2"></i> --}}
+                        <span class="hidden sm:hidden lg:inline-block">{{ __('Paths') }}</span>
+                    </x-jet-nav-link>
+
+                    <!-- Student Courses -->
+
+                    @auth
+                        <x-jet-nav-link href="{{ route('student.courses.index') }}" :active="routeIsActive('student.courses.*')" class="hidden sm:hidden md:inline-block">
+                            {{-- <i class="fas fa-chalkboard-teacher mr-2"></i> --}}
+                            <span class="hidden sm:hidden lg:inline-block">{{ __('My Learning') }}</span>
+                        </x-jet-nav-link>
+                    @endauth
+
+                    <!-- Modalities nav link -->
+
+                    {{-- <x-jet-dropdown align="left" width="60" :active="request()->routeIs('courses.modality.*')">
                         <x-slot name="trigger">
                             <a class="nav-link text-gray-500 hidden sm:hidden md:inline-block" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-laptop-house  mr-2"></i><span class="hidden sm:hidden lg:inline-block">{{ __('Modalities') }}</span>
+                                <span class="hidden sm:hidden lg:inline-block">{{ __('Modalities') }}</span>
                             </a>
                         </x-slot>
                         <x-slot name="content">
@@ -82,9 +195,11 @@
                                 @endif
                             </div>
                         </x-slot>
-                    </x-jet-dropdown>
+                    </x-jet-dropdown> --}}
 
-                    <x-jet-dropdown align="left" width="60" :active="request()->routeIs('courses.category.*')">
+
+
+                    {{-- <x-jet-dropdown align="left" width="60" :active="request()->routeIs('courses.category.*')">
                         <x-slot name="trigger">
                             <a class="nav-link text-gray-500 hidden sm:hidden md:inline-block" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-tags mr-2"></i><span class="hidden sm:hidden lg:inline-block">{{ __('Categories') }}</span>
@@ -101,7 +216,7 @@
                                 @endif
                             </div>
                         </x-slot>
-                    </x-jet-dropdown>
+                    </x-jet-dropdown> --}}
 
                     {{-- TODO: Link Dashboard --}}
                     {{-- <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
@@ -131,8 +246,7 @@
                     @endforeach
                 </ul> --}}
 
-                {{-- language switcher type "icon" or "text" --}}
-                <x-tailwind.language-switcher />
+
 
                 {{-- @auth
                     <!-- Teams Dropdown -->
@@ -188,6 +302,11 @@
 
                 <!-- Settings Dropdown -->
                 <div class="ml-3 relative flex items-center">
+
+                    <!-- language switcher type "icon" or "text" -->
+
+                    <x-tailwind.language-switcher />
+
                     @auth
                         <x-jet-dropdown align="right" width="48">
                             <x-slot name="trigger">
@@ -228,45 +347,32 @@
 
                                 <!-- Admin and Manager dashboard -->
                                 @can ('view-dashboard')
-                                    <x-jet-dropdown-link href="{{ route('admin.cpanel', App::getLocale() ) }}" :active="request()->routeIs('admin.cpanel')">
-                                        {{ __('Control Panel') }}
+                                    <x-jet-dropdown-link href="{{ route('dashboard.index' ) }}" :active="request()->routeIs('dashboard.index')">
+                                        {{ __('Dashboard') }}
                                     </x-jet-dropdown-link>
                                 @endcan
 
-                                <!-- course moderator dashboard -->
-                                @can ('moderate-course')
-                                    <x-jet-dropdown-link href="{{ route('course-moderator.dashboard.index', App::getLocale() ) }}" :active="request()->routeIs('course-moderator.dashboard.index')">
-                                        {{ __('Control Panel') }}
+
+                                {{-- @can ('create-course')
+                                    <x-jet-dropdown-link href="{{ route('instructor.courses.index') }}" :active="request()->routeIs('instructor.courses.index')">
+                                        {{ __('Courses') }}
                                     </x-jet-dropdown-link>
                                 @endcan
 
-                                <!-- instructor and course creator dashboard -->
+
                                 @can ('create-course')
-                                    <x-jet-dropdown-link href="{{ route('instructor.dashboard.index') }}" :active="request()->routeIs('instructor.dashboard.index')">
-                                        {{ __('Management') }}
+                                    <x-jet-dropdown-link href="{{ route('instructor.learning-paths.index') }}" :active="request()->routeIs('instructor.learning-paths.index')">
+                                        {{ __('Learning Paths') }}
                                     </x-jet-dropdown-link>
                                 @endcan
 
-                                <!-- content moderator dashboard -->
-                                @can ('moderate-content')
-                                    <x-jet-dropdown-link href="{{ route('content-moderator.dashboard.index' ) }}" :active="request()->routeIs('content-moderator.dashboard.index')">
-                                        {{ __('Control Panel') }}
+                                @can ('create-course')
+                                    <x-jet-dropdown-link href="{{ route('instructor.workshops.index') }}" :active="request()->routeIs('instructor.workshops.index')">
+                                        {{ __('Workshops') }}
                                     </x-jet-dropdown-link>
                                 @endcan
+ --}}
 
-                                <!-- content creator dashboard -->
-                                @can ('create-post')
-                                    <x-jet-dropdown-link href="{{ route('content-creator.dashboard.index') }}" :active="request()->routeIs('content-creator.dashboard.index')">
-                                        {{ __('Management') }}
-                                    </x-jet-dropdown-link>
-                                @endcan
-
-                                <!-- student dashboard -->
-                                @can ('enroll')
-                                    <x-jet-dropdown-link href="{{ route('student.dashboard.index') }}" :active="request()->routeIs('student.dashboard.index')">
-                                        {{ __('Learning') }}
-                                    </x-jet-dropdown-link>
-                                @endcan
 
                                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                     <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
@@ -305,11 +411,11 @@
 
                     <!-- Register button -->
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent bg-gray-100 rounded-md shadow-sm text-sm max-w-prose font-medium text-blue-900 hover:bg-gray-200  hover:shadow" >{{ __('Register') }}</a>
+                            <a href="{{ route('register') }}" class="ml-4 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent bg-gray-100 rounded-md shadow-sm text-sm max-w-prose font-medium text-blue-900 hover:bg-gray-200  hover:shadow" >{{ __('Register') }}</a>
                         @endif
 
                         <!-- Login button -->
-                        <a href="{{ route('login') }}" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm max-w-prose font-medium text-white hover:shadow" style="background-color: #003876;">{{ __('Sign In') }}</a>
+                        <a href="{{ route('login') }}" class="ml-4 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm max-w-prose font-medium text-white hover:shadow" style="background-color: #003876;">{{ __('Sign In') }}</a>
 
 
                     @endauth
@@ -332,7 +438,7 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             @foreach ($nav_links as $nav_link)
-                <x-jet-responsive-nav-link href="{{ $nav_link['route'] }}" :active="$nav_link['active']">
+                <x-jet-responsive-nav-link href="{{ $nav_link['route'] }}" :active="$nav_link['active']" :icon="$nav_link['icon']">
                     {{ __($nav_link['name']) }}
                 </x-jet-responsive-nav-link>
             @endforeach
@@ -347,7 +453,7 @@
 
         </div>
 
-        <div class="pt-2 pb-3 space-y-1">
+        {{-- <div class="pt-2 pb-3 space-y-1">
             <x-jet-dropdown width="60" align="left">
                 <x-slot name="trigger">
                     <a class="nav-link text-gray-500 ml-4 flex justify-left items-center" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -370,6 +476,7 @@
         </div>
 
         <div class="pt-2 pb-3 space-y-1">
+
             <x-jet-dropdown width="60" align="left">
                 <x-slot name="trigger">
                     <a class="nav-link text-gray-500 ml-4 flex justify-left items-center" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -379,7 +486,7 @@
                 </x-slot>
                 <x-slot name="content">
                     <div class="w-64 bg-gray-100">
-                        @if(count($categories))
+                        @if(isset($categories))
                             @foreach($categories as $category)
                             <x-jet-dropdown-link href="{{ route('courses.category', ['category' => $category] ) }}" :active="request()->routeIs('courses.category.*')">
                                 {{ __($category->name) }}
@@ -389,7 +496,7 @@
                     </div>
                 </x-slot>
             </x-jet-dropdown>
-        </div>
+        </div> --}}
 
 
         <!-- Responsive Settings Options -->
@@ -430,45 +537,23 @@
 
                     <!-- Admin and Manager responsive dashboard -->
                     @can('view-dashboard')
-                        <x-jet-responsive-nav-link href="{{ route('admin.cpanel', App::getLocale() ) }}" :active="request()->routeIs('admin.cpanel', App::getLocale() )">
-                            {{ __('Control Panel') }}
+                        <x-jet-responsive-nav-link href="{{ route('dashboard.index' ) }}" :active="request()->routeIs('dashboard.index' )">
+                            {{ __('Dashboard') }}
                         </x-jet-responsive-nav-link>
                     @endcan
 
-                    <!-- course moderator responsive dashboard -->
-                    @can('moderate-course')
-                        <x-jet-responsive-nav-link href="{{ route('course-moderator.dashboard.index') }}" :active="request()->routeIs('course-moderator.dashboard.index')">
-                            {{ __('Control Panel') }}
-                        </x-jet-responsive-nav-link>
-                    @endcan
+
+
 
                     <!-- instructor and course creator responsive dashboard -->
-                    @can('create-course')
-                        <x-jet-responsive-nav-link href="{{ route('instructor.dashboard.index') }}" :active="request()->routeIs('instructor.dashboard.index')">
-                            {{ __('Management') }}
+                    {{-- @can('create-course')
+                        <x-jet-responsive-nav-link href="{{ route('instructor.courses.index') }}" :active="request()->routeIs('instructor.courses.index')">
+                            {{ __('Courses') }}
                         </x-jet-responsive-nav-link>
-                    @endcan
+                    @endcan --}}
 
-                    <!-- content moderator responsive dashboard -->
-                    @can('moderate-content')
-                        <x-jet-responsive-nav-link href="{{ route('content-moderator.dashboard.index') }}" :active="request()->routeIs('content-moderator.dashboard.index')">
-                            {{ __('Control Panel') }}
-                        </x-jet-responsive-nav-link>
-                    @endcan
 
-                    <!-- content creator responsive dashboard -->
-                    @can('create-post')
-                        <x-jet-responsive-nav-link href="{{ route('content-creator.dashboard.index') }}" :active="request()->routeIs('content-creator.dashboard.index')">
-                            {{ __('Management') }}
-                        </x-jet-responsive-nav-link>
-                    @endcan
 
-                    <!-- student responsive dashboard -->
-                    @can('enroll')
-                        <x-jet-responsive-nav-link href="{{ route('student.dashboard.index') }}" :active="request()->routeIs('student.dashboard.index')">
-                            {{ __('Learning') }}
-                        </x-jet-responsive-nav-link>
-                    @endcan
 
                     @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                         <x-jet-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">

@@ -17,7 +17,7 @@
 
     <div class="card">
         <div class="card-body">
-            {!! Form::model($tag, ['route' => ['admin.tags.update', [app()->getLocale(), $tag] ], 'method' => 'put' ]) !!}
+            {!! Form::model($tag, ['route' => ['admin.tags.update', $tag ], 'method' => 'put' ]) !!}
 
                 @include('admin.tags.partials.form')
 

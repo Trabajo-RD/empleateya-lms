@@ -37,7 +37,7 @@ class PartnerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $locale)
+    public function store(Request $request)
     {
        //return $request;
 
@@ -65,7 +65,7 @@ class PartnerController extends Controller
             ]);
         }
 
-        return redirect()->route('admin.partners.edit', compact('locale', 'partner'))->with('info', 'Se ha creado una nueva asociación.');
+        return redirect()->route('admin.partners.edit', compact( 'partner'))->with('info', 'Se ha creado una nueva asociación.');
 
     }
 
@@ -86,9 +86,9 @@ class PartnerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($locale, Partner $partner)
+    public function edit(Partner $partner)
     {
-        return view('admin.partners.edit', compact('locale', 'partner'));
+        return view('admin.partners.edit', compact('partner'));
     }
 
     /**
@@ -98,7 +98,7 @@ class PartnerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $locale, Partner $partner)
+    public function update(Request $request, Partner $partner)
     {
         $request->validate([
             'title' => 'required|unique:partners,title,' . $partner->id
@@ -132,7 +132,7 @@ class PartnerController extends Controller
             }
         }
 
-        return redirect()->route('admin.partners.edit', compact('locale', 'partner'))->with('info', 'Se han actualizado los datos de la asociación.');
+        return redirect()->route('admin.partners.edit', compact( 'partner'))->with('info', 'Se han actualizado los datos de la asociación.');
     }
 
     /**
@@ -141,7 +141,7 @@ class PartnerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($locale, Partner $partner)
+    public function destroy(Partner $partner)
     {
         $partner->delete();
 

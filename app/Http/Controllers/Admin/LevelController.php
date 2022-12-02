@@ -64,7 +64,7 @@ class LevelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($locale, Level $level)
+    public function edit(Level $level)
     {
         return view('admin.levels.edit', compact('level'));
     }
@@ -76,7 +76,7 @@ class LevelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $locale, Level $level)
+    public function update(Request $request, Level $level)
     {
         $request->validate([
             'name' => 'required|unique:levels,name,' . $level->id
@@ -93,7 +93,7 @@ class LevelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($locale, Level $level)
+    public function destroy(Level $level)
     {
         $level->delete();
 

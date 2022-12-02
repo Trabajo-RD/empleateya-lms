@@ -19,8 +19,11 @@ class CreateCourseUserTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('course_id');
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('course_id')->references('id')->on('courses');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+
+            $table->boolean('is_moderator')->default(false);
+            $table->boolean('is_helper')->default(false);
 
             $table->timestamps();
         });

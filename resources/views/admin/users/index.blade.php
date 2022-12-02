@@ -8,7 +8,7 @@
 
     <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 1rem;">
         <div class="d-flex flex-row">
-            <h1 class="text-dark">Usuarios</h1>
+            <h1 class="text-primary">{{ __('Users') }}</h1>
         </div>
 
         <div class="d-flex flex-row-reverse">

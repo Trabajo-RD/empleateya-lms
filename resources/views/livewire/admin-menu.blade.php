@@ -2,7 +2,7 @@
                 <div id="layout-admin-responsiv-left-sidebar" class="relative w-full bg-gray-200 text-gray-800 flex justify-between md:hidden">
                     <!-- responsive logo -->
                     
-                        <a href="{{ route('home', app()->getLocale()) }}" class="block p-4">
+                        <a href="{{ route('home') }}" class="block p-4">
                             {{-- <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40px" height="40px" viewBox="0 0 40 40" version="1.1">
                             <defs>
                             <filter id="alpha" filterUnits="objectBoundingBox" x="0%" y="0%" width="100%" height="100%">

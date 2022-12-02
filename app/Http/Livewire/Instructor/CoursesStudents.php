@@ -30,7 +30,7 @@ class CoursesStudents extends Component
 
     public function render()
     {
-        $students = $this->course->participants()
+        $students = $this->course->users()
                     ->where('name', 'LIKE', '%' . $this->search . '%')
                     ->orWhere('lastname', 'LIKE', '%' . $this->search . '%')
                     ->orWhere('document_id', 'LIKE', '%' . $this->search . '%')

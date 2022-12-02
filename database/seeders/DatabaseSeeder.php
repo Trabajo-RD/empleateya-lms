@@ -21,16 +21,26 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         /**
-         * Generate all image directories
+         * Generate resource directories
          */
         Storage::deleteDirectory('courses');
         Storage::makeDirectory('courses');
+
+        Storage::deleteDirectory('scorm');
+        Storage::makeDirectory('scorm');
 
         Storage::deleteDirectory('partners');
         Storage::makeDirectory('partners');
 
         Storage::deleteDirectory('workshops');
         Storage::makeDirectory('workshops');
+
+        Storage::deleteDirectory('paths/modules');
+        Storage::deleteDirectory('paths');
+        Storage::makeDirectory('/paths/modules');
+
+        // Create the app admin user
+        // \App\Models\Admin::factory()->create();
 
         // Seed all permissions
         $this->call(PermissionSeeder::class);
@@ -46,8 +56,8 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->command->info('User table seeded!');
 
-        $this->call(MonitorUserSeeder::class);
-        $this->command->info('Monitor to User table seeded!');
+        // $this->call(MonitorUserSeeder::class);
+        // $this->command->info('Monitor to User table seeded!');
 
         $this->call(CountriesTableSeeder::class);
         $this->command->info('Countries table seeded!');
@@ -67,6 +77,15 @@ class DatabaseSeeder extends Seeder
         $this->call(ModalitySeeder::class);
         $this->command->info('Modality table seeded!');
 
+        // $this->call(PartnerSeeder::class);
+        // $this->command->info('Partner table seeded!');
+
+        $this->call(OrganizationSeeder::class);
+        $this->command->info('Organization table seeded!');
+
+        $this->call(ProgramSeeder::class);
+        $this->command->info('Program table seeded!');
+
         $this->call(PlatformSeeder::class);
         $this->command->info('Platform table seeded!');
 
@@ -76,38 +95,42 @@ class DatabaseSeeder extends Seeder
         // $this->call(MicrosoftLearnCourseSeeder::class);
         // $this->command->info('Microsoft Learn Courses seeded!');
 
-        // $this->call(MicrosoftLearnModulesSeeder::class);
-        // $this->command->info('Microsoft Learn Modules seeded!');
-
         $this->call(LinkSeeder::class);
         $this->command->info('Link table seeded!');
 
         $this->call(LanguagesSeeder::class);
         $this->command->info('Language table seeded!');
 
-        $this->call(PartnerSeeder::class);
-        $this->command->info('Partner table seeded!');
 
-        $this->call(OrganizationSeeder::class);
-        $this->command->info('Organization table seeded!');
+        // (Opcional)
+        // $this->call(LearningPathSeeder::class);
+        // $this->command->info('LearningPath table seeded!');
 
-        // Tag::factory(8)->create();
+        // $this->call(MicrosoftPathSeeder::class);
+        // $this->command->info('Microsoft Paths table seeded!');
+
+        // $this->call(MicrosoftUnitSeeder::class);
+        // $this->command->info('Microsoft Unit table seeded!');
+
+        // $this->call(MicrosoftCourseSeeder::class);
+        // $this->command->info('Microsoft Course table seeded!');
 
         // TODO: uncomment to create test courses
-        $this->call(CourseSeeder::class);
-        $this->command->info('Course table seeded!');
+        // $this->call(CourseSeeder::class);
+        // $this->command->info('Course table seeded!');
 
-        $this->call(WorkshopSeeder::class);
-        $this->command->info('Workshop table seeded!');
+        // TODO: uncomment to create test workshops
+        // $this->call(WorkshopSeeder::class);
+        // $this->command->info('Workshop table seeded!');
 
-        $this->call(CompetencySeeder::class);
-        $this->command->info('Competency table seeded!');
+        // $this->call(CompetencySeeder::class);
+        // $this->command->info('Competency table seeded!');
 
         $this->call(ProfessionSeeder::class);
         $this->command->info('Profession table seeded!');
 
-        $this->call(LearningPathSeeder::class);
-        $this->command->info('LearningPath table seeded!');
+        $this->call(TermSeeder::class);
+        $this->command->info('Terms table seeded!');
 
     }
 }

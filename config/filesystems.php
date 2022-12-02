@@ -53,6 +53,21 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
         ],
 
+        'scorm-local' => [
+            'driver'     => 'local',
+            'root'       =>  storage_path('../../capacitate-scorm'), // env('SCORM_ROOT_DIR'), // set root dir
+            'visibility' => 'public',
+        ],
+
+        's3-scorm' => [
+            'driver' => 's3',
+            'root'   => storage_path('../../capacitate-scorm'), // env('SCORM_ROOT_DIR'), // set root dir
+            'key'    => env('AWS_ACCESS_KEY_ID'),
+            'secret' => env('AWS_SECRET_ACCESS_KEY'),
+            'region' => env('AWS_DEFAULT_REGION'),
+            'bucket' => env('AWS_SCORM_BUCKET'),
+        ],
+
     ],
 
     /*
@@ -68,6 +83,7 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+        public_path('images') => storage_path('app/images'),
     ],
 
 ];

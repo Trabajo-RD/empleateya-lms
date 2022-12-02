@@ -37,7 +37,7 @@ class SlideController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $locale)
+    public function store(Request $request)
     {
         //return $request;
 
@@ -78,7 +78,7 @@ class SlideController extends Controller
             ]);
         }
 
-        return redirect()->route('admin.slides.edit', compact('locale', 'slide') )->with('info', __('Slide created successfully'));
+        return redirect()->route('admin.slides.edit', compact('slide') )->with('info', __('Slide created successfully'));
     }
 
     /**
@@ -98,9 +98,9 @@ class SlideController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($locale, Slide $slide)
+    public function edit(Slide $slide)
     {
-        return view('admin.slides.edit', compact('locale', 'slide'));
+        return view('admin.slides.edit', compact('slide'));
     }
 
     /**
@@ -110,13 +110,15 @@ class SlideController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $locale, Slide $slide)
+    public function update(Request $request, Slide $slide)
     {
         $request->validate([
             'title' => 'required|unique:slides,title,' . $slide->id
         ]);
 
         $data = $request->all();
+
+        $slide_id = $data['id'];
 
         $slide->update([
             'title' => $data['title'],
@@ -142,7 +144,12 @@ class SlideController extends Controller
         ]);
 
         if( $request->file('file') ){
-            $url = Storage::put('slides', $request->file('file'));
+            $image = $request->file('file');
+            // $name_generated = hexdec(uniqid()).'.'.$image->getClientOriginalExtension(); // 23264564.jpg
+
+            // $image = Image::make($image)->resize(1024, 700);
+
+            $url = Storage::put('slides', $image);
 
             if( $slide->image ){
                 Storage::delete($slide->image->url);
@@ -157,7 +164,7 @@ class SlideController extends Controller
             }
         }
 
-        return redirect()->route('admin.slides.edit', compact('locale', 'slide') )->with('info', __('The slide has been updated'));
+        return redirect()->route('admin.slides.edit', compact('slide') )->with('info', __('The slide has been updated'));
     }
 
     /**
@@ -166,7 +173,7 @@ class SlideController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($locale, Slide $slide)
+    public function destroy(Slide $slide)
     {
         $slide->delete();
 

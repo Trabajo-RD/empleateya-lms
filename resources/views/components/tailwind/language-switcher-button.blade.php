@@ -9,7 +9,7 @@
 
                 <!-- current locale name -->
                 <span class="hidden ml-1 sm:hidden lg:inline">
-                    {{ LaravelLocalization::getCurrentLocaleName() }}
+                    {{ __(LaravelLocalization::getCurrentLocaleName()) }}
                 </span>
         </a>
     </x-slot>

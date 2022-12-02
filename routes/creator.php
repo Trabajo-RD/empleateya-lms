@@ -35,25 +35,25 @@ Route::group([
     /**
      * Route to manage creator courses using a Livewire component
      */
-    Route::resource('creator/courses', CourseController::class)->names('courses');
+    Route::resource('creator/courses', CourseController::class)->names('creator.courses');
 
     /**
      * Route to display the diferent platform options to create a course
      */
-    Route::get('creator/new/courses', [CourseController::class, 'new'])->name('courses.new');
+    Route::get('creator/new/courses', [CourseController::class, 'new'])->name('creator.courses.new');
 
     /**
      * Route to manage Microsoft Learn Courses
      */
     // Route::get('creator/courses/microsoft/create', [CourseController::class, 'createMicrosoftLearnCourse'])->name('courses.microsoft.create');
-    Route::resource('creator/microsoft/courses', MicrosoftController::class)->names('courses.microsoft');
+    Route::resource('creator/microsoft/courses', MicrosoftController::class)->names('creator.courses.microsoft');
 
-    Route::resource('creator/linkedin/courses', LinkedinController::class)->names('courses.linkedin');
+    Route::resource('creator/linkedin/courses', LinkedinController::class)->names('creator.courses.linkedin');
 
     /**
      * Route to get course information using an external URL with AJAX
      */
-    Route::post('creator/courses/get', [CourseController::class, 'get'])->name('courses.get.info');
+    Route::post('creator/courses/get', [CourseController::class, 'get'])->name('creator.courses.get.info');
 
     /**
      * Route to manage the LMS Frontend content
@@ -81,34 +81,34 @@ Route::group([
     // });
 
 
-    Route::get('creator/courses/{course}/curriculum', CoursesCurriculum::class)->middleware('can:update-post')->name('courses.curriculum');
+    Route::get('creator/courses/{course}/curriculum', CoursesCurriculum::class)->middleware('can:update-post')->name('creator.courses.curriculum');
 
-    Route::get('creator/courses/{course}/goals', [CourseController::class, 'goals'])->name('courses.goals');
+    Route::get('creator/courses/{course}/goals', [CourseController::class, 'goals'])->name('creator.courses.goals');
 
     /**
      * Route for manage the course students
      */
-    Route::get('creator/courses/{course}/students', CoursesStudents::class)->middleware('can:update-post')->name('courses.students');
+    Route::get('creator/courses/{course}/students', CoursesStudents::class)->middleware('can:update-post')->name('creator.courses.students');
 
     /**
      * Route to request change course status
      */
-    Route::post('creator/courses/{course}/status', [CourseController::class, 'status'])->name('courses.status');
+    Route::post('creator/courses/{course}/status', [CourseController::class, 'status'])->name('creator.courses.status');
 
     /**
      * Route to display the observations in course info view
      */
-    Route::get('creator/courses/{course}/observation', [CourseController::class, 'observation'])->name('courses.observation');
+    Route::get('creator/courses/{course}/observation', [CourseController::class, 'observation'])->name('creator.courses.observation');
 
     // require __DIR__.'/auth.php';
 
     /**
      * Route to review the courses in revision status
      */
-    Route::get('creator/courses/{course}/preview', [CourseController::class, 'preview'])->name('courses.preview');
+    Route::get('creator/courses/{course}/preview', [CourseController::class, 'preview'])->name('creator.courses.preview');
 
-    Route::get('creator/courses/{course}/{section}/test', [TestController::class, 'index'])->name('test');
-    Route::post('creator/courses/{course}/{section}/test', [TestController::class, 'store'])->name('test.store');
+    Route::get('creator/courses/{course}/{section}/test', [TestController::class, 'index'])->name('creator.test');
+    Route::post('creator/courses/{course}/{section}/test', [TestController::class, 'store'])->name('creator.test.store');
 });
 
 

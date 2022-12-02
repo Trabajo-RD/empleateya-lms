@@ -7,6 +7,7 @@ use App\Models\Course;
 use App\Models\Topic;
 use App\Models\Level;
 use App\Models\Type;
+use App\Models\Program;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,11 +20,13 @@ class CourseCategory extends Component
     use WithPagination;
 
     public $category;
-    public $user = '';
+    public $user;
+    public $user_courses = null;
 
     public $type_id;
     public $topic_id;
     public $level_id;
+    public $program_id;
 
     public $layout = 'course-card';
 
@@ -36,59 +39,38 @@ class CourseCategory extends Component
         $this->category = request()->category;
 
         if(Auth::user() ){
-            $this->user = request()->user()->id;
+            $this->user = request()->user();
         }
     }
 
     public function render()
     {
-        $topics = Topic::where('category_id', $this->category->id)->get();
-        $levels = Level::all();
-        $types = Type::all();
+        $topics     =   Topic::where('category_id', $this->category->id)->get();
+        $levels     =   Level::all();
+        $types      =   Type::all();
+        $programs   =   Program::all();
 
-        $courses = Course::where('status', 3)
-        ->category($this->category->id)
+        $courses = $this->category->courses()
+        ->program( $this->program_id )
         ->topic( $this->topic_id )
         ->level( $this->level_id )
         ->type( $this->type_id )
         ->latest('id')
         ->paginate(12);
 
-        $user_courses = DB::table('courses')
-            ->join('course_user','courses.id', '=', 'course_user.course_id')
-            ->join('users', 'courses.user_id', '=', 'users.id')
-            ->join('categories', 'courses.category_id', '=', 'categories.id')
-            ->leftjoin('images', 'images.imageable_id', '=', 'courses.id')
-            ->select(
-                'courses.id',
-                'courses.title as title',
-                'courses.slug AS slug',
-                'users.name AS name',
-                'users.lastname AS lastname',
-                'categories.name AS category',
-                'images.url AS image'
-            )
-            ->where('courses.category_id','=', $this->category->id)
-            ->where('course_user.user_id', '=', $this->user)
-            ->groupBy(
-                'courses.id',
-                'courses.title',
-                'courses.slug',
-                'users.name',
-                'users.lastname',
-                'categories.name',
-                'images.url'
-            )
+        if (Auth::check()) {
+            $this->user_courses = $this->user->courses_enrolled()
             ->orderBy('courses.id', 'desc')
             ->limit(3)
         ->get();
+        }
 
+        // TODO: Courses in this category order by rating
         $featured_courses = DB::table('courses')
             ->join('reviews','courses.id', '=', 'reviews.reviewable_id')
             ->join('types', 'courses.type_id', '=', 'types.id')
             ->join('users', 'courses.user_id', '=', 'users.id')
             ->join('prices', 'courses.price_id', '=', 'prices.id')
-            ->join('categories', 'courses.category_id', '=', 'categories.id')
             ->join('levels', 'courses.level_id', '=', 'levels.id')
             ->join('modalities', 'courses.modality_id', '=', 'modalities.id')
             ->leftjoin('images', 'images.imageable_id', '=', 'courses.id')
@@ -101,7 +83,7 @@ class CourseCategory extends Component
                 'types.name as type',
                 'users.name AS name',
                 'users.lastname AS lastname',
-                'categories.name AS category',
+                // 'categories.name AS category',
                 'levels.name AS level',
                 'modalities.name AS modality',
                 'prices.name AS price',
@@ -109,8 +91,8 @@ class CourseCategory extends Component
                 'images.url AS image',
                 DB::raw('AVG(reviews.rating) as rating')
             )
-            ->where('courses.category_id','=', $this->category->id)
-            // ->where('images.imageable_type', '=', 'App\Models\Course')
+            // ->where('courses.category_id','=', $this->category->id)
+
             ->groupBy(
                 'courses.id',
                 'courses.title',
@@ -118,7 +100,7 @@ class CourseCategory extends Component
                 'types.name',
                 'users.name',
                 'users.lastname',
-                'categories.name',
+                // 'categories.name',
                 'levels.name',
                 'modalities.name',
                 'images.url',
@@ -129,7 +111,7 @@ class CourseCategory extends Component
             ->limit(3)
             ->get();
 
-        return view('livewire.course-category', compact('courses', 'user_courses', 'featured_courses', 'topics', 'levels', 'types'));
+        return view('livewire.course-category', compact('courses',  'featured_courses', 'programs', 'topics', 'levels', 'types'));
     }
 
     public function resetFilters(){

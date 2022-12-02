@@ -1,39 +1,29 @@
 <x-app-layout>
 
     <!-- hero -->
-    <section class="bg-cover" style="background-image:linear-gradient(rgba(0, 56, 118, 0.7), rgba(35, 73, 116, 0.6)), url({{ asset( 'images/courses/hero9.jpg' ) }})">
-        <div class="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-36">
-            <div class="w-full md:w-3/4 lg:w-1/2">
+    <section class="bg-cover mb-8" style="background-image:linear-gradient(rgba(0, 56, 118, 0.7), rgba(35, 73, 116, 0.6)), url({{ asset( 'images/courses/hero9.jpg' ) }})">
+        <x-tailwind.layouts.container>
+            <div class="w-full md:w-3/4 lg:w-1/2 py-12">
                 <!-- titulo -->
-                <h1 class="text-white font-extrabold text-3xl sm:text-4xl md:text-5xl">{{ __('Welcome to the era of digital transformation') }}</h1>
-                <!-- parrafo -->
-                <p class="text-white mt-3 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0 mb-4">{{ __('If you are looking to be more competitive, get a job or start your own business, these courses are for you') }}</p>
+                <x-tailwind.headings.h2  color="white" class="font-extrabold">
+                    {{ __('Course catalog') }}
+                </x-tailwind.headings.h2>
+
+                <x-tailwind.text.lead color="white">
+                    {{ __('If you are looking to be more competitive, get a job or start your own business, these courses are for you') }}
+                </x-tailwind.text.lead>
+
                 <!-- Buscador -->
-                @livewire('search')
+                {{-- @livewire('search') --}}
+                
             </div>
-        </div>
+        </x-tailwind.layouts.container>
     </section>
 
     <main>
-        @livewire('courses-index')
+        {{-- @livewire('courses-index') --}}
+        @livewire('course.course-index')
     </main>
 
-    <!-- Page Footer -->
-    @if(isset($footer))
-    <footer class="bg-gray-800">
-        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-            {{ $footer }}
-        </div>
-    </footer>
-    @endif
-
-    <!-- Page Copyright -->
-    @if(isset($copyright))
-    <section class="bg-gray-900">
-        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-white">
-            {{ $copyright }}
-        </div>
-    </section>
-    @endif
-
+   
 </x-app-layout>

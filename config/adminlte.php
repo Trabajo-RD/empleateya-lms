@@ -52,12 +52,12 @@ return [
     // 'logo_img_xl_class' => 'brand-image-xs',
     // 'logo_img_alt' => 'AdminLTE',
 
-    'logo' => '<b>CAPACÍTATE</b> RD',
+    'logo' => '<b>CAPACÍTATE</b>',
     'logo_img' => 'images/admin/EmpleateyaLMSLogo.svg',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'CAPACÍTATE RD',
+    'logo_img_alt' => 'CAPACÍTATE',
 
     /*
     |--------------------------------------------------------------------------
@@ -152,9 +152,9 @@ return [
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-red elevation-4',
+    'classes_sidebar' => 'sidebar-light-navy elevation-4',
     'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-white navbar-light',
+    'classes_topnav' => 'navbar-navy navbar-dark',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
 
@@ -351,145 +351,185 @@ return [
             'topnav'    => true,
         ],
         [
-            'key'       => 'blog',
-            'text'      => 'blog',
-            'url'       => 'admin/blog',
-            'can'       => 'manage-blog',
+            'text'        => 'Welcome',
+            'route'       => 'dashboard.index',
+            'icon'        => 'fas fa-fw fa-home mr-2',
+            'can'         => 'view-dashboard',
         ],
-        // [
-        //     'text'        => 'Dashboard',
-        //     'route'       => 'admin.home',
-        //     'icon'        => 'fas fa-fw fa-tachometer-alt',
-        //     'can'         => 'view-dashboard',
-        // ],
-        // [
-        //     'text'        => 'Menú',
-        //     'route'       => 'admin.items.index',
-        //     'icon'        => 'fas fa-fw fa-sitemap',
-        //     'active'      => ['admin/items*'],
 
-        // ],
+        [
+            'text'        => 'Dashboard',
+            'route'       => 'admin.dashboard',
+            'icon'        => 'fas fa-fw fa-tachometer-alt mr-2',
+            'can'         => ['assign-role'],
+        ],
+
+        [
+            'text'        => 'Dashboard',
+            'route'       => 'instructor.dashboard',
+            'icon'        => 'fas fa-fw fa-tachometer-alt mr-2',
+            'can'         => ['create-course'],
+        ],
+
+        [
+            'text'        => 'Dashboard',
+            'route'       => 'student.dashboard',
+            'icon'        => 'fas fa-fw fa-tachometer-alt mr-2',
+            'can'         => ['enroll'],
+        ],
+
+        [
+            'text'        => 'Roles',
+            'route'       => 'admin.roles.index',
+            'icon'        => 'fas fa-fw fa-users-cog mr-2',
+            'active'      => ['admin/roles*'],
+            'can'         => 'update-role',
+        ],
+        [
+            'text'        => 'Usuarios',
+            'route'       => 'admin.users.index',
+            'icon'        => 'fas fa-fw fa-users mr-2',
+            'active'      => ['admin/users*'],
+            'can'         => 'list-user',
+        ],
+        [
+            'text'      => 'Menus',
+            'route'     => 'admin.dashboard.menus.index',
+            'icon'      => 'fas fa-fw fa-stream mr-2',
+            'active'    => ['admin/dashboard/menus'],
+            'can'       => 'update-role'
+        ],
+        [
+            'text'        => 'pages',
+            'url'         => 'admin/pages',
+            'icon'        => 'far fa-fw fa-file mr-2',
+            'can'         => 'create-page',
+            'label'       => 4,
+            'label_color' => 'success',
+        ],
+
+        // ['header' => 'account_settings'],
         // [
-        //     'text'        => 'Roles',
-        //     'route'       => 'admin.roles.index',
-        //     'icon'        => 'fas fa-fw fa-users-cog',
-        //     'active'      => ['admin/roles*'],
-        //     'can'         => 'update-role',
+        //     'text' => 'profile',
+        //     'url'  => 'user/profile',
+        //     'icon' => 'fas fa-fw fa-user',
         // ],
-        // [
-        //     'text'        => 'Usuarios',
-        //     'route'       => 'admin.users.index',
-        //     'icon'        => 'fas fa-fw fa-users',
-        //     'active'      => ['admin/users*'],
-        //     'can'         => 'list-user',
-        // ],
-        // [
-        //     'text'        => 'pages',
-        //     'url'         => 'admin/pages',
-        //     'icon'        => 'far fa-fw fa-file',
-        //     'label'       => 4,
-        //     'label_color' => 'success',
-        // ],
+
         ['header' => 'OPCIONES DE CURSOS'],
-        // [
-        //     'text' => 'Cursos en revisión',
-        //     'route'  => 'admin.courses.index',
-        //     'icon' => 'fas fa-laptop mr-1',
-        // ],
-        // [
-        //     'text' => 'Categorías',
-        //     'route'  => 'admin.categories.index',
-        //     'icon' => 'fas fa-tags mr-1',
-        // ],
-        // [
-        //     'text' => 'Tipos',
-        //     'route'  => 'admin.types.index',
-        //     'icon' => 'fas fa-photo-video mr-1',
-        // ],
-        // [
-        //     'text' => 'Niveles',
-        //     'route'  => 'admin.levels.index',
-        //     'icon' => 'fas fa-layer-group mr-1',
-        // ],
-        // [
-        //     'text' => 'Modalidades',
-        //     'route'  => 'admin.modalities.index',
-        //     'icon' => 'fas fa-laptop-house mr-1',
-        // ],
-        // [
-        //     'text' => 'Plataformas',
-        //     'route'  => 'admin.platforms.index',
-        //     'icon' => 'fas fa-server mr-1',
-        // ],
-        // [
-        //     'text' => 'Precios',
-        //     'route'  => 'admin.prices.index',
-        //     'icon' => 'fas fa-dollar-sign mr-1',
-        // ],
+        [
+            'text'  => 'Cursos',
+            'route' => 'instructor.dashboard.courses.index',
+            'icon'  => 'fas fa-graduation-cap mr-2',
+            'active'      => ['instructor/dashboard/courses'],
+            'can'   => 'create-course',
+        ],
+        [
+            'text'  => 'Talleres',
+            'route' => 'instructor.dashboard.workshops.index',
+            'icon'  => 'fas fa-chalkboard-teacher mr-2',
+            'active'      => ['instructor/dashboard/workshops'],
+            'can'   => 'create-workshop',
+        ],
+        [
+            'text'  => 'Módulos',
+            'route' => 'instructor.dashboard.modules.index',
+            'icon'  => 'fas fa-cubes mr-2',
+            'active'      => ['instructor/dashboard/modules'],
+            'can'   => 'create-course',
+            // 'submenu'   => [
+            //     [
+            //         'text' => 'Unidades',
+            //         'route' => 'instructor.dashboard.modules.units.index',
+            //         'icon' => 'fas fa-cube mr-2',
+            //         'can' => 'create-course'
+            //     ],
+            // ],
+        ],
+        [
+            'text'  => 'Rutas de Aprendizaje',
+            'route' => 'instructor.dashboard.paths.index',
+            // 'icon'  => 'fas fa-graduation-cap',
+            'icon'  => 'fas fa-map-signs mr-2',
+            'active'      => ['instructor/dashboard/paths*'],
+            'can'   => 'create-path',
+        ],
+        [
+            'text'  => 'Cursos',
+            'route' => 'student.dashboard.courses.index',
+            'icon'  => 'fas fa-graduation-cap mr-2',
+            'can'   => 'enroll',
+        ],
+
+        [
+            'text' => 'Cursos en revisión',
+            'route'  => 'admin.courses.index',
+            'icon' => 'fas fa-laptop mr-2',
+            'can'   => 'approve-course'
+        ],
+        [
+            'text' => 'Categorías',
+            'route'  => 'admin.categories.index',
+            'icon' => 'fas fa-tags mr-2',
+            'can' => 'create-category'
+        ],
+        [
+            'text' => 'Tipos',
+            'route'  => 'admin.types.index',
+            'icon' => 'fas fa-photo-video mr-2',
+            'can'   => 'create-type'
+        ],
+        [
+            'text' => 'Niveles',
+            'route'  => 'admin.levels.index',
+            'icon' => 'fas fa-layer-group mr-2',
+            'can'   =>  'create-level'
+        ],
+        [
+            'text' => 'Modalidades',
+            'route'  => 'admin.modalities.index',
+            'icon' => 'fas fa-laptop-house mr-2',
+            'can'   => 'create-modality',
+        ],
+        [
+            'text' => 'Plataformas',
+            'route'  => 'admin.platforms.index',
+            'icon' => 'fas fa-server mr-2',
+            'can'   => 'create-platform',
+        ],
+        [
+            'text' => 'Precios',
+            'route'  => 'admin.prices.index',
+            'icon' => 'fas fa-dollar-sign mr-2',
+            'can'   => 'create-price',
+        ],
         // [
         //     'text' => 'Sociedades y Convenios',
         //     'route'  => 'admin.partners.index',
         //     'icon' => 'far fa-handshake mr-1',
         // ],
-        // [
-        //     'text' => 'change_password',
-        //     'url'  => 'admin/settings',
-        //     'icon' => 'fas fa-fw fa-lock',
-        // ],
-        // [
-        //     'text'    => 'multilevel',
-        //     'icon'    => 'fas fa-fw fa-share',
-        //     'submenu' => [
-        //         [
-        //             'text' => 'level_one',
-        //             'url'  => '#',
-        //         ],
-        //         [
-        //             'text'    => 'level_one',
-        //             'url'     => '#',
-        //             'submenu' => [
-        //                 [
-        //                     'text' => 'level_two',
-        //                     'url'  => '#',
-        //                 ],
-        //                 [
-        //                     'text'    => 'level_two',
-        //                     'url'     => '#',
-        //                     'submenu' => [
-        //                         [
-        //                             'text' => 'level_three',
-        //                             'url'  => '#',
-        //                         ],
-        //                         [
-        //                             'text' => 'level_three',
-        //                             'url'  => '#',
-        //                         ],
-        //                     ],
-        //                 ],
-        //             ],
-        //         ],
-        //         [
-        //             'text' => 'level_one',
-        //             'url'  => '#',
-        //         ],
-        //     ],
-        // ],
-        // ['header' => 'labels'],
-        // [
-        //     'text'       => 'important',
-        //     'icon_color' => 'red',
-        //     'url'        => '#',
-        // ],
-        // [
-        //     'text'       => 'warning',
-        //     'icon_color' => 'yellow',
-        //     'url'        => '#',
-        // ],
-        // [
-        //     'text'       => 'information',
-        //     'icon_color' => 'cyan',
-        //     'url'        => '#',
-        // ],
+        [
+            'text' => 'Carousel',
+            'route'  => 'admin.slides.index',
+            'icon' => 'fas fa-fw fa-lock mr-2',
+            'can'   =>  'create-slide'
+        ],
+
+        ['header' => 'labels'],
+        [
+            'text'       => 'important',
+            'icon_color' => 'red',
+            'url'        => '#',
+        ],
+        [
+            'text'       => 'warning',
+            'icon_color' => 'yellow',
+            'url'        => '#',
+        ],
+        [
+            'text'       => 'information',
+            'icon_color' => 'cyan',
+            'url'        => '#',
+        ],
     ],
 
 

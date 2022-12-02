@@ -21,14 +21,14 @@ use Illuminate\Support\Facades\Gate;
 
 class CourseController extends Controller
 {
-    public function __construct()
-    {
-        // Add middleware to Resource Routes
-        // $this->middleware('can:list-course')->only('index');
-        $this->middleware('can:create-course')->only('index', 'create', 'store', 'new');
-        $this->middleware('can:update-course')->only('edit', 'update', 'goals');
-        $this->middleware('can:delete-course')->only('destroy');
-    }
+    // public function __construct()
+    // {
+    //     // Add middleware to Resource Routes
+    //     $this->middleware('can:list-course')->only('index');
+    //     $this->middleware('can:create-course')->only('index', 'create', 'store', 'new');
+    //     $this->middleware('can:update-course')->only('edit', 'update', 'goals');
+    //     $this->middleware('can:delete-course')->only('destroy');
+    // }
 
     /**
      * Display a listing of the resource.
@@ -66,7 +66,7 @@ class CourseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $locale)
+    public function store(Request $request)
     {
         //return $request;
 
@@ -103,7 +103,7 @@ class CourseController extends Controller
             ]);
         }
 
-        return redirect()->route('instructor.courses.edit', [$locale, $course]);
+        return redirect()->route('instructor.courses.edit', $course);
 
     }
 
@@ -124,7 +124,7 @@ class CourseController extends Controller
      * @param  \App\Models\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function edit($locale, Course $course)
+    public function edit(Course $course)
     {
         // Determine if the given user own this course and can update course
         // $this->authorize('dictated', $course);
@@ -139,7 +139,7 @@ class CourseController extends Controller
             $modalities = Modality::pluck('name', 'id');
             $languages = Language::pluck('name', 'id');
 
-            return view('instructor.courses.edit', compact('locale', 'course', 'categories', 'topics', 'types', 'levels', 'prices', 'modalities', 'languages'));
+            return view('instructor.courses.edit', compact('course', 'categories', 'topics', 'types', 'levels', 'prices', 'modalities', 'languages'));
         } else {
             echo $response->message();
         }
@@ -154,7 +154,7 @@ class CourseController extends Controller
      * @param  \App\Models\Course           $course
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $locale, Course $course)
+    public function update(Request $request, Course $course)
     {
         // Determine if a given user can update course
         // $this->authorize('dictated', $course);
@@ -202,7 +202,7 @@ class CourseController extends Controller
                 }
             }
 
-            return redirect()->route('instructor.courses.edit', [$locale, $course]);
+            return redirect()->route('instructor.courses.edit', $course);
         } else {
             echo $response->message();
         }
@@ -227,7 +227,7 @@ class CourseController extends Controller
      * @param       App\Models\Course   $course
      * @return      view
      */
-    public function goals( $locale, Course $course ){
+    public function goals( Course $course ){
         // Policy to check if an instructor is modifying a course created by another instructor
         // $this->authorize('dictated', $course);
         $response = Gate::inspect('update', $course);
@@ -242,7 +242,7 @@ class CourseController extends Controller
     /**
      * Change the course status when click on Request Revision button
      */
-    public function status( $locale, Course $course ){
+    public function status( Course $course ){
         $course->status = 2;
         $course->save();
 
@@ -250,20 +250,20 @@ class CourseController extends Controller
             $course->observation->delete();
         }
 
-        return redirect()->route('instructor.courses.edit', [$locale, $course] );
+        return redirect()->route('instructor.courses.edit', $course );
     }
 
     /**
      * Return course observation view
      */
-    public function observation( $locale, Course $course ){
+    public function observation( Course $course ){
         return view('instructor.courses.observation', compact('course') );
     }
 
     /**
      * Return the view course preview
      */
-    public function preview( $locale, Course $course ){
+    public function preview( Course $course ){
 
         // $this->authorize('revision', $course );
 
@@ -274,7 +274,7 @@ class CourseController extends Controller
     /**
      * Show create new course options
      */
-    public function new( Request $request, $locale ){
+    public function new( Request $request ){
         return view('instructor.courses.new');
     }
 }

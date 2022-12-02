@@ -4,7 +4,7 @@
 
 <!-- logo -->
 <div class="items-center text-center">
-    <a href="{{ route('home', app()->getLocale()) }}" class="items-center flex justify-center space-x-2">
+    <a href="{{ route('home') }}" class="items-center flex justify-center space-x-2">
         <x-jet-application-mark class="block h-9 w-auto" />
     </a>
         {{-- <span class="uppercase text-blue-900 font-extrabold text-2xl">Capacítate</span> --}}
@@ -20,7 +20,7 @@
     <!-- sidebar menu -->
 
 
-    <a href="{{ route('instructor.dashboard.index', App::getLocale() ) }}" class="block py-2.5 px-4 flex items-center space-x-4 rounded-lg transition duration-200 hover:bg-gray-300 hover:bg-opacity-80 @routeIs('instructor.dashboard.index', app()->getLocale() ) bg-gray-300 bg-opacity-80 font-extrabold @else bg-transparent @endif">
+    <a href="{{ route('instructor.dashboard.index', App::getLocale() ) }}" class="block py-2.5 px-4 flex items-center space-x-4 rounded-lg transition duration-200 hover:bg-gray-300 hover:bg-opacity-80 @routeIs('instructor.dashboard.index' ) bg-gray-300 bg-opacity-80 font-extrabold @else bg-transparent @endif">
         <i class="fas fa-th-large"></i>
         <span class="sidebar-item-text">{{ __('Dashboard') }}</span>
     </a>
@@ -55,14 +55,14 @@
 
     {{-- <hr class="my-6">
 
-    <a href="{{ route('instructor.courses.preview', [app()->getLocale(), $course]) }}" target="_blank" class="btn bg-gray-300 text-gray-700 block w-full mb-4 text-center hover:shadow">
+    <a href="{{ route('instructor.courses.preview', ['course' => $course]) }}" target="_blank" class="btn bg-gray-300 text-gray-700 block w-full mb-4 text-center hover:shadow">
         {{ __('Preview') }}
     </a> --}}
 
     {{-- @switch($course->status)
         @case(1)
             <!-- Request change course status -->
-            <form action="{{ route('instructor.courses.status', [app()->getLocale(), $course]) }}" method="POST">
+            <form action="{{ route('instructor.courses.status', ['course' => $course]) }}" method="POST">
                 @csrf
                 <button type="submit" class="btn btn-accent w-full shadow">{{ __('Request review') }}</button>
             </form>

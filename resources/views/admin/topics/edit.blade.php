@@ -17,7 +17,7 @@
 
     <div class="card">
         <div class="card-body">
-            {!! Form::model($topic, ['route' => ['admin.topics.update', [app()->getLocale(), $topic] ], 'method' => 'put' ]) !!}
+            {!! Form::model($topic, ['route' => ['admin.topics.update', $topic ], 'method' => 'put' ]) !!}
 
                 @include('admin.topics.partials.form')
 

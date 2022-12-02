@@ -17,28 +17,27 @@ class CreateCoursesTable extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('subtitle')->nullable();
+            $table->string('uid')->unique();
+            $table->text('title');
+            $table->text('subtitle')->nullable();
             $table->text('summary');
             $table->text('url')->nullable();
             $table->integer('duration_in_minutes');
             $table->enum('status', [Course::DRAFT, Course::PENDING, Course::PUBLISH, Course::TRASH, Course::INITIATED, Course::FINALIZED])->default(1);
             $table->text('slug');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('moderator_id')->nullable();
-            $table->unsignedBigInteger('contributor_id')->nullable();
             $table->unsignedBigInteger('level_id')->nullable();
-            $table->unsignedBigInteger('category_id')->nullable();
+            // $table->unsignedBigInteger('topic_id')->nullable();
             $table->unsignedBigInteger('price_id')->nullable();
             $table->unsignedBigInteger('type_id')->nullable();
             $table->unsignedBigInteger('modality_id')->nullable();
+            // $table->integer('order')->nullable();
 
             // Foreign
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('moderator_id')->references('id')->on('users')->onDelete('set null');
-            $table->foreign('contributor_id')->references('id')->on('users')->onDelete('set null');
+
             $table->foreign('level_id')->references('id')->on('levels')->onDelete('set null');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
+            // $table->foreign('topic_id')->references('id')->on('topics')->onDelete('set null');
             $table->foreign('price_id')->references('id')->on('prices')->onDelete('set null');
             $table->foreign('type_id')->references('id')->on('types')->onDelete('set null');
             $table->foreign('modality_id')->references('id')->on('modalities')->onDelete('set null');

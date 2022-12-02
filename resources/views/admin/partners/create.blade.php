@@ -9,7 +9,7 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            {!! Form::open(['route' => ['admin.partners.store', app()->getLocale()], 'files' => true]) !!}
+            {!! Form::open(['route' => 'admin.partners.store', 'files' => true]) !!}
 
 
                 @include('admin.partners.partials.form')

@@ -24,7 +24,7 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($locale)
+    public function index()
     {
         $roles = Role::all();
 
@@ -84,11 +84,11 @@ class RoleController extends Controller
      * @param  \Spatie\Permission\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function edit($locale, Role $role)
+    public function edit(Role $role)
     {
         $permissions = Permission::orderBy('name')->get();
 
-        return view('admin.roles.edit', compact('locale', 'role', 'permissions'));
+        return view('admin.roles.edit', compact('role', 'permissions'));
     }
 
     /**
@@ -98,7 +98,7 @@ class RoleController extends Controller
      * @param  \Spatie\Permission\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $locale, Role $role)
+    public function update(Request $request, Role $role)
     {
         // return $role;
 
@@ -114,7 +114,7 @@ class RoleController extends Controller
         // sync() delete all permissions and regenerate again
         $role->permissions()->sync($request->permissions);
 
-        return redirect()->route('admin.roles.edit', compact('locale', 'role'))->with('rol_updated', 'Se han guardado los cambios correctamente');
+        return redirect()->route('admin.roles.edit', compact('role'))->with('rol_updated', 'Se han guardado los cambios correctamente');
     }
 
     /**
@@ -123,7 +123,7 @@ class RoleController extends Controller
      * @param  \Spatie\Permission\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function destroy($locale, Role $role)
+    public function destroy(Role $role)
     {
         $role->delete();
 

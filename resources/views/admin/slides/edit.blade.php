@@ -15,14 +15,16 @@
 
     <div class="card">
         <div class="card-body">
-            {!! Form::model($slide, ['route' => ['admin.slides.update', [app()->getLocale(), $slide] ], 'method' => 'put' ]) !!}
+            {!! Form::model($slide, ['route' => ['admin.slides.update', $slide ], 'method' => 'put' ]) !!}
+
+                <input type="hidden" name="id" value="{{ $slide->id }}" />
 
                 @include('admin.slides.partials.form')
 
                 <a href="{{ url()->previous() }}" class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="Omitir y volver a la vista anterior"><i class="fas fa-arrow-circle-left mr-2"></i>Volver atrás</a>
 
                 {!! Form::submit('Actualizar slide', ['class' => 'btn btn-primary float-right', 'data-toggle' => 'tooltip', 'data-placement' => 'left', 'title' => 'Guardar los cambios realizados']) !!}
-                
+
             {!! Form::close() !!}
         </div>
     </div>

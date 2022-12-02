@@ -17,7 +17,7 @@
 
     <div class="card">
         <div class="card-body">
-            {!! Form::model($category, ['route' => ['admin.categories.update', [app()->getLocale(), $category ]], 'method' => 'put' ]) !!}
+            {!! Form::model($category, ['route' => ['admin.categories.update', $category ], 'method' => 'put' ]) !!}
 
                 @include('admin.categories.partials.form')
 

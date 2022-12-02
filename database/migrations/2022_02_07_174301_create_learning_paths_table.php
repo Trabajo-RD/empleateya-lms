@@ -17,10 +17,12 @@ class CreateLearningPathsTable extends Migration
     {
         Schema::create('learning_paths', function (Blueprint $table) {
             $table->id();
+            $table->string('uid')->unique();
             $table->text('title');
+            $table->text('subtitle')->nullable();
             $table->text('slug');
             $table->text('summary')->nullable();
-            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->text('url')->nullable();
             $table->integer('duration_in_minutes')->nullable();
             $table->enum('status', [LearningPath::DRAFT, LearningPath::PENDING, LearningPath::PUBLISH, LearningPath::TRASH])->default(1);
             $table->unsignedBigInteger('user_id')->nullable();
@@ -29,11 +31,18 @@ class CreateLearningPathsTable extends Migration
             $table->foreign('level_id')->references('id')->on('levels')->onDelete('set null');
             $table->unsignedBigInteger('type_id')->nullable();
             $table->foreign('type_id')->references('id')->on('types')->onDelete('set null');
-            $table->unsignedBigInteger('organization_id')->nullable();
-            $table->foreign('organization_id')->references('id')->on('organizations')->onDelete('set null');
+            $table->unsignedBigInteger('modality_id')->nullable();
+            $table->foreign('modality_id')->references('id')->on('modalities')->onDelete('set null');
+            $table->unsignedBigInteger('program_id')->nullable();
+            $table->foreign('program_id')->references('id')->on('programs')->onDelete('set null');
+            $table->unsignedBigInteger('price_id')->default(1);
+            $table->foreign('price_id')->references('id')->on('prices');
+            $table->unsignedBigInteger('language_id')->nullable();
+            $table->foreign('language_id')->references('id')->on('languages')->onDelete('set null');
             $table->timestamps();
             $table->dateTime('deleted_at')->nullable();
         });
+
     }
 
     /**

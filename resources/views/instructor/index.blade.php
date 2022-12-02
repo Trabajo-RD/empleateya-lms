@@ -17,31 +17,93 @@
     <!-- hero -->
         @livewire('jumbotron')
 
-        {{-- {{ $course->title }} --}}
-        <h3>Latest Courses</h3>
-         @livewire('course-card')
 
 
-        <section class="bg-cover rounded-lg" style="background-image:linear-gradient(rgba(0, 56, 118, 0.7), rgba(35, 73, 116, 0.6)), url({{ asset( 'images/home/slider/hero2.jpg' ) }})">
-            <div class="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-10 sm:px-6 lg:px-8 py-12">
-                <div class="w-full md:w-3/4 lg:w-1/2">
-                    <!-- titulo -->
-                    <h1 class="text-white font-extrabold text-4xl sm:text-5xl md:text-6xl">{{ __('Capacítate') }}</h1>
-                    <!-- parrafo -->
-                    <p class="text-white mt-3 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0 mb-4">{{ __('In our Learning Management System you will find courses and articles from different areas that will help you in your professional development')}}</p>
-                    <!-- Buscador -->
-                    {{-- @livewire('search') --}}
+
+{{-- {{ $course->title }} --}}
+<h3>Latest Courses</h3>
+@livewire('course-card')
+
+
+
+        <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+          <!-- Info boxes -->
+          <div class="row">
+
+              <div class="col-12 col-sm-6 col-md-3">
+                  <div class="info-box mb-3">
+                    <span class="info-box-icon bg-success elevation-1"><i class="fas fa-laptop"></i></span>
+
+                    <div class="info-box-content">
+                      <span class="info-box-text">Cursos</span>
+                      <span class="info-box-number">18</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                  </div>
+                  <!-- /.info-box -->
                 </div>
-            </div>
-        </section>
+                <!-- /.col -->
+                <div class="col-12 col-sm-6 col-md-3">
+                  <div class="info-box mb-3">
+                    <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <x-jet-welcome />
+                    <div class="info-box-content">
+                      <span class="info-box-text">Usuarios</span>
+                      <span class="info-box-number">15</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                  </div>
+                  <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+
+            <!-- fix for small devices only -->
+            <div class="clearfix hidden-md-up"></div>
+
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box">
+                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-male"></i></span>
+
+                <div class="info-box-content">
+                  <span class="info-box-text">Masculino</span>
+                  <span class="info-box-number">
+                    30
+                    {{-- <small>%</small> --}}
+                  </span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
             </div>
-        </div>
-    </div>
+            <!-- /.col -->
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-female"></i></span>
+
+                <div class="info-box-content">
+                  <span class="info-box-text">Femenino</span>
+                  <span class="info-box-number">20</span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+
+
+          </div>
+          <!-- /.row -->
+
+        </div><!--/. container-fluid -->
+      </section>
+      <!-- /.content -->
+
+
+
+
+
 
     <!-- Page Footer -->
     <x-slot name="footer">

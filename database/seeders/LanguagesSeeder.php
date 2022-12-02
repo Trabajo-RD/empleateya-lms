@@ -20,27 +20,28 @@ class LanguagesSeeder extends Seeder
             [
                 'code' => 'en',
                 'name' => 'English',
+                'slug' => Str::slug('English')
             ],
             [
-                'code' => 'es-ES',
-                'name' => 'Spanish (Spain)',
+                'code' => 'es',
+                'name' => 'Spanish',
+                'slug' => Str::slug('Spanish')
             ],
-            [
-                'code' => 'es-DO',
-                'name' => 'Spanish (Dominican Republic)',
-            ],
-            [
-                'code' => 'fr',
-                'name' => 'French',
-            ],
-            [
-                'code' => 'it',
-                'name' => 'Italian',
-            ],
-            [
-                'code' => 'pt',
-                'name' => 'Portuguese',
-            ],
+            // [
+            //     'code' => 'fr',
+            //     'name' => 'French',
+            //     'slug' => Str::slug('French')
+            // ],
+            // [
+            //     'code' => 'it',
+            //     'name' => 'Italian',
+            //     'slug' => Str::slug('Italian')
+            // ],
+            // [
+            //     'code' => 'pt',
+            //     'name' => 'Portuguese',
+            //     'slug' => Str::slug('Portuguese')
+            // ],
         ];
 
         foreach($languages as $language){
@@ -48,6 +49,7 @@ class LanguagesSeeder extends Seeder
             Language::create([
                 'code' => $language['code'],
                 'name' => $language['name'],
+                'slug' => $language['slug']
             ]);
 
         }

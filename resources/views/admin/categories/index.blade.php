@@ -17,7 +17,7 @@
     <div class="card">
 
         <div class="card-header">
-            <a href="{{ route('admin.categories.create', app()->getLocale() ) }}" class="btn btn-primary float-left" data-toggle="tooltip" data-placement="bottom" title="Añade una nueva categoría">
+            <a href="{{ route('admin.categories.create') }}" class="btn btn-primary float-left" data-toggle="tooltip" data-placement="bottom" title="Añade una nueva categoría">
             <i class="fas fa-plus mr-1"></i>Añadir categoría</a>
         </div>
 
@@ -41,10 +41,10 @@
                             <td>{{ $category->name }}</td>
                             <!-- button -->
                             <td width="12%">
-                                <a href="{{ route('admin.categories.edit', [app()->getLocale(), $category] ) }}" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="left" title="Editar {{$category->name}}"><i class="far fa-edit mr-1"></i>Editar</a>
+                                <a href="{{ route('admin.categories.edit', $category ) }}" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="left" title="Editar {{$category->name}}"><i class="far fa-edit mr-1"></i>Editar</a>
                             </td>
                             <td width="14%">
-                                <form action="{{ route( 'admin.categories.destroy', [app()->getLocale(), $category] ) }}" method="POST" class="delete-category">
+                                <form action="{{ route( 'admin.categories.destroy', $category ) }}" method="POST" class="delete-category">
                                     @csrf
                                     @method('delete')
                                     <button class="btn btn-outline-danger" type="submit" data-toggle="tooltip" data-placement="left" title="Eliminar {{$category->name}}"><i class="far fa-trash-alt mr-1"></i>Eliminar</button>

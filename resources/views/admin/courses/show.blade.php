@@ -36,7 +36,7 @@
                 </span>
                 <!-- course category -->
                 <span class="badge badge-secondary p-2" data-toggle="tooltip" data-placement="top" title="Categoría">
-                    <i class="fas fa-tags text-sm mr-2"></i>{{ $course->category->name }}
+                    <i class="fas fa-tags text-sm mr-2"></i>{{ $course->topic->name }}
                 </span>
                 <!-- course level -->
                 <span class="badge badge-secondary p-2" data-toggle="tooltip" data-placement="top" title="Nivel requerido">
@@ -61,7 +61,7 @@
                 </div>
                 <!-- users enrolled -->
                 <span class="text-muted">
-                    <i class="fas fa-users text-sm mr-2"></i>{{ $course->participants_count }} Participantes
+                    <i class="fas fa-users text-sm mr-2"></i>{{ $course->users_count }} Participantes
                 </span>
             </div>
         </div>
@@ -95,8 +95,9 @@
         </section>
 
         <!-- section requirements  -->
+        @isset($course->requirements)
         <section class="mb-4 text-dark">
-            <h4 class="font-weight-bold mb-1">Requisitos</h4>
+            <h4 class="font-weight-bold mb-1">{{ __('Requirements') }}</h4>
 
             <ul class="list-group">
 
@@ -116,53 +117,58 @@
 
             </ul>
         </section>
+        @endisset
 
         <!-- section goals -->
-        <section class="mb-4 text-dark">
-            <h4 class="font-weight-bold mb-1">Lo que aprenderás</h4>
-                <ul class="list-group">
+        @if($course->goals)
+            <section class="mb-4 text-dark">
+                <h4 class="font-weight-bold mb-1">{{ __('What you will learn') }}</h4>
+                    <ul class="list-group">
 
-                    @forelse ( $course->goals as $goal )
-                        <li class="list-group-item"><i class="fas fa-check text-sm text-gray-500 mr-2"></i>{{ $goal->name }}</li>
-                    @empty
-                        <li class="list-group-item">Este curso no tiene metas asignadas</li>
-                    @endforelse
+                        @forelse ( $course->goals as $goal )
+                            <li class="list-group-item"><i class="fas fa-check text-sm text-gray-500 mr-2"></i>{{ $goal->name }}</li>
+                        @empty
+                            <li class="list-group-item">Este curso no tiene metas asignadas</li>
+                        @endforelse
 
-                </ul>
-        </section>
+                    </ul>
+            </section>
+        @endif
 
         <!-- section subjects -->
-        <section class="mb-4 text-dark">
-            <h4 class="font-weight-bold mb-1">Contenido del curso</h4>
+        @if($course->section)
+            <section class="mb-4 text-dark">
+                <h4 class="font-weight-bold mb-1">Contenido del curso</h4>
 
-            @forelse ( $course->sections as $section )
+                @forelse ( $course->sections as $section )
 
-                <div class="card">
+                    <div class="card">
 
-                    <h5 class="card-header">
-                        <i class="fas fa-chevron-down mr-2"></i>
-                        {{ $section->name }}
-                    </h5>
+                        <h5 class="card-header">
+                            <i class="fas fa-chevron-down mr-2"></i>
+                            {{ $section->title }}
+                        </h5>
 
-                    <div class="card-body">
-                        <ul class="list-group">
-                            @foreach ($section->lessons as $lesson )
+                        <div class="card-body">
+                            <ul class="list-group">
+                                @foreach ($section->lessons as $lesson )
 
-                                <li class="list-group-item"><i class="far fa-play-circle fa-lg mr-4"></i>{{ $lesson->name }}</li>
+                                    <li class="list-group-item"><i class="far fa-play-circle fa-lg mr-4"></i>{{ $lesson->title }}</li>
 
-                            @endforeach
-                        </ul>
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            @empty
-                <div class="card">
-                    <div class="card-body">
-                        Este curso no tiene secciones asignadas.
+                @empty
+                    <div class="card">
+                        <div class="card-body">
+                            Este curso no tiene secciones asignadas.
+                        </div>
                     </div>
-                </div>
-            @endforelse
+                @endforelse
 
-        </section>
+            </section>
+        @endif
 
 
         <div class="card mb-4 py-4">
@@ -192,12 +198,12 @@
                     <a href="{{ url()->previous() }}" class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="Omitir los cambios y volver a la vista anterior"><i class="fas fa-arrow-circle-left mr-2"></i>Volver atrás</a>
 
 
-                    {{-- <a href="{{ route('admin.courses.observation', [app()->getLocale(), $course ]) }}" wire:click="sendDisapprovedNotification" class="btn btn-secondary">Añadir observación</a> --}}
+                    {{-- <a href="{{ route('admin.courses.observation', $course ) }}" wire:click="sendDisapprovedNotification" class="btn btn-secondary">Añadir observación</a> --}}
 
                     <div class="d-flex justify-content-around">
-                        <a href="{{ route('admin.courses.observation', [app()->getLocale(), $course ]) }}" class="btn btn-warning mx-2"><i class="fas fa-exclamation-circle mr-2"></i>Añadir observación</a>
+                        <a href="{{ route('admin.courses.observation', $course) }}" class="btn btn-warning mx-2"><i class="fas fa-exclamation-circle mr-2"></i>Añadir observación</a>
 
-                        <form action="{{ route('admin.courses.approved', [app()->getLocale(), $course] ) }}" method="POST">
+                        <form action="{{ route('admin.courses.approved', $course ) }}" method="POST">
                             @csrf
                             <button type="submit" class="btn btn-primary mx-2"><i class="fas fa-check-circle mr-2"></i>Aprobar curso</button>
                         </form>

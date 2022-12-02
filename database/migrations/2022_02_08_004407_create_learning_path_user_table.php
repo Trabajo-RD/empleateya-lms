@@ -19,6 +19,8 @@ class CreateLearningPathUserTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('learning_path_id');
             $table->foreign('learning_path_id')->references('id')->on('learning_paths')->onDelete('cascade');
+            $table->tinyInteger('status')->default(0);
+            $table->timestamp('end_date')->nullable();
             $table->timestamps();
         });
     }

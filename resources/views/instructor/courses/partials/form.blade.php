@@ -84,22 +84,23 @@
         {!! Form::select('modality_id', $modalities, null, ['class' => 'form-input block w-full mt-1']) !!}
     </div>
 
-    <!-- course duration -->
-    <div>
+    <!-- duration -->
+    <div class="form-group">
         {!! Form::label('duration_in_minutes', Lang::get('Duration in minutes')) !!}
         {!! Form::text('duration_in_minutes', null, ['class' => 'form-input block w-full mt-1' . ($errors->has('duration_in_minutes') ? ' border-red-600' : '') ]) !!}
+        @error('duration_in_minutes')
+            <span class="invalid-feedback">
+                <strong class="text-xs text-red-700">{{ $message }}</strong>
+            </span>
+        @enderror
     </div>
-    @error('duration_in_minutes')
-        <span class="invalid-feedback">
-            <strong class="text-xs text-red-700">{{ $message }}</strong>
-        </span>
-    @enderror
+
 
     <!-- course prices select -->
     <div>
         {!! Form::label('price_id', Lang::get('Price')) !!}
         {!! Form::select('price_id', $prices, null, ['class' => 'form-input block w-full mt-1']) !!}
-    </div>    
+    </div>
 
     <!-- course language select -->
     <div>
@@ -137,13 +138,13 @@
         {!! Form::label('end_date', Lang::get('End Date')) !!}
         {!! Form::date('end_date', null, ['class' => 'form-input block w-full mt-1' . ($errors->has('end_date') ? 'border-red-600' : '') ]) !!}
     </div>
-    
+
 </div>
 
 <hr class="mt-2 mb-6">
 
 <!-- course-URL -->
-<div class="mb-4">    
+<div class="mb-4">
     <div class="flex">
         <div class="flex-1"
             {!! Form::label( 'url', Lang::get('External URL') ) !!}

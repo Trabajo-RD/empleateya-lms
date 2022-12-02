@@ -5,7 +5,7 @@
 @section('plugins.Sweetalert2', true)
 
 @section('content_header')
-    <a href="{{ route('admin.items.create', app()->getLocale() ) }}" class="btn btn-primary float-right"><i class="fas fa-plus mr-1"></i>Nuevo item</a>
+    <a href="{{ route('admin.items.create') }}" class="btn btn-primary float-right"><i class="fas fa-plus mr-1"></i>Nuevo item</a>
     <h1 class="text-dark">Menu Items</h1>
 @stop
 
@@ -49,10 +49,10 @@
                             @endswitch
                             </td>
                             <td width="12%" class="align-middle">
-                                <a href="{{ route('admin.items.edit', [app()->getLocale(), $item] ) }}" class="btn btn-outline-secondary"><i class="far fa-edit mr-1"></i>Editar</a>
+                                <a href="{{ route('admin.items.edit', $item ) }}" class="btn btn-outline-secondary"><i class="far fa-edit mr-1"></i>Editar</a>
                             </td>
                             <td width="14%" class="align-middle">
-                                <form action="{{ route( 'admin.items.destroy', [app()->getLocale(), $item] ) }}" method="POST" class="delete-item">
+                                <form action="{{ route( 'admin.items.destroy', $item ) }}" method="POST" class="delete-item">
                                     @csrf
                                     @method('delete')
                                     <button class="btn btn-outline-danger" type="submit"><i class="far fa-trash-alt mr-1"></i>Eliminar</button>

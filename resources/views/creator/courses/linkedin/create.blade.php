@@ -6,7 +6,7 @@
                 <h1 class="text-2xl font-bold">{{ __('New_course') }}</h1>
                 <hr class="mt-2 mb-6">
 
-                {!! Form::open(['route' => ['creator.courses.store', app()->getLocale()], 'files' => true, 'autocomplete' => 'off', 'class' => 'create_form' ]) !!}
+                {!! Form::open(['route' => 'creator.courses.store', 'files' => true, 'autocomplete' => 'off', 'class' => 'create_form' ]) !!}
 
                     @include('creator.courses.partials.linkedin-form')
 
@@ -148,11 +148,11 @@
         function slug(str){
             var $slug = '';
             var trimmed = str.trim(str);
-            $slug = trimmed.replace(/[^a-z0-9-]/gi, '-').
-            replace(/-+/g, '-').
-            replace(/^-|-$/g, '');
-            return $slug.toLowerCase();
+            $slug = trimmed.normalize("NFD").replace(/[\u0300-\u036f]/g, '');
+
+            return $slug.replace(/\s+/g, '-').replace(/-+/g, '-').toLowerCase();
         }
+
 
 
 
